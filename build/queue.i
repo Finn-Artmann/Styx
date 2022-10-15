@@ -2778,7 +2778,7 @@ void enqueue(queue_t* q, char* word);
 
 void init_queue(queue_t* q){
 
- q->data = malloc(0*sizeof(char*));
+ q->data = malloc(1);
  q->tail = -1;
  q->head = -1;
 }
@@ -2849,23 +2849,14 @@ void enqueue(queue_t* q, char* word){
 
  int len = strlen(word) + 1;
 
- char* cpy = malloc(len*sizeof(char*));
+ q->data = (char**) realloc(q->data, (q->tail+1) * sizeof(char**));
 
- if(cpy == 
+ if(q->data == 
 # 63 "src/queue.c" 3 4
-          ((void *)0)
+              ((void *)0)
 # 63 "src/queue.c"
-              ){ return; }
+                  ) {return; }
 
- strcpy(cpy, word);
-
- char** data_resized = realloc(q->data, (q->tail+1) * sizeof(char*));
-
- if(data_resized == 
-# 69 "src/queue.c" 3 4
-                   ((void *)0)
-# 69 "src/queue.c"
-                       ) {return; }
-
- q->data[q->tail] = cpy;
+ q->data[q->tail] = (char*) malloc(len);
+ strcpy(q->data[q->tail], word);
 }

@@ -7,7 +7,7 @@
 
 void init_queue(queue_t* q){
 
-	q->data = malloc(0*sizeof(char*));
+	q->data = malloc(1);
 	q->tail = -1;
 	q->head = -1;
 }
@@ -58,15 +58,11 @@ void enqueue(queue_t* q, char* word){
 	
 	int len = strlen(word) + 1; // +1 for terminating zero
 
-	char* cpy = malloc(len*sizeof(char*));
+	q->data = (char**) realloc(q->data, (q->tail+1) * sizeof(char**));
 
-	if(cpy == NULL){ return; } // malloc failed 
-	
-	strcpy(cpy, word);
+	if(q->data == NULL) {return; } // realloc failed
 
-	char** data_resized = realloc(q->data, (q->tail+1) * sizeof(char*));
-
-	if(data_resized == NULL) {return; } // realloc failed
-
-	q->data[q->tail] = cpy;
+	q->data[q->tail] = (char*) malloc(len);
+	strcpy(q->data[q->tail], word);
 }
+				

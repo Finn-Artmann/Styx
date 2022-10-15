@@ -2987,14 +2987,34 @@ void generate_words(){
  enqueue(&queue, start_symbol);
 
 
- char* word = dequeue(&queue);
- if(is_lower_string(word)){
-  printf("%s\n", word);
+
+ char* next_word;
+ while( (next_word = dequeue(&queue) ) != 
+# 69 "src/main.c" 3 4
+                                         ((void *)0)
+# 69 "src/main.c"
+                                             ){
+  if(is_lower_string(next_word)){
+   printf("%s\n", next_word);
+  }
+
+  for(volatile int i=0; i < sizeof(rules)/sizeof(rule); i++){
+
+   char* word = next_word;
+   int occrnc = 0;
+   char* new_word;
+   while((new_word = replace(word, rules[i].lhs, rules[i].rhs, occrnc++)) != 
+# 79 "src/main.c" 3 4
+                                                                            ((void *)0)
+# 79 "src/main.c"
+                                                                                ){
+    enqueue(&queue, new_word);
+    free(new_word);
+   }
+  }
+
  }
 
- for(int i=0; i < sizeof(rules)/sizeof(rule); i++){
-
- }
 }
 
 
@@ -3002,12 +3022,8 @@ void generate_words(){
 
 
 int main(int argc, char** argv){
-# 101 "src/main.c"
- char* word = "einstestzweitestdrei";
- char* search = "test";
- char* rep = "12345";
-
- printf("%s", replace(word, search, rep, 1));
+# 121 "src/main.c"
+ generate_words();
 
  return 0;
 }
