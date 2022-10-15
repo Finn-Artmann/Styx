@@ -2362,6 +2362,501 @@ __attribute__ ((__nothrow__ , __leaf__)) wcstombs (char *__restrict __dst, const
 
 
 # 3 "src/main.c" 2
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h" 1 3 4
+# 4 "src/main.c" 2
+
+# 1 "/usr/include/string.h" 1 3 4
+# 26 "/usr/include/string.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
+# 27 "/usr/include/string.h" 2 3 4
+
+
+
+
+
+
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
+# 34 "/usr/include/string.h" 2 3 4
+# 43 "/usr/include/string.h" 3 4
+extern void *memcpy (void *__restrict __dest, const void *__restrict __src,
+       size_t __n) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern void *memmove (void *__dest, const void *__src, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+
+
+
+extern void *memccpy (void *__restrict __dest, const void *__restrict __src,
+        int __c, size_t __n)
+    __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2))) __attribute__ ((__access__ (__write_only__, 1, 4)));
+
+
+
+
+extern void *memset (void *__s, int __c, size_t __n) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
+
+
+extern int memcmp (const void *__s1, const void *__s2, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+# 80 "/usr/include/string.h" 3 4
+extern int __memcmpeq (const void *__s1, const void *__s2, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+# 107 "/usr/include/string.h" 3 4
+extern void *memchr (const void *__s, int __c, size_t __n)
+      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+# 141 "/usr/include/string.h" 3 4
+extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char *strncpy (char *__restrict __dest,
+        const char *__restrict __src, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern char *strcat (char *__restrict __dest, const char *__restrict __src)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char *strncat (char *__restrict __dest, const char *__restrict __src,
+        size_t __n) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern int strcmp (const char *__s1, const char *__s2)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+extern int strncmp (const char *__s1, const char *__s2, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern int strcoll (const char *__s1, const char *__s2)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+extern size_t strxfrm (char *__restrict __dest,
+         const char *__restrict __src, size_t __n)
+    __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2))) __attribute__ ((__access__ (__write_only__, 1, 3)));
+
+
+
+# 1 "/usr/include/x86_64-linux-gnu/bits/types/locale_t.h" 1 3 4
+# 22 "/usr/include/x86_64-linux-gnu/bits/types/locale_t.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h" 1 3 4
+# 27 "/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h" 3 4
+struct __locale_struct
+{
+
+  struct __locale_data *__locales[13];
+
+
+  const unsigned short int *__ctype_b;
+  const int *__ctype_tolower;
+  const int *__ctype_toupper;
+
+
+  const char *__names[13];
+};
+
+typedef struct __locale_struct *__locale_t;
+# 23 "/usr/include/x86_64-linux-gnu/bits/types/locale_t.h" 2 3 4
+
+typedef __locale_t locale_t;
+# 173 "/usr/include/string.h" 2 3 4
+
+
+extern int strcoll_l (const char *__s1, const char *__s2, locale_t __l)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2, 3)));
+
+
+extern size_t strxfrm_l (char *__dest, const char *__src, size_t __n,
+    locale_t __l) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2, 4)))
+     __attribute__ ((__access__ (__write_only__, 1, 3)));
+
+
+
+
+
+extern char *strdup (const char *__s)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__malloc__)) __attribute__ ((__nonnull__ (1)));
+
+
+
+
+
+
+extern char *strndup (const char *__string, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__malloc__)) __attribute__ ((__nonnull__ (1)));
+# 246 "/usr/include/string.h" 3 4
+extern char *strchr (const char *__s, int __c)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+# 273 "/usr/include/string.h" 3 4
+extern char *strrchr (const char *__s, int __c)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+# 293 "/usr/include/string.h" 3 4
+extern size_t strcspn (const char *__s, const char *__reject)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern size_t strspn (const char *__s, const char *__accept)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+# 323 "/usr/include/string.h" 3 4
+extern char *strpbrk (const char *__s, const char *__accept)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+# 350 "/usr/include/string.h" 3 4
+extern char *strstr (const char *__haystack, const char *__needle)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+
+
+extern char *strtok (char *__restrict __s, const char *__restrict __delim)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2)));
+
+
+
+extern char *__strtok_r (char *__restrict __s,
+    const char *__restrict __delim,
+    char **__restrict __save_ptr)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2, 3)));
+
+extern char *strtok_r (char *__restrict __s, const char *__restrict __delim,
+         char **__restrict __save_ptr)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2, 3)));
+# 407 "/usr/include/string.h" 3 4
+extern size_t strlen (const char *__s)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+
+
+
+
+extern size_t strnlen (const char *__string, size_t __maxlen)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+
+
+
+
+extern char *strerror (int __errnum) __attribute__ ((__nothrow__ , __leaf__));
+# 432 "/usr/include/string.h" 3 4
+extern int strerror_r (int __errnum, char *__buf, size_t __buflen) __asm__ ("" "__xpg_strerror_r") __attribute__ ((__nothrow__ , __leaf__))
+
+                        __attribute__ ((__nonnull__ (2)))
+    __attribute__ ((__access__ (__write_only__, 2, 3)));
+# 458 "/usr/include/string.h" 3 4
+extern char *strerror_l (int __errnum, locale_t __l) __attribute__ ((__nothrow__ , __leaf__));
+
+
+
+# 1 "/usr/include/strings.h" 1 3 4
+# 23 "/usr/include/strings.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
+# 24 "/usr/include/strings.h" 2 3 4
+
+
+
+
+
+
+
+
+
+
+extern int bcmp (const void *__s1, const void *__s2, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern void bcopy (const void *__src, void *__dest, size_t __n)
+  __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern void bzero (void *__s, size_t __n) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
+# 68 "/usr/include/strings.h" 3 4
+extern char *index (const char *__s, int __c)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+# 96 "/usr/include/strings.h" 3 4
+extern char *rindex (const char *__s, int __c)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+
+
+
+
+
+
+extern int ffs (int __i) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__));
+
+
+
+
+
+extern int ffsl (long int __l) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__));
+__extension__ extern int ffsll (long long int __ll)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__));
+
+
+
+extern int strcasecmp (const char *__s1, const char *__s2)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+extern int strncasecmp (const char *__s1, const char *__s2, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+
+
+
+
+extern int strcasecmp_l (const char *__s1, const char *__s2, locale_t __loc)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2, 3)));
+
+
+
+extern int strncasecmp_l (const char *__s1, const char *__s2,
+     size_t __n, locale_t __loc)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2, 4)));
+
+
+
+
+
+
+
+
+# 1 "/usr/include/x86_64-linux-gnu/bits/strings_fortified.h" 1 3 4
+# 22 "/usr/include/x86_64-linux-gnu/bits/strings_fortified.h" 3 4
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) void
+__attribute__ ((__nothrow__ , __leaf__)) bcopy (const void *__src, void *__dest, size_t __len)
+{
+  (void) __builtin___memmove_chk (__dest, __src, __len,
+      __builtin_object_size (__dest, 0));
+}
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) void
+__attribute__ ((__nothrow__ , __leaf__)) bzero (void *__dest, size_t __len)
+{
+  (void) __builtin___memset_chk (__dest, '\0', __len,
+     __builtin_object_size (__dest, 0));
+}
+# 145 "/usr/include/strings.h" 2 3 4
+# 463 "/usr/include/string.h" 2 3 4
+
+
+
+extern void explicit_bzero (void *__s, size_t __n) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)))
+    __attribute__ ((__access__ (__write_only__, 1, 2)));
+
+
+
+extern char *strsep (char **__restrict __stringp,
+       const char *__restrict __delim)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+
+
+extern char *strsignal (int __sig) __attribute__ ((__nothrow__ , __leaf__));
+# 489 "/usr/include/string.h" 3 4
+extern char *__stpcpy (char *__restrict __dest, const char *__restrict __src)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+extern char *stpcpy (char *__restrict __dest, const char *__restrict __src)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+
+extern char *__stpncpy (char *__restrict __dest,
+   const char *__restrict __src, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+extern char *stpncpy (char *__restrict __dest,
+        const char *__restrict __src, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+# 535 "/usr/include/string.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/string_fortified.h" 1 3 4
+# 25 "/usr/include/x86_64-linux-gnu/bits/string_fortified.h" 3 4
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) void *
+__attribute__ ((__nothrow__ , __leaf__)) memcpy (void *__restrict __dest, const void *__restrict __src, size_t __len)
+
+{
+  return __builtin___memcpy_chk (__dest, __src, __len,
+     __builtin_object_size (__dest, 0));
+}
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) void *
+__attribute__ ((__nothrow__ , __leaf__)) memmove (void *__dest, const void *__src, size_t __len)
+{
+  return __builtin___memmove_chk (__dest, __src, __len,
+      __builtin_object_size (__dest, 0));
+}
+# 56 "/usr/include/x86_64-linux-gnu/bits/string_fortified.h" 3 4
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) void *
+__attribute__ ((__nothrow__ , __leaf__)) memset (void *__dest, int __ch, size_t __len)
+{
+  return __builtin___memset_chk (__dest, __ch, __len,
+     __builtin_object_size (__dest, 0));
+}
+
+
+
+
+void __explicit_bzero_chk (void *__dest, size_t __len, size_t __destlen)
+  __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1))) __attribute__ ((__access__ (__write_only__, 1, 2)));
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) void
+__attribute__ ((__nothrow__ , __leaf__)) explicit_bzero (void *__dest, size_t __len)
+{
+  __explicit_bzero_chk (__dest, __len, __builtin_object_size (__dest, 0));
+}
+
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) char *
+__attribute__ ((__nothrow__ , __leaf__)) strcpy (char *__restrict __dest, const char *__restrict __src)
+{
+  return __builtin___strcpy_chk (__dest, __src, __builtin_object_size (__dest, 2 > 1));
+}
+
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) char *
+__attribute__ ((__nothrow__ , __leaf__)) stpcpy (char *__restrict __dest, const char *__restrict __src)
+{
+  return __builtin___stpcpy_chk (__dest, __src, __builtin_object_size (__dest, 2 > 1));
+}
+
+
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) char *
+__attribute__ ((__nothrow__ , __leaf__)) strncpy (char *__restrict __dest, const char *__restrict __src, size_t __len)
+
+{
+  return __builtin___strncpy_chk (__dest, __src, __len,
+      __builtin_object_size (__dest, 2 > 1));
+}
+
+
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) char *
+__attribute__ ((__nothrow__ , __leaf__)) stpncpy (char *__dest, const char *__src, size_t __n)
+{
+  return __builtin___stpncpy_chk (__dest, __src, __n,
+      __builtin_object_size (__dest, 2 > 1));
+}
+# 127 "/usr/include/x86_64-linux-gnu/bits/string_fortified.h" 3 4
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) char *
+__attribute__ ((__nothrow__ , __leaf__)) strcat (char *__restrict __dest, const char *__restrict __src)
+{
+  return __builtin___strcat_chk (__dest, __src, __builtin_object_size (__dest, 2 > 1));
+}
+
+
+extern __inline __attribute__ ((__always_inline__)) __attribute__ ((__gnu_inline__)) __attribute__ ((__artificial__)) char *
+__attribute__ ((__nothrow__ , __leaf__)) strncat (char *__restrict __dest, const char *__restrict __src, size_t __len)
+
+{
+  return __builtin___strncat_chk (__dest, __src, __len,
+      __builtin_object_size (__dest, 2 > 1));
+}
+# 536 "/usr/include/string.h" 2 3 4
+
+
+
+
+# 6 "src/main.c" 2
+# 1 "/usr/include/ctype.h" 1 3 4
+# 28 "/usr/include/ctype.h" 3 4
+
+# 46 "/usr/include/ctype.h" 3 4
+enum
+{
+  _ISupper = ((0) < 8 ? ((1 << (0)) << 8) : ((1 << (0)) >> 8)),
+  _ISlower = ((1) < 8 ? ((1 << (1)) << 8) : ((1 << (1)) >> 8)),
+  _ISalpha = ((2) < 8 ? ((1 << (2)) << 8) : ((1 << (2)) >> 8)),
+  _ISdigit = ((3) < 8 ? ((1 << (3)) << 8) : ((1 << (3)) >> 8)),
+  _ISxdigit = ((4) < 8 ? ((1 << (4)) << 8) : ((1 << (4)) >> 8)),
+  _ISspace = ((5) < 8 ? ((1 << (5)) << 8) : ((1 << (5)) >> 8)),
+  _ISprint = ((6) < 8 ? ((1 << (6)) << 8) : ((1 << (6)) >> 8)),
+  _ISgraph = ((7) < 8 ? ((1 << (7)) << 8) : ((1 << (7)) >> 8)),
+  _ISblank = ((8) < 8 ? ((1 << (8)) << 8) : ((1 << (8)) >> 8)),
+  _IScntrl = ((9) < 8 ? ((1 << (9)) << 8) : ((1 << (9)) >> 8)),
+  _ISpunct = ((10) < 8 ? ((1 << (10)) << 8) : ((1 << (10)) >> 8)),
+  _ISalnum = ((11) < 8 ? ((1 << (11)) << 8) : ((1 << (11)) >> 8))
+};
+# 79 "/usr/include/ctype.h" 3 4
+extern const unsigned short int **__ctype_b_loc (void)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__));
+extern const __int32_t **__ctype_tolower_loc (void)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__));
+extern const __int32_t **__ctype_toupper_loc (void)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__));
+# 108 "/usr/include/ctype.h" 3 4
+extern int isalnum (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int isalpha (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int iscntrl (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int isdigit (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int islower (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int isgraph (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int isprint (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int ispunct (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int isspace (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int isupper (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int isxdigit (int) __attribute__ ((__nothrow__ , __leaf__));
+
+
+
+extern int tolower (int __c) __attribute__ ((__nothrow__ , __leaf__));
+
+
+extern int toupper (int __c) __attribute__ ((__nothrow__ , __leaf__));
+
+
+
+
+extern int isblank (int) __attribute__ ((__nothrow__ , __leaf__));
+# 142 "/usr/include/ctype.h" 3 4
+extern int isascii (int __c) __attribute__ ((__nothrow__ , __leaf__));
+
+
+
+extern int toascii (int __c) __attribute__ ((__nothrow__ , __leaf__));
+
+
+
+extern int _toupper (int) __attribute__ ((__nothrow__ , __leaf__));
+extern int _tolower (int) __attribute__ ((__nothrow__ , __leaf__));
+# 206 "/usr/include/ctype.h" 3 4
+extern __inline __attribute__ ((__gnu_inline__)) int
+__attribute__ ((__nothrow__ , __leaf__)) tolower (int __c)
+{
+  return __c >= -128 && __c < 256 ? (*__ctype_tolower_loc ())[__c] : __c;
+}
+
+extern __inline __attribute__ ((__gnu_inline__)) int
+__attribute__ ((__nothrow__ , __leaf__)) toupper (int __c)
+{
+  return __c >= -128 && __c < 256 ? (*__ctype_toupper_loc ())[__c] : __c;
+}
+# 251 "/usr/include/ctype.h" 3 4
+extern int isalnum_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int isalpha_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int iscntrl_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int isdigit_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int islower_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int isgraph_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int isprint_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int ispunct_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int isspace_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int isupper_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+extern int isxdigit_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+
+extern int isblank_l (int, locale_t) __attribute__ ((__nothrow__ , __leaf__));
+
+
+
+extern int __tolower_l (int __c, locale_t __l) __attribute__ ((__nothrow__ , __leaf__));
+extern int tolower_l (int __c, locale_t __l) __attribute__ ((__nothrow__ , __leaf__));
+
+
+extern int __toupper_l (int __c, locale_t __l) __attribute__ ((__nothrow__ , __leaf__));
+extern int toupper_l (int __c, locale_t __l) __attribute__ ((__nothrow__ , __leaf__));
+# 327 "/usr/include/ctype.h" 3 4
+
+# 7 "src/main.c" 2
 
 # 1 "include/queue.h" 1
 
@@ -2380,26 +2875,139 @@ void free_queue(queue_t* q);
 void print_queue(queue_t* q);
 char* dequeue(queue_t* q);
 void enqueue(queue_t* q, char* word);
-# 5 "src/main.c" 2
+# 9 "src/main.c" 2
+# 1 "include/rules.h" 1
+typedef struct rule{
 
-int main(int argc, char** argv){
+ char* lhs;
+ char* rhs;
+
+} rule;
+
+rule rules[] = {
+
+ {"X", "aXc"},
+ {"X", "pY"},
+ {"Y", "bYc"},
+ {"Y", "q"}
+};
+
+char* start_symbol = "X";
+# 10 "src/main.c" 2
+
+
+# 11 "src/main.c" 3 4
+_Bool 
+# 11 "src/main.c"
+    is_lower_string(char* s){
+
+ for(int i=0; s[i]!='\0'; i++){
+  if(!
+# 14 "src/main.c" 3 4
+     ((*__ctype_b_loc ())[(int) ((
+# 14 "src/main.c"
+     s[i]
+# 14 "src/main.c" 3 4
+     ))] & (unsigned short int) _ISlower)
+# 14 "src/main.c"
+                  ){
+   return 
+# 15 "src/main.c" 3 4
+         0
+# 15 "src/main.c"
+              ;
+  }
+ }
+ return 
+# 18 "src/main.c" 3 4
+       1
+# 18 "src/main.c"
+           ;
+}
+
+
+char* replace(const char* word, const char* search, const char* replace, const int n){
+
+
+ char* result;
+
+ int replace_len = strlen(replace);
+ int search_len = strlen(search);
+ int word_len = strlen(word);
+
+ result = (char*) malloc(word_len + replace_len - search_len +1);
+
+ int i=0;
+ int occurence=0;
+ 
+# 35 "src/main.c" 3 4
+_Bool 
+# 35 "src/main.c"
+     found_nth_occurence = 
+# 35 "src/main.c" 3 4
+                           0
+# 35 "src/main.c"
+                                ;
+ while(*word){
+
+  char* tmp = strstr(word, search);
+
+  if(tmp == word && n == occurence++){
+   strcpy(&result[i], replace);
+   i+= replace_len;
+   word += search_len;
+   found_nth_occurence = 
+# 44 "src/main.c" 3 4
+                        1
+# 44 "src/main.c"
+                            ;
+  }
+  else{
+   result[i++] = *word++;
+  }
+ }
+
+
+ if(!found_nth_occurence) { return 
+# 52 "src/main.c" 3 4
+                                  ((void *)0)
+# 52 "src/main.c"
+                                      ;}
+
+
+ return result;
+}
+
+
+void generate_words(){
+
 
  queue_t queue;
- char* word0 = "test";
- char* word1 = "hallo";
-
  init_queue(&queue);
+ enqueue(&queue, start_symbol);
 
- enqueue(&queue, word0);
- enqueue(&queue, word1);
 
- print_queue(&queue);
+ char* word = dequeue(&queue);
+ if(is_lower_string(word)){
+  printf("%s\n", word);
+ }
 
- dequeue(&queue);
+ for(int i=0; i < sizeof(rules)/sizeof(rule); i++){
 
- print_queue(&queue);
+ }
+}
 
- free_queue(&queue);
+
+
+
+
+int main(int argc, char** argv){
+# 101 "src/main.c"
+ char* word = "einstestzweitestdrei";
+ char* search = "test";
+ char* rep = "12345";
+
+ printf("%s", replace(word, search, rep, 1));
 
  return 0;
 }
