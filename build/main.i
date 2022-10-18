@@ -2901,7 +2901,11 @@ _Bool
 # 11 "src/main.c"
     is_lower_string(char* s){
 
- for(int i=0; s[i]!='\0'; i++){
+ for(int i=0; s!= 
+# 13 "src/main.c" 3 4
+                 ((void *)0) 
+# 13 "src/main.c"
+                      && s[i]!='\0'; i++){
   if(!
 # 14 "src/main.c" 3 4
      ((*__ctype_b_loc ())[(int) ((
@@ -2928,6 +2932,23 @@ _Bool
 
 char* replace(const char* word, const char* search, const char* replace, const int n){
 
+ if(word == 
+# 24 "src/main.c" 3 4
+           ((void *)0) 
+# 24 "src/main.c"
+                || search == 
+# 24 "src/main.c" 3 4
+                             ((void *)0) 
+# 24 "src/main.c"
+                                  || replace == 
+# 24 "src/main.c" 3 4
+                                                ((void *)0)
+# 24 "src/main.c"
+                                                    ) {return 
+# 24 "src/main.c" 3 4
+                                                              ((void *)0)
+# 24 "src/main.c"
+                                                                  ;}
 
  char* result;
 
@@ -2935,18 +2956,18 @@ char* replace(const char* word, const char* search, const char* replace, const i
  int search_len = strlen(search);
  int word_len = strlen(word);
 
- result = (char*) malloc(word_len + replace_len - search_len +1);
+ result = malloc(word_len + replace_len - search_len +1);
 
  int i=0;
  int occurence=0;
  
-# 35 "src/main.c" 3 4
+# 36 "src/main.c" 3 4
 _Bool 
-# 35 "src/main.c"
+# 36 "src/main.c"
      found_nth_occurence = 
-# 35 "src/main.c" 3 4
+# 36 "src/main.c" 3 4
                            0
-# 35 "src/main.c"
+# 36 "src/main.c"
                                 ;
  while(*word){
 
@@ -2957,9 +2978,9 @@ _Bool
    i+= replace_len;
    word += search_len;
    found_nth_occurence = 
-# 44 "src/main.c" 3 4
+# 45 "src/main.c" 3 4
                         1
-# 44 "src/main.c"
+# 45 "src/main.c"
                             ;
   }
   else{
@@ -2967,11 +2988,13 @@ _Bool
   }
  }
 
+ result[i] = '\0';
+
 
  if(!found_nth_occurence) { return 
-# 52 "src/main.c" 3 4
+# 55 "src/main.c" 3 4
                                   ((void *)0)
-# 52 "src/main.c"
+# 55 "src/main.c"
                                       ;}
 
 
@@ -2979,7 +3002,7 @@ _Bool
 }
 
 
-void generate_words(){
+void generate_words(void){
 
 
  queue_t queue;
@@ -2988,25 +3011,33 @@ void generate_words(){
 
 
 
- char* next_word;
+ char* next_word = 
+# 71 "src/main.c" 3 4
+                  ((void *)0)
+# 71 "src/main.c"
+                      ;
  while( (next_word = dequeue(&queue) ) != 
-# 69 "src/main.c" 3 4
+# 72 "src/main.c" 3 4
                                          ((void *)0)
-# 69 "src/main.c"
+# 72 "src/main.c"
                                              ){
   if(is_lower_string(next_word)){
    printf("%s\n", next_word);
   }
 
-  for(volatile int i=0; i < sizeof(rules)/sizeof(rule); i++){
+  for(int i=0; i < sizeof(rules)/sizeof(rule); i++){
 
    char* word = next_word;
    int occrnc = 0;
-   char* new_word;
+   char* new_word = 
+# 81 "src/main.c" 3 4
+                   ((void *)0)
+# 81 "src/main.c"
+                       ;
    while((new_word = replace(word, rules[i].lhs, rules[i].rhs, occrnc++)) != 
-# 79 "src/main.c" 3 4
+# 82 "src/main.c" 3 4
                                                                             ((void *)0)
-# 79 "src/main.c"
+# 82 "src/main.c"
                                                                                 ){
     enqueue(&queue, new_word);
     free(new_word);
@@ -3020,9 +3051,8 @@ void generate_words(){
 
 
 
-
 int main(int argc, char** argv){
-# 121 "src/main.c"
+# 123 "src/main.c"
  generate_words();
 
  return 0;

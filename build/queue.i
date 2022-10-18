@@ -2834,9 +2834,13 @@ void enqueue(queue_t* q, char* word){
 
  if(q == 
 # 48 "src/queue.c" 3 4
-        ((void *)0)
+        ((void *)0) 
 # 48 "src/queue.c"
-            ){ return; }
+             || word == 
+# 48 "src/queue.c" 3 4
+                        ((void *)0)
+# 48 "src/queue.c"
+                            ){ return; }
 
  if(q->tail == -1){
   q->head = 0;
@@ -2857,6 +2861,6 @@ void enqueue(queue_t* q, char* word){
 # 63 "src/queue.c"
                   ) {return; }
 
- q->data[q->tail] = (char*) malloc(len);
+ q->data[q->tail] = malloc(len);
  strcpy(q->data[q->tail], word);
 }

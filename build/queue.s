@@ -298,7 +298,7 @@ enqueue:
 	.loc 1 48 2 is_stmt 1 view .LVU75
 	.loc 1 48 4 is_stmt 0 view .LVU76
 	testq	%rdi, %rdi
-	je	.L32
+	je	.L33
 	.loc 1 46 37 view .LVU77
 	pushq	%r13
 	.cfi_def_cfa_offset 16
@@ -307,93 +307,96 @@ enqueue:
 	.cfi_def_cfa_offset 24
 	.cfi_offset 12, -24
 	movq	%rsi, %r12
-	.loc 1 50 2 is_stmt 1 view .LVU78
-	.loc 1 46 37 is_stmt 0 view .LVU79
 	pushq	%rbp
 	.cfi_def_cfa_offset 32
 	.cfi_offset 6, -32
 	pushq	%rbx
 	.cfi_def_cfa_offset 40
 	.cfi_offset 3, -40
-	movq	%rdi, %rbx
 	subq	$8, %rsp
 	.cfi_def_cfa_offset 48
-	.loc 1 50 6 view .LVU80
+	.loc 1 48 4 view .LVU78
+	testq	%rsi, %rsi
+	je	.L22
+	.loc 1 50 6 view .LVU79
 	movl	8(%rdi), %esi
 .LVL20:
-	.loc 1 50 4 view .LVU81
+	.loc 1 50 6 view .LVU80
+	movq	%rdi, %rbx
+	.loc 1 50 2 is_stmt 1 view .LVU81
+	.loc 1 50 4 is_stmt 0 view .LVU82
 	cmpl	$-1, %esi
-	je	.L35
-	.loc 1 56 3 is_stmt 1 view .LVU82
-	.loc 1 61 46 is_stmt 0 view .LVU83
+	je	.L36
+	.loc 1 56 3 is_stmt 1 view .LVU83
+	.loc 1 61 46 is_stmt 0 view .LVU84
 	leal	2(%rsi), %ebp
-	.loc 1 56 10 view .LVU84
+	.loc 1 56 10 view .LVU85
 	leal	1(%rsi), %eax
-	.loc 1 61 46 view .LVU85
+	.loc 1 61 46 view .LVU86
 	movslq	%ebp, %rbp
-	.loc 1 61 21 view .LVU86
+	.loc 1 61 21 view .LVU87
 	salq	$3, %rbp
-.L26:
+.L27:
 	movl	%eax, 8(%rbx)
-	.loc 1 59 2 is_stmt 1 view .LVU87
-	.loc 1 59 12 is_stmt 0 view .LVU88
+	.loc 1 59 2 is_stmt 1 view .LVU88
+	.loc 1 59 12 is_stmt 0 view .LVU89
 	movq	%r12, %rdi
 .LVL21:
-	.loc 1 59 12 view .LVU89
+	.loc 1 59 12 view .LVU90
 	call	strlen@PLT
 .LVL22:
-	.loc 1 61 21 view .LVU90
+	.loc 1 61 21 view .LVU91
 	movq	(%rbx), %rdi
 	movq	%rbp, %rsi
-	.loc 1 59 25 view .LVU91
+	.loc 1 59 25 view .LVU92
 	leal	1(%rax), %r13d
 .LVL23:
-	.loc 1 61 2 is_stmt 1 view .LVU92
-	.loc 1 61 21 is_stmt 0 view .LVU93
+	.loc 1 61 2 is_stmt 1 view .LVU93
+	.loc 1 61 21 is_stmt 0 view .LVU94
 	call	realloc@PLT
 .LVL24:
-	.loc 1 61 10 view .LVU94
+	.loc 1 61 10 view .LVU95
 	movq	%rax, (%rbx)
-	.loc 1 63 2 is_stmt 1 view .LVU95
-	.loc 1 63 4 is_stmt 0 view .LVU96
+	.loc 1 63 2 is_stmt 1 view .LVU96
+	.loc 1 63 4 is_stmt 0 view .LVU97
 	testq	%rax, %rax
 	je	.L22
-	.loc 1 65 2 is_stmt 1 view .LVU97
-	.loc 1 65 11 is_stmt 0 view .LVU98
+	.loc 1 65 2 is_stmt 1 view .LVU98
+	.loc 1 65 11 is_stmt 0 view .LVU99
 	movslq	8(%rbx), %rdx
-	.loc 1 65 29 view .LVU99
+	.loc 1 65 21 view .LVU100
 	movslq	%r13d, %rdi
-	.loc 1 65 9 view .LVU100
+	.loc 1 65 9 view .LVU101
 	leaq	(%rax,%rdx,8), %rbx
 .LVL25:
-	.loc 1 65 29 view .LVU101
+	.loc 1 65 21 view .LVU102
 	call	malloc@PLT
 .LVL26:
 .LBB26:
 .LBB27:
 	.file 3 "/usr/include/x86_64-linux-gnu/bits/string_fortified.h"
-	.loc 3 79 10 view .LVU102
+	.loc 3 79 10 view .LVU103
 	movq	%r12, %rsi
 .LBE27:
 .LBE26:
-	.loc 1 65 19 view .LVU103
+	.loc 1 65 19 view .LVU104
 	movq	%rax, (%rbx)
-	.loc 1 66 2 is_stmt 1 view .LVU104
-	.loc 1 67 1 is_stmt 0 view .LVU105
+	.loc 1 66 2 is_stmt 1 view .LVU105
+	.loc 1 67 1 is_stmt 0 view .LVU106
 	addq	$8, %rsp
 	.cfi_remember_state
 	.cfi_def_cfa_offset 40
-	.loc 1 65 29 view .LVU106
+	.loc 1 65 21 view .LVU107
 	movq	%rax, %rdi
 .LVL27:
 .LBB30:
 .LBI26:
-	.loc 3 77 42 is_stmt 1 view .LVU107
+	.loc 3 77 42 is_stmt 1 view .LVU108
 .LBB28:
-	.loc 3 79 3 view .LVU108
+	.loc 3 79 3 view .LVU109
 .LBE28:
 .LBE30:
-	.loc 1 67 1 is_stmt 0 view .LVU109
+	.loc 1 67 1 is_stmt 0 view .LVU110
 	popq	%rbx
 	.cfi_restore 3
 	.cfi_def_cfa_offset 32
@@ -404,60 +407,58 @@ enqueue:
 	.cfi_restore 12
 	.cfi_def_cfa_offset 16
 .LVL28:
-	.loc 1 67 1 view .LVU110
+	.loc 1 67 1 view .LVU111
 	popq	%r13
 	.cfi_restore 13
 	.cfi_def_cfa_offset 8
 .LVL29:
 .LBB31:
 .LBB29:
-	.loc 3 79 10 view .LVU111
+	.loc 3 79 10 view .LVU112
 	jmp	strcpy@PLT
 .LVL30:
 	.p2align 4,,10
 	.p2align 3
-.L35:
+.L36:
 	.cfi_restore_state
-	.loc 3 79 10 view .LVU112
+	.loc 3 79 10 view .LVU113
 .LBE29:
 .LBE31:
-	.loc 1 51 3 is_stmt 1 view .LVU113
-	.loc 1 51 11 is_stmt 0 view .LVU114
+	.loc 1 51 3 is_stmt 1 view .LVU114
+	.loc 1 51 11 is_stmt 0 view .LVU115
 	movl	$0, 12(%rdi)
-	.loc 1 52 3 is_stmt 1 view .LVU115
+	.loc 1 52 3 is_stmt 1 view .LVU116
 	movl	$8, %ebp
-	.loc 1 52 11 is_stmt 0 view .LVU116
+	.loc 1 52 11 is_stmt 0 view .LVU117
 	xorl	%eax, %eax
-	jmp	.L26
+	jmp	.L27
 .LVL31:
+	.p2align 4,,10
+	.p2align 3
 .L22:
-	.loc 1 67 1 view .LVU117
+	.loc 1 67 1 view .LVU118
 	addq	$8, %rsp
 	.cfi_def_cfa_offset 40
 	popq	%rbx
 	.cfi_def_cfa_offset 32
-.LVL32:
-	.loc 1 67 1 view .LVU118
 	popq	%rbp
 	.cfi_def_cfa_offset 24
 	popq	%r12
 	.cfi_def_cfa_offset 16
-.LVL33:
+.LVL32:
 	.loc 1 67 1 view .LVU119
 	popq	%r13
 	.cfi_def_cfa_offset 8
-.LVL34:
-	.loc 1 67 1 view .LVU120
 	ret
-.LVL35:
+.LVL33:
 	.p2align 4,,10
 	.p2align 3
-.L32:
+.L33:
 	.cfi_restore 3
 	.cfi_restore 6
 	.cfi_restore 12
 	.cfi_restore 13
-	.loc 1 67 1 view .LVU121
+	.loc 1 67 1 view .LVU120
 	ret
 	.cfi_endproc
 .LFE55:
@@ -672,7 +673,7 @@ enqueue:
 	.uleb128 0x1d
 	.long	0x3d1
 	.quad	.LBI26
-	.byte	.LVU107
+	.byte	.LVU108
 	.long	.LLRL12
 	.byte	0x1
 	.byte	0x42
@@ -1482,16 +1483,16 @@ enqueue:
 .Ldebug_loc0:
 .LVUS9:
 	.uleb128 0
-	.uleb128 .LVU89
-	.uleb128 .LVU89
-	.uleb128 .LVU101
-	.uleb128 .LVU101
-	.uleb128 .LVU112
-	.uleb128 .LVU112
+	.uleb128 .LVU90
+	.uleb128 .LVU90
+	.uleb128 .LVU102
+	.uleb128 .LVU102
+	.uleb128 .LVU113
+	.uleb128 .LVU113
 	.uleb128 .LVU118
 	.uleb128 .LVU118
-	.uleb128 .LVU121
-	.uleb128 .LVU121
+	.uleb128 .LVU120
+	.uleb128 .LVU120
 	.uleb128 0
 .LLST9:
 	.byte	0x4
@@ -1514,37 +1515,37 @@ enqueue:
 	.byte	0x9f
 	.byte	0x4
 	.uleb128 .LVL30-.Ltext0
-	.uleb128 .LVL32-.Ltext0
+	.uleb128 .LVL31-.Ltext0
 	.uleb128 0x1
 	.byte	0x53
 	.byte	0x4
-	.uleb128 .LVL32-.Ltext0
-	.uleb128 .LVL35-.Ltext0
+	.uleb128 .LVL31-.Ltext0
+	.uleb128 .LVL33-.Ltext0
 	.uleb128 0x4
 	.byte	0xa3
 	.uleb128 0x1
 	.byte	0x55
 	.byte	0x9f
 	.byte	0x4
-	.uleb128 .LVL35-.Ltext0
+	.uleb128 .LVL33-.Ltext0
 	.uleb128 .LFE55-.Ltext0
 	.uleb128 0x1
 	.byte	0x55
 	.byte	0
 .LVUS10:
 	.uleb128 0
-	.uleb128 .LVU81
-	.uleb128 .LVU81
-	.uleb128 .LVU110
-	.uleb128 .LVU110
-	.uleb128 .LVU112
-	.uleb128 .LVU112
-	.uleb128 .LVU112
-	.uleb128 .LVU112
+	.uleb128 .LVU80
+	.uleb128 .LVU80
+	.uleb128 .LVU111
+	.uleb128 .LVU111
+	.uleb128 .LVU113
+	.uleb128 .LVU113
+	.uleb128 .LVU113
+	.uleb128 .LVU113
 	.uleb128 .LVU119
 	.uleb128 .LVU119
-	.uleb128 .LVU121
-	.uleb128 .LVU121
+	.uleb128 .LVU120
+	.uleb128 .LVU120
 	.uleb128 0
 .LLST10:
 	.byte	0x4
@@ -1572,47 +1573,40 @@ enqueue:
 	.byte	0x9f
 	.byte	0x4
 	.uleb128 .LVL30-.Ltext0
-	.uleb128 .LVL33-.Ltext0
+	.uleb128 .LVL32-.Ltext0
 	.uleb128 0x1
 	.byte	0x5c
 	.byte	0x4
+	.uleb128 .LVL32-.Ltext0
 	.uleb128 .LVL33-.Ltext0
-	.uleb128 .LVL35-.Ltext0
 	.uleb128 0x4
 	.byte	0xa3
 	.uleb128 0x1
 	.byte	0x54
 	.byte	0x9f
 	.byte	0x4
-	.uleb128 .LVL35-.Ltext0
+	.uleb128 .LVL33-.Ltext0
 	.uleb128 .LFE55-.Ltext0
 	.uleb128 0x1
 	.byte	0x54
 	.byte	0
 .LVUS11:
-	.uleb128 .LVU92
-	.uleb128 .LVU111
-	.uleb128 .LVU117
-	.uleb128 .LVU120
+	.uleb128 .LVU93
+	.uleb128 .LVU112
 .LLST11:
 	.byte	0x4
 	.uleb128 .LVL23-.Ltext0
 	.uleb128 .LVL29-.Ltext0
 	.uleb128 0x1
 	.byte	0x5d
-	.byte	0x4
-	.uleb128 .LVL31-.Ltext0
-	.uleb128 .LVL34-.Ltext0
-	.uleb128 0x1
-	.byte	0x5d
 	.byte	0
 .LVUS13:
-	.uleb128 .LVU107
-	.uleb128 .LVU110
-	.uleb128 .LVU110
-	.uleb128 .LVU112
-	.uleb128 .LVU112
-	.uleb128 .LVU112
+	.uleb128 .LVU108
+	.uleb128 .LVU111
+	.uleb128 .LVU111
+	.uleb128 .LVU113
+	.uleb128 .LVU113
+	.uleb128 .LVU113
 .LLST13:
 	.byte	0x4
 	.uleb128 .LVL27-.Ltext0
@@ -1634,8 +1628,8 @@ enqueue:
 	.byte	0x9f
 	.byte	0
 .LVUS14:
-	.uleb128 .LVU107
-	.uleb128 .LVU112
+	.uleb128 .LVU108
+	.uleb128 .LVU113
 .LLST14:
 	.byte	0x4
 	.uleb128 .LVL27-.Ltext0

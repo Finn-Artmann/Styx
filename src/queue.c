@@ -45,7 +45,7 @@ char* dequeue(queue_t* q){
 
 void enqueue(queue_t* q, char* word){
 	
-	if(q == NULL){ return; }
+	if(q == NULL || word == NULL){ return; }
 
 	if(q->tail == -1){
 		q->head = 0;
@@ -62,7 +62,7 @@ void enqueue(queue_t* q, char* word){
 
 	if(q->data == NULL) {return; } // realloc failed
 
-	q->data[q->tail] = (char*) malloc(len);
+	q->data[q->tail] = malloc(len);
 	strcpy(q->data[q->tail], word);
 }
 				

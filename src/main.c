@@ -10,7 +10,7 @@
 
 bool is_lower_string(char* s){
 		
-	for(int i=0; s[i]!='\0'; i++){
+	for(int i=0; s!= NULL && s[i]!='\0'; i++){
 		if(!islower(s[i])){
 			return false;
 		}
@@ -21,14 +21,15 @@ bool is_lower_string(char* s){
 
 char* replace(const char* word, const char* search, const char* replace, const int n){
 	
-	
+	if(word == NULL || search == NULL || replace == NULL) {return NULL;}
+
 	char* result;
 
 	int replace_len = strlen(replace);
 	int search_len = strlen(search);
 	int word_len = strlen(word);
 	
-	result = (char*) malloc(word_len + replace_len - search_len +1);
+	result = malloc(word_len + replace_len - search_len +1);
 
 	int i=0;
 	int occurence=0;
@@ -47,6 +48,8 @@ char* replace(const char* word, const char* search, const char* replace, const i
 			result[i++] = *word++;
 		}
 	}
+	
+	result[i] = '\0';
 
 	// Return NULL if ther is there is no n'th occurence of the search string 
 	if(!found_nth_occurence) { return NULL;}
@@ -56,7 +59,7 @@ char* replace(const char* word, const char* search, const char* replace, const i
 }
 
 
-void generate_words(){
+void generate_words(void){
 	
 	// Preperation
 	queue_t queue;
@@ -65,17 +68,17 @@ void generate_words(){
 	
 	// Algorithm
 	
-	char* next_word;
+	char* next_word = NULL;
 	while( (next_word = dequeue(&queue) ) != NULL){
 		if(is_lower_string(next_word)){
 			printf("%s\n", next_word);
 		}
 
-		for(volatile int i=0; i < sizeof(rules)/sizeof(rule); i++){
+		for(int i=0; i < sizeof(rules)/sizeof(rule); i++){
 			
 			char* word = next_word;
 			int occrnc = 0;
-			char* new_word;
+			char* new_word = NULL;
 			while((new_word = replace(word, rules[i].lhs, rules[i].rhs, occrnc++)) != NULL){	
 				enqueue(&queue, new_word);
 				free(new_word);
@@ -89,7 +92,6 @@ void generate_words(){
 
 
 	
-
 int main(int argc, char** argv){
 
 	//queue_t queue;
