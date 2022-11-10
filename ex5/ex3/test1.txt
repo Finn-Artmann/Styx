@@ -1,0 +1,5 @@
+Das ist eine Test Datei.
+Ungerade Zahlen: 123 1 9 99 9923 2225
+Gerade Zahlen: 0 2 4 6 66 12234 33398
+END
+!Nach END!
