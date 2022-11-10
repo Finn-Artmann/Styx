@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 6
-#define YY_END_OF_BUFFER 7
+#define YY_NUM_RULES 9
+#define YY_END_OF_BUFFER 10
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -360,10 +360,11 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[18] =
+static const flex_int16_t yy_accept[26] =
     {   0,
-        0,    0,    7,    6,    2,    3,    2,    5,    5,    2,
-        3,    2,    4,    4,    5,    1,    0
+        0,    0,    0,    0,   10,    9,    9,    2,    3,    2,
+        5,    5,    8,    9,    6,    2,    3,    2,    4,    4,
+        8,    7,    5,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -372,16 +373,16 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    2,    3,    4,
-        3,    4,    3,    4,    3,    4,    3,    1,    1,    1,
-        1,    1,    1,    1,    5,    5,    5,    6,    7,    5,
-        5,    5,    5,    5,    5,    5,    5,    8,    5,    5,
-        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
-        1,    1,    1,    1,    1,    1,    5,    5,    5,    5,
+        1,    1,    1,    1,    1,    1,    2,    3,    4,    5,
+        4,    5,    4,    5,    4,    6,    7,    1,    1,    1,
+        1,    1,    1,    1,    8,    8,    8,    9,   10,    8,
+        8,    8,    8,    8,    8,    8,    8,   11,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        1,    1,    1,    1,    1,    1,    8,    8,    8,    8,
 
-        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
-        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
-        5,    5,    1,    1,    1,    1,    1,    1,    1,    1,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+       12,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -398,35 +399,44 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[9] =
+static const YY_CHAR yy_meta[13] =
     {   0,
-        1,    1,    1,    1,    2,    2,    2,    2
+        1,    1,    2,    2,    2,    1,    1,    3,    3,    3,
+        3,    3
     } ;
 
-static const flex_int16_t yy_base[20] =
+static const flex_int16_t yy_base[30] =
     {   0,
-        0,    0,   16,   17,   17,    7,    0,    0,    7,   17,
-        0,    0,    0,    8,    0,    0,   17,   11,   10
+        0,    0,    9,   18,   25,   39,   12,   39,   28,    0,
+        0,    9,    0,   17,   39,   39,    0,    0,    0,    9,
+        0,   39,    0,    0,   39,   35,   14,   14,   12
     } ;
 
-static const flex_int16_t yy_def[20] =
+static const flex_int16_t yy_def[30] =
     {   0,
-       17,    1,   17,   17,   17,   17,    6,   18,   18,   17,
-        6,    6,   19,   19,   18,   18,    0,   17,   17
+       25,    1,   26,   26,   25,   25,   25,   25,   25,    9,
+       27,   27,   28,   25,   25,   25,    9,    9,   29,   29,
+       28,   25,   27,   27,    0,   25,   25,   25,   25
     } ;
 
-static const flex_int16_t yy_nxt[26] =
+static const flex_int16_t yy_nxt[52] =
     {   0,
-        4,    5,    6,    7,    8,    8,    9,    8,   10,   11,
-       12,   15,   13,   16,   14,   17,    3,   17,   17,   17,
-       17,   17,   17,   17,   17
+        6,    7,    8,    9,   10,   10,    9,   11,   11,   12,
+       11,   11,   13,   13,   23,   21,   19,   24,   22,   20,
+       14,   13,   13,   15,   25,   25,   25,   25,   25,   14,
+       16,   17,   18,   18,   17,    6,    6,    6,    5,   25,
+       25,   25,   25,   25,   25,   25,   25,   25,   25,   25,
+       25
     } ;
 
-static const flex_int16_t yy_chk[26] =
+static const flex_int16_t yy_chk[52] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    6,    6,
-        6,   19,   18,   14,    9,    3,   17,   17,   17,   17,
-       17,   17,   17,   17,   17
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    3,    3,   29,   28,   27,   20,   14,   12,
+        3,    4,    4,    7,    5,    0,    0,    0,    0,    4,
+        9,    9,    9,    9,    9,   26,   26,   26,   25,   25,
+       25,   25,   25,   25,   25,   25,   25,   25,   25,   25,
+       25
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -447,12 +457,57 @@ char *yytext;
 #line 2 "lexer.l"
 #include <stdio.h>
 #include <ctype.h>
+#include <stdbool.h>
 
-long sum = 0;
-#line 453 "lex.yy.c"
-#line 454 "lex.yy.c"
+long sum_even = 0;
+long sum_odd = 0;
+
+
+char* replace(const char* word, const char* search, const char* replace, const int n){
+	
+	if(word == NULL || search == NULL || replace == NULL) {return NULL;}
+
+	char* result;
+
+	int replace_len = strlen(replace);
+	int search_len = strlen(search);
+	int word_len = strlen(word);
+	
+	result = malloc(word_len + replace_len - search_len +1);
+
+	int i=0;
+	int occurence=0;
+	bool found_nth_occurence = false;
+	while(*word){
+		
+		char* tmp = strstr(word, search);
+
+		if(tmp == word && n == occurence++){
+			strcpy(&result[i], replace);
+			i+= replace_len;
+			word += search_len;
+			found_nth_occurence = true;
+		}
+		else{
+			result[i++] = *word++;
+		}
+	}
+	
+	result[i] = '\0';
+
+	// Return NULL if ther is there is no n'th occurence of the search string 
+	if(!found_nth_occurence) { return NULL;}
+
+
+	return result;
+}
+
+#line 506 "lex.yy.c"
+
+#line 508 "lex.yy.c"
 
 #define INITIAL 0
+#define OCTAL 1
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -667,10 +722,10 @@ YY_DECL
 		}
 
 	{
-#line 16 "lexer.l"
+#line 61 "lexer.l"
 
 
-#line 674 "lex.yy.c"
+#line 729 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -697,13 +752,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 18 )
+				if ( yy_current_state >= 26 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 17 );
+		while ( yy_base[yy_current_state] != 39 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -729,36 +784,74 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 18 "lexer.l"
-{ return 0;}
+#line 63 "lexer.l"
+{ return 3;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 19 "lexer.l"
-{ ECHO; /*printf("Identified even number: %s\n", yytext); sum+= atoi(yytext);*/}
+#line 64 "lexer.l"
+{ ECHO; sum_even+= atoi(yytext); return 1;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 20 "lexer.l"
-{ ECHO; /*printf("Identified odd number: %s\n", yytext); sum+= atoi(yytext);*/ }
+#line 65 "lexer.l"
+{ ECHO; sum_odd+= atoi(yytext); return 2;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 21 "lexer.l"
-{ ECHO;/*printf("Identified even letter count: %s\n", yytext);*/ }
+#line 66 "lexer.l"
+{ for(int i=0;i<yyleng;i++){
+                            if(isupper(yytext[i])){
+                                    yytext[i]= tolower(yytext[i]);       
+                            }                                  
+                    }  
+                    ECHO;
+                    } 
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 22 "lexer.l"
-{ ECHO; /*printf("Identified odd letter count: %s\n", yytext);*/ }
+#line 73 "lexer.l"
+{ for(int i=0;i<yyleng;i++){
+			if(islower(yytext[i])){
+				yytext[i]= toupper(yytext[i]);
+			} 
+		   } 
+		   ECHO;
+		}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 24 "lexer.l"
+#line 81 "lexer.l"
+{ BEGIN(OCTAL); }
+	YY_BREAK
+case 7:
+YY_RULE_SETUP
+#line 82 "lexer.l"
+{ BEGIN(INITIAL); }
+	YY_BREAK
+case 8:
+YY_RULE_SETUP
+#line 83 "lexer.l"
+{
+
+	// printf("OCTAL FOUND: %s\n", yytext);
+	long dec = strtol(yytext, NULL, 8);
+	// printf("DEC: %ld\n", dec);
+	char dec_str[100 + sizeof(char)];
+	sprintf(dec_str, "%ld", dec);
+	// printf("DECSTR: %s\n", dec_str);
+	yytext = replace(yytext, yytext, dec_str, 0);
+	ECHO;
+}
+	YY_BREAK
+case 9:
+YY_RULE_SETUP
+#line 94 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 761 "lex.yy.c"
+#line 853 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
+case YY_STATE_EOF(OCTAL):
 	yyterminate();
 
 	case YY_END_OF_BUFFER:
@@ -1054,7 +1147,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 18 )
+			if ( yy_current_state >= 26 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1082,11 +1175,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 18 )
+		if ( yy_current_state >= 26 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 17);
+	yy_is_jam = (yy_current_state == 25);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1762,16 +1855,32 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 24 "lexer.l"
+#line 94 "lexer.l"
 
 
 
 int yywrap(void) {return 1;}
 int main(int argc, char** argv){
 	
-	printf("Starting lexing process ... \n");
+	//printf("Starting lexing process ... \n");
 	yyin = fopen(argv[1], "r");
-	yylex();
+	
+
+	for(int res=yylex(); res != 0 && res!=3; res=yylex()){
+		
+		switch(res){
+			
+			case 1:
+				printf("Sum even: %ld\n", sum_even);
+				break;
+
+			case 2:
+				printf("Sum odd: %ld\n", sum_odd);
+				break;
+			default:
+				break;
+		}
+	}
 
 	//printf("Sum of all even and odd numbers: %ld\n", sum);
 
