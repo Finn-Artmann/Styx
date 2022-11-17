@@ -3,12 +3,6 @@
 
 #include "stack.h"
 
-struct dfa {
-	int initial;
-	int (*transition)(int state, char ch, stack_t* stack);
-};
-
-struct dfa *create_dfa (int i, int (*t)(int, char));
 
 struct dfa_ctx {
 	struct dfa *dfa;
@@ -17,6 +11,13 @@ struct dfa_ctx {
 	int offset;
 	stack_t* stack;
 };
+
+struct dfa {
+	int initial;
+	int (*transition)(int state, char ch, struct dfa_ctx* ctx);
+};
+
+struct dfa *create_dfa (int i, int (*t)(int, char, struct dfa_ctx*));
 
 struct dfa_ctx *dfa_new_ctx (struct dfa *dfa, char *word);
 

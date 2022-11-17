@@ -1,5 +1,5 @@
 # 0 "src/main.c"
-# 1 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1//"
+# 1 "/data/home/arf43777/Dokumente/CompilerConstruction/ex6/ex1//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
@@ -1155,7 +1155,7 @@ typedef __uintmax_t uintmax_t;
 
 
 # 5 "include/stack.h"
-typedef int val_t;
+typedef char val_t;
 
 typedef struct Stack{
 
@@ -1172,15 +1172,11 @@ void s_push(stack_t* s, val_t num);
 
 val_t s_pop(stack_t* s);
 
+val_t s_peek(stack_t* s);
+
 int s_isempty(stack_t* s);
 # 5 "include/generic_pda.h" 2
 
-struct dfa {
- int initial;
- int (*transition)(int state, char ch);
-};
-
-struct dfa *create_dfa (int i, int (*t)(int, char));
 
 struct dfa_ctx {
  struct dfa *dfa;
@@ -1189,6 +1185,13 @@ struct dfa_ctx {
  int offset;
  stack_t* stack;
 };
+
+struct dfa {
+ int initial;
+ int (*transition)(int state, char ch, struct dfa_ctx* ctx);
+};
+
+struct dfa *create_dfa (int i, int (*t)(int, char, struct dfa_ctx*));
 
 struct dfa_ctx *dfa_new_ctx (struct dfa *dfa, char *word);
 
@@ -1199,8 +1202,21 @@ char *generate_word (void);
 # 5 "src/main.c" 2
 
 
-int pda_transition(int st, char ch){
-
+int pda_transition(int st, char ch, struct dfa_ctx* ctx){
+ switch(st){
+  case 1: switch(ch){
+   case 'a': s_push(ctx->stack, 'a'); return 1;
+   case 'b': s_push(ctx->stack, 'b'); return 1;
+   case '.': return 2;
+   default: return 0;
+   }
+  case 2: switch(ch){
+   case 'a': if(s_peek(ctx->stack) == 'a'){s_pop(ctx->stack); return 2;}
+   case 'b': if(s_peek(ctx->stack) == 'b'){s_pop(ctx->stack); return 2;}
+   case '\0': if(s_isempty(ctx->stack)){return -1;}
+   default: return 0;
+   }
+ }
 }
 
 
@@ -1208,10 +1224,10 @@ int main(int argc, char** argv){
 
  struct dfa* pda = create_dfa(1, pda_transition);
 
- char* test_word = "test";
-
+ char* test_word = "ab.ba";
  struct dfa_ctx* pda_ctx = dfa_new_ctx(pda, test_word);
  int result = run_dfa(pda_ctx);
+ printf("Result: %d\n", result);
 
 
  return 0;

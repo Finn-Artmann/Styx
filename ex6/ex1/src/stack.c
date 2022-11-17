@@ -26,7 +26,7 @@ val_t s_pop(stack_t* s){
 	return s->data[s->top--];
 }
 
-val_t s_peek(stack* s){
+val_t s_peek(stack_t* s){
 	return s->data[s->top];
 }
 

@@ -1,7 +1,7 @@
 	.file	"generic_pda.c"
 	.text
 .Ltext0:
-	.file 0 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1" "src/generic_pda.c"
+	.file 0 "/data/home/arf43777/Dokumente/CompilerConstruction/ex6/ex1" "src/generic_pda.c"
 	.p2align 4
 	.globl	create_dfa
 	.type	create_dfa, @function
@@ -9,12 +9,12 @@ create_dfa:
 .LVL0:
 .LFB51:
 	.file 1 "src/generic_pda.c"
-	.loc 1 11 53 view -0
+	.loc 1 11 70 view -0
 	.cfi_startproc
-	.loc 1 11 53 is_stmt 0 view .LVU1
+	.loc 1 11 70 is_stmt 0 view .LVU1
 	endbr64
 	.loc 1 12 5 is_stmt 1 view .LVU2
-	.loc 1 11 53 is_stmt 0 view .LVU3
+	.loc 1 11 70 is_stmt 0 view .LVU3
 	pushq	%rbp
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
@@ -22,7 +22,7 @@ create_dfa:
 	.loc 1 12 23 view .LVU4
 	movl	$16, %edi
 .LVL1:
-	.loc 1 11 53 view .LVU5
+	.loc 1 11 70 view .LVU5
 	pushq	%rbx
 	.cfi_def_cfa_offset 24
 	.cfi_offset 3, -24
@@ -66,62 +66,86 @@ dfa_new_ctx:
 	endbr64
 	.loc 1 21 5 is_stmt 1 view .LVU17
 	.loc 1 20 59 is_stmt 0 view .LVU18
-	pushq	%r12
+	pushq	%r13
 	.cfi_def_cfa_offset 16
-	.cfi_offset 12, -16
-	pushq	%rbp
+	.cfi_offset 13, -16
+	movq	%rsi, %r13
+	pushq	%r12
 	.cfi_def_cfa_offset 24
-	.cfi_offset 6, -24
-	movq	%rsi, %rbp
-	pushq	%rbx
+	.cfi_offset 12, -24
+	pushq	%rbp
 	.cfi_def_cfa_offset 32
-	.cfi_offset 3, -32
-	.loc 1 20 59 view .LVU19
+	.cfi_offset 6, -32
+	pushq	%rbx
+	.cfi_def_cfa_offset 40
+	.cfi_offset 3, -40
 	movq	%rdi, %rbx
-	.loc 1 21 27 view .LVU20
+	.loc 1 21 27 view .LVU19
 	movl	$40, %edi
 .LVL6:
+	.loc 1 20 59 view .LVU20
+	subq	$8, %rsp
+	.cfi_def_cfa_offset 48
 	.loc 1 21 27 view .LVU21
 	call	malloc@PLT
 .LVL7:
-	.loc 1 25 18 view .LVU22
-	movq	%rbp, %rdi
-	.loc 1 23 14 view .LVU23
-	movq	%rbx, (%rax)
-	.loc 1 21 27 view .LVU24
+	.loc 1 23 23 view .LVU22
+	movl	$16, %edi
+	.loc 1 21 27 view .LVU23
 	movq	%rax, %r12
 .LVL8:
-	.loc 1 23 5 is_stmt 1 view .LVU25
-	.loc 1 24 5 view .LVU26
-	.loc 1 24 16 is_stmt 0 view .LVU27
-	movl	(%rbx), %eax
+	.loc 1 23 6 is_stmt 1 view .LVU24
+	.loc 1 23 23 is_stmt 0 view .LVU25
+	call	malloc@PLT
 .LVL9:
-	.loc 1 24 16 view .LVU28
-	movl	%eax, 8(%r12)
-	.loc 1 25 5 is_stmt 1 view .LVU29
-	.loc 1 25 18 is_stmt 0 view .LVU30
-	call	strdup@PLT
+	.loc 1 26 15 view .LVU26
+	movq	%r13, %rdi
+	.loc 1 24 11 view .LVU27
+	movq	%rbx, (%r12)
+	.loc 1 23 23 view .LVU28
+	movq	%rax, %rbp
 .LVL10:
-	.loc 1 29 1 view .LVU31
-	popq	%rbx
-	.cfi_def_cfa_offset 24
+	.loc 1 24 2 is_stmt 1 view .LVU29
+	.loc 1 25 2 view .LVU30
+	.loc 1 25 13 is_stmt 0 view .LVU31
+	movl	(%rbx), %eax
 .LVL11:
-	.loc 1 29 1 view .LVU32
-	popq	%rbp
-	.cfi_def_cfa_offset 16
+	.loc 1 25 13 view .LVU32
+	movl	%eax, 8(%r12)
+	.loc 1 26 2 is_stmt 1 view .LVU33
+	.loc 1 26 15 is_stmt 0 view .LVU34
+	call	strdup@PLT
 .LVL12:
-	.loc 1 26 17 view .LVU33
-	movl	$0, 24(%r12)
-	.loc 1 25 16 view .LVU34
+	.loc 1 28 13 view .LVU35
+	movq	%rbp, 32(%r12)
+	.loc 1 26 13 view .LVU36
 	movq	%rax, 16(%r12)
-	.loc 1 26 5 is_stmt 1 view .LVU35
-	.loc 1 28 5 view .LVU36
-	.loc 1 29 1 is_stmt 0 view .LVU37
+	.loc 1 27 2 is_stmt 1 view .LVU37
+	.loc 1 31 1 is_stmt 0 view .LVU38
 	movq	%r12, %rax
-	popq	%r12
-	.cfi_def_cfa_offset 8
+	.loc 1 27 14 view .LVU39
+	movl	$0, 24(%r12)
+	.loc 1 28 2 is_stmt 1 view .LVU40
+	.loc 1 30 5 view .LVU41
+	.loc 1 31 1 is_stmt 0 view .LVU42
+	addq	$8, %rsp
+	.cfi_def_cfa_offset 40
+	popq	%rbx
+	.cfi_def_cfa_offset 32
 .LVL13:
-	.loc 1 29 1 view .LVU38
+	.loc 1 31 1 view .LVU43
+	popq	%rbp
+	.cfi_def_cfa_offset 24
+.LVL14:
+	.loc 1 31 1 view .LVU44
+	popq	%r12
+	.cfi_def_cfa_offset 16
+.LVL15:
+	.loc 1 31 1 view .LVU45
+	popq	%r13
+	.cfi_def_cfa_offset 8
+.LVL16:
+	.loc 1 31 1 view .LVU46
 	ret
 	.cfi_endproc
 .LFE52:
@@ -130,75 +154,76 @@ dfa_new_ctx:
 	.globl	run_dfa
 	.type	run_dfa, @function
 run_dfa:
-.LVL14:
+.LVL17:
 .LFB53:
-	.loc 1 31 35 is_stmt 1 view -0
+	.loc 1 33 35 is_stmt 1 view -0
 	.cfi_startproc
-	.loc 1 31 35 is_stmt 0 view .LVU40
+	.loc 1 33 35 is_stmt 0 view .LVU48
 	endbr64
-	.loc 1 32 5 is_stmt 1 view .LVU41
-	.loc 1 31 35 is_stmt 0 view .LVU42
+	.loc 1 34 5 is_stmt 1 view .LVU49
+	.loc 1 33 35 is_stmt 0 view .LVU50
 	pushq	%rbx
 	.cfi_def_cfa_offset 16
 	.cfi_offset 3, -16
-	.loc 1 31 35 view .LVU43
+	.loc 1 33 35 view .LVU51
 	movq	%rdi, %rbx
 .LBB2:
-	.loc 1 37 22 view .LVU44
+	.loc 1 39 22 view .LVU52
 	movl	8(%rdi), %edi
-.LVL15:
-	.loc 1 37 22 view .LVU45
+.LVL18:
+	.loc 1 39 22 view .LVU53
 .LBE2:
-	.loc 1 32 11 view .LVU46
+	.loc 1 34 11 view .LVU54
 	jmp	.L7
 	.p2align 4,,10
 	.p2align 3
 .L9:
 .LBB3:
-	.loc 1 35 9 is_stmt 1 view .LVU47
-	.loc 1 35 41 is_stmt 0 view .LVU48
+	.loc 1 37 9 is_stmt 1 view .LVU55
+	.loc 1 37 41 is_stmt 0 view .LVU56
 	addl	$1, %edx
 	movl	%edx, 24(%rbx)
-.LVL16:
-	.loc 1 37 9 is_stmt 1 view .LVU49
-	.loc 1 37 22 is_stmt 0 view .LVU50
+.LVL19:
+	.loc 1 39 9 is_stmt 1 view .LVU57
+	.loc 1 39 22 is_stmt 0 view .LVU58
 	movsbl	(%rax), %esi
-	.loc 1 37 30 view .LVU51
+	movq	%rbx, %rdx
+	.loc 1 39 30 view .LVU59
 	movq	(%rbx), %rax
-.LVL17:
-	.loc 1 37 22 view .LVU52
+.LVL20:
+	.loc 1 39 22 view .LVU60
 	call	*8(%rax)
-.LVL18:
-	.loc 1 37 20 view .LVU53
+.LVL21:
+	.loc 1 39 20 view .LVU61
 	movl	%eax, 8(%rbx)
-	.loc 1 38 9 is_stmt 1 view .LVU54
-	.loc 1 37 22 is_stmt 0 view .LVU55
+	.loc 1 40 9 is_stmt 1 view .LVU62
+	.loc 1 39 22 is_stmt 0 view .LVU63
 	movl	%eax, %edi
-	.loc 1 38 12 view .LVU56
+	.loc 1 40 12 view .LVU64
 	testl	%eax, %eax
 	je	.L6
 .L7:
-	.loc 1 38 12 view .LVU57
+	.loc 1 40 12 view .LVU65
 .LBE3:
-	.loc 1 32 36 is_stmt 1 view .LVU58
-	.loc 1 32 26 is_stmt 0 view .LVU59
+	.loc 1 34 36 is_stmt 1 view .LVU66
+	.loc 1 34 26 is_stmt 0 view .LVU67
 	movslq	24(%rbx), %rax
 	movq	%rax, %rdx
-	.loc 1 32 22 view .LVU60
+	.loc 1 34 22 view .LVU68
 	addq	16(%rbx), %rax
-	.loc 1 32 36 view .LVU61
+	.loc 1 34 36 view .LVU69
 	cmpb	$0, (%rax)
 	jne	.L9
-	.loc 1 42 5 is_stmt 1 view .LVU62
-	.loc 1 42 23 is_stmt 0 view .LVU63
+	.loc 1 44 5 is_stmt 1 view .LVU70
+	.loc 1 44 23 is_stmt 0 view .LVU71
 	shrl	$31, %edi
 .L6:
-	.loc 1 43 1 view .LVU64
+	.loc 1 45 1 view .LVU72
 	movl	%edi, %eax
 	popq	%rbx
 	.cfi_def_cfa_offset 8
-.LVL19:
-	.loc 1 43 1 view .LVU65
+.LVL22:
+	.loc 1 45 1 view .LVU73
 	ret
 	.cfi_endproc
 .LFE53:
@@ -208,11 +233,11 @@ run_dfa:
 	.type	generate_word, @function
 generate_word:
 .LFB54:
-	.loc 1 46 28 is_stmt 1 view -0
+	.loc 1 48 28 is_stmt 1 view -0
 	.cfi_startproc
 	endbr64
-	.loc 1 47 3 view .LVU67
-	.loc 1 46 28 is_stmt 0 view .LVU68
+	.loc 1 49 3 view .LVU75
+	.loc 1 48 28 is_stmt 0 view .LVU76
 	pushq	%r13
 	.cfi_def_cfa_offset 16
 	.cfi_offset 13, -16
@@ -227,14 +252,14 @@ generate_word:
 	.cfi_offset 3, -40
 	subq	$8, %rsp
 	.cfi_def_cfa_offset 48
-	.loc 1 47 13 view .LVU69
+	.loc 1 49 13 view .LVU77
 	call	random@PLT
-.LVL20:
-	.loc 1 47 22 view .LVU70
+.LVL23:
+	.loc 1 49 22 view .LVU78
 	movabsq	$7378697629483820647, %rdx
-	.loc 1 47 13 view .LVU71
+	.loc 1 49 13 view .LVU79
 	movq	%rax, %rcx
-	.loc 1 47 22 view .LVU72
+	.loc 1 49 22 view .LVU80
 	imulq	%rdx
 	movq	%rcx, %rax
 	sarq	$63, %rax
@@ -244,64 +269,64 @@ generate_word:
 	leaq	(%rbx,%rbx,4), %rax
 	salq	$2, %rax
 	subq	%rax, %rcx
-	.loc 1 48 26 view .LVU73
+	.loc 1 50 26 view .LVU81
 	leal	1(%rcx), %edi
-	.loc 1 47 22 view .LVU74
+	.loc 1 49 22 view .LVU82
 	movq	%rcx, %rbx
-.LVL21:
-	.loc 1 48 3 is_stmt 1 view .LVU75
-	.loc 1 48 16 is_stmt 0 view .LVU76
+.LVL24:
+	.loc 1 50 3 is_stmt 1 view .LVU83
+	.loc 1 50 16 is_stmt 0 view .LVU84
 	movslq	%edi, %rdi
 	call	malloc@PLT
-.LVL22:
-	.loc 1 48 16 view .LVU77
+.LVL25:
+	.loc 1 50 16 view .LVU85
 	movq	%rax, %r12
-.LVL23:
-	.loc 1 50 3 is_stmt 1 view .LVU78
-	.loc 1 50 10 view .LVU79
-	.loc 1 50 10 is_stmt 0 view .LVU80
+.LVL26:
+	.loc 1 52 3 is_stmt 1 view .LVU86
+	.loc 1 52 10 view .LVU87
+	.loc 1 52 10 is_stmt 0 view .LVU88
 	testq	%rbx, %rbx
 	je	.L15
 	leal	-1(%rbx), %ebp
-	.loc 1 48 32 view .LVU81
+	.loc 1 50 32 view .LVU89
 	movq	%r12, %r13
 	movl	%ebp, %eax
-.LVL24:
-	.loc 1 48 32 view .LVU82
+.LVL27:
+	.loc 1 50 32 view .LVU90
 	leaq	1(%r12,%rax), %rbx
-.LVL25:
+.LVL28:
 	.p2align 4,,10
 	.p2align 3
 .L16:
-	.loc 1 51 5 is_stmt 1 view .LVU83
-	.loc 1 51 20 is_stmt 0 view .LVU84
+	.loc 1 53 5 is_stmt 1 view .LVU91
+	.loc 1 53 20 is_stmt 0 view .LVU92
 	call	rand@PLT
-.LVL26:
-	.loc 1 51 9 view .LVU85
+.LVL29:
+	.loc 1 53 9 view .LVU93
 	addq	$1, %r13
-.LVL27:
-	.loc 1 51 26 view .LVU86
+.LVL30:
+	.loc 1 53 26 view .LVU94
 	movl	%eax, %edx
 	shrl	$31, %edx
 	addl	%edx, %eax
 	andl	$1, %eax
 	subl	%edx, %eax
-	.loc 1 51 18 view .LVU87
+	.loc 1 53 18 view .LVU95
 	addl	$48, %eax
 	movb	%al, -1(%r13)
-	.loc 1 50 10 is_stmt 1 view .LVU88
-	.loc 1 50 10 is_stmt 0 view .LVU89
+	.loc 1 52 10 is_stmt 1 view .LVU96
+	.loc 1 52 10 is_stmt 0 view .LVU97
 	cmpq	%rbx, %r13
 	jne	.L16
-	.loc 1 51 9 view .LVU90
+	.loc 1 53 9 view .LVU98
 	leaq	1(%r12,%rbp), %rax
-.LVL28:
+.LVL31:
 .L15:
-	.loc 1 53 3 is_stmt 1 view .LVU91
-	.loc 1 53 8 is_stmt 0 view .LVU92
+	.loc 1 55 3 is_stmt 1 view .LVU99
+	.loc 1 55 8 is_stmt 0 view .LVU100
 	movb	$0, (%rax)
-	.loc 1 55 3 is_stmt 1 view .LVU93
-	.loc 1 56 1 is_stmt 0 view .LVU94
+	.loc 1 57 3 is_stmt 1 view .LVU101
+	.loc 1 58 1 is_stmt 0 view .LVU102
 	addq	$8, %rsp
 	.cfi_def_cfa_offset 40
 	movq	%r12, %rax
@@ -311,8 +336,8 @@ generate_word:
 	.cfi_def_cfa_offset 24
 	popq	%r12
 	.cfi_def_cfa_offset 16
-.LVL29:
-	.loc 1 56 1 view .LVU95
+.LVL32:
+	.loc 1 58 1 view .LVU103
 	popq	%r13
 	.cfi_def_cfa_offset 8
 	ret
@@ -327,12 +352,12 @@ generate_word:
 	.file 6 "/usr/include/string.h"
 	.section	.debug_info,"",@progbits
 .Ldebug_info0:
-	.long	0x38f
+	.long	0x3ca
 	.value	0x5
 	.byte	0x1
 	.byte	0x8
 	.long	.Ldebug_abbrev0
-	.uleb128 0x10
+	.uleb128 0x11
 	.long	.LASF32
 	.byte	0x1d
 	.long	.LASF0
@@ -350,7 +375,7 @@ generate_word:
 	.byte	0x8
 	.byte	0x7
 	.long	.LASF2
-	.uleb128 0x11
+	.uleb128 0x12
 	.byte	0x4
 	.byte	0x5
 	.string	"int"
@@ -382,7 +407,7 @@ generate_word:
 	.byte	0x2
 	.byte	0x5
 	.long	.LASF9
-	.uleb128 0x12
+	.uleb128 0x13
 	.byte	0x8
 	.uleb128 0x2
 	.long	0x80
@@ -390,7 +415,7 @@ generate_word:
 	.byte	0x1
 	.byte	0x6
 	.long	.LASF10
-	.uleb128 0x13
+	.uleb128 0x14
 	.long	0x80
 	.uleb128 0x1
 	.byte	0x8
@@ -402,23 +427,22 @@ generate_word:
 	.long	.LASF13
 	.byte	0x3
 	.byte	0x5
-	.byte	0xd
-	.long	0x41
-	.uleb128 0x9
+	.byte	0xe
+	.long	0x80
+	.uleb128 0xb
 	.long	.LASF16
 	.byte	0x10
 	.byte	0x3
-	.byte	0x7
 	.byte	0x10
-	.long	0xcc
+	.long	0xcb
 	.uleb128 0x3
 	.long	.LASF14
 	.byte	0x3
 	.byte	0x9
 	.byte	0x9
-	.long	0xcc
+	.long	0xcb
 	.byte	0
-	.uleb128 0xa
+	.uleb128 0xc
 	.string	"top"
 	.byte	0x3
 	.byte	0xa
@@ -434,155 +458,157 @@ generate_word:
 	.byte	0xc
 	.byte	0x3
 	.long	0xa4
-	.uleb128 0x14
-	.string	"dfa"
-	.byte	0x10
-	.byte	0x4
-	.byte	0x6
-	.byte	0x8
-	.long	0x105
-	.uleb128 0x3
+	.uleb128 0xb
 	.long	.LASF17
+	.byte	0x28
 	.byte	0x4
-	.byte	0x7
-	.byte	0x6
-	.long	0x41
+	.byte	0x8
+	.long	0x12a
+	.uleb128 0xc
+	.string	"dfa"
+	.byte	0x4
+	.byte	0x8
+	.byte	0xe
+	.long	0x152
 	.byte	0
 	.uleb128 0x3
 	.long	.LASF18
 	.byte	0x4
-	.byte	0x8
-	.byte	0x8
-	.long	0x119
-	.byte	0x8
-	.byte	0
-	.uleb128 0x15
-	.long	0x41
-	.long	0x119
-	.uleb128 0x5
-	.long	0x41
-	.uleb128 0x5
-	.long	0x80
-	.byte	0
-	.uleb128 0x2
-	.long	0x105
-	.uleb128 0x9
-	.long	.LASF19
-	.byte	0x28
-	.byte	0x4
-	.byte	0xd
-	.byte	0x8
-	.long	0x16d
-	.uleb128 0xa
-	.string	"dfa"
-	.byte	0x4
-	.byte	0xe
-	.byte	0xe
-	.long	0x16d
-	.byte	0
-	.uleb128 0x3
-	.long	.LASF20
-	.byte	0x4
-	.byte	0xf
+	.byte	0x9
 	.byte	0x6
 	.long	0x41
 	.byte	0x8
 	.uleb128 0x3
-	.long	.LASF21
+	.long	.LASF19
 	.byte	0x4
-	.byte	0x10
+	.byte	0xa
 	.byte	0x8
 	.long	0x7b
 	.byte	0x10
 	.uleb128 0x3
-	.long	.LASF22
+	.long	.LASF20
 	.byte	0x4
-	.byte	0x11
+	.byte	0xb
 	.byte	0x6
 	.long	0x41
 	.byte	0x18
 	.uleb128 0x3
-	.long	.LASF23
+	.long	.LASF21
 	.byte	0x4
-	.byte	0x12
+	.byte	0xc
 	.byte	0xb
-	.long	0x172
+	.long	0x157
 	.byte	0x20
 	.byte	0
+	.uleb128 0x15
+	.string	"dfa"
+	.byte	0x10
+	.byte	0x4
+	.byte	0xf
+	.byte	0x8
+	.long	0x152
+	.uleb128 0x3
+	.long	.LASF22
+	.byte	0x4
+	.byte	0x10
+	.byte	0x6
+	.long	0x41
+	.byte	0
+	.uleb128 0x3
+	.long	.LASF23
+	.byte	0x4
+	.byte	0x11
+	.byte	0x8
+	.long	0x17a
+	.byte	0x8
+	.byte	0
 	.uleb128 0x2
-	.long	0xdd
+	.long	0x12a
 	.uleb128 0x2
-	.long	0xd1
-	.uleb128 0xb
+	.long	0xd0
+	.uleb128 0x16
+	.long	0x41
+	.long	0x175
+	.uleb128 0x5
+	.long	0x41
+	.uleb128 0x5
+	.long	0x80
+	.uleb128 0x5
+	.long	0x175
+	.byte	0
+	.uleb128 0x2
+	.long	0xdc
+	.uleb128 0x2
+	.long	0x15c
+	.uleb128 0xd
 	.long	.LASF24
 	.value	0x1c6
 	.byte	0xc
 	.long	0x41
-	.uleb128 0xb
+	.uleb128 0xd
 	.long	.LASF25
 	.value	0x192
 	.byte	0x11
 	.long	0x48
-	.uleb128 0x16
+	.uleb128 0x17
 	.long	.LASF26
 	.byte	0x6
 	.byte	0xbb
 	.byte	0xe
 	.long	0x7b
-	.long	0x1a5
+	.long	0x1ad
 	.uleb128 0x5
 	.long	0x93
 	.byte	0
-	.uleb128 0x17
+	.uleb128 0x18
 	.long	.LASF27
 	.byte	0x5
 	.value	0x21c
 	.byte	0xe
 	.long	0x79
-	.long	0x1bc
+	.long	0x1c4
 	.uleb128 0x5
 	.long	0x2e
 	.byte	0
-	.uleb128 0xc
+	.uleb128 0x9
 	.long	.LASF29
-	.byte	0x2e
+	.byte	0x30
 	.byte	0x7
 	.long	0x7b
 	.quad	.LFB54
 	.quad	.LFE54-.LFB54
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x250
-	.uleb128 0x4
+	.long	0x257
+	.uleb128 0x6
 	.string	"len"
-	.byte	0x2f
+	.byte	0x31
 	.byte	0x7
 	.long	0x41
-	.long	.LLST9
-	.long	.LVUS9
-	.uleb128 0x18
-	.long	.LASF28
-	.byte	0x1
-	.byte	0x30
-	.byte	0x9
-	.long	0x7b
 	.long	.LLST10
 	.long	.LVUS10
-	.uleb128 0x4
-	.string	"ptr"
-	.byte	0x30
-	.byte	0x20
+	.uleb128 0xe
+	.long	.LASF28
+	.byte	0x32
+	.byte	0x9
 	.long	0x7b
 	.long	.LLST11
 	.long	.LVUS11
-	.uleb128 0xd
-	.quad	.LVL20
-	.long	0x183
-	.uleb128 0xe
-	.quad	.LVL22
-	.long	0x1a5
-	.long	0x242
 	.uleb128 0x6
+	.string	"ptr"
+	.byte	0x32
+	.byte	0x20
+	.long	0x7b
+	.long	.LLST12
+	.long	.LVUS12
+	.uleb128 0xf
+	.quad	.LVL23
+	.long	0x18b
+	.uleb128 0xa
+	.quad	.LVL25
+	.long	0x1ad
+	.long	0x249
+	.uleb128 0x4
 	.uleb128 0x1
 	.byte	0x55
 	.uleb128 0x8
@@ -595,56 +621,62 @@ generate_word:
 	.byte	0x20
 	.byte	0x26
 	.byte	0
-	.uleb128 0xd
-	.quad	.LVL26
-	.long	0x177
+	.uleb128 0xf
+	.quad	.LVL29
+	.long	0x17f
 	.byte	0
-	.uleb128 0x19
+	.uleb128 0x9
 	.long	.LASF30
-	.byte	0x1
-	.byte	0x1f
+	.byte	0x21
 	.byte	0x5
 	.long	0x41
 	.quad	.LFB53
 	.quad	.LFE53-.LFB53
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x29e
+	.long	0x2b4
 	.uleb128 0x7
 	.string	"ctx"
-	.byte	0x1f
+	.byte	0x21
 	.byte	0x1e
-	.long	0x29e
-	.long	.LLST6
-	.long	.LVUS6
-	.uleb128 0x1a
-	.long	.LLRL7
-	.uleb128 0x4
+	.long	0x175
+	.long	.LLST7
+	.long	.LVUS7
+	.uleb128 0x19
+	.long	.LLRL8
+	.uleb128 0x6
 	.string	"ch"
-	.byte	0x23
+	.byte	0x25
 	.byte	0xe
 	.long	0x80
-	.long	.LLST8
-	.long	.LVUS8
-	.byte	0
-	.byte	0
+	.long	.LLST9
+	.long	.LVUS9
+	.uleb128 0x1a
+	.quad	.LVL21
+	.uleb128 0x4
+	.uleb128 0x1
+	.byte	0x51
 	.uleb128 0x2
-	.long	0x11e
-	.uleb128 0xc
+	.byte	0x73
+	.sleb128 0
+	.byte	0
+	.byte	0
+	.byte	0
+	.uleb128 0x9
 	.long	.LASF31
 	.byte	0x14
 	.byte	0x11
-	.long	0x29e
+	.long	0x175
 	.quad	.LFB52
 	.quad	.LFE52-.LFB52
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x32b
+	.long	0x366
 	.uleb128 0x7
 	.string	"dfa"
 	.byte	0x14
 	.byte	0x2a
-	.long	0x16d
+	.long	0x152
 	.long	.LLST3
 	.long	.LVUS3
 	.uleb128 0x1b
@@ -655,32 +687,49 @@ generate_word:
 	.long	0x7b
 	.long	.LLST4
 	.long	.LVUS4
-	.uleb128 0x4
+	.uleb128 0x6
 	.string	"ctx"
 	.byte	0x15
 	.byte	0x15
-	.long	0x29e
+	.long	0x175
 	.long	.LLST5
 	.long	.LVUS5
 	.uleb128 0xe
+	.long	.LASF21
+	.byte	0x17
+	.byte	0xf
+	.long	0x157
+	.long	.LLST6
+	.long	.LVUS6
+	.uleb128 0xa
 	.quad	.LVL7
-	.long	0x1a5
-	.long	0x316
-	.uleb128 0x6
+	.long	0x1ad
+	.long	0x33a
+	.uleb128 0x4
 	.uleb128 0x1
 	.byte	0x55
 	.uleb128 0x2
 	.byte	0x8
 	.byte	0x28
 	.byte	0
-	.uleb128 0xf
-	.quad	.LVL10
-	.long	0x18f
-	.uleb128 0x6
+	.uleb128 0xa
+	.quad	.LVL9
+	.long	0x1ad
+	.long	0x351
+	.uleb128 0x4
+	.uleb128 0x1
+	.byte	0x55
+	.uleb128 0x1
+	.byte	0x40
+	.byte	0
+	.uleb128 0x10
+	.quad	.LVL12
+	.long	0x197
+	.uleb128 0x4
 	.uleb128 0x1
 	.byte	0x55
 	.uleb128 0x2
-	.byte	0x76
+	.byte	0x7d
 	.sleb128 0
 	.byte	0
 	.byte	0
@@ -689,7 +738,7 @@ generate_word:
 	.byte	0x1
 	.byte	0xb
 	.byte	0xd
-	.long	0x16d
+	.long	0x152
 	.quad	.LFB51
 	.quad	.LFE51-.LFB51
 	.uleb128 0x1
@@ -705,20 +754,20 @@ generate_word:
 	.string	"t"
 	.byte	0xb
 	.byte	0x26
-	.long	0x119
+	.long	0x17a
 	.long	.LLST1
 	.long	.LVUS1
-	.uleb128 0x4
+	.uleb128 0x6
 	.string	"dfa"
 	.byte	0xc
 	.byte	0x11
-	.long	0x16d
+	.long	0x152
 	.long	.LLST2
 	.long	.LVUS2
-	.uleb128 0xf
+	.uleb128 0x10
 	.quad	.LVL2
-	.long	0x1a5
-	.uleb128 0x6
+	.long	0x1ad
+	.uleb128 0x4
 	.uleb128 0x1
 	.byte	0x55
 	.uleb128 0x1
@@ -767,6 +816,22 @@ generate_word:
 	.byte	0
 	.byte	0
 	.uleb128 0x4
+	.uleb128 0x49
+	.byte	0
+	.uleb128 0x2
+	.uleb128 0x18
+	.uleb128 0x7e
+	.uleb128 0x18
+	.byte	0
+	.byte	0
+	.uleb128 0x5
+	.uleb128 0x5
+	.byte	0
+	.uleb128 0x49
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0x6
 	.uleb128 0x34
 	.byte	0
 	.uleb128 0x3
@@ -784,22 +849,6 @@ generate_word:
 	.uleb128 0x17
 	.uleb128 0x2137
 	.uleb128 0x17
-	.byte	0
-	.byte	0
-	.uleb128 0x5
-	.uleb128 0x5
-	.byte	0
-	.uleb128 0x49
-	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0x6
-	.uleb128 0x49
-	.byte	0
-	.uleb128 0x2
-	.uleb128 0x18
-	.uleb128 0x7e
-	.uleb128 0x18
 	.byte	0
 	.byte	0
 	.uleb128 0x7
@@ -838,62 +887,6 @@ generate_word:
 	.byte	0
 	.byte	0
 	.uleb128 0x9
-	.uleb128 0x13
-	.byte	0x1
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0xb
-	.uleb128 0xb
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x1
-	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0xa
-	.uleb128 0xd
-	.byte	0
-	.uleb128 0x3
-	.uleb128 0x8
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x38
-	.uleb128 0xb
-	.byte	0
-	.byte	0
-	.uleb128 0xb
-	.uleb128 0x2e
-	.byte	0
-	.uleb128 0x3f
-	.uleb128 0x19
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0x21
-	.sleb128 5
-	.uleb128 0x3b
-	.uleb128 0x5
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x27
-	.uleb128 0x19
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x3c
-	.uleb128 0x19
-	.byte	0
-	.byte	0
-	.uleb128 0xc
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -923,16 +916,7 @@ generate_word:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0xd
-	.uleb128 0x48
-	.byte	0
-	.uleb128 0x7d
-	.uleb128 0x1
-	.uleb128 0x7f
-	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0xe
+	.uleb128 0xa
 	.uleb128 0x48
 	.byte	0x1
 	.uleb128 0x7d
@@ -941,11 +925,88 @@ generate_word:
 	.uleb128 0x13
 	.uleb128 0x1
 	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0xb
+	.uleb128 0x13
+	.byte	0x1
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0xb
+	.uleb128 0xb
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0x21
+	.sleb128 7
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x1
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0xc
+	.uleb128 0xd
+	.byte	0
+	.uleb128 0x3
+	.uleb128 0x8
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x38
+	.uleb128 0xb
+	.byte	0
+	.byte	0
+	.uleb128 0xd
+	.uleb128 0x2e
+	.byte	0
+	.uleb128 0x3f
+	.uleb128 0x19
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0x21
+	.sleb128 5
+	.uleb128 0x3b
+	.uleb128 0x5
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x27
+	.uleb128 0x19
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x3c
+	.uleb128 0x19
+	.byte	0
+	.byte	0
+	.uleb128 0xe
+	.uleb128 0x34
+	.byte	0
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0x21
+	.sleb128 1
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x2
+	.uleb128 0x17
+	.uleb128 0x2137
+	.uleb128 0x17
 	.byte	0
 	.byte	0
 	.uleb128 0xf
 	.uleb128 0x48
-	.byte	0x1
+	.byte	0
 	.uleb128 0x7d
 	.uleb128 0x1
 	.uleb128 0x7f
@@ -953,6 +1014,15 @@ generate_word:
 	.byte	0
 	.byte	0
 	.uleb128 0x10
+	.uleb128 0x48
+	.byte	0x1
+	.uleb128 0x7d
+	.uleb128 0x1
+	.uleb128 0x7f
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0x11
 	.uleb128 0x11
 	.byte	0x1
 	.uleb128 0x25
@@ -971,7 +1041,7 @@ generate_word:
 	.uleb128 0x17
 	.byte	0
 	.byte	0
-	.uleb128 0x11
+	.uleb128 0x12
 	.uleb128 0x24
 	.byte	0
 	.uleb128 0xb
@@ -982,21 +1052,21 @@ generate_word:
 	.uleb128 0x8
 	.byte	0
 	.byte	0
-	.uleb128 0x12
+	.uleb128 0x13
 	.uleb128 0xf
 	.byte	0
 	.uleb128 0xb
 	.uleb128 0xb
 	.byte	0
 	.byte	0
-	.uleb128 0x13
+	.uleb128 0x14
 	.uleb128 0x26
 	.byte	0
 	.uleb128 0x49
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x14
+	.uleb128 0x15
 	.uleb128 0x13
 	.byte	0x1
 	.uleb128 0x3
@@ -1013,7 +1083,7 @@ generate_word:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x15
+	.uleb128 0x16
 	.uleb128 0x15
 	.byte	0x1
 	.uleb128 0x27
@@ -1024,7 +1094,7 @@ generate_word:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x16
+	.uleb128 0x17
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -1047,7 +1117,7 @@ generate_word:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x17
+	.uleb128 0x18
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -1070,59 +1140,18 @@ generate_word:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x18
-	.uleb128 0x34
-	.byte	0
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x2
-	.uleb128 0x17
-	.uleb128 0x2137
-	.uleb128 0x17
-	.byte	0
-	.byte	0
 	.uleb128 0x19
-	.uleb128 0x2e
-	.byte	0x1
-	.uleb128 0x3f
-	.uleb128 0x19
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x27
-	.uleb128 0x19
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x11
-	.uleb128 0x1
-	.uleb128 0x12
-	.uleb128 0x7
-	.uleb128 0x40
-	.uleb128 0x18
-	.uleb128 0x7c
-	.uleb128 0x19
-	.uleb128 0x1
-	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0x1a
 	.uleb128 0xb
 	.byte	0x1
 	.uleb128 0x55
 	.uleb128 0x17
+	.byte	0
+	.byte	0
+	.uleb128 0x1a
+	.uleb128 0x48
+	.byte	0x1
+	.uleb128 0x7d
+	.uleb128 0x1
 	.byte	0
 	.byte	0
 	.uleb128 0x1b
@@ -1180,100 +1209,100 @@ generate_word:
 	.byte	0
 	.long	0
 .Ldebug_loc0:
-.LVUS9:
-	.uleb128 .LVU75
-	.uleb128 .LVU77
-	.uleb128 .LVU77
-	.uleb128 .LVU80
-	.uleb128 .LVU80
+.LVUS10:
 	.uleb128 .LVU83
-.LLST9:
+	.uleb128 .LVU85
+	.uleb128 .LVU85
+	.uleb128 .LVU88
+	.uleb128 .LVU88
+	.uleb128 .LVU91
+.LLST10:
 	.byte	0x4
-	.uleb128 .LVL21-.Ltext0
-	.uleb128 .LVL22-1-.Ltext0
+	.uleb128 .LVL24-.Ltext0
+	.uleb128 .LVL25-1-.Ltext0
 	.uleb128 0x1
 	.byte	0x52
 	.byte	0x4
-	.uleb128 .LVL22-1-.Ltext0
-	.uleb128 .LVL23-.Ltext0
+	.uleb128 .LVL25-1-.Ltext0
+	.uleb128 .LVL26-.Ltext0
 	.uleb128 0x1
 	.byte	0x53
 	.byte	0x4
-	.uleb128 .LVL23-.Ltext0
-	.uleb128 .LVL25-.Ltext0
+	.uleb128 .LVL26-.Ltext0
+	.uleb128 .LVL28-.Ltext0
 	.uleb128 0x3
 	.byte	0x73
 	.sleb128 -1
 	.byte	0x9f
 	.byte	0
-.LVUS10:
-	.uleb128 .LVU78
-	.uleb128 .LVU82
-	.uleb128 .LVU82
-	.uleb128 .LVU95
-	.uleb128 .LVU95
+.LVUS11:
+	.uleb128 .LVU86
+	.uleb128 .LVU90
+	.uleb128 .LVU90
+	.uleb128 .LVU103
+	.uleb128 .LVU103
 	.uleb128 0
-.LLST10:
+.LLST11:
 	.byte	0x4
-	.uleb128 .LVL23-.Ltext0
-	.uleb128 .LVL24-.Ltext0
+	.uleb128 .LVL26-.Ltext0
+	.uleb128 .LVL27-.Ltext0
 	.uleb128 0x1
 	.byte	0x50
 	.byte	0x4
-	.uleb128 .LVL24-.Ltext0
-	.uleb128 .LVL29-.Ltext0
+	.uleb128 .LVL27-.Ltext0
+	.uleb128 .LVL32-.Ltext0
 	.uleb128 0x1
 	.byte	0x5c
 	.byte	0x4
-	.uleb128 .LVL29-.Ltext0
+	.uleb128 .LVL32-.Ltext0
 	.uleb128 .LFE54-.Ltext0
 	.uleb128 0x1
 	.byte	0x50
 	.byte	0
-.LVUS11:
-	.uleb128 .LVU78
-	.uleb128 .LVU82
-	.uleb128 .LVU82
-	.uleb128 .LVU83
-	.uleb128 .LVU83
+.LVUS12:
+	.uleb128 .LVU86
+	.uleb128 .LVU90
+	.uleb128 .LVU90
 	.uleb128 .LVU91
-.LLST11:
+	.uleb128 .LVU91
+	.uleb128 .LVU99
+.LLST12:
 	.byte	0x4
-	.uleb128 .LVL23-.Ltext0
-	.uleb128 .LVL24-.Ltext0
+	.uleb128 .LVL26-.Ltext0
+	.uleb128 .LVL27-.Ltext0
 	.uleb128 0x1
 	.byte	0x50
 	.byte	0x4
-	.uleb128 .LVL24-.Ltext0
-	.uleb128 .LVL25-.Ltext0
+	.uleb128 .LVL27-.Ltext0
+	.uleb128 .LVL28-.Ltext0
 	.uleb128 0x1
 	.byte	0x5c
 	.byte	0x4
-	.uleb128 .LVL25-.Ltext0
 	.uleb128 .LVL28-.Ltext0
+	.uleb128 .LVL31-.Ltext0
 	.uleb128 0x1
 	.byte	0x5d
 	.byte	0
-.LVUS6:
+.LVUS7:
 	.uleb128 0
-	.uleb128 .LVU45
-	.uleb128 .LVU45
-	.uleb128 .LVU65
-	.uleb128 .LVU65
+	.uleb128 .LVU53
+	.uleb128 .LVU53
+	.uleb128 .LVU73
+	.uleb128 .LVU73
 	.uleb128 0
-.LLST6:
+.LLST7:
 	.byte	0x4
-	.uleb128 .LVL14-.Ltext0
-	.uleb128 .LVL15-.Ltext0
+	.uleb128 .LVL17-.Ltext0
+	.uleb128 .LVL18-.Ltext0
 	.uleb128 0x1
 	.byte	0x55
 	.byte	0x4
-	.uleb128 .LVL15-.Ltext0
-	.uleb128 .LVL19-.Ltext0
+	.uleb128 .LVL18-.Ltext0
+	.uleb128 .LVL22-.Ltext0
 	.uleb128 0x1
 	.byte	0x53
 	.byte	0x4
-	.uleb128 .LVL19-.Ltext0
+	.uleb128 .LVL22-.Ltext0
 	.uleb128 .LFE53-.Ltext0
 	.uleb128 0x4
 	.byte	0xa3
@@ -1281,30 +1310,30 @@ generate_word:
 	.byte	0x55
 	.byte	0x9f
 	.byte	0
-.LVUS8:
-	.uleb128 .LVU49
-	.uleb128 .LVU52
-	.uleb128 .LVU52
-	.uleb128 .LVU53
-.LLST8:
+.LVUS9:
+	.uleb128 .LVU57
+	.uleb128 .LVU60
+	.uleb128 .LVU60
+	.uleb128 .LVU61
+.LLST9:
 	.byte	0x4
-	.uleb128 .LVL16-.Ltext0
-	.uleb128 .LVL17-.Ltext0
+	.uleb128 .LVL19-.Ltext0
+	.uleb128 .LVL20-.Ltext0
 	.uleb128 0x2
 	.byte	0x70
 	.sleb128 0
 	.byte	0x4
-	.uleb128 .LVL17-.Ltext0
-	.uleb128 .LVL18-1-.Ltext0
+	.uleb128 .LVL20-.Ltext0
+	.uleb128 .LVL21-1-.Ltext0
 	.uleb128 0x1
 	.byte	0x54
 	.byte	0
 .LVUS3:
 	.uleb128 0
-	.uleb128 .LVU21
-	.uleb128 .LVU21
-	.uleb128 .LVU32
-	.uleb128 .LVU32
+	.uleb128 .LVU20
+	.uleb128 .LVU20
+	.uleb128 .LVU43
+	.uleb128 .LVU43
 	.uleb128 0
 .LLST3:
 	.byte	0x4
@@ -1314,11 +1343,11 @@ generate_word:
 	.byte	0x55
 	.byte	0x4
 	.uleb128 .LVL6-.Ltext0
-	.uleb128 .LVL11-.Ltext0
+	.uleb128 .LVL13-.Ltext0
 	.uleb128 0x1
 	.byte	0x53
 	.byte	0x4
-	.uleb128 .LVL11-.Ltext0
+	.uleb128 .LVL13-.Ltext0
 	.uleb128 .LFE52-.Ltext0
 	.uleb128 0x4
 	.byte	0xa3
@@ -1330,8 +1359,8 @@ generate_word:
 	.uleb128 0
 	.uleb128 .LVU22
 	.uleb128 .LVU22
-	.uleb128 .LVU33
-	.uleb128 .LVU33
+	.uleb128 .LVU46
+	.uleb128 .LVU46
 	.uleb128 0
 .LLST4:
 	.byte	0x4
@@ -1341,11 +1370,11 @@ generate_word:
 	.byte	0x54
 	.byte	0x4
 	.uleb128 .LVL7-1-.Ltext0
-	.uleb128 .LVL12-.Ltext0
+	.uleb128 .LVL16-.Ltext0
 	.uleb128 0x1
-	.byte	0x56
+	.byte	0x5d
 	.byte	0x4
-	.uleb128 .LVL12-.Ltext0
+	.uleb128 .LVL16-.Ltext0
 	.uleb128 .LFE52-.Ltext0
 	.uleb128 0x4
 	.byte	0xa3
@@ -1354,28 +1383,61 @@ generate_word:
 	.byte	0x9f
 	.byte	0
 .LVUS5:
-	.uleb128 .LVU25
-	.uleb128 .LVU28
-	.uleb128 .LVU28
-	.uleb128 .LVU38
-	.uleb128 .LVU38
+	.uleb128 .LVU24
+	.uleb128 .LVU26
+	.uleb128 .LVU26
+	.uleb128 .LVU45
+	.uleb128 .LVU45
 	.uleb128 0
 .LLST5:
 	.byte	0x4
 	.uleb128 .LVL8-.Ltext0
-	.uleb128 .LVL9-.Ltext0
+	.uleb128 .LVL9-1-.Ltext0
 	.uleb128 0x1
 	.byte	0x50
 	.byte	0x4
-	.uleb128 .LVL9-.Ltext0
-	.uleb128 .LVL13-.Ltext0
+	.uleb128 .LVL9-1-.Ltext0
+	.uleb128 .LVL15-.Ltext0
 	.uleb128 0x1
 	.byte	0x5c
 	.byte	0x4
-	.uleb128 .LVL13-.Ltext0
+	.uleb128 .LVL15-.Ltext0
 	.uleb128 .LFE52-.Ltext0
 	.uleb128 0x1
 	.byte	0x50
+	.byte	0
+.LVUS6:
+	.uleb128 .LVU29
+	.uleb128 .LVU32
+	.uleb128 .LVU32
+	.uleb128 .LVU44
+	.uleb128 .LVU44
+	.uleb128 .LVU45
+	.uleb128 .LVU45
+	.uleb128 0
+.LLST6:
+	.byte	0x4
+	.uleb128 .LVL10-.Ltext0
+	.uleb128 .LVL11-.Ltext0
+	.uleb128 0x1
+	.byte	0x50
+	.byte	0x4
+	.uleb128 .LVL11-.Ltext0
+	.uleb128 .LVL14-.Ltext0
+	.uleb128 0x1
+	.byte	0x56
+	.byte	0x4
+	.uleb128 .LVL14-.Ltext0
+	.uleb128 .LVL15-.Ltext0
+	.uleb128 0x2
+	.byte	0x7c
+	.sleb128 32
+	.byte	0x4
+	.uleb128 .LVL15-.Ltext0
+	.uleb128 .LFE52-.Ltext0
+	.uleb128 0x2
+	.byte	0x70
+	.sleb128 32
 	.byte	0
 .LVUS0:
 	.uleb128 0
@@ -1458,7 +1520,7 @@ generate_word:
 	.byte	0x8
 	.byte	0
 	.long	0
-.LLRL7:
+.LLRL8:
 	.byte	0x4
 	.uleb128 .LBB2-.Ltext0
 	.uleb128 .LBE2-.Ltext0
@@ -1476,7 +1538,9 @@ generate_word:
 	.string	"generate_word"
 .LASF33:
 	.string	"create_dfa"
-.LASF20:
+.LASF32:
+	.string	"GNU C17 11.3.0 -mtune=generic -march=x86-64 -g -Og -O3 -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection"
+.LASF18:
 	.string	"state"
 .LASF6:
 	.string	"short unsigned int"
@@ -1484,17 +1548,15 @@ generate_word:
 	.string	"random"
 .LASF26:
 	.string	"strdup"
-.LASF23:
+.LASF21:
 	.string	"stack"
 .LASF14:
 	.string	"data"
-.LASF32:
-	.string	"GNU C17 11.2.0 -mtune=generic -march=x86-64 -g -Og -O3 -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection"
 .LASF5:
 	.string	"unsigned char"
-.LASF21:
+.LASF19:
 	.string	"input"
-.LASF18:
+.LASF23:
 	.string	"transition"
 .LASF2:
 	.string	"long unsigned int"
@@ -1506,7 +1568,7 @@ generate_word:
 	.string	"run_dfa"
 .LASF16:
 	.string	"Stack"
-.LASF19:
+.LASF17:
 	.string	"dfa_ctx"
 .LASF7:
 	.string	"unsigned int"
@@ -1518,13 +1580,13 @@ generate_word:
 	.string	"long long int"
 .LASF10:
 	.string	"char"
-.LASF22:
+.LASF20:
 	.string	"offset"
 .LASF9:
 	.string	"short int"
 .LASF15:
 	.string	"stack_t"
-.LASF17:
+.LASF22:
 	.string	"initial"
 .LASF3:
 	.string	"long int"
@@ -1538,8 +1600,8 @@ generate_word:
 .LASF0:
 	.string	"src/generic_pda.c"
 .LASF1:
-	.string	"/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1"
-	.ident	"GCC: (Ubuntu 11.2.0-19ubuntu1) 11.2.0"
+	.string	"/data/home/arf43777/Dokumente/CompilerConstruction/ex6/ex1"
+	.ident	"GCC: (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0"
 	.section	.note.GNU-stack,"",@progbits
 	.section	.note.gnu.property,"a"
 	.align 8

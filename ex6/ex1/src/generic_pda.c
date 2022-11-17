@@ -8,7 +8,7 @@
 /* Generic DFA implementation */
 
 
-struct dfa *create_dfa (int i, int (*t)(int, char)) {
+struct dfa *create_dfa (int i, int (*t)(int, char, struct dfa_ctx*)) {
     struct dfa *dfa = malloc(sizeof *dfa);
 
     dfa->initial = i;
@@ -17,14 +17,15 @@ struct dfa *create_dfa (int i, int (*t)(int, char)) {
     return dfa;
 }
 
-struct dfa_ctx *dfa_new_ctx (struct dfa *dfa, char *word, stack_t* stack) {
+struct dfa_ctx *dfa_new_ctx (struct dfa *dfa, char *word) {
     struct dfa_ctx *ctx = malloc (sizeof *ctx);
 
+    	stack_t* stack = malloc(sizeof *stack);
 	ctx->dfa = dfa;
 	ctx->state = dfa->initial;
 	ctx->input = strdup(word);
 	ctx->offset = 0;
-	ctx->stack  = stack;
+	ctx->stack = stack;
 
     return ctx;
 }
@@ -35,7 +36,7 @@ int run_dfa (struct dfa_ctx *ctx) {
         // Get next character and advance offset
         char ch = ctx->input[ctx->offset++];
         // Call the transition function of the dfa
-        ctx->state = ctx->dfa->transition(ctx->state, ch);
+        ctx->state = ctx->dfa->transition(ctx->state, ch, ctx);
         if (ctx->state == 0)
             return 0; // We hit an invalid state, bail out
     }

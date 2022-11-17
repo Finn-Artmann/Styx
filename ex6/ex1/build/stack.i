@@ -1,5 +1,5 @@
 # 0 "src/stack.c"
-# 1 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1//"
+# 1 "/data/home/arf43777/Dokumente/CompilerConstruction/ex6/ex1//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
@@ -2370,7 +2370,7 @@ __attribute__ ((__nothrow__ , __leaf__)) wcstombs (char *__restrict __dst, const
 
 
 # 5 "include/stack.h"
-typedef int val_t;
+typedef char val_t;
 
 typedef struct Stack{
 
@@ -2386,6 +2386,8 @@ stack_t* s_new();
 void s_push(stack_t* s, val_t num);
 
 val_t s_pop(stack_t* s);
+
+val_t s_peek(stack_t* s);
 
 int s_isempty(stack_t* s);
 # 5 "src/stack.c" 2
@@ -2408,9 +2410,13 @@ void s_push(stack_t* s, val_t num){
 
 val_t s_pop(stack_t* s){
 
- s->data = realloc(s->data, (s->top + 1) * sizeof(val_t));
+
 
  return s->data[s->top--];
+}
+
+val_t s_peek(stack_t* s){
+ return s->data[s->top];
 }
 
 int s_isempty(stack_t* s){

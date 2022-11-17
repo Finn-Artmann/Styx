@@ -1,5 +1,5 @@
 # 0 "src/generic_pda.c"
-# 1 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1//"
+# 1 "/data/home/arf43777/Dokumente/CompilerConstruction/ex6/ex1//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
@@ -2956,7 +2956,7 @@ extern int timespec_get (struct timespec *__ts, int __base)
 
 
 # 5 "include/stack.h"
-typedef int val_t;
+typedef char val_t;
 
 typedef struct Stack{
 
@@ -2973,15 +2973,11 @@ void s_push(stack_t* s, val_t num);
 
 val_t s_pop(stack_t* s);
 
+val_t s_peek(stack_t* s);
+
 int s_isempty(stack_t* s);
 # 5 "include/generic_pda.h" 2
 
-struct dfa {
- int initial;
- int (*transition)(int state, char ch);
-};
-
-struct dfa *create_dfa (int i, int (*t)(int, char));
 
 struct dfa_ctx {
  struct dfa *dfa;
@@ -2990,6 +2986,13 @@ struct dfa_ctx {
  int offset;
  stack_t* stack;
 };
+
+struct dfa {
+ int initial;
+ int (*transition)(int state, char ch, struct dfa_ctx* ctx);
+};
+
+struct dfa *create_dfa (int i, int (*t)(int, char, struct dfa_ctx*));
 
 struct dfa_ctx *dfa_new_ctx (struct dfa *dfa, char *word);
 
@@ -3002,7 +3005,7 @@ char *generate_word (void);
 
 
 
-struct dfa *create_dfa (int i, int (*t)(int, char)) {
+struct dfa *create_dfa (int i, int (*t)(int, char, struct dfa_ctx*)) {
     struct dfa *dfa = malloc(sizeof *dfa);
 
     dfa->initial = i;
@@ -3014,10 +3017,12 @@ struct dfa *create_dfa (int i, int (*t)(int, char)) {
 struct dfa_ctx *dfa_new_ctx (struct dfa *dfa, char *word) {
     struct dfa_ctx *ctx = malloc (sizeof *ctx);
 
-    ctx->dfa = dfa;
-    ctx->state = dfa->initial;
-    ctx->input = strdup(word);
-    ctx->offset = 0;
+     stack_t* stack = malloc(sizeof *stack);
+ ctx->dfa = dfa;
+ ctx->state = dfa->initial;
+ ctx->input = strdup(word);
+ ctx->offset = 0;
+ ctx->stack = stack;
 
     return ctx;
 }
@@ -3028,7 +3033,7 @@ int run_dfa (struct dfa_ctx *ctx) {
 
         char ch = ctx->input[ctx->offset++];
 
-        ctx->state = ctx->dfa->transition(ctx->state, ch);
+        ctx->state = ctx->dfa->transition(ctx->state, ch, ctx);
         if (ctx->state == 0)
             return 0;
     }
