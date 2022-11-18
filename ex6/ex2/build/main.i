@@ -1,5 +1,5 @@
 # 0 "src/main.c"
-# 1 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1//"
+# 1 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex2//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
@@ -1206,26 +1206,23 @@ int pda_transition(int st, char ch, struct dfa_ctx* ctx){
  switch(st){
   case 1: switch(ch){
    case 'a': s_push(ctx->stack, 'a'); return 1;
-   case 'b': s_push(ctx->stack, 'b'); return 1;
-   case '.': return 2;
+   case 'p': return 2;
    default: return 0;
    }
   case 2: switch(ch){
-   case 'a': if(s_peek(ctx->stack) == 'a'){
-       s_pop(ctx->stack);
-       return 2;
-      }
-      break;
-   case 'b': if(s_peek(ctx->stack) == 'b'){
-       s_pop(ctx->stack);
-       return 2;
-      }
-      break;
-   case '\0': if(s_isempty(ctx->stack)){
-        return -1;
-       }
-       break;
+   case 'b': s_push(ctx->stack, 'b'); return 2;
+   case 'q': return 3;
    default: return 0;
+   }
+  case 3: switch(ch){
+   case 'c': s_pop(ctx->stack); return 3;
+   case '\0': if(s_isempty(ctx->stack)){
+     return -1;
+       }
+       else{
+     return 0;
+       }
+   default : return 0;
    }
  }
 }
@@ -1235,7 +1232,7 @@ int main(int argc, char** argv){
 
  struct dfa* pda = create_dfa(1, pda_transition);
 
- char* test_word = "ab.ba";
+ char* test_word = "aaapbbqcccc";
  struct dfa_ctx* pda_ctx = dfa_new_ctx(pda, test_word);
 
  if(run_dfa(pda_ctx))

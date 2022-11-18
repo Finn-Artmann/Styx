@@ -1,7 +1,7 @@
 	.file	"generic_pda.c"
 	.text
 .Ltext0:
-	.file 0 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1" "src/generic_pda.c"
+	.file 0 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex2" "src/generic_pda.c"
 	.p2align 4
 	.globl	create_dfa
 	.type	create_dfa, @function
@@ -1605,7 +1605,7 @@ generate_word:
 .LASF0:
 	.string	"src/generic_pda.c"
 .LASF1:
-	.string	"/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1"
+	.string	"/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex2"
 	.ident	"GCC: (Ubuntu 11.2.0-19ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits
 	.section	.note.gnu.property,"a"

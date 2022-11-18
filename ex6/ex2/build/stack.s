@@ -1,7 +1,7 @@
 	.file	"stack.c"
 	.text
 .Ltext0:
-	.file 0 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1" "src/stack.c"
+	.file 0 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex2" "src/stack.c"
 	.p2align 4
 	.globl	s_new
 	.type	s_new, @function
@@ -898,7 +898,7 @@ s_isempty:
 	.string	"malloc"
 	.section	.debug_line_str,"MS",@progbits,1
 .LASF1:
-	.string	"/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1"
+	.string	"/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex2"
 .LASF0:
 	.string	"src/stack.c"
 	.ident	"GCC: (Ubuntu 11.2.0-19ubuntu1) 11.2.0"

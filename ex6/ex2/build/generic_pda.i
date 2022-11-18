@@ -1,5 +1,5 @@
 # 0 "src/generic_pda.c"
-# 1 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex1//"
+# 1 "/home/finn/Documents/OTH/CC/CompilerConstruction/ex6/ex2//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
