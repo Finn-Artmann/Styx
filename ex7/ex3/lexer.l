@@ -30,6 +30,7 @@ enum {
 void addstr(char ch);
 void addid(int len, char* str);
 void addtype(int len, char* str);
+void addop(int len, char* str);
 int babylonian_to_decimal(char* str);
 
 
@@ -83,6 +84,27 @@ STRING "ẞŦ®ı’Ŋ"
 CHAR "©ĦÆ®"
 VOID "‚ØıÐ"
 
+/* Operators */
+PLUS "¤"
+MINUS "¤¤"
+MULT "¤¤¤"
+DIV "¤¤¤¤"
+LE "<§"
+GE ">§"
+EQ "§§"
+NE "¡§"
+GT ">"
+LT "<"
+AND "&&"
+OR "||"
+
+/* Keywords */
+IF "ıª"
+ELSE "€Łẞ€"
+FOR "ªØ®"
+RETURN "®€Ŧ↑®’"
+
+
 
 
 %x STRING HEX BABYLONIAN LINECOMMENT BLOCKCOMMENT
@@ -121,6 +143,18 @@ VOID "‚ØıÐ"
 {IDENTIFIER} { *yyval.id='\0'; addid(yyleng, yytext); return ID; }
 {WHITESPACE} { *yyval.str='\0'; addstr(' '); return WHITESPC; }
 
+{PLUS} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{MINUS} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{MULT} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{DIV} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{LE} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{GE} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{EQ} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{NE} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{GT} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{LT} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{AND} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
+{OR} { *yyval.op='\0'; addop(yyleng, yytext); return OP; }
 
 
 
@@ -184,6 +218,13 @@ void addtype(int len, char* str){
     yyval.type = realloc(yyval.type, l+len+1);
     strncat(yyval.type, str, len);
     yyval.type[l+len] = '\0';
+}
+
+void addop(int len, char* str){
+    int l = strlen(yyval.op);
+    yyval.op = realloc(yyval.op, l+len+1);
+    strncat(yyval.op, str, len);
+    yyval.op[l+len] = '\0';
 }
 
 int main (void){
