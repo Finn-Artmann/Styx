@@ -54,7 +54,9 @@ HEXSTART {ESCCHAR}x
 BABYLONIAN_START {ESCCHAR}B\{
 BABYLONIAN_END \}B{ESCCHAR}
 
-IDENTIFIER [ΩŁ€®Ŧ¥↑ıØÞ˚ÆẞÐªŊĦ˙&Ł‹©‚‘’º—@ł¶ŧ←↓→øþ¨æſðđŋħ.ĸł«¢„“”µ]+
+DELIMITER [#\n]+
+
+IDENTIFIER (Ω|Ł|€|®|Ŧ|¥|↑|ı|Ø|Þ|˚|Æ|ẞ|Ð|ª|Ŋ|Ħ|˙|&|Ł|‹|©|‚|‘|’|º|—|@|ł|¶|ŧ|←|↓|→|ø|þ|¨|æ|ſ|ð|đ|ŋ|ħ|ĸ|ł|«|¢|„|“|”|µ)+
 
 
 LINECOMMENT_START {ESCCHAR}Ł
@@ -92,6 +94,8 @@ FOR "ªØ®"
 RETURN "®€Ŧ↑®’"
 PRINT "Þ®ı’Ŧ"
 SCAN "ẞ©Æ’"
+MAIN "ºÆı’"
+RAND_INT "®Æ’Ðı’Ŧ"
 
 /* Special */
 ROUND_OPEN "("
@@ -107,20 +111,20 @@ SEMICOLON ";"
 
 {STRINGSTART} { BEGIN(STRING); *str_buf = '\0'; }
 <STRING>{ESCAPE_STR} {for (int i = UTF8_EURO_LEN; i < yyleng; i++){ addstr(yytext[i]);} } 
-<STRING>{STRINGEND} { BEGIN(INITIAL); yylval.str = strdup(str_buf); return str; }
+<STRING>{STRINGEND} { BEGIN(INITIAL); yylval.str = strdup(str_buf); return STR; }
 <STRING>{STRINGCHAR} { addstr(*yytext); }
 <STRING>{NEWLINE} { addstr('\n'); }
 <STRING>{ASCII} { addstr(atoi(yytext + UTF8_EURO_LEN)); }
 
 
-{DEC_NUMBER} { yylval.num = atoi(yytext); return num; }
+{DEC_NUMBER} { yylval.num = atoi(yytext); return NUM; }
 
 {HEXSTART} { BEGIN(HEX); }
-<HEX>{HEX_NUMBER} { BEGIN(INITIAL); yylval.num = strtol(yytext, NULL, 16); return num; }
+<HEX>{HEX_NUMBER} { BEGIN(INITIAL); yylval.num = strtol(yytext, NULL, 16); return NUM; }
 
 {BABYLONIAN_START} { BEGIN(BABYLONIAN); }
 <BABYLONIAN>{BABYLONIAN_END} {BEGIN(INITIAL); }
-<BABYLONIAN>{BABYLONIAN_NUMBER} { yylval.num = babylonian_to_decimal(yytext); return num; }
+<BABYLONIAN>{BABYLONIAN_NUMBER} { yylval.num = babylonian_to_decimal(yytext); return NUM; }
 
 
 {LINECOMMENT_START} { BEGIN(LINECOMMENT);  *str_buf = '\0';}
@@ -131,37 +135,45 @@ SEMICOLON ";"
 <BLOCKCOMMENT>{BLOCKCOMMENT_END} { BEGIN(INITIAL); }
 <BLOCKCOMMENT>{BLOCKCOMMENT_CHAR} { addstr(*yytext); /* addstr could be removed here to completly ignore comments */ }
 
-{INT} { yylval.type = strdup(yytext); return type; }
-{STRING} { yylval.type = strdup(yytext); return type; }
-{CHAR} { yylval.type = strdup(yytext); return type; }
-{VOID} { yylval.type = strdup(yytext); return type; }
+{INT} { yylval.type = strdup(yytext); return TYPE; }
+{STRING} { yylval.type = strdup(yytext); return TYPE; }
+{CHAR} { yylval.type = strdup(yytext); return TYPE; }
+{VOID} { yylval.type = strdup(yytext); return TYPE; }
 
 
-{PLUS} { yylval.op = strdup(yytext); return op; }
-{MINUS} { yylval.op = strdup(yytext); return op; }
-{MULT} { yylval.op = strdup(yytext);  return op; }
-{DIV} { yylval.op = strdup(yytext);  return op; }
-{LE} { yylval.op = strdup(yytext);  return op; }
-{GE} { yylval.op = strdup(yytext);  return op; }
-{EQ} { yylval.op = strdup(yytext);  return op; }
-{NE} { yylval.op = strdup(yytext);  return op; }
-{GT} { yylval.op = strdup(yytext);  return op; }
-{LT} { yylval.op = strdup(yytext);  return op; }
-{AND} { yylval.op = strdup(yytext);  return op; }
-{OR} { yylval.op = strdup(yytext);  return op; }
 
-{IF} { yylval.kw = strdup(yytext); return kw; }
-{ELSE} { yylval.kw = strdup(yytext); return kw; }
-{FOR} { yylval.kw = strdup(yytext); return kw; }
-{RETURN} { yylval.kw = strdup(yytext); return kw; }
-{PRINT} { yylval.kw = strdup(yytext); return kw; }
-{SCAN} { yylval.kw = strdup(yytext); return kw; }
-{SEMICOLON} { return semicolon; }
+{PLUS} { return PLUS; }
+{MINUS} { return MINUS; }
+{MULT} { return MULT; }
+{DIV} { return DIV; }
+{LE} { return LE; }
+{GE} { return GE; }
+{EQ} { return EQ; }
+{NE} { return NE; }
+{GT} { return GT; }
+{LT} { return LT; }
+{AND} { return AND; }
+{OR} { return OR; }
 
-{IDENTIFIER} { yylval.id = strdup(yytext); return id; }
+{IF} { return IF; }
+{ELSE} { return ELSE; }
+{FOR} { return FOR; }
+{RETURN} { return RETURN; }
+{PRINT} { return PRINT; }
+{SCAN} { return SCAN; }
+{RAND_INT} { yylval.num = rand(); return RAND_INT; }
 
-(\ |\n) // Ignore spaces and newlines<STRING>{STRINGCHAR} { addstr(*yytext); }
 
+{IDENTIFIER} { yylval.id = strdup(yytext); return ID; }
+
+
+{SEMICOLON} { return SEMICOLON; }
+{ROUND_OPEN} { return ROUND_OPEN; }
+{ROUND_CLOSE} { return ROUND_CLOSE; }
+{CURLY_OPEN} { return CURLY_OPEN; }
+{CURLY_CLOSE} { return CURLY_CLOSE; }
+
+{DELIMITER} { } // Ignore delimiter
 
 . { return *yytext; } // Return any other character
 

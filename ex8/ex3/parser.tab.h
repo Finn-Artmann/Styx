@@ -54,14 +54,36 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    str = 258,                     /* str  */
-    type = 259,                    /* type  */
-    id = 260,                      /* id  */
-    op = 261,                      /* op  */
-    kw = 262,                      /* kw  */
-    num = 263,                     /* num  */
-    semicolon = 264,               /* semicolon  */
-    eoi = 265                      /* eoi  */
+    IF = 258,                      /* IF  */
+    ELSE = 259,                    /* ELSE  */
+    FOR = 260,                     /* FOR  */
+    RETURN = 261,                  /* RETURN  */
+    PRINT = 262,                   /* PRINT  */
+    SCAN = 263,                    /* SCAN  */
+    RAND_INT = 264,                /* RAND_INT  */
+    PLUS = 265,                    /* PLUS  */
+    MINUS = 266,                   /* MINUS  */
+    MULT = 267,                    /* MULT  */
+    DIV = 268,                     /* DIV  */
+    LE = 269,                      /* LE  */
+    GE = 270,                      /* GE  */
+    EQ = 271,                      /* EQ  */
+    NE = 272,                      /* NE  */
+    GT = 273,                      /* GT  */
+    LT = 274,                      /* LT  */
+    AND = 275,                     /* AND  */
+    OR = 276,                      /* OR  */
+    SEMICOLON = 277,               /* SEMICOLON  */
+    ROUND_OPEN = 278,              /* ROUND_OPEN  */
+    ROUND_CLOSE = 279,             /* ROUND_CLOSE  */
+    CURLY_OPEN = 280,              /* CURLY_OPEN  */
+    CURLY_CLOSE = 281,             /* CURLY_CLOSE  */
+    STR = 282,                     /* STR  */
+    TYPE = 283,                    /* TYPE  */
+    ID = 284,                      /* ID  */
+    OP = 285,                      /* OP  */
+    NUM = 286,                     /* NUM  */
+    EOI = 287                      /* EOI  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -76,10 +98,9 @@ union YYSTYPE
 	char* id;
 	char* str;
 	char* op;
-	char* kw;
 	int num;
 
-#line 83 "parser.tab.h"
+#line 104 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -13,7 +13,7 @@ parser.tab.o: parser.tab.c parser.tab.h
 
 
 lex.yy.c: lexer.l
-	flex lexer.l
+	flex -d lexer.l
 
 
 lex.yy.o: lex.yy.c parser.tab.h 
