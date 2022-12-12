@@ -71,9 +71,22 @@ start: main ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
 
 main: TYPE ID {	printf("Main function is valid\n"); }
 
-body: body body { printf("Body is valid\n"); }
-	| statement { printf("Body is valid\n"); }
-	| { printf("Body is valid\n"); }
+body: statements
+    | declarations statements
+	{
+		printf("Body is valid\n");
+	}
+
+declarations: declaration
+	    | declarations declaration
+
+declaration: TYPE ID SEMICOLON
+	{
+		printf("Declaration is valid\n");
+	}
+
+statements: statement
+	  | statements statement
 
 statement: assignment { printf("Assignment is valid\n"); }
 	| if_statement { printf("If statement is valid\n"); }
@@ -95,6 +108,7 @@ for_statement: FOR ROUND_OPEN assignment expression SEMICOLON assignment ROUND_C
 return_statement: RETURN expression SEMICOLON { printf("Return statement is valid\n"); }
 
 print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON { printf("Print statement is valid\n"); }
+		| PRINT ROUND_OPEN STR ROUND_CLOSE SEMICOLON { printf("Print statement is valid\n"); }
 
 scan_statement: SCAN ROUND_OPEN ID ROUND_CLOSE SEMICOLON { printf("Scan statement is valid\n"); }
 
@@ -104,21 +118,26 @@ rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON { printf("Rand 
 
 
 expression: term { printf("Expression is valid\n"); }
+	| expression PLUS term { printf("Expression is valid\n"); }
+	| expression MINUS term { printf("Expression is valid\n"); }
+	| expression LE term { printf("Expression is valid\n"); }
+	| expression GE term { printf("Expression is valid\n"); }
+	| expression EQ term { printf("Expression is valid\n"); }
+	| expression NE term { printf("Expression is valid\n"); }
+	| expression GT term { printf("Expression is valid\n"); }
+	| expression LT term { printf("Expression is valid\n"); }
+	| expression AND term { printf("Expression is valid\n"); }
+	| expression OR term { printf("Expression is valid\n"); }	
 	  
 
-term: term PLUS factor { printf("Term is valid\n"); }
-	| term MINUS factor { printf("Term is valid\n"); }
-	| factor { printf("Term is valid\n"); }
+term: factor { printf("Term is valid\n"); }
+	| term MULT factor { printf("Term is valid\n"); }
+	| term DIV factor { printf("Term is valid\n"); }
 
-factor: factor MULT primary { printf("Factor is valid\n"); }
-	| factor DIV primary { printf("Factor is valid\n"); }
-	| primary { printf("Factor is valid\n"); }
-
-primary: ID { printf("Primary is valid\n"); }
-	| NUM { printf("Primary is valid\n"); }
-	| ROUND_OPEN expression ROUND_CLOSE { printf("Primary is valid\n"); }
-
-
+factor: ID { printf("Factor is valid\n"); }
+      	| NUM { printf("Factor is valid\n"); }
+	| ROUND_OPEN expression ROUND_CLOSE { printf("Factor is valid\n"); }
+	| RAND_INT ROUND_OPEN NUM ROUND_CLOSE { printf("Factor is valid\n"); }
 
 
 

@@ -143,18 +143,20 @@ enum yysymbol_kind_t
   YYSYMBOL_start = 34,                     /* start  */
   YYSYMBOL_main = 35,                      /* main  */
   YYSYMBOL_body = 36,                      /* body  */
-  YYSYMBOL_statement = 37,                 /* statement  */
-  YYSYMBOL_assignment = 38,                /* assignment  */
-  YYSYMBOL_if_statement = 39,              /* if_statement  */
-  YYSYMBOL_for_statement = 40,             /* for_statement  */
-  YYSYMBOL_return_statement = 41,          /* return_statement  */
-  YYSYMBOL_print_statement = 42,           /* print_statement  */
-  YYSYMBOL_scan_statement = 43,            /* scan_statement  */
-  YYSYMBOL_rand_int_statement = 44,        /* rand_int_statement  */
-  YYSYMBOL_expression = 45,                /* expression  */
-  YYSYMBOL_term = 46,                      /* term  */
-  YYSYMBOL_factor = 47,                    /* factor  */
-  YYSYMBOL_primary = 48                    /* primary  */
+  YYSYMBOL_declarations = 37,              /* declarations  */
+  YYSYMBOL_declaration = 38,               /* declaration  */
+  YYSYMBOL_statements = 39,                /* statements  */
+  YYSYMBOL_statement = 40,                 /* statement  */
+  YYSYMBOL_assignment = 41,                /* assignment  */
+  YYSYMBOL_if_statement = 42,              /* if_statement  */
+  YYSYMBOL_for_statement = 43,             /* for_statement  */
+  YYSYMBOL_return_statement = 44,          /* return_statement  */
+  YYSYMBOL_print_statement = 45,           /* print_statement  */
+  YYSYMBOL_scan_statement = 46,            /* scan_statement  */
+  YYSYMBOL_rand_int_statement = 47,        /* rand_int_statement  */
+  YYSYMBOL_expression = 48,                /* expression  */
+  YYSYMBOL_term = 49,                      /* term  */
+  YYSYMBOL_factor = 50                     /* factor  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -459,16 +461,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   93
+#define YYLAST   156
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  33
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  16
+#define YYNNTS  18
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  31
+#define YYNRULES  44
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  79
+#define YYNSTATES  109
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   287
@@ -518,12 +520,13 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int8 yyrline[] =
+static const yytype_uint8 yyrline[] =
 {
-       0,    67,    67,    72,    74,    75,    76,    78,    79,    80,
-      81,    82,    83,    84,    88,    90,    91,    93,    95,    97,
-      99,   101,   106,   109,   110,   111,   113,   114,   115,   117,
-     118,   119
+       0,    67,    67,    72,    74,    75,    80,    81,    83,    88,
+      89,    91,    92,    93,    94,    95,    96,    97,   101,   103,
+     104,   106,   108,   110,   111,   113,   115,   120,   121,   122,
+     123,   124,   125,   126,   127,   128,   129,   130,   133,   134,
+     135,   137,   138,   139,   140
 };
 #endif
 
@@ -544,9 +547,9 @@ static const char *const yytname[] =
   "LE", "GE", "EQ", "NE", "GT", "LT", "AND", "OR", "SEMICOLON",
   "ROUND_OPEN", "ROUND_CLOSE", "CURLY_OPEN", "CURLY_CLOSE", "STR", "TYPE",
   "ID", "OP", "NUM", "EOI", "$accept", "start", "main", "body",
-  "statement", "assignment", "if_statement", "for_statement",
-  "return_statement", "print_statement", "scan_statement",
-  "rand_int_statement", "expression", "term", "factor", "primary", YY_NULLPTR
+  "declarations", "declaration", "statements", "statement", "assignment",
+  "if_statement", "for_statement", "return_statement", "print_statement",
+  "scan_statement", "rand_int_statement", "expression", "term", "factor", YY_NULLPTR
 };
 
 static const char *
@@ -556,7 +559,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-27)
+#define YYPACT_NINF (-67)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -568,16 +571,19 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-      -4,   -26,    30,    19,   -27,   -27,    29,    36,    51,    39,
-      40,   -13,    45,    46,    48,    56,    -1,   -27,   -27,   -27,
-     -27,   -27,   -27,   -27,   -27,   -13,    35,   -13,   -27,   -27,
-      52,    16,    21,   -27,   -13,    44,    47,   -13,   -27,    51,
-      53,   -13,    54,   -27,   -13,   -13,   -13,   -13,    55,    57,
-      58,    61,    50,    62,   -27,    21,    21,   -27,   -27,    63,
-      64,    65,   -27,    51,    35,   -27,   -27,   -27,     6,    66,
-      84,    67,    68,    51,    51,    14,    41,   -27,   -27
+     -11,    -8,    28,     9,   -67,   -67,    17,    19,    -2,    22,
+      25,     0,    35,    38,    42,    13,    43,    40,    -2,   -67,
+       5,   -67,   -67,   -67,   -67,   -67,   -67,   -67,   -67,     0,
+      49,    67,     0,   -67,   -67,    77,     6,   -67,    -7,    73,
+      74,    93,     0,   -67,   -67,     5,   -67,    36,     0,    85,
+      53,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,   -67,     0,     0,   112,    65,   113,   114,   -67,    90,
+     115,   103,   117,   -67,     6,     6,     6,     6,     6,     6,
+       6,     6,     6,     6,   -67,   -67,   120,   121,   122,   123,
+     -67,    -2,    49,   -67,   -67,   -67,   -67,   -67,   124,   125,
+     135,   126,   127,    -2,    -2,   128,   129,   -67,   -67
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -585,28 +591,31 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     3,     1,     0,     0,     6,     0,
-       0,     0,     0,     0,     0,     0,     0,     5,     7,     8,
-       9,    10,    11,    12,    13,     0,     0,     0,    29,    30,
-       0,    22,    25,    28,     0,     0,     0,     0,     2,     4,
-       0,     0,     0,    18,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    31,    23,    24,    26,    27,     0,
-       0,     0,    14,     6,     0,    19,    20,    21,     0,     0,
-      15,     0,     0,     6,     6,     0,     0,    17,    16
+       0,     0,     0,     0,     3,     1,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     6,
+       4,     9,    11,    12,    13,    14,    15,    16,    17,     0,
+       0,     0,     0,    41,    42,     0,    27,    38,     0,     0,
+       0,     0,     0,     2,     7,     5,    10,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    22,     0,     0,     0,     0,     0,     0,     8,     0,
+       0,     0,     0,    43,    28,    29,    30,    31,    32,    33,
+      34,    35,    36,    37,    39,    40,     0,     0,     0,     0,
+      18,     0,     0,    44,    24,    23,    25,    26,     0,     0,
+      19,     0,     0,     0,     0,     0,     0,    21,    20
 };
 
 /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-     -27,   -27,   -27,    -8,   -27,   -25,   -27,   -27,   -27,   -27,
-     -27,   -27,     4,   -27,     7,   -10
+     -67,   -67,   -67,   -66,   -67,   130,   138,    -5,   -30,   -67,
+     -67,   -67,   -67,   -67,   -67,     1,    75,   -27
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3,    39,    17,    18,    19,    20,    21,    22,
-      23,    24,    30,    31,    32,    33
+       0,     2,     3,    17,    18,    19,    20,    21,    22,    23,
+      24,    25,    26,    27,    28,    35,    36,    37
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -614,30 +623,42 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      16,    41,     9,     4,    10,    11,    12,    13,    14,     9,
-      27,    10,    11,    12,    13,    14,    28,     9,    29,    10,
-      11,    12,    13,    14,     1,    38,    44,    45,    15,    40,
-       5,    42,    70,    46,    47,    15,    57,    58,    48,    69,
-      77,    51,     6,    15,     9,    53,    10,    11,    12,    13,
-      14,    55,    56,     7,     9,    68,    10,    11,    12,    13,
-      14,     8,    25,    26,    15,    75,    76,    78,    34,    35,
-      15,    36,    37,    49,    43,    63,    50,    52,    54,    59,
-      15,    60,    61,    62,    64,    65,    66,    67,    72,     0,
-      71,     0,    73,    74
+      48,     9,    31,    10,    11,    12,    13,    14,     9,    31,
+      10,    11,    12,    13,    14,    46,    32,     1,    62,    63,
+      64,     4,    33,    32,    34,    98,    15,    16,     5,    33,
+      47,    34,     6,    50,    16,    84,    85,   105,   106,    65,
+      46,     7,    41,    69,     8,    29,    51,    52,    30,    71,
+      53,    54,    55,    56,    57,    58,    59,    60,    38,    42,
+      70,    39,    99,    51,    52,    40,    43,    53,    54,    55,
+      56,    57,    58,    59,    60,    51,    52,    73,    16,    53,
+      54,    55,    56,    57,    58,    59,    60,    51,    52,    87,
+      49,    53,    54,    55,    56,    57,    58,    59,    60,    61,
+      51,    52,    66,    67,    53,    54,    55,    56,    57,    58,
+      59,    60,    90,    51,    52,    68,    72,    53,    54,    55,
+      56,    57,    58,    59,    60,    92,    74,    75,    76,    77,
+      78,    79,    80,    81,    82,    83,    86,    88,    89,   102,
+      91,    93,    94,    95,    96,    97,     0,     0,    44,   101,
+     100,   103,   104,     0,   107,   108,    45
 };
 
 static const yytype_int8 yycheck[] =
 {
-       8,    26,     3,    29,     5,     6,     7,     8,     9,     3,
-      23,     5,     6,     7,     8,     9,    29,     3,    31,     5,
-       6,     7,     8,     9,    28,    26,    10,    11,    29,    25,
-       0,    27,    26,    12,    13,    29,    46,    47,    34,    64,
-      26,    37,    23,    29,     3,    41,     5,     6,     7,     8,
-       9,    44,    45,    24,     3,    63,     5,     6,     7,     8,
-       9,    25,    23,    23,    29,    73,    74,    26,    23,    23,
-      29,    23,    16,    29,    22,    25,    29,    24,    24,    24,
-      29,    24,    24,    22,    22,    22,    22,    22,     4,    -1,
-      24,    -1,    25,    25
+      30,     3,     9,     5,     6,     7,     8,     9,     3,     9,
+       5,     6,     7,     8,     9,    20,    23,    28,    12,    13,
+      27,    29,    29,    23,    31,    91,    28,    29,     0,    29,
+      29,    31,    23,    32,    29,    62,    63,   103,   104,    38,
+      45,    24,    29,    42,    25,    23,    10,    11,    23,    48,
+      14,    15,    16,    17,    18,    19,    20,    21,    23,    16,
+      24,    23,    92,    10,    11,    23,    26,    14,    15,    16,
+      17,    18,    19,    20,    21,    10,    11,    24,    29,    14,
+      15,    16,    17,    18,    19,    20,    21,    10,    11,    24,
+      23,    14,    15,    16,    17,    18,    19,    20,    21,    22,
+      10,    11,    29,    29,    14,    15,    16,    17,    18,    19,
+      20,    21,    22,    10,    11,    22,    31,    14,    15,    16,
+      17,    18,    19,    20,    21,    22,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    24,    24,    24,     4,
+      25,    24,    22,    22,    22,    22,    -1,    -1,    18,    24,
+      26,    25,    25,    -1,    26,    26,    18
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -645,31 +666,36 @@ static const yytype_int8 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,    28,    34,    35,    29,     0,    23,    24,    25,     3,
-       5,     6,     7,     8,     9,    29,    36,    37,    38,    39,
-      40,    41,    42,    43,    44,    23,    23,    23,    29,    31,
-      45,    46,    47,    48,    23,    23,    23,    16,    26,    36,
-      45,    38,    45,    22,    10,    11,    12,    13,    45,    29,
-      29,    45,    24,    45,    24,    47,    47,    48,    48,    24,
-      24,    24,    22,    25,    22,    22,    22,    22,    36,    38,
+       5,     6,     7,     8,     9,    28,    29,    36,    37,    38,
+      39,    40,    41,    42,    43,    44,    45,    46,    47,    23,
+      23,     9,    23,    29,    31,    48,    49,    50,    23,    23,
+      23,    29,    16,    26,    38,    39,    40,    48,    41,    23,
+      48,    10,    11,    14,    15,    16,    17,    18,    19,    20,
+      21,    22,    12,    13,    27,    48,    29,    29,    22,    48,
+      24,    48,    31,    24,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    50,    50,    24,    24,    24,    24,
+      22,    25,    22,    24,    22,    22,    22,    22,    36,    41,
       26,    24,     4,    25,    25,    36,    36,    26,    26
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    33,    34,    35,    36,    36,    36,    37,    37,    37,
-      37,    37,    37,    37,    38,    39,    39,    40,    41,    42,
-      43,    44,    45,    46,    46,    46,    47,    47,    47,    48,
-      48,    48
+       0,    33,    34,    35,    36,    36,    37,    37,    38,    39,
+      39,    40,    40,    40,    40,    40,    40,    40,    41,    42,
+      42,    43,    44,    45,    45,    46,    47,    48,    48,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    49,    49,
+      49,    50,    50,    50,    50
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     6,     2,     2,     1,     0,     1,     1,     1,
-       1,     1,     1,     1,     4,     7,    11,    10,     3,     5,
-       5,     5,     1,     3,     3,     1,     3,     3,     1,     1,
-       1,     3
+       0,     2,     6,     2,     1,     2,     1,     2,     3,     1,
+       2,     1,     1,     1,     1,     1,     1,     1,     4,     7,
+      11,    10,     3,     5,     5,     5,     5,     1,     3,     3,
+       3,     3,     3,     3,     3,     3,     3,     3,     1,     3,
+       3,     1,     1,     3,     4
 };
 
 
@@ -1667,185 +1693,237 @@ yyreduce:
         {
 		printf("Program is valid\n");
 	}
-#line 1671 "parser.tab.c"
+#line 1697 "parser.tab.c"
     break;
 
   case 3: /* main: TYPE ID  */
 #line 72 "parser.y"
               {	printf("Main function is valid\n"); }
-#line 1677 "parser.tab.c"
+#line 1703 "parser.tab.c"
     break;
 
-  case 4: /* body: body body  */
-#line 74 "parser.y"
-                { printf("Body is valid\n"); }
-#line 1683 "parser.tab.c"
-    break;
-
-  case 5: /* body: statement  */
-#line 75 "parser.y"
-                    { printf("Body is valid\n"); }
-#line 1689 "parser.tab.c"
-    break;
-
-  case 6: /* body: %empty  */
+  case 5: /* body: declarations statements  */
 #line 76 "parser.y"
-          { printf("Body is valid\n"); }
-#line 1695 "parser.tab.c"
+        {
+		printf("Body is valid\n");
+	}
+#line 1711 "parser.tab.c"
     break;
 
-  case 7: /* statement: assignment  */
-#line 78 "parser.y"
-                      { printf("Assignment is valid\n"); }
-#line 1701 "parser.tab.c"
-    break;
-
-  case 8: /* statement: if_statement  */
-#line 79 "parser.y"
-                       { printf("If statement is valid\n"); }
-#line 1707 "parser.tab.c"
-    break;
-
-  case 9: /* statement: for_statement  */
-#line 80 "parser.y"
-                        { printf("For statement is valid\n"); }
-#line 1713 "parser.tab.c"
-    break;
-
-  case 10: /* statement: return_statement  */
-#line 81 "parser.y"
-                           { printf("Return statement is valid\n"); }
+  case 8: /* declaration: TYPE ID SEMICOLON  */
+#line 84 "parser.y"
+        {
+		printf("Declaration is valid\n");
+	}
 #line 1719 "parser.tab.c"
     break;
 
-  case 11: /* statement: print_statement  */
-#line 82 "parser.y"
-                          { printf("Print statement is valid\n"); }
+  case 11: /* statement: assignment  */
+#line 91 "parser.y"
+                      { printf("Assignment is valid\n"); }
 #line 1725 "parser.tab.c"
     break;
 
-  case 12: /* statement: scan_statement  */
-#line 83 "parser.y"
-                         { printf("Scan statement is valid\n"); }
+  case 12: /* statement: if_statement  */
+#line 92 "parser.y"
+                       { printf("If statement is valid\n"); }
 #line 1731 "parser.tab.c"
     break;
 
-  case 13: /* statement: rand_int_statement  */
-#line 84 "parser.y"
-                             { printf("Rand int statement is valid\n"); }
+  case 13: /* statement: for_statement  */
+#line 93 "parser.y"
+                        { printf("For statement is valid\n"); }
 #line 1737 "parser.tab.c"
     break;
 
-  case 14: /* assignment: ID EQ expression SEMICOLON  */
-#line 88 "parser.y"
-                                       { printf("Assignment is valid\n"); }
+  case 14: /* statement: return_statement  */
+#line 94 "parser.y"
+                           { printf("Return statement is valid\n"); }
 #line 1743 "parser.tab.c"
     break;
 
-  case 15: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 90 "parser.y"
-                                                                               { printf("If statement is valid\n"); }
+  case 15: /* statement: print_statement  */
+#line 95 "parser.y"
+                          { printf("Print statement is valid\n"); }
 #line 1749 "parser.tab.c"
     break;
 
-  case 16: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE  */
-#line 91 "parser.y"
-                                                                                                            { printf("If statement is valid\n"); }
+  case 16: /* statement: scan_statement  */
+#line 96 "parser.y"
+                         { printf("Scan statement is valid\n"); }
 #line 1755 "parser.tab.c"
     break;
 
-  case 17: /* for_statement: FOR ROUND_OPEN assignment expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 93 "parser.y"
-                                                                                                                 { printf("For statement is valid\n"); }
+  case 17: /* statement: rand_int_statement  */
+#line 97 "parser.y"
+                             { printf("Rand int statement is valid\n"); }
 #line 1761 "parser.tab.c"
     break;
 
-  case 18: /* return_statement: RETURN expression SEMICOLON  */
-#line 95 "parser.y"
-                                              { printf("Return statement is valid\n"); }
+  case 18: /* assignment: ID EQ expression SEMICOLON  */
+#line 101 "parser.y"
+                                       { printf("Assignment is valid\n"); }
 #line 1767 "parser.tab.c"
     break;
 
-  case 19: /* print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON  */
-#line 97 "parser.y"
-                                                                   { printf("Print statement is valid\n"); }
+  case 19: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
+#line 103 "parser.y"
+                                                                               { printf("If statement is valid\n"); }
 #line 1773 "parser.tab.c"
     break;
 
-  case 20: /* scan_statement: SCAN ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
-#line 99 "parser.y"
-                                                         { printf("Scan statement is valid\n"); }
+  case 20: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE  */
+#line 104 "parser.y"
+                                                                                                            { printf("If statement is valid\n"); }
 #line 1779 "parser.tab.c"
     break;
 
-  case 21: /* rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
-#line 101 "parser.y"
-                                                                 { printf("Rand int statement is valid\n"); }
+  case 21: /* for_statement: FOR ROUND_OPEN assignment expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
+#line 106 "parser.y"
+                                                                                                                 { printf("For statement is valid\n"); }
 #line 1785 "parser.tab.c"
     break;
 
-  case 22: /* expression: term  */
-#line 106 "parser.y"
-                 { printf("Expression is valid\n"); }
+  case 22: /* return_statement: RETURN expression SEMICOLON  */
+#line 108 "parser.y"
+                                              { printf("Return statement is valid\n"); }
 #line 1791 "parser.tab.c"
     break;
 
-  case 23: /* term: term PLUS factor  */
-#line 109 "parser.y"
-                       { printf("Term is valid\n"); }
+  case 23: /* print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON  */
+#line 110 "parser.y"
+                                                                   { printf("Print statement is valid\n"); }
 #line 1797 "parser.tab.c"
     break;
 
-  case 24: /* term: term MINUS factor  */
-#line 110 "parser.y"
-                            { printf("Term is valid\n"); }
+  case 24: /* print_statement: PRINT ROUND_OPEN STR ROUND_CLOSE SEMICOLON  */
+#line 111 "parser.y"
+                                                             { printf("Print statement is valid\n"); }
 #line 1803 "parser.tab.c"
     break;
 
-  case 25: /* term: factor  */
-#line 111 "parser.y"
-                 { printf("Term is valid\n"); }
+  case 25: /* scan_statement: SCAN ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
+#line 113 "parser.y"
+                                                         { printf("Scan statement is valid\n"); }
 #line 1809 "parser.tab.c"
     break;
 
-  case 26: /* factor: factor MULT primary  */
-#line 113 "parser.y"
-                            { printf("Factor is valid\n"); }
+  case 26: /* rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
+#line 115 "parser.y"
+                                                                 { printf("Rand int statement is valid\n"); }
 #line 1815 "parser.tab.c"
     break;
 
-  case 27: /* factor: factor DIV primary  */
-#line 114 "parser.y"
-                             { printf("Factor is valid\n"); }
+  case 27: /* expression: term  */
+#line 120 "parser.y"
+                 { printf("Expression is valid\n"); }
 #line 1821 "parser.tab.c"
     break;
 
-  case 28: /* factor: primary  */
-#line 115 "parser.y"
-                  { printf("Factor is valid\n"); }
+  case 28: /* expression: expression PLUS term  */
+#line 121 "parser.y"
+                               { printf("Expression is valid\n"); }
 #line 1827 "parser.tab.c"
     break;
 
-  case 29: /* primary: ID  */
-#line 117 "parser.y"
-            { printf("Primary is valid\n"); }
+  case 29: /* expression: expression MINUS term  */
+#line 122 "parser.y"
+                                { printf("Expression is valid\n"); }
 #line 1833 "parser.tab.c"
     break;
 
-  case 30: /* primary: NUM  */
-#line 118 "parser.y"
-              { printf("Primary is valid\n"); }
+  case 30: /* expression: expression LE term  */
+#line 123 "parser.y"
+                             { printf("Expression is valid\n"); }
 #line 1839 "parser.tab.c"
     break;
 
-  case 31: /* primary: ROUND_OPEN expression ROUND_CLOSE  */
-#line 119 "parser.y"
-                                            { printf("Primary is valid\n"); }
+  case 31: /* expression: expression GE term  */
+#line 124 "parser.y"
+                             { printf("Expression is valid\n"); }
 #line 1845 "parser.tab.c"
     break;
 
+  case 32: /* expression: expression EQ term  */
+#line 125 "parser.y"
+                             { printf("Expression is valid\n"); }
+#line 1851 "parser.tab.c"
+    break;
 
-#line 1849 "parser.tab.c"
+  case 33: /* expression: expression NE term  */
+#line 126 "parser.y"
+                             { printf("Expression is valid\n"); }
+#line 1857 "parser.tab.c"
+    break;
+
+  case 34: /* expression: expression GT term  */
+#line 127 "parser.y"
+                             { printf("Expression is valid\n"); }
+#line 1863 "parser.tab.c"
+    break;
+
+  case 35: /* expression: expression LT term  */
+#line 128 "parser.y"
+                             { printf("Expression is valid\n"); }
+#line 1869 "parser.tab.c"
+    break;
+
+  case 36: /* expression: expression AND term  */
+#line 129 "parser.y"
+                              { printf("Expression is valid\n"); }
+#line 1875 "parser.tab.c"
+    break;
+
+  case 37: /* expression: expression OR term  */
+#line 130 "parser.y"
+                             { printf("Expression is valid\n"); }
+#line 1881 "parser.tab.c"
+    break;
+
+  case 38: /* term: factor  */
+#line 133 "parser.y"
+             { printf("Term is valid\n"); }
+#line 1887 "parser.tab.c"
+    break;
+
+  case 39: /* term: term MULT factor  */
+#line 134 "parser.y"
+                           { printf("Term is valid\n"); }
+#line 1893 "parser.tab.c"
+    break;
+
+  case 40: /* term: term DIV factor  */
+#line 135 "parser.y"
+                          { printf("Term is valid\n"); }
+#line 1899 "parser.tab.c"
+    break;
+
+  case 41: /* factor: ID  */
+#line 137 "parser.y"
+           { printf("Factor is valid\n"); }
+#line 1905 "parser.tab.c"
+    break;
+
+  case 42: /* factor: NUM  */
+#line 138 "parser.y"
+              { printf("Factor is valid\n"); }
+#line 1911 "parser.tab.c"
+    break;
+
+  case 43: /* factor: ROUND_OPEN expression ROUND_CLOSE  */
+#line 139 "parser.y"
+                                            { printf("Factor is valid\n"); }
+#line 1917 "parser.tab.c"
+    break;
+
+  case 44: /* factor: RAND_INT ROUND_OPEN NUM ROUND_CLOSE  */
+#line 140 "parser.y"
+                                              { printf("Factor is valid\n"); }
+#line 1923 "parser.tab.c"
+    break;
+
+
+#line 1927 "parser.tab.c"
 
         default: break;
       }
@@ -2080,7 +2158,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 125 "parser.y"
+#line 144 "parser.y"
 
 
 // C Code
