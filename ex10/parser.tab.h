@@ -82,8 +82,7 @@ extern int yydebug;
     TYPE = 283,                    /* TYPE  */
     ID = 284,                      /* ID  */
     OP = 285,                      /* OP  */
-    NUM = 286,                     /* NUM  */
-    EOI = 287                      /* EOI  */
+    NUM = 286                      /* NUM  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -92,15 +91,15 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "parser.y"
+#line 111 "parser.y"
 
 	char* type;
 	char* id;
 	char* str;
-	char* op;
 	int num;
+	struct astnode* ast;
 
-#line 104 "parser.tab.h"
+#line 103 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
