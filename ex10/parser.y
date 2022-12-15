@@ -99,6 +99,35 @@
 			fclose(dot);
 		}
 	}
+
+	// Global list for pairs of function names and pointers into the AST
+	struct funclist {
+		char* name;
+		astnode_t* node;
+		struct funclist* next;
+	};
+	struct funclist* funclist = NULL;
+	
+	// Add function to list
+	void add_function(char* name, astnode_t* node){
+		struct funclist* new = malloc(sizeof *new);
+		new->name = strdup(name);
+		new->node = node;
+		new->next = funclist;
+		funclist = new;
+	}
+
+	// Find function in list
+	astnode_t* find_function(char* name){
+		struct funclist* current = funclist;
+		while(current){
+			if(strcmp(current->name, name) == 0){
+				return current->node;
+			}
+			current = current->next;
+		}
+		return NULL;
+	}
 %}
 
 %define parse.lac full
@@ -124,6 +153,7 @@
 %token PRINT
 %token SCAN
 %token RAND_INT
+%token <str>MAIN
 
 
 // Operators
@@ -142,6 +172,7 @@
 
 // Special
 %token SEMICOLON
+%token COMMA
 %token ROUND_OPEN
 %token ROUND_CLOSE
 %token CURLY_OPEN
@@ -153,7 +184,9 @@
 %token <num> NUM
 %start start
 
-%type <ast> start program main body statements statement declarations declaration assignment expression if_statement for_statement return_statement print_statement scan_statement rand_int_statement term factor
+%type <ast> start program functions function parameters parameter main body statements statement declarations declaration assignment expression if_statement for_statement return_statement print_statement scan_statement rand_int_statement term factor
+
+
 %%
  
 
@@ -161,21 +194,46 @@
 
 start: program {print_ast($1, 0); printf("\n");} //TODO: Execute AST
 
-program: main ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
-	{
-		printf("Program is valid\n");
 
+
+program: functions main {
+		printf("Program is valid\n");
+		
 		$$ = new_astnode("Program");
 		$$->child[0] = $1;
-		$$->child[1] = $5;
+	}
+	| main {
+		printf("Program is valid\n");
+		
+		$$ = new_astnode("Program");
+		$$->child[0] = $1;
 	}
 
-main: TYPE ID 
+functions: function { $$ = new_astnode("Functions"); $$->child[0] = $1; }
+	 | functions function { $$ = new_astnode("Functions"); $$->child[0] = $1; $$->child[1] = $2; }
+
+function: TYPE ID ROUND_OPEN parameters ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode("Function"); $$->child[0] = $4; $$->child[1] = $7; $$->val.str = $2; $$->type= AST_ID_T;}
+
+parameters: parameter { $$ = new_astnode("Parameters"); $$->child[0] = $1; }
+	 | parameters COMMA parameter { $$ = new_astnode("Parameters"); $$->child[0] = $1; $$->child[1] = $3; }
+	 | { $$ = new_astnode("Parameters"); }
+
+parameter: TYPE ID { $$ = new_astnode("Parameter"); $$->val.str = $2; $$->type = AST_ID_T; }
+
+
+main: TYPE MAIN ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
     {	
-    	
+	if(strcmp($1, "ı’Ŧ") != 0){
+		printf("Error: Main function must return ı’Ŧ and must have identifier ºÆı’\n");
+		printf("Found: TYPE: %s \n", $1);
+		exit(1);
+	}
+	
+	
 	$$ = new_astnode("Main");
 	$$->val.str = $2;
 	$$->type = AST_ID_T;
+	$$->child[0] = $6;
     }
 
 body: statements { $$ = new_astnode("Body"); $$->child[0] = $1; }

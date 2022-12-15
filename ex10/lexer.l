@@ -103,6 +103,7 @@ ROUND_CLOSE ")"
 CURLY_OPEN "{"
 CURLY_CLOSE "}"
 SEMICOLON ";"
+COMMA "?"
 
 
 %x STRING HEX BABYLONIAN LINECOMMENT BLOCKCOMMENT
@@ -162,12 +163,13 @@ SEMICOLON ";"
 {PRINT} { return PRINT; }
 {SCAN} { return SCAN; }
 {RAND_INT} { yylval.num = rand(); return RAND_INT; }
-
+{MAIN} { yylval.str = strdup(yytext); return MAIN; }
 
 {IDENTIFIER} { yylval.id = strdup(yytext); return ID; }
 
 
 {SEMICOLON} { return SEMICOLON; }
+{COMMA} { return COMMA; }
 {ROUND_OPEN} { return ROUND_OPEN; }
 {ROUND_CLOSE} { return ROUND_CLOSE; }
 {CURLY_OPEN} { return CURLY_OPEN; }

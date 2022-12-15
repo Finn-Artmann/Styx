@@ -61,28 +61,30 @@ extern int yydebug;
     PRINT = 262,                   /* PRINT  */
     SCAN = 263,                    /* SCAN  */
     RAND_INT = 264,                /* RAND_INT  */
-    PLUS = 265,                    /* PLUS  */
-    MINUS = 266,                   /* MINUS  */
-    MULT = 267,                    /* MULT  */
-    DIV = 268,                     /* DIV  */
-    LE = 269,                      /* LE  */
-    GE = 270,                      /* GE  */
-    EQ = 271,                      /* EQ  */
-    NE = 272,                      /* NE  */
-    GT = 273,                      /* GT  */
-    LT = 274,                      /* LT  */
-    AND = 275,                     /* AND  */
-    OR = 276,                      /* OR  */
-    SEMICOLON = 277,               /* SEMICOLON  */
-    ROUND_OPEN = 278,              /* ROUND_OPEN  */
-    ROUND_CLOSE = 279,             /* ROUND_CLOSE  */
-    CURLY_OPEN = 280,              /* CURLY_OPEN  */
-    CURLY_CLOSE = 281,             /* CURLY_CLOSE  */
-    STR = 282,                     /* STR  */
-    TYPE = 283,                    /* TYPE  */
-    ID = 284,                      /* ID  */
-    OP = 285,                      /* OP  */
-    NUM = 286                      /* NUM  */
+    MAIN = 265,                    /* MAIN  */
+    PLUS = 266,                    /* PLUS  */
+    MINUS = 267,                   /* MINUS  */
+    MULT = 268,                    /* MULT  */
+    DIV = 269,                     /* DIV  */
+    LE = 270,                      /* LE  */
+    GE = 271,                      /* GE  */
+    EQ = 272,                      /* EQ  */
+    NE = 273,                      /* NE  */
+    GT = 274,                      /* GT  */
+    LT = 275,                      /* LT  */
+    AND = 276,                     /* AND  */
+    OR = 277,                      /* OR  */
+    SEMICOLON = 278,               /* SEMICOLON  */
+    COMMA = 279,                   /* COMMA  */
+    ROUND_OPEN = 280,              /* ROUND_OPEN  */
+    ROUND_CLOSE = 281,             /* ROUND_CLOSE  */
+    CURLY_OPEN = 282,              /* CURLY_OPEN  */
+    CURLY_CLOSE = 283,             /* CURLY_CLOSE  */
+    STR = 284,                     /* STR  */
+    TYPE = 285,                    /* TYPE  */
+    ID = 286,                      /* ID  */
+    OP = 287,                      /* OP  */
+    NUM = 288                      /* NUM  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -99,7 +101,7 @@ union YYSTYPE
 	int num;
 	struct astnode* ast;
 
-#line 103 "parser.tab.h"
+#line 105 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
