@@ -6,7 +6,7 @@
 
 #include "parser.tab.h"
 
-#define UTF8_EURO_LEN 3 
+#define UTF8_ESCCHAR_LEN 1 
 
 
 void addstr(char ch);
@@ -47,7 +47,7 @@ STRINGCHAR .
 ESCCHAR "E"
 NEWLINE "Ω"
 ESCAPE_STR {ESCCHAR}({STRINGSTART}|{STRINGEND}|{NEWLINE}|{ESCCHAR})
-ASCII {ESCCHAR}({DEC_NUMBER}|{HEX_NUMBER})
+ASCII {ESCCHAR}({DEC_NUMBER}|x{HEX_NUMBER})
 
 
 HEXSTART {ESCCHAR}x
@@ -112,11 +112,11 @@ COMMA "?"
 
 
 {STRINGSTART} { BEGIN(STRING); *str_buf = '\0'; }
-<STRING>{ESCAPE_STR} {for (int i = UTF8_EURO_LEN; i < yyleng; i++){ addstr(yytext[i]);} } 
+<STRING>{ESCAPE_STR} {for (int i = UTF8_ESCCHAR_LEN; i < yyleng; i++){ addstr(yytext[i]);} } 
 <STRING>{STRINGEND} { BEGIN(INITIAL); yylval.str = strdup(str_buf); return STR; }
 <STRING>{STRINGCHAR} { addstr(*yytext); }
 <STRING>{NEWLINE} { addstr('\n'); }
-<STRING>{ASCII} { addstr(atoi(yytext + UTF8_EURO_LEN)); }
+<STRING>{ASCII} { addstr(atoi(yytext + UTF8_ESCCHAR_LEN)); }
 
 
 {DEC_NUMBER} { yylval.num = atoi(yytext); return NUM; }

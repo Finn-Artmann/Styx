@@ -12,6 +12,8 @@
 	extern FILE *yyin;
 	extern int yylineno;
 
+	extern int yy_flex_debug;
+
 	// Global variable storage
 	#define MAX_VARS 256
 	struct var{
@@ -200,7 +202,7 @@
 
 	// Execute AST 
 	int exec_ast(astnode_t* root){
-		printf("Executing AST Node %d: %s\n", root->id, root->name);
+		//printf("Executing AST Node %d: %s\n", root->id, root->name);
 		if(	strcmp(root->name, "Program") == 0 ||
 			strcmp(root->name, "Main") == 0 ||
 			strcmp(root->name, "Body") == 0 ||
@@ -309,6 +311,13 @@
 			}
 			setvar(root->val.str, atoi(buf));
 		}
+		else if(strcmp(root->name, "For") == 0){
+			// TODO: Add assignment/declaration in for loop
+
+			for(; exec_ast(root->child[0]); exec_ast(root->child[1])){
+				exec_ast(root->child[2]);
+			}
+		}
 		else{
 			printf("Error: Unknown node %s\n", root->name);
 		}
@@ -384,14 +393,14 @@ start: program { print_ast($1, 0); printf("\n"); exec_ast($1);} //TODO: Execute 
 
 
 program: functions main {
-		printf("Program is valid\n");
+		printf(">>> [SŦYX parser]: Program syntax is valid\n");
 		
 		$$ = new_astnode("Program");
 		$$->child[0] = $1;
 		$$->child[1] = $2;
 	}
 	| main {
-		printf("Program is valid\n");
+		printf(">>> [SŦYX parser] Program syntax is valid\n");
 		
 		$$ = new_astnode("Program");
 		$$->child[0] = $1;
@@ -460,7 +469,7 @@ if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE {
 	    | IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode("IfElse"); $$->child[0] = $3; $$->child[1] = $6; $$->child[2] = $10; }
 	    
 
-for_statement: FOR ROUND_OPEN assignment expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode("For"); $$->child[0] = $3; $$->child[1] = $4; $$->child[2] = $6; $$->child[3] = $9; }
+for_statement: FOR ROUND_OPEN expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode("For"); $$->child[0] = $3; $$->child[1] = $5; $$->child[2] = $8; }
 
 return_statement: RETURN expression SEMICOLON { $$ = new_astnode("Return"); $$->child[0] = $2; }
 
@@ -503,7 +512,7 @@ factor: ID { $$ = new_astnode("FactorID"); $$->val.str = $1; $$->type = AST_ID_T
 
 // C Code
 int main(int arc, char** argv){
-	
+	yy_flex_debug = 0;
 	init_vars();
 	yyin = fopen(argv[1], "r");
 	return yyparse();

@@ -1,92 +1,116 @@
 digraph ast {
-n40 [label="id: 40
+n54 [label="id: 54
  Program"];
-n40 -> n39;
-n39 [label="id: 39
+n54 -> n53;
+n53 [label="id: 53
  Main
  ID: ºÆı’"];
-n39 -> n38;
-n38 [label="id: 38
+n53 -> n52;
+n52 [label="id: 52
  Body"];
-n38 -> n37;
-n37 [label="id: 37
+n52 -> n51;
+n51 [label="id: 51
  Statements"];
-n37 -> n31;
-n31 [label="id: 31
+n51 -> n11;
+n11 [label="id: 11
  Statements"];
-n31 -> n2;
-n2 [label="id: 2
- Statements"];
-n2 -> n1;
-n1 [label="id: 1
- Statement"];
-n1 -> n0;
-n0 [label="id: 0
- Scan
- ID: Æ"];
-n31 -> n30;
-n30 [label="id: 30
- Statement"];
-n30 -> n29;
-n29 [label="id: 29
- IfElse"];
-n29 -> n8;
-n8 [label="id: 8
- ExpressionGE"];
-n8 -> n5;
+n11 -> n5;
 n5 [label="id: 5
- ExpressionTerm"];
+ Statements"];
 n5 -> n4;
 n4 [label="id: 4
- TermFactor"];
+ Statement"];
 n4 -> n3;
 n3 [label="id: 3
- FactorID
- ID: Æ"];
+ Assignment
+ ID: Ŧ"];
+n3 -> n2;
+n2 [label="id: 2
+ ExpressionTerm"];
+n2 -> n1;
+n1 [label="id: 1
+ TermFactor"];
+n1 -> n0;
+n0 [label="id: 0
+ FactorNUM
+ NUM: 10"];
+n11 -> n10;
+n10 [label="id: 10
+ Statement"];
+n10 -> n9;
+n9 [label="id: 9
+ Assignment
+ ID: ’↑º"];
+n9 -> n8;
+n8 [label="id: 8
+ ExpressionTerm"];
 n8 -> n7;
 n7 [label="id: 7
  TermFactor"];
 n7 -> n6;
 n6 [label="id: 6
- FactorNUM
+ FactorRAND
  NUM: 10"];
-n29 -> n18;
-n18 [label="id: 18
- Body"];
-n18 -> n17;
-n17 [label="id: 17
- Statements"];
-n17 -> n16;
-n16 [label="id: 16
+n51 -> n50;
+n50 [label="id: 50
  Statement"];
-n16 -> n15;
-n15 [label="id: 15
- Assignment
- ID: Æ"];
-n15 -> n14;
+n50 -> n49;
+n49 [label="id: 49
+ For"];
+n49 -> n17;
+n17 [label="id: 17
+ ExpressionGT"];
+n17 -> n14;
 n14 [label="id: 14
- ExpressionPlus"];
-n14 -> n11;
-n11 [label="id: 11
  ExpressionTerm"];
-n11 -> n10;
-n10 [label="id: 10
- TermFactor"];
-n10 -> n9;
-n9 [label="id: 9
- FactorID
- ID: Æ"];
 n14 -> n13;
 n13 [label="id: 13
  TermFactor"];
 n13 -> n12;
 n12 [label="id: 12
+ FactorID
+ ID: Ŧ"];
+n17 -> n16;
+n16 [label="id: 16
+ TermFactor"];
+n16 -> n15;
+n15 [label="id: 15
+ FactorNUM
+ NUM: 0"];
+n49 -> n24;
+n24 [label="id: 24
+ Assignment
+ ID: Ŧ"];
+n24 -> n23;
+n23 [label="id: 23
+ ExpressionMinus"];
+n23 -> n20;
+n20 [label="id: 20
+ ExpressionTerm"];
+n20 -> n19;
+n19 [label="id: 19
+ TermFactor"];
+n19 -> n18;
+n18 [label="id: 18
+ FactorID
+ ID: Ŧ"];
+n23 -> n22;
+n22 [label="id: 22
+ TermFactor"];
+n22 -> n21;
+n21 [label="id: 21
  FactorNUM
  NUM: 1"];
-n29 -> n28;
-n28 [label="id: 28
+n49 -> n48;
+n48 [label="id: 48
  Body"];
-n28 -> n27;
+n48 -> n47;
+n47 [label="id: 47
+ Statements"];
+n47 -> n30;
+n30 [label="id: 30
+ Statements"];
+n30 -> n27;
 n27 [label="id: 27
  Statements"];
 n27 -> n26;
@@ -94,42 +118,68 @@ n26 [label="id: 26
  Statement"];
 n26 -> n25;
 n25 [label="id: 25
- Assignment
- ID: Æ"];
-n25 -> n24;
-n24 [label="id: 24
- ExpressionMinus"];
-n24 -> n21;
-n21 [label="id: 21
- ExpressionTerm"];
-n21 -> n20;
-n20 [label="id: 20
- TermFactor"];
-n20 -> n19;
-n19 [label="id: 19
- FactorID
- ID: Æ"];
-n24 -> n23;
-n23 [label="id: 23
- TermFactor"];
-n23 -> n22;
-n22 [label="id: 22
- FactorNUM
- NUM: 2"];
-n37 -> n36;
-n36 [label="id: 36
+ PrintStr
+ STR: Guess the number
+"];
+n30 -> n29;
+n29 [label="id: 29
  Statement"];
-n36 -> n35;
-n35 [label="id: 35
- Print"];
-n35 -> n34;
-n34 [label="id: 34
- ExpressionTerm"];
-n34 -> n33;
+n29 -> n28;
+n28 [label="id: 28
+ Scan
+ ID: Æ"];
+n47 -> n46;
+n46 [label="id: 46
+ Statement"];
+n46 -> n45;
+n45 [label="id: 45
+ IfElse"];
+n45 -> n36;
+n36 [label="id: 36
+ ExpressionEQ"];
+n36 -> n33;
 n33 [label="id: 33
- TermFactor"];
+ ExpressionTerm"];
 n33 -> n32;
 n32 [label="id: 32
+ TermFactor"];
+n32 -> n31;
+n31 [label="id: 31
  FactorID
  ID: Æ"];
+n36 -> n35;
+n35 [label="id: 35
+ TermFactor"];
+n35 -> n34;
+n34 [label="id: 34
+ FactorID
+ ID: ’↑º"];
+n45 -> n40;
+n40 [label="id: 40
+ Body"];
+n40 -> n39;
+n39 [label="id: 39
+ Statements"];
+n39 -> n38;
+n38 [label="id: 38
+ Statement"];
+n38 -> n37;
+n37 [label="id: 37
+ PrintStr
+ STR: CORRECT
+"];
+n45 -> n44;
+n44 [label="id: 44
+ Body"];
+n44 -> n43;
+n43 [label="id: 43
+ Statements"];
+n43 -> n42;
+n42 [label="id: 42
+ Statement"];
+n42 -> n41;
+n41 [label="id: 41
+ PrintStr
+ STR: FALSE 
+"];
 }
