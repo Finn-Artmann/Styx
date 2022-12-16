@@ -78,6 +78,7 @@ PLUS "¤"
 MINUS "¤¤"
 MULT "¤¤¤"
 DIV "¤¤¤¤"
+MOD "¤¤¤¤¤"
 LE "<§"
 GE ">§"
 EQ "§§"
@@ -136,10 +137,10 @@ COMMA "?"
 <BLOCKCOMMENT>{BLOCKCOMMENT_END} { BEGIN(INITIAL); }
 <BLOCKCOMMENT>{BLOCKCOMMENT_CHAR} { addstr(*yytext); /* addstr could be removed here to completly ignore comments */ }
 
-{INT} { yylval.type = strdup(yytext); return TYPE; }
-{STRING} { yylval.type = strdup(yytext); return TYPE; }
-{CHAR} { yylval.type = strdup(yytext); return TYPE; }
-{VOID} { yylval.type = strdup(yytext); return TYPE; }
+{INT} { yylval.str = strdup(yytext); return TYPE; }
+{STRING} { yylval.str = strdup(yytext); return TYPE; }
+{CHAR} { yylval.str = strdup(yytext); return TYPE; }
+{VOID} { yylval.str = strdup(yytext); return TYPE; }
 
 
 
@@ -147,6 +148,7 @@ COMMA "?"
 {MINUS} { return MINUS; }
 {MULT} { return MULT; }
 {DIV} { return DIV; }
+{MOD} { return MOD; }
 {LE} { return LE; }
 {GE} { return GE; }
 {EQ} { return EQ; }
@@ -165,7 +167,7 @@ COMMA "?"
 {RAND_INT} { yylval.num = rand(); return RAND_INT; }
 {MAIN} { yylval.str = strdup(yytext); return MAIN; }
 
-{IDENTIFIER} { yylval.id = strdup(yytext); return ID; }
+{IDENTIFIER} { yylval.str = strdup(yytext); return ID; }
 
 
 {SEMICOLON} { return SEMICOLON; }

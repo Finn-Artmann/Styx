@@ -66,25 +66,26 @@ extern int yydebug;
     MINUS = 267,                   /* MINUS  */
     MULT = 268,                    /* MULT  */
     DIV = 269,                     /* DIV  */
-    LE = 270,                      /* LE  */
-    GE = 271,                      /* GE  */
-    EQ = 272,                      /* EQ  */
-    NE = 273,                      /* NE  */
-    GT = 274,                      /* GT  */
-    LT = 275,                      /* LT  */
-    AND = 276,                     /* AND  */
-    OR = 277,                      /* OR  */
-    SEMICOLON = 278,               /* SEMICOLON  */
-    COMMA = 279,                   /* COMMA  */
-    ROUND_OPEN = 280,              /* ROUND_OPEN  */
-    ROUND_CLOSE = 281,             /* ROUND_CLOSE  */
-    CURLY_OPEN = 282,              /* CURLY_OPEN  */
-    CURLY_CLOSE = 283,             /* CURLY_CLOSE  */
-    STR = 284,                     /* STR  */
-    TYPE = 285,                    /* TYPE  */
-    ID = 286,                      /* ID  */
-    OP = 287,                      /* OP  */
-    NUM = 288                      /* NUM  */
+    MOD = 270,                     /* MOD  */
+    LE = 271,                      /* LE  */
+    GE = 272,                      /* GE  */
+    EQ = 273,                      /* EQ  */
+    NE = 274,                      /* NE  */
+    GT = 275,                      /* GT  */
+    LT = 276,                      /* LT  */
+    AND = 277,                     /* AND  */
+    OR = 278,                      /* OR  */
+    SEMICOLON = 279,               /* SEMICOLON  */
+    COMMA = 280,                   /* COMMA  */
+    ROUND_OPEN = 281,              /* ROUND_OPEN  */
+    ROUND_CLOSE = 282,             /* ROUND_CLOSE  */
+    CURLY_OPEN = 283,              /* CURLY_OPEN  */
+    CURLY_CLOSE = 284,             /* CURLY_CLOSE  */
+    STR = 285,                     /* STR  */
+    TYPE = 286,                    /* TYPE  */
+    ID = 287,                      /* ID  */
+    OP = 288,                      /* OP  */
+    NUM = 289                      /* NUM  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -93,15 +94,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 111 "parser.y"
+#line 311 "parser.y"
 
-	char* type;
-	char* id;
 	char* str;
 	int num;
 	struct astnode* ast;
 
-#line 105 "parser.tab.h"
+#line 104 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
