@@ -9,6 +9,8 @@
 	void yyerror(const char *msg){
 		fprintf(stderr, "%s\n", msg);
 	}
+	extern FILE *yyin;
+	extern int yylineno;
 
 	// Global variable storage
 	#define MAX_VARS 256
@@ -295,6 +297,21 @@
 		else if(strcmp(root->name, "PrintStr") == 0){
 			printf("%s", root->val.str);
 		}
+		else if(strcmp(root->name, "Scan")  == 0){
+			
+			// Read int from stdin using fgets
+			char buf[100];
+			printf("<< ");
+			char* s = fgets(buf, 100, stdin);
+			if(s == NULL){
+				printf("EOF\n");
+				exit(1);
+			}
+			setvar(root->val.str, atoi(buf));
+		}
+		else{
+			printf("Error: Unknown node %s\n", root->name);
+		}
 		
 		// Default return value
 		return 0;
@@ -485,8 +502,9 @@ factor: ID { $$ = new_astnode("FactorID"); $$->val.str = $1; $$->type = AST_ID_T
 %%
 
 // C Code
-int main(void){
+int main(int arc, char** argv){
 	
-	init_vars();                    
+	init_vars();
+	yyin = fopen(argv[1], "r");
 	return yyparse();
 }

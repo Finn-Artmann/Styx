@@ -1,58 +1,71 @@
 digraph ast {
-n46 [label="id: 46
+n40 [label="id: 40
  Program"];
-n46 -> n45;
-n45 [label="id: 45
+n40 -> n39;
+n39 [label="id: 39
  Main
  ID: ºÆı’"];
-n45 -> n44;
-n44 [label="id: 44
+n39 -> n38;
+n38 [label="id: 38
  Body"];
-n44 -> n43;
-n43 [label="id: 43
- Statements"];
-n43 -> n37;
+n38 -> n37;
 n37 [label="id: 37
  Statements"];
-n37 -> n8;
-n8 [label="id: 8
+n37 -> n31;
+n31 [label="id: 31
  Statements"];
-n8 -> n7;
-n7 [label="id: 7
- Statement"];
-n7 -> n6;
-n6 [label="id: 6
- Assignment
- ID: Æ"];
-n6 -> n5;
-n5 [label="id: 5
- ExpressionPlus"];
-n5 -> n2;
+n31 -> n2;
 n2 [label="id: 2
- ExpressionTerm"];
+ Statements"];
 n2 -> n1;
 n1 [label="id: 1
- TermFactor"];
+ Statement"];
 n1 -> n0;
 n0 [label="id: 0
- FactorNUM
- NUM: 4"];
+ Scan
+ ID: Æ"];
+n31 -> n30;
+n30 [label="id: 30
+ Statement"];
+n30 -> n29;
+n29 [label="id: 29
+ IfElse"];
+n29 -> n8;
+n8 [label="id: 8
+ ExpressionGE"];
+n8 -> n5;
+n5 [label="id: 5
+ ExpressionTerm"];
 n5 -> n4;
 n4 [label="id: 4
  TermFactor"];
 n4 -> n3;
 n3 [label="id: 3
+ FactorID
+ ID: Æ"];
+n8 -> n7;
+n7 [label="id: 7
+ TermFactor"];
+n7 -> n6;
+n6 [label="id: 6
  FactorNUM
- NUM: 6"];
-n37 -> n36;
-n36 [label="id: 36
+ NUM: 10"];
+n29 -> n18;
+n18 [label="id: 18
+ Body"];
+n18 -> n17;
+n17 [label="id: 17
+ Statements"];
+n17 -> n16;
+n16 [label="id: 16
  Statement"];
-n36 -> n35;
-n35 [label="id: 35
- IfElse"];
-n35 -> n14;
+n16 -> n15;
+n15 [label="id: 15
+ Assignment
+ ID: Æ"];
+n15 -> n14;
 n14 [label="id: 14
- ExpressionEQ"];
+ ExpressionPlus"];
 n14 -> n11;
 n11 [label="id: 11
  ExpressionTerm"];
@@ -69,87 +82,54 @@ n13 [label="id: 13
 n13 -> n12;
 n12 [label="id: 12
  FactorNUM
- NUM: 10"];
-n35 -> n24;
-n24 [label="id: 24
- Body"];
-n24 -> n23;
-n23 [label="id: 23
- Statements"];
-n23 -> n22;
-n22 [label="id: 22
- Statement"];
-n22 -> n21;
-n21 [label="id: 21
- Assignment
- ID: Æ"];
-n21 -> n20;
-n20 [label="id: 20
- ExpressionPlus"];
-n20 -> n17;
-n17 [label="id: 17
- ExpressionTerm"];
-n17 -> n16;
-n16 [label="id: 16
- TermFactor"];
-n16 -> n15;
-n15 [label="id: 15
- FactorID
- ID: Æ"];
-n20 -> n19;
-n19 [label="id: 19
- TermFactor"];
-n19 -> n18;
-n18 [label="id: 18
- FactorNUM
- NUM: 2"];
-n35 -> n34;
-n34 [label="id: 34
- Body"];
-n34 -> n33;
-n33 [label="id: 33
- Statements"];
-n33 -> n32;
-n32 [label="id: 32
- Statement"];
-n32 -> n31;
-n31 [label="id: 31
- Assignment
- ID: Æ"];
-n31 -> n30;
-n30 [label="id: 30
- ExpressionMinus"];
-n30 -> n27;
-n27 [label="id: 27
- ExpressionTerm"];
-n27 -> n26;
-n26 [label="id: 26
- TermFactor"];
-n26 -> n25;
-n25 [label="id: 25
- FactorID
- ID: Æ"];
-n30 -> n29;
-n29 [label="id: 29
- TermFactor"];
+ NUM: 1"];
 n29 -> n28;
 n28 [label="id: 28
+ Body"];
+n28 -> n27;
+n27 [label="id: 27
+ Statements"];
+n27 -> n26;
+n26 [label="id: 26
+ Statement"];
+n26 -> n25;
+n25 [label="id: 25
+ Assignment
+ ID: Æ"];
+n25 -> n24;
+n24 [label="id: 24
+ ExpressionMinus"];
+n24 -> n21;
+n21 [label="id: 21
+ ExpressionTerm"];
+n21 -> n20;
+n20 [label="id: 20
+ TermFactor"];
+n20 -> n19;
+n19 [label="id: 19
+ FactorID
+ ID: Æ"];
+n24 -> n23;
+n23 [label="id: 23
+ TermFactor"];
+n23 -> n22;
+n22 [label="id: 22
  FactorNUM
  NUM: 2"];
-n43 -> n42;
-n42 [label="id: 42
+n37 -> n36;
+n36 [label="id: 36
  Statement"];
-n42 -> n41;
-n41 [label="id: 41
+n36 -> n35;
+n35 [label="id: 35
  Print"];
-n41 -> n40;
-n40 [label="id: 40
+n35 -> n34;
+n34 [label="id: 34
  ExpressionTerm"];
-n40 -> n39;
-n39 [label="id: 39
+n34 -> n33;
+n33 [label="id: 33
  TermFactor"];
-n39 -> n38;
-n38 [label="id: 38
+n33 -> n32;
+n32 [label="id: 32
  FactorID
  ID: Æ"];
 }
