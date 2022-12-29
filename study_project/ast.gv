@@ -1,499 +1,545 @@
 digraph ast {
-n148 [label="id: 148
+n162 [label="id: 162
  Program"];
-n148 -> n105;
-n105 [label="id: 105
+n162 -> n1;
+n1 [label="id: 1
+ GlobalDeclarations"];
+n1 -> n0;
+n0 [label="id: 0
+ GlobalDeclaration
+ ID: Ŧ€ẞŦ"];
+n162 -> n113;
+n113 [label="id: 113
  Functions"];
-n105 -> n104;
-n104 [label="id: 104
+n113 -> n112;
+n112 [label="id: 112
  Function
  ID: ÞŁÆ›"];
-n104 -> n0;
-n0 [label="id: 0
+n112 -> n2;
+n2 [label="id: 2
  Parameters"];
-n104 -> n103;
-n103 [label="id: 103
+n112 -> n111;
+n111 [label="id: 111
  Body"];
-n103 -> n6;
+n111 -> n8;
+n8 [label="id: 8
+ Declarations"];
+n8 -> n6;
 n6 [label="id: 6
  Declarations"];
 n6 -> n4;
 n4 [label="id: 4
  Declarations"];
-n4 -> n2;
-n2 [label="id: 2
- Declarations"];
-n2 -> n1;
-n1 [label="id: 1
- Declaration
- ID: ’↑º"];
 n4 -> n3;
 n3 [label="id: 3
  Declaration
- ID: ı’Þ↑Ŧ"];
+ ID: ’↑º"];
 n6 -> n5;
 n5 [label="id: 5
  Declaration
+ ID: ı’Þ↑Ŧ"];
+n8 -> n7;
+n7 [label="id: 7
+ Declaration
  ID: ı"];
+n111 -> n110;
+n110 [label="id: 110
+ Statements"];
+n110 -> n29;
+n29 [label="id: 29
+ Statements"];
+n29 -> n26;
+n26 [label="id: 26
+ Statements"];
+n26 -> n20;
+n20 [label="id: 20
+ Statements"];
+n20 -> n14;
+n14 [label="id: 14
+ Statements"];
+n14 -> n13;
+n13 [label="id: 13
+ Statement"];
+n13 -> n12;
+n12 [label="id: 12
+ Assignment
+ ID: ı"];
+n12 -> n11;
+n11 [label="id: 11
+ ExpressionTerm"];
+n11 -> n10;
+n10 [label="id: 10
+ TermFactor"];
+n10 -> n9;
+n9 [label="id: 9
+ FactorNUM
+ NUM: 1"];
+n20 -> n19;
+n19 [label="id: 19
+ Statement"];
+n19 -> n18;
+n18 [label="id: 18
+ Assignment
+ ID: ’↑º"];
+n18 -> n17;
+n17 [label="id: 17
+ ExpressionTerm"];
+n17 -> n16;
+n16 [label="id: 16
+ TermFactor"];
+n16 -> n15;
+n15 [label="id: 15
+ FactorRAND
+ NUM: 1000"];
+n26 -> n25;
+n25 [label="id: 25
+ Statement"];
+n25 -> n24;
+n24 [label="id: 24
+ Print"];
+n24 -> n23;
+n23 [label="id: 23
+ ExpressionTerm"];
+n23 -> n22;
+n22 [label="id: 22
+ TermFactor"];
+n22 -> n21;
+n21 [label="id: 21
+ FactorID
+ ID: Ŧ€ẞŦ"];
+n29 -> n28;
+n28 [label="id: 28
+ Statement"];
+n28 -> n27;
+n27 [label="id: 27
+ PrintStr
+ STR: Guess the number between 0 and 1000
+"];
+n110 -> n109;
+n109 [label="id: 109
+ Statement"];
+n109 -> n108;
+n108 [label="id: 108
+ For"];
+n108 -> n35;
+n35 [label="id: 35
+ ExpressionGT"];
+n35 -> n32;
+n32 [label="id: 32
+ ExpressionTerm"];
+n32 -> n31;
+n31 [label="id: 31
+ TermFactor"];
+n31 -> n30;
+n30 [label="id: 30
+ FactorID
+ ID: ı"];
+n35 -> n34;
+n34 [label="id: 34
+ TermFactor"];
+n34 -> n33;
+n33 [label="id: 33
+ FactorNUM
+ NUM: 0"];
+n108 -> n42;
+n42 [label="id: 42
+ Assignment
+ ID: ı"];
+n42 -> n41;
+n41 [label="id: 41
+ ExpressionPlus"];
+n41 -> n38;
+n38 [label="id: 38
+ ExpressionTerm"];
+n38 -> n37;
+n37 [label="id: 37
+ TermFactor"];
+n37 -> n36;
+n36 [label="id: 36
+ FactorID
+ ID: ı"];
+n41 -> n40;
+n40 [label="id: 40
+ TermFactor"];
+n40 -> n39;
+n39 [label="id: 39
+ FactorNUM
+ NUM: 1"];
+n108 -> n107;
+n107 [label="id: 107
+ Body"];
+n107 -> n106;
+n106 [label="id: 106
+ Statements"];
+n106 -> n45;
+n45 [label="id: 45
+ Statements"];
+n45 -> n44;
+n44 [label="id: 44
+ Statement"];
+n44 -> n43;
+n43 [label="id: 43
+ Scan
+ ID: ı’Þ↑Ŧ"];
+n106 -> n105;
+n105 [label="id: 105
+ Statement"];
+n105 -> n104;
+n104 [label="id: 104
+ IfElse"];
+n104 -> n51;
+n51 [label="id: 51
+ ExpressionEQ"];
+n51 -> n48;
+n48 [label="id: 48
+ ExpressionTerm"];
+n48 -> n47;
+n47 [label="id: 47
+ TermFactor"];
+n47 -> n46;
+n46 [label="id: 46
+ FactorID
+ ID: ı’Þ↑Ŧ"];
+n51 -> n50;
+n50 [label="id: 50
+ TermFactor"];
+n50 -> n49;
+n49 [label="id: 49
+ FactorID
+ ID: ’↑º"];
+n104 -> n76;
+n76 [label="id: 76
+ Body"];
+n76 -> n75;
+n75 [label="id: 75
+ Statements"];
+n75 -> n66;
+n66 [label="id: 66
+ Statements"];
+n66 -> n63;
+n63 [label="id: 63
+ Statements"];
+n63 -> n57;
+n57 [label="id: 57
+ Statements"];
+n57 -> n54;
+n54 [label="id: 54
+ Statements"];
+n54 -> n53;
+n53 [label="id: 53
+ Statement"];
+n53 -> n52;
+n52 [label="id: 52
+ PrintStr
+ STR: CORRECT!
+"];
+n57 -> n56;
+n56 [label="id: 56
+ Statement"];
+n56 -> n55;
+n55 [label="id: 55
+ PrintStr
+ STR: Number of guesses needed: "];
+n63 -> n62;
+n62 [label="id: 62
+ Statement"];
+n62 -> n61;
+n61 [label="id: 61
+ Print"];
+n61 -> n60;
+n60 [label="id: 60
+ ExpressionTerm"];
+n60 -> n59;
+n59 [label="id: 59
+ TermFactor"];
+n59 -> n58;
+n58 [label="id: 58
+ FactorID
+ ID: ı"];
+n66 -> n65;
+n65 [label="id: 65
+ Statement"];
+n65 -> n64;
+n64 [label="id: 64
+ PrintStr
+ STR: 
+"];
+n75 -> n74;
+n74 [label="id: 74
+ Statement"];
+n74 -> n73;
+n73 [label="id: 73
+ Assignment
+ ID: ı"];
+n73 -> n72;
+n72 [label="id: 72
+ ExpressionMinus"];
+n72 -> n69;
+n69 [label="id: 69
+ ExpressionTerm"];
+n69 -> n68;
+n68 [label="id: 68
+ TermFactor"];
+n68 -> n67;
+n67 [label="id: 67
+ FactorNUM
+ NUM: 0"];
+n72 -> n71;
+n71 [label="id: 71
+ TermFactor"];
+n71 -> n70;
+n70 [label="id: 70
+ FactorNUM
+ NUM: 1"];
+n104 -> n103;
+n103 [label="id: 103
+ Body"];
 n103 -> n102;
 n102 [label="id: 102
  Statements"];
-n102 -> n21;
-n21 [label="id: 21
+n102 -> n89;
+n89 [label="id: 89
  Statements"];
-n21 -> n18;
-n18 [label="id: 18
- Statements"];
-n18 -> n12;
-n12 [label="id: 12
- Statements"];
-n12 -> n11;
-n11 [label="id: 11
+n89 -> n88;
+n88 [label="id: 88
  Statement"];
-n11 -> n10;
-n10 [label="id: 10
- Assignment
- ID: ı"];
-n10 -> n9;
-n9 [label="id: 9
+n88 -> n87;
+n87 [label="id: 87
+ If"];
+n87 -> n82;
+n82 [label="id: 82
+ ExpressionLT"];
+n82 -> n79;
+n79 [label="id: 79
  ExpressionTerm"];
-n9 -> n8;
-n8 [label="id: 8
+n79 -> n78;
+n78 [label="id: 78
  TermFactor"];
-n8 -> n7;
-n7 [label="id: 7
- FactorNUM
- NUM: 1"];
-n18 -> n17;
-n17 [label="id: 17
- Statement"];
-n17 -> n16;
-n16 [label="id: 16
- Assignment
+n78 -> n77;
+n77 [label="id: 77
+ FactorID
+ ID: ı’Þ↑Ŧ"];
+n82 -> n81;
+n81 [label="id: 81
+ TermFactor"];
+n81 -> n80;
+n80 [label="id: 80
+ FactorID
  ID: ’↑º"];
-n16 -> n15;
-n15 [label="id: 15
- ExpressionTerm"];
-n15 -> n14;
-n14 [label="id: 14
- TermFactor"];
-n14 -> n13;
-n13 [label="id: 13
- FactorRAND
- NUM: 1000"];
-n21 -> n20;
-n20 [label="id: 20
+n87 -> n86;
+n86 [label="id: 86
+ Body"];
+n86 -> n85;
+n85 [label="id: 85
+ Statements"];
+n85 -> n84;
+n84 [label="id: 84
  Statement"];
-n20 -> n19;
-n19 [label="id: 19
+n84 -> n83;
+n83 [label="id: 83
  PrintStr
- STR: Guess the number between 0 and 1000
+ STR: Your guess is lower than the actual number
 "];
 n102 -> n101;
 n101 [label="id: 101
  Statement"];
 n101 -> n100;
 n100 [label="id: 100
- For"];
-n100 -> n27;
-n27 [label="id: 27
+ If"];
+n100 -> n95;
+n95 [label="id: 95
  ExpressionGT"];
-n27 -> n24;
-n24 [label="id: 24
+n95 -> n92;
+n92 [label="id: 92
  ExpressionTerm"];
-n24 -> n23;
-n23 [label="id: 23
+n92 -> n91;
+n91 [label="id: 91
  TermFactor"];
-n23 -> n22;
-n22 [label="id: 22
+n91 -> n90;
+n90 [label="id: 90
  FactorID
- ID: ı"];
-n27 -> n26;
-n26 [label="id: 26
+ ID: ı’Þ↑Ŧ"];
+n95 -> n94;
+n94 [label="id: 94
  TermFactor"];
-n26 -> n25;
-n25 [label="id: 25
- FactorNUM
- NUM: 0"];
-n100 -> n34;
-n34 [label="id: 34
- Assignment
- ID: ı"];
-n34 -> n33;
-n33 [label="id: 33
- ExpressionPlus"];
-n33 -> n30;
-n30 [label="id: 30
- ExpressionTerm"];
-n30 -> n29;
-n29 [label="id: 29
- TermFactor"];
-n29 -> n28;
-n28 [label="id: 28
+n94 -> n93;
+n93 [label="id: 93
  FactorID
- ID: ı"];
-n33 -> n32;
-n32 [label="id: 32
- TermFactor"];
-n32 -> n31;
-n31 [label="id: 31
- FactorNUM
- NUM: 1"];
+ ID: ’↑º"];
 n100 -> n99;
 n99 [label="id: 99
  Body"];
 n99 -> n98;
 n98 [label="id: 98
  Statements"];
-n98 -> n37;
-n37 [label="id: 37
- Statements"];
-n37 -> n36;
-n36 [label="id: 36
- Statement"];
-n36 -> n35;
-n35 [label="id: 35
- Scan
- ID: ı’Þ↑Ŧ"];
 n98 -> n97;
 n97 [label="id: 97
  Statement"];
 n97 -> n96;
 n96 [label="id: 96
- IfElse"];
-n96 -> n43;
-n43 [label="id: 43
- ExpressionEQ"];
-n43 -> n40;
-n40 [label="id: 40
- ExpressionTerm"];
-n40 -> n39;
-n39 [label="id: 39
- TermFactor"];
-n39 -> n38;
-n38 [label="id: 38
- FactorID
- ID: ı’Þ↑Ŧ"];
-n43 -> n42;
-n42 [label="id: 42
- TermFactor"];
-n42 -> n41;
-n41 [label="id: 41
- FactorID
- ID: ’↑º"];
-n96 -> n68;
-n68 [label="id: 68
- Body"];
-n68 -> n67;
-n67 [label="id: 67
- Statements"];
-n67 -> n58;
-n58 [label="id: 58
- Statements"];
-n58 -> n55;
-n55 [label="id: 55
- Statements"];
-n55 -> n49;
-n49 [label="id: 49
- Statements"];
-n49 -> n46;
-n46 [label="id: 46
- Statements"];
-n46 -> n45;
-n45 [label="id: 45
- Statement"];
-n45 -> n44;
-n44 [label="id: 44
- PrintStr
- STR: CORRECT!
-"];
-n49 -> n48;
-n48 [label="id: 48
- Statement"];
-n48 -> n47;
-n47 [label="id: 47
- PrintStr
- STR: Number of guesses needed: "];
-n55 -> n54;
-n54 [label="id: 54
- Statement"];
-n54 -> n53;
-n53 [label="id: 53
- Print"];
-n53 -> n52;
-n52 [label="id: 52
- ExpressionTerm"];
-n52 -> n51;
-n51 [label="id: 51
- TermFactor"];
-n51 -> n50;
-n50 [label="id: 50
- FactorID
- ID: ı"];
-n58 -> n57;
-n57 [label="id: 57
- Statement"];
-n57 -> n56;
-n56 [label="id: 56
- PrintStr
- STR: 
-"];
-n67 -> n66;
-n66 [label="id: 66
- Statement"];
-n66 -> n65;
-n65 [label="id: 65
- Assignment
- ID: ı"];
-n65 -> n64;
-n64 [label="id: 64
- ExpressionMinus"];
-n64 -> n61;
-n61 [label="id: 61
- ExpressionTerm"];
-n61 -> n60;
-n60 [label="id: 60
- TermFactor"];
-n60 -> n59;
-n59 [label="id: 59
- FactorNUM
- NUM: 0"];
-n64 -> n63;
-n63 [label="id: 63
- TermFactor"];
-n63 -> n62;
-n62 [label="id: 62
- FactorNUM
- NUM: 1"];
-n96 -> n95;
-n95 [label="id: 95
- Body"];
-n95 -> n94;
-n94 [label="id: 94
- Statements"];
-n94 -> n81;
-n81 [label="id: 81
- Statements"];
-n81 -> n80;
-n80 [label="id: 80
- Statement"];
-n80 -> n79;
-n79 [label="id: 79
- If"];
-n79 -> n74;
-n74 [label="id: 74
- ExpressionLT"];
-n74 -> n71;
-n71 [label="id: 71
- ExpressionTerm"];
-n71 -> n70;
-n70 [label="id: 70
- TermFactor"];
-n70 -> n69;
-n69 [label="id: 69
- FactorID
- ID: ı’Þ↑Ŧ"];
-n74 -> n73;
-n73 [label="id: 73
- TermFactor"];
-n73 -> n72;
-n72 [label="id: 72
- FactorID
- ID: ’↑º"];
-n79 -> n78;
-n78 [label="id: 78
- Body"];
-n78 -> n77;
-n77 [label="id: 77
- Statements"];
-n77 -> n76;
-n76 [label="id: 76
- Statement"];
-n76 -> n75;
-n75 [label="id: 75
- PrintStr
- STR: Your guess is lower than the actual number
-"];
-n94 -> n93;
-n93 [label="id: 93
- Statement"];
-n93 -> n92;
-n92 [label="id: 92
- If"];
-n92 -> n87;
-n87 [label="id: 87
- ExpressionGT"];
-n87 -> n84;
-n84 [label="id: 84
- ExpressionTerm"];
-n84 -> n83;
-n83 [label="id: 83
- TermFactor"];
-n83 -> n82;
-n82 [label="id: 82
- FactorID
- ID: ı’Þ↑Ŧ"];
-n87 -> n86;
-n86 [label="id: 86
- TermFactor"];
-n86 -> n85;
-n85 [label="id: 85
- FactorID
- ID: ’↑º"];
-n92 -> n91;
-n91 [label="id: 91
- Body"];
-n91 -> n90;
-n90 [label="id: 90
- Statements"];
-n90 -> n89;
-n89 [label="id: 89
- Statement"];
-n89 -> n88;
-n88 [label="id: 88
  PrintStr
  STR: Your guess is higher than the actual number
 "];
-n148 -> n147;
-n147 [label="id: 147
+n162 -> n161;
+n161 [label="id: 161
  Main
  ID: ºÆı’"];
-n147 -> n146;
-n146 [label="id: 146
+n161 -> n160;
+n160 [label="id: 160
  Body"];
-n146 -> n107;
-n107 [label="id: 107
+n160 -> n115;
+n115 [label="id: 115
  Declarations"];
-n107 -> n106;
-n106 [label="id: 106
+n115 -> n114;
+n114 [label="id: 114
  Declaration
+ ID: ÞŁÆ›ÆŊÆı’"];
+n160 -> n159;
+n159 [label="id: 159
+ Statements"];
+n159 -> n136;
+n136 [label="id: 136
+ Statements"];
+n136 -> n133;
+n133 [label="id: 133
+ Statements"];
+n133 -> n130;
+n130 [label="id: 130
+ Statements"];
+n130 -> n127;
+n127 [label="id: 127
+ Statements"];
+n127 -> n121;
+n121 [label="id: 121
+ Statements"];
+n121 -> n120;
+n120 [label="id: 120
+ Statement"];
+n120 -> n119;
+n119 [label="id: 119
+ Assignment
+ ID: ÞŁÆ›ÆŊÆı’"];
+n119 -> n118;
+n118 [label="id: 118
+ ExpressionTerm"];
+n118 -> n117;
+n117 [label="id: 117
+ TermFactor"];
+n117 -> n116;
+n116 [label="id: 116
+ FactorNUM
+ NUM: 1"];
+n127 -> n126;
+n126 [label="id: 126
+ Statement"];
+n126 -> n125;
+n125 [label="id: 125
+ Assignment
+ ID: Ŧ€ẞŦ"];
+n125 -> n124;
+n124 [label="id: 124
+ ExpressionTerm"];
+n124 -> n123;
+n123 [label="id: 123
+ TermFactor"];
+n123 -> n122;
+n122 [label="id: 122
+ FactorNUM
+ NUM: 5"];
+n130 -> n129;
+n129 [label="id: 129
+ Statement"];
+n129 -> n128;
+n128 [label="id: 128
+ FunctionCall
+ ID: ÞŁÆ›"];
+n133 -> n132;
+n132 [label="id: 132
+ Statement"];
+n132 -> n131;
+n131 [label="id: 131
+ PrintStr
+ STR: Do you want to play again? 0 -> no, 1 -> yes
+"];
+n136 -> n135;
+n135 [label="id: 135
+ Statement"];
+n135 -> n134;
+n134 [label="id: 134
+ Scan
+ ID: ÞŁÆ›ÆŊÆı’"];
+n159 -> n158;
+n158 [label="id: 158
+ Statement"];
+n158 -> n157;
+n157 [label="id: 157
+ For"];
+n157 -> n142;
+n142 [label="id: 142
+ ExpressionNE"];
+n142 -> n139;
+n139 [label="id: 139
+ ExpressionTerm"];
+n139 -> n138;
+n138 [label="id: 138
+ TermFactor"];
+n138 -> n137;
+n137 [label="id: 137
+ FactorID
+ ID: ÞŁÆ›ÆŊÆı’"];
+n142 -> n141;
+n141 [label="id: 141
+ TermFactor"];
+n141 -> n140;
+n140 [label="id: 140
+ FactorNUM
+ NUM: 0"];
+n157 -> n146;
+n146 [label="id: 146
+ Assignment
  ID: ÞŁÆ›ÆŊÆı’"];
 n146 -> n145;
 n145 [label="id: 145
- Statements"];
-n145 -> n122;
-n122 [label="id: 122
- Statements"];
-n122 -> n119;
-n119 [label="id: 119
- Statements"];
-n119 -> n116;
-n116 [label="id: 116
- Statements"];
-n116 -> n113;
-n113 [label="id: 113
- Statements"];
-n113 -> n112;
-n112 [label="id: 112
- Statement"];
-n112 -> n111;
-n111 [label="id: 111
- Assignment
- ID: ÞŁÆ›ÆŊÆı’"];
-n111 -> n110;
-n110 [label="id: 110
  ExpressionTerm"];
-n110 -> n109;
-n109 [label="id: 109
- TermFactor"];
-n109 -> n108;
-n108 [label="id: 108
- FactorNUM
- NUM: 1"];
-n116 -> n115;
-n115 [label="id: 115
- Statement"];
-n115 -> n114;
-n114 [label="id: 114
- FunctionCall
- ID: ÞŁÆ›"];
-n119 -> n118;
-n118 [label="id: 118
- Statement"];
-n118 -> n117;
-n117 [label="id: 117
- PrintStr
- STR: Do you want to play again? 0 -> no, 1 -> yes
-"];
-n122 -> n121;
-n121 [label="id: 121
- Statement"];
-n121 -> n120;
-n120 [label="id: 120
- Scan
- ID: ÞŁÆ›ÆŊÆı’"];
 n145 -> n144;
 n144 [label="id: 144
- Statement"];
+ TermFactor"];
 n144 -> n143;
 n143 [label="id: 143
- For"];
-n143 -> n128;
-n128 [label="id: 128
- ExpressionNE"];
-n128 -> n125;
-n125 [label="id: 125
- ExpressionTerm"];
-n125 -> n124;
-n124 [label="id: 124
- TermFactor"];
-n124 -> n123;
-n123 [label="id: 123
  FactorID
  ID: ÞŁÆ›ÆŊÆı’"];
-n128 -> n127;
-n127 [label="id: 127
- TermFactor"];
-n127 -> n126;
-n126 [label="id: 126
- FactorNUM
- NUM: 0"];
-n143 -> n132;
-n132 [label="id: 132
- Assignment
- ID: ÞŁÆ›ÆŊÆı’"];
-n132 -> n131;
-n131 [label="id: 131
- ExpressionTerm"];
-n131 -> n130;
-n130 [label="id: 130
- TermFactor"];
-n130 -> n129;
-n129 [label="id: 129
- FactorID
- ID: ÞŁÆ›ÆŊÆı’"];
-n143 -> n142;
-n142 [label="id: 142
+n157 -> n156;
+n156 [label="id: 156
  Body"];
-n142 -> n141;
-n141 [label="id: 141
+n156 -> n155;
+n155 [label="id: 155
  Statements"];
-n141 -> n138;
-n138 [label="id: 138
+n155 -> n152;
+n152 [label="id: 152
  Statements"];
-n138 -> n135;
-n135 [label="id: 135
+n152 -> n149;
+n149 [label="id: 149
  Statements"];
-n135 -> n134;
-n134 [label="id: 134
+n149 -> n148;
+n148 [label="id: 148
  Statement"];
-n134 -> n133;
-n133 [label="id: 133
+n148 -> n147;
+n147 [label="id: 147
  FunctionCall
  ID: ÞŁÆ›"];
-n138 -> n137;
-n137 [label="id: 137
+n152 -> n151;
+n151 [label="id: 151
  Statement"];
-n137 -> n136;
-n136 [label="id: 136
+n151 -> n150;
+n150 [label="id: 150
  PrintStr
  STR: Do you want to play again? 0 -> no, 1 -> yes
 "];
-n141 -> n140;
-n140 [label="id: 140
+n155 -> n154;
+n154 [label="id: 154
  Statement"];
-n140 -> n139;
-n139 [label="id: 139
+n154 -> n153;
+n153 [label="id: 153
  Scan
  ID: ÞŁÆ›ÆŊÆı’"];
 }

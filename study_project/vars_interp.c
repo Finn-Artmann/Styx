@@ -93,7 +93,7 @@ int var_get (char *id) {
     return s->val;
   else {
     // Handle usage of undeclared variable
-    printf("ERROR: Unable to get variable. Variable has not been declared yet!\n");
+    printf("ERROR: Unable to get variable '%s'. Variable has not been declared yet!\n", id);
     exit(1);
     
     return 0;

@@ -314,7 +314,9 @@
 				exit(1);
 			}
 			else{
+				var_enter_func();
 				exec_ast(func->child[1]); // Execute function body
+				var_leave_func();
 			}
 		}
 		else if(strcmp(root->name, "Function") == 0){
@@ -397,7 +399,16 @@ start: program { print_ast($1, 0); printf("\n"); exec_ast($1);} //TODO: Execute 
 
 
 
-program: functions main {
+program: global_declarations functions main {
+       		printf(">>> [SŦYX parser]: Program syntax is valid\n");
+                 
+                $$ = new_astnode("Program");
+                $$->child[0] = $1;
+                $$->child[1] = $2;
+		$$->child[2] = $3;
+
+	} 
+        |functions main {
 		printf(">>> [SŦYX parser]: Program syntax is valid\n");
 		
 		$$ = new_astnode("Program");
@@ -449,16 +460,12 @@ main: TYPE MAIN ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
 body: statements { $$ = new_astnode("Body"); $$->child[0] = $1; }
     | declarations statements { $$ = new_astnode("Body"); $$->child[0] = $1; $$->child[1] = $2; }
     | declarations { $$ = new_astnode("Body"); $$->child[0] = $1; }
-    | global_declarations declarations statements { $$ = new_astnode("Body"); $$->child[0] = $1; $$->child[1] = $2; $$->child[2] = $3; }
-    | global_declarations declarations { $$ = new_astnode("Body"); $$->child[0] = $1; $$->child[1] = $2; }
-    | global_declarations statements { $$ = new_astnode("Body"); $$->child[0] = $1; $$->child[1] = $2; }
-    | global_declarations { $$ = new_astnode("Body"); $$->child[0] = $1; }
-
+    | { $$ = new_astnode("Body"); }
 
 global_declarations: global_declaration { $$ = new_astnode("GlobalDeclarations"); $$->child[0] = $1; }
 	 | global_declarations global_declaration { $$ = new_astnode("GlobalDeclarations"); $$->child[0] = $1; $$->child[1] = $2; }
 
-global_declaration: GLOBAL TYPE ID SEMICOLON { $$ = new_astnode("GlobalDeclaration"); $$->val.str = $2; $$->type = AST_ID_T; }
+global_declaration: GLOBAL TYPE ID SEMICOLON { $$ = new_astnode("GlobalDeclaration"); $$->val.str = $3; $$->type = AST_ID_T; }
 
 declarations: declaration { $$ = new_astnode("Declarations"); $$->child[0] = $1; }
 	    | declarations declaration { $$ = new_astnode("Declarations"); $$->child[0] = $1; $$->child[1] = $2; }
