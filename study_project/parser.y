@@ -236,15 +236,16 @@
 			strcmp(root->name, "TermDiv") == 0	||
 			strcmp(root->name, "TermMod") == 0	
 		){
+			        
 				int val1 = exec_ast(root->child[0]);
-				int val2 = exec_ast(root->child[2]);
-				if(strcmp(root->child[1]->name, "*") == 0){
+				int val2 = exec_ast(root->child[1]);
+				if(strcmp(root->val.str, "*") == 0){
 					return val1 * val2;
 				}
-				else if(strcmp(root->child[1]->name, "/") == 0){
+				else if(strcmp(root->val.str, "/") == 0){
 					return val1 / val2;
 				}
-				else if(strcmp(root->child[1]->name, "%") == 0){
+				else if(strcmp(root->val.str, "%") == 0){
 					return val1 % val2;
 				}
 		}
