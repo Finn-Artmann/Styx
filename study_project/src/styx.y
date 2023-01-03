@@ -152,6 +152,36 @@
 		funclist = new;
 	}
 
+	// Parameter queue for function calls
+	struct paramlist {
+		int val;
+		struct paramlist* next;
+	};
+
+	struct paramlist* paramlist = NULL;
+
+	// Add parameter to queue
+	void add_param(struct paramlist** list, int val){
+		struct paramlist* new = malloc(sizeof *new);
+		new->val = val;
+		new->next = *list;
+		*list = new;
+	}
+
+	// Get parameter from queue
+	int get_param(struct paramlist** list){
+		
+		if(*list == NULL){
+			printf("Error: No parameters left in queue\n");
+			exit(1);
+		}
+		struct paramlist* current = *list;
+		*list = current->next;
+		int val = current->val;
+		free(current);
+		return val;
+	}
+
 	// Find function in list
 	astnode_t* find_function(char* name){
 		struct funclist* current = funclist;
@@ -164,16 +194,19 @@
 		return NULL;
 	}
 
+	int return_val = 0;
+
 	// Execute AST 
 	int exec_ast(astnode_t* root){
-		//printf("Executing AST Node %d: %s\n", root->id, root->name);
+		//printf("Executing AST Node %d: %s\n", root->id, root->name); // For debugging
 		if(	strcmp(root->name, "Program") == 0 ||
 			strcmp(root->name, "Main") == 0 ||
 			strcmp(root->name, "Statements") == 0 ||
 			strcmp(root->name, "Statement") == 0 ||
 			strcmp(root->name, "Declarations") == 0 ||
 			strcmp(root->name, "GlobalDeclarations") == 0 ||
-			strcmp(root->name, "Functions") == 0
+			strcmp(root->name, "Functions") == 0 ||
+			strcmp(root->name, "Parameters") == 0
 
 		){
 			for(int i = 0; i < MAXCHILDREN; i++){
@@ -196,6 +229,9 @@
 			var_set(root->val.str, val);
 		}
 		else if(strcmp(root->name, "ExpressionTerm") == 0){
+			return exec_ast(root->child[0]);
+		}
+		else if(strcmp(root->name, "ExpressionFunctionCall") == 0){
 			return exec_ast(root->child[0]);
 		}
 		else if(strcmp(root->name, "ExpressionPlus") == 0){
@@ -258,6 +294,9 @@
 		else if(strcmp(root->name, "(Factor)") == 0){
 			return exec_ast(root->child[0]);
 		}
+		else if(strcmp(root->name, "FactorFunctionCall") == 0){
+			return exec_ast(root->child[0]);
+		}
 		else if(strcmp(root->name, "FactorRAND") == 0){
 			srand(time(NULL));
 			return rand() % (root->val.num);
@@ -316,14 +355,33 @@
 			}
 			else{
 				var_enter_func();
+				if(root->child[0] != NULL){
+					exec_ast(root->child[0]); // Add function arguments to paramlist
+				}
+				if(func->child[0] != NULL){
+					exec_ast(func->child[0]); // Create local variable from paramlist
+				}
 				exec_ast(func->child[1]); // Execute function body
+				return return_val;
 				var_leave_func();
 			}
 		}
+		else if(strcmp(root->name, "Parameter") == 0){
+			int param = get_param(&paramlist);
+			var_declare(root->val.str, param); //TODO: Add other types
+		}
 		else if(strcmp(root->name, "Function") == 0){
 			// Function definition
-			// TODO: Add function arguments
-			// Nothing more to do here since we already added the function to the list
+			add_function(root->val.str, root);
+		}
+		else if(strcmp(root->name, "ArgExpr") == 0){
+			int arg = exec_ast(root->child[0]); //TODO: Add other types
+			add_param(&paramlist, arg);
+		}
+		else if(strcmp(root->name, "ArgsExpr") == 0){
+			exec_ast(root->child[0]);
+			int arg = exec_ast(root->child[1]);
+			add_param(&paramlist, arg);
 		}
 		else{
 			printf("Error: Unknown node %s\n", root->name);
@@ -373,6 +431,7 @@
 %token LT
 %token AND
 %token OR
+%token ASSIGN
 
 // Special
 %token SEMICOLON
@@ -409,7 +468,7 @@ program: global_declarations functions main {
 		$$->child[2] = $3;
 
 	} 
-        |functions main {
+    |functions main {
 		printf(">>> [SŦYX parser]: Program syntax is valid\n");
 		
 		$$ = new_astnode("Program");
@@ -429,16 +488,22 @@ functions: function { $$ = new_astnode("Functions"); $$->child[0] = $1; }
 function: TYPE ID ROUND_OPEN parameters ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE 
 	{ 
 		$$ = new_astnode("Function");
-		$$->child[0] = $4; 
-		$$->child[1] = $7; 
-		$$->val.str = $2; 
-		$$->type= AST_ID_T;
-		add_function($2, $$);
+		$$->child[0] = $4;
+		$$->child[1] = $7;
+		$$->val.str = $2;
+		$$->type = AST_ID_T;
+
+		// $$ = new_astnode("Function");
+		// $$->child[0] = $4; 
+		// $$->child[1] = $7; 
+		// $$->val.str = $2; 
+		// $$->type= AST_ID_T;
+		// add_function($2, $$);
 	}
 
 parameters: parameter { $$ = new_astnode("Parameters"); $$->child[0] = $1; }
 	 | parameters COMMA parameter { $$ = new_astnode("Parameters"); $$->child[0] = $1; $$->child[1] = $3; }
-	 | { $$ = new_astnode("Parameters"); }
+	 | %empty { $$ = NULL; }
 
 parameter: TYPE ID { $$ = new_astnode("Parameter"); $$->val.str = $2; $$->type = AST_ID_T; }
 
@@ -461,7 +526,7 @@ main: TYPE MAIN ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
 body: statements { $$ = new_astnode("Body"); $$->child[0] = $1; }
     | declarations statements { $$ = new_astnode("Body"); $$->child[0] = $1; $$->child[1] = $2; }
     | declarations { $$ = new_astnode("Body"); $$->child[0] = $1; }
-    | { $$ = new_astnode("Body"); }
+    | %empty { $$ = NULL; }
 
 global_declarations: global_declaration { $$ = new_astnode("GlobalDeclarations"); $$->child[0] = $1; }
 	 | global_declarations global_declaration { $$ = new_astnode("GlobalDeclarations"); $$->child[0] = $1; $$->child[1] = $2; }
@@ -483,11 +548,11 @@ statement: assignment { $$ = new_astnode("Statement"); $$->child[0] = $1; }
 	 | print_statement { $$ = new_astnode("Statement"); $$->child[0] = $1; }
 	 | scan_statement { $$ = new_astnode("Statement"); $$->child[0] = $1; }
 	 | rand_int_statement { $$ = new_astnode("Statement"); $$->child[0] = $1; }
-	 | function_call { $$ = new_astnode("Statement"); $$->child[0] = $1; }
 	 | CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode("Statement"); $$->child[0] = $2; }
+	 | expression SEMICOLON { $$ = new_astnode("Statement"); $$->child[0] = $1; }
 
 
-assignment: ID EQ expression SEMICOLON { $$ = new_astnode("Assignment"); $$->val.str = $1; $$->type = AST_ID_T; $$->child[0] = $3; }
+assignment: ID ASSIGN expression SEMICOLON { $$ = new_astnode("Assignment"); $$->val.str = $1; $$->type = AST_ID_T; $$->child[0] = $3; }
 
 if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode("If"); $$->child[0] = $3; $$->child[1] = $6; }
 	    | IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode("IfElse"); $$->child[0] = $3; $$->child[1] = $6; $$->child[2] = $10; }
@@ -504,11 +569,11 @@ scan_statement: SCAN ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode("Sca
 
 rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode("RandInt"); $$->val.str = $3; $$->type = AST_ID_T; }
 
-function_call: ID ROUND_OPEN ROUND_CLOSE SEMICOLON { $$ = new_astnode("FunctionCall"); $$->val.str = $1; $$->type = AST_ID_T; }
-	     | ID ROUND_OPEN arguments ROUND_CLOSE SEMICOLON { $$ = new_astnode("FunctionCall"); $$->val.str = $1; $$->type = AST_ID_T; $$->child[0] = $3; }
+function_call: ID ROUND_OPEN arguments ROUND_CLOSE { $$ = new_astnode("FunctionCall"); $$->val.str = $1; $$->type = AST_ID_T; $$->child[0] = $3; }
 
-arguments: expression { $$ = new_astnode("Arguments"); $$->child[0] = $1; }
-	 | arguments COMMA expression { $$ = new_astnode("Arguments"); $$->child[0] = $1; $$->child[1] = $3; }
+arguments: expression { $$ = new_astnode("ArgExpr"); $$->child[0] = $1; }
+	 | arguments COMMA expression { $$ = new_astnode("ArgsExpr"); $$->child[0] = $1; $$->child[1] = $3; }
+	 | %empty { $$ = NULL; }
 
 expression: term { $$ = new_astnode("ExpressionTerm"); $$->child[0] = $1; }
 	| expression PLUS term { $$ = new_astnode("ExpressionPlus"); $$->child[0] = $1; $$->child[1] = $3; }
@@ -529,7 +594,8 @@ term: factor { $$ = new_astnode("TermFactor"); $$->child[0] = $1; }
 	| term MOD factor { $$ = new_astnode("TermMod"); $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "%"; $$->type = AST_STR_T; }
 
 factor: ID { $$ = new_astnode("FactorID"); $$->val.str = $1; $$->type = AST_ID_T; }
-      	| NUM { $$ = new_astnode("FactorNUM"); $$->val.num = $1; $$->type = AST_NUM_T; }
+    | NUM { $$ = new_astnode("FactorNUM"); $$->val.num = $1; $$->type = AST_NUM_T; }
+	| function_call { $$ = new_astnode("FactorFunctionCall"); $$->child[0] = $1; }
 	| ROUND_OPEN expression ROUND_CLOSE { $$ = new_astnode("(Factor)"); $$->child[0] = $2; $$->val.str = "(expr)"; $$->type = AST_STR_T; }
 	| RAND_INT ROUND_OPEN NUM ROUND_CLOSE { $$ = new_astnode("FactorRAND"); $$->val.num = $3; $$->type = AST_NUM_T; }
 
@@ -540,6 +606,7 @@ factor: ID { $$ = new_astnode("FactorID"); $$->val.str = $1; $$->type = AST_ID_T
 // C Code
 int main(int arc, char** argv){
 	yy_flex_debug = 0;
+	yydebug = 0;
 	yyin = fopen(argv[1], "r");
 	return yyparse();
 }

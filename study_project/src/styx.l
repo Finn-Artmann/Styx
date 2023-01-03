@@ -87,6 +87,7 @@ GT ">"
 LT "<"
 AND "&&"
 OR "||"
+ASSIGN "§"
 
 /* Keywords */
 IF "ıª"
@@ -158,6 +159,7 @@ COMMA "?"
 {LT} { return LT; }
 {AND} { return AND; }
 {OR} { return OR; }
+{ASSIGN} { return ASSIGN; }
 
 {IF} { return IF; }
 {ELSE} { return ELSE; }

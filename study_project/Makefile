@@ -6,7 +6,7 @@ bin/styx: build/styx.tab.o build/lex.yy.o build/vars_interp.o
 	$(CC) -o $@ build/styx.tab.o build/lex.yy.o build/vars_interp.o $(LDFLAGS)
 
 build/styx.tab.c build/styx.tab.h: src/styx.y
-	bison --defines src/styx.y -o build/styx.tab.c
+	bison -t --defines src/styx.y -o build/styx.tab.c -Wcounterexamples 
 
 build/styx.tab.o: build/styx.tab.c build/styx.tab.h
 	$(CC) $(CFLAGS) -c -o build/styx.tab.o build/styx.tab.c

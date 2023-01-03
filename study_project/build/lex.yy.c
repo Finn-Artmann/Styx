@@ -453,8 +453,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 /* %% [3.0] code to copy yytext_ptr to yytext[] goes here, if %array \ */\
 	(yy_c_buf_p) = yy_cp;
 /* %% [4.0] data tables for the DFA and the user's section 1 definitions go here */
-#define YY_NUM_RULES 54
-#define YY_END_OF_BUFFER 55
+#define YY_NUM_RULES 55
+#define YY_END_OF_BUFFER 56
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -465,34 +465,34 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[267] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,   55,   53,   52,   52,   45,   48,   49,    7,
-        7,   46,   33,   32,   47,   45,   53,   50,   53,   51,
-       53,   53,   53,   53,   53,   53,   53,   53,    4,   54,
-        4,    4,    4,    9,    9,   12,   12,   54,   15,   14,
-       15,   18,   18,   18,   18,   52,   34,   45,    0,    0,
+        0,    0,   56,   54,   53,   53,   46,   49,   50,    7,
+        7,   47,   33,   32,   48,   46,   54,   51,   54,   52,
+       54,   54,   54,   54,   54,   54,   54,   54,    4,   55,
+        4,    4,    4,    9,    9,   12,   12,   55,   15,   14,
+       15,   18,   18,   18,   18,   53,   34,   46,    0,    0,
         0,    0,    0,    0,    0,    0,    7,    0,    0,    0,
-        8,    0,    0,   35,    0,   23,    0,   45,   45,   45,
-       45,   45,   45,   45,   45,    0,    0,    0,    0,    0,
+        8,    0,    0,   35,    0,   23,   36,   46,   46,   46,
+       46,   46,   46,   46,   46,    0,    0,    0,    0,    0,
         6,    6,    2,    0,    0,    0,    5,    0,    9,    0,
 
        12,   12,   12,    0,   14,   18,    0,    0,    0,    0,
        28,   29,   10,   13,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,   45,   45,   45,
+        0,    0,    0,    0,    0,    0,    0,   46,   46,   46,
         1,    6,    6,    6,    0,    3,   12,   12,   12,   12,
-       12,   11,    0,   16,   31,   24,   30,   45,   45,   45,
-        0,   45,   45,   36,    0,   45,    0,    0,    0,    0,
+       12,   11,    0,   16,   31,   24,   30,   46,   46,   46,
+        0,   46,   46,   37,    0,   46,    0,    0,    0,    0,
         6,    2,   12,   12,   12,   17,    0,    0,    0,    0,
-       45,    0,    0,   45,    0,   45,   45,   45,   45,   12,
-       12,   12,   25,   45,   38,    0,    0,   45,   45,    0,
-       45,    0,    0,    0,    0,   12,   12,    0,    0,   45,
+       46,    0,    0,   46,    0,   46,   46,   46,   46,   12,
+       12,   12,   25,   46,   39,    0,    0,   46,   46,    0,
+       46,    0,    0,    0,    0,   12,   12,    0,    0,   46,
 
-       45,    0,    0,   19,    0,   45,   45,   45,    0,   12,
+       46,    0,    0,   19,    0,   46,   46,   46,    0,   12,
        12,   26,   21,    0,    0,    0,    0,    0,    0,    0,
-        0,   45,   12,   12,    0,   45,    0,   44,   45,   45,
-        0,   45,   22,    0,   12,   12,   27,    0,   45,    0,
-        0,   41,    0,    0,   12,   45,    0,   40,   45,    0,
-       37,    0,   45,    0,   45,    0,    0,   43,    0,   45,
-        0,   20,    0,   39,   42,    0
+        0,   46,   12,   12,    0,   46,    0,   45,   46,   46,
+        0,   46,   22,    0,   12,   12,   27,    0,   46,    0,
+        0,   42,    0,    0,   12,   46,    0,   41,   46,    0,
+       38,    0,   46,    0,   46,    0,    0,   44,    0,   46,
+        0,   20,    0,   40,   43,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -980,11 +980,11 @@ static const flex_int16_t yy_chk[1658] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[55] =
+static const flex_int32_t yy_rule_can_match_eol[56] =
     {   0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -992,14 +992,14 @@ static char *yy_last_accepting_cpos;
 extern int yy_flex_debug;
 int yy_flex_debug = 1;
 
-static const flex_int16_t yy_rule_linenum[54] =
+static const flex_int16_t yy_rule_linenum[55] =
     {   0,
-      115,  116,  117,  118,  119,  120,  123,  125,  126,  128,
-      129,  130,  133,  134,  135,  137,  138,  139,  141,  142,
-      143,  144,  148,  149,  150,  151,  152,  153,  154,  155,
-      156,  157,  158,  159,  160,  162,  163,  164,  165,  166,
-      167,  168,  169,  170,  172,  175,  176,  177,  178,  179,
-      180,  182,  184
+      116,  117,  118,  119,  120,  121,  124,  126,  127,  129,
+      130,  131,  134,  135,  136,  138,  139,  140,  142,  143,
+      144,  145,  149,  150,  151,  152,  153,  154,  155,  156,
+      157,  158,  159,  160,  161,  162,  164,  165,  166,  167,
+      168,  169,  170,  171,  172,  174,  177,  178,  179,  180,
+      181,  182,  184,  186
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -1323,7 +1323,7 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 112 "src/styx.l"
+#line 113 "src/styx.l"
 
 
 
@@ -1395,13 +1395,13 @@ do_action:	/* This label is used only to access EOF actions. */
 			{
 			if ( yy_act == 0 )
 				fprintf( stderr, "--scanner backing up\n" );
-			else if ( yy_act < 54 )
+			else if ( yy_act < 55 )
 				fprintf( stderr, "--accepting rule at line %ld (\"%s\")\n",
 				         (long)yy_rule_linenum[yy_act], yytext );
-			else if ( yy_act == 54 )
+			else if ( yy_act == 55 )
 				fprintf( stderr, "--accepting default rule (\"%s\")\n",
 				         yytext );
-			else if ( yy_act == 55 )
+			else if ( yy_act == 56 )
 				fprintf( stderr, "--(end of buffer or a NUL)\n" );
 			else
 				fprintf( stderr, "--EOF (start condition %d)\n", YY_START );
@@ -1419,278 +1419,283 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 115 "src/styx.l"
+#line 116 "src/styx.l"
 { BEGIN(STRING); *str_buf = '\0'; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 116 "src/styx.l"
+#line 117 "src/styx.l"
 {for (int i = UTF8_ESCCHAR_LEN; i < yyleng; i++){ addstr(yytext[i]);} } 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 117 "src/styx.l"
+#line 118 "src/styx.l"
 { BEGIN(INITIAL); yylval.str = strdup(str_buf); return STR; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 118 "src/styx.l"
+#line 119 "src/styx.l"
 { addstr(*yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 119 "src/styx.l"
+#line 120 "src/styx.l"
 { addstr('\n'); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 120 "src/styx.l"
+#line 121 "src/styx.l"
 { addstr(atoi(yytext + UTF8_ESCCHAR_LEN)); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 123 "src/styx.l"
+#line 124 "src/styx.l"
 { yylval.num = atoi(yytext); return NUM; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 125 "src/styx.l"
+#line 126 "src/styx.l"
 { BEGIN(HEX); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 126 "src/styx.l"
+#line 127 "src/styx.l"
 { BEGIN(INITIAL); yylval.num = strtol(yytext, NULL, 16); return NUM; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 128 "src/styx.l"
+#line 129 "src/styx.l"
 { BEGIN(BABYLONIAN); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 129 "src/styx.l"
+#line 130 "src/styx.l"
 {BEGIN(INITIAL); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 130 "src/styx.l"
+#line 131 "src/styx.l"
 { yylval.num = babylonian_to_decimal(yytext); return NUM; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 133 "src/styx.l"
+#line 134 "src/styx.l"
 { BEGIN(LINECOMMENT);  *str_buf = '\0';}
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 134 "src/styx.l"
+#line 135 "src/styx.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 135 "src/styx.l"
+#line 136 "src/styx.l"
 { addstr(*yytext); /* addstr could be removed here to completely ignore comments */ }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 137 "src/styx.l"
+#line 138 "src/styx.l"
 { BEGIN(BLOCKCOMMENT); *str_buf = '\0'; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 138 "src/styx.l"
+#line 139 "src/styx.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 139 "src/styx.l"
+#line 140 "src/styx.l"
 { addstr(*yytext); /* addstr could be removed here to completly ignore comments */ }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 141 "src/styx.l"
+#line 142 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 142 "src/styx.l"
+#line 143 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 143 "src/styx.l"
+#line 144 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 144 "src/styx.l"
+#line 145 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 148 "src/styx.l"
+#line 149 "src/styx.l"
 { return PLUS; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 149 "src/styx.l"
+#line 150 "src/styx.l"
 { return MINUS; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 150 "src/styx.l"
+#line 151 "src/styx.l"
 { return MULT; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 151 "src/styx.l"
+#line 152 "src/styx.l"
 { return DIV; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 152 "src/styx.l"
+#line 153 "src/styx.l"
 { return MOD; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 153 "src/styx.l"
+#line 154 "src/styx.l"
 { return LE; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 154 "src/styx.l"
+#line 155 "src/styx.l"
 { return GE; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 155 "src/styx.l"
+#line 156 "src/styx.l"
 { return EQ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 156 "src/styx.l"
+#line 157 "src/styx.l"
 { return NE; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 157 "src/styx.l"
+#line 158 "src/styx.l"
 { return GT; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 158 "src/styx.l"
+#line 159 "src/styx.l"
 { return LT; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 159 "src/styx.l"
+#line 160 "src/styx.l"
 { return AND; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 160 "src/styx.l"
+#line 161 "src/styx.l"
 { return OR; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 162 "src/styx.l"
-{ return IF; }
+{ return ASSIGN; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 163 "src/styx.l"
-{ return ELSE; }
+#line 164 "src/styx.l"
+{ return IF; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 164 "src/styx.l"
-{ return FOR; }
+#line 165 "src/styx.l"
+{ return ELSE; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 165 "src/styx.l"
-{ return RETURN; }
+#line 166 "src/styx.l"
+{ return FOR; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 166 "src/styx.l"
-{ return PRINT; }
+#line 167 "src/styx.l"
+{ return RETURN; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 167 "src/styx.l"
-{ return SCAN; }
+#line 168 "src/styx.l"
+{ return PRINT; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 168 "src/styx.l"
-{ yylval.num = rand(); return RAND_INT; }
+#line 169 "src/styx.l"
+{ return SCAN; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 169 "src/styx.l"
-{ return GLOBAL; }
+#line 170 "src/styx.l"
+{ yylval.num = rand(); return RAND_INT; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 170 "src/styx.l"
-{ yylval.str = strdup(yytext); return MAIN; }
+#line 171 "src/styx.l"
+{ return GLOBAL; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 172 "src/styx.l"
-{ yylval.str = strdup(yytext); return ID; }
+{ yylval.str = strdup(yytext); return MAIN; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 175 "src/styx.l"
-{ return SEMICOLON; }
+#line 174 "src/styx.l"
+{ yylval.str = strdup(yytext); return ID; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 176 "src/styx.l"
-{ return COMMA; }
+#line 177 "src/styx.l"
+{ return SEMICOLON; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 177 "src/styx.l"
-{ return ROUND_OPEN; }
+#line 178 "src/styx.l"
+{ return COMMA; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 178 "src/styx.l"
-{ return ROUND_CLOSE; }
+#line 179 "src/styx.l"
+{ return ROUND_OPEN; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 179 "src/styx.l"
-{ return CURLY_OPEN; }
+#line 180 "src/styx.l"
+{ return ROUND_CLOSE; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 180 "src/styx.l"
-{ return CURLY_CLOSE; }
+#line 181 "src/styx.l"
+{ return CURLY_OPEN; }
 	YY_BREAK
 case 52:
-/* rule 52 can match eol */
 YY_RULE_SETUP
 #line 182 "src/styx.l"
-{ } // Ignore delimiter
+{ return CURLY_CLOSE; }
 	YY_BREAK
 case 53:
+/* rule 53 can match eol */
 YY_RULE_SETUP
 #line 184 "src/styx.l"
-{ return *yytext; } // Return any other character
+{ } // Ignore delimiter
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 187 "src/styx.l"
+#line 186 "src/styx.l"
+{ return *yytext; } // Return any other character
+	YY_BREAK
+case 55:
+YY_RULE_SETUP
+#line 189 "src/styx.l"
 ECHO;
 	YY_BREAK
-#line 1694 "build/lex.yy.c"
+#line 1699 "build/lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(HEX):
@@ -2808,7 +2813,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 187 "src/styx.l"
+#line 189 "src/styx.l"
 
 
 //function to convert babylonian string to decimal number; 1 = Y, 10 = <; base is 60 seperated by space

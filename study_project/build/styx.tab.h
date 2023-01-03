@@ -39,7 +39,7 @@
 # define YY_YY_BUILD_STYX_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -76,17 +76,18 @@ extern int yydebug;
     LT = 277,                      /* LT  */
     AND = 278,                     /* AND  */
     OR = 279,                      /* OR  */
-    SEMICOLON = 280,               /* SEMICOLON  */
-    COMMA = 281,                   /* COMMA  */
-    ROUND_OPEN = 282,              /* ROUND_OPEN  */
-    ROUND_CLOSE = 283,             /* ROUND_CLOSE  */
-    CURLY_OPEN = 284,              /* CURLY_OPEN  */
-    CURLY_CLOSE = 285,             /* CURLY_CLOSE  */
-    STR = 286,                     /* STR  */
-    TYPE = 287,                    /* TYPE  */
-    ID = 288,                      /* ID  */
-    OP = 289,                      /* OP  */
-    NUM = 290                      /* NUM  */
+    ASSIGN = 280,                  /* ASSIGN  */
+    SEMICOLON = 281,               /* SEMICOLON  */
+    COMMA = 282,                   /* COMMA  */
+    ROUND_OPEN = 283,              /* ROUND_OPEN  */
+    ROUND_CLOSE = 284,             /* ROUND_CLOSE  */
+    CURLY_OPEN = 285,              /* CURLY_OPEN  */
+    CURLY_CLOSE = 286,             /* CURLY_CLOSE  */
+    STR = 287,                     /* STR  */
+    TYPE = 288,                    /* TYPE  */
+    ID = 289,                      /* ID  */
+    OP = 290,                      /* OP  */
+    NUM = 291                      /* NUM  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -95,13 +96,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 344 "src/styx.y"
+#line 399 "src/styx.y"
 
 	char* str;
 	int num;
 	struct astnode* ast;
 
-#line 105 "build/styx.tab.h"
+#line 106 "build/styx.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
