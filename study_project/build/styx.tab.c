@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "parser.y"
+#line 1 "src/styx.y"
 
 	// Header Code
 
@@ -403,7 +403,7 @@
 		return 0;
 	}	
 
-#line 407 "parser.tab.c"
+#line 407 "build/styx.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -426,7 +426,7 @@
 #  endif
 # endif
 
-#include "parser.tab.h"
+#include "styx.tab.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -2065,13 +2065,13 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* start: program  */
-#line 399 "parser.y"
+#line 399 "src/styx.y"
                { print_ast((yyvsp[0].ast), 0); printf("\n"); exec_ast((yyvsp[0].ast));}
-#line 2071 "parser.tab.c"
+#line 2071 "build/styx.tab.c"
     break;
 
   case 3: /* program: global_declarations functions main  */
-#line 403 "parser.y"
+#line 403 "src/styx.y"
                                             {
        		printf(">>> [SŦYX parser]: Program syntax is valid\n");
                  
@@ -2081,11 +2081,11 @@ yyreduce:
 		(yyval.ast)->child[2] = (yyvsp[0].ast);
 
 	}
-#line 2085 "parser.tab.c"
+#line 2085 "build/styx.tab.c"
     break;
 
   case 4: /* program: functions main  */
-#line 412 "parser.y"
+#line 412 "src/styx.y"
                         {
 		printf(">>> [SŦYX parser]: Program syntax is valid\n");
 		
@@ -2093,34 +2093,34 @@ yyreduce:
 		(yyval.ast)->child[0] = (yyvsp[-1].ast);
 		(yyval.ast)->child[1] = (yyvsp[0].ast);
 	}
-#line 2097 "parser.tab.c"
+#line 2097 "build/styx.tab.c"
     break;
 
   case 5: /* program: main  */
-#line 419 "parser.y"
+#line 419 "src/styx.y"
                {
 		printf(">>> [SŦYX parser] Program syntax is valid\n");
 		
 		(yyval.ast) = new_astnode("Program");
 		(yyval.ast)->child[0] = (yyvsp[0].ast);
 	}
-#line 2108 "parser.tab.c"
+#line 2108 "build/styx.tab.c"
     break;
 
   case 6: /* functions: function  */
-#line 426 "parser.y"
+#line 426 "src/styx.y"
                     { (yyval.ast) = new_astnode("Functions"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2114 "parser.tab.c"
+#line 2114 "build/styx.tab.c"
     break;
 
   case 7: /* functions: functions function  */
-#line 427 "parser.y"
+#line 427 "src/styx.y"
                               { (yyval.ast) = new_astnode("Functions"); (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2120 "parser.tab.c"
+#line 2120 "build/styx.tab.c"
     break;
 
   case 8: /* function: TYPE ID ROUND_OPEN parameters ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 430 "parser.y"
+#line 430 "src/styx.y"
         { 
 		(yyval.ast) = new_astnode("Function");
 		(yyval.ast)->child[0] = (yyvsp[-4].ast); 
@@ -2129,35 +2129,35 @@ yyreduce:
 		(yyval.ast)->type= AST_ID_T;
 		add_function((yyvsp[-6].str), (yyval.ast));
 	}
-#line 2133 "parser.tab.c"
+#line 2133 "build/styx.tab.c"
     break;
 
   case 9: /* parameters: parameter  */
-#line 439 "parser.y"
+#line 439 "src/styx.y"
                       { (yyval.ast) = new_astnode("Parameters"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2139 "parser.tab.c"
+#line 2139 "build/styx.tab.c"
     break;
 
   case 10: /* parameters: parameters COMMA parameter  */
-#line 440 "parser.y"
+#line 440 "src/styx.y"
                                       { (yyval.ast) = new_astnode("Parameters"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2145 "parser.tab.c"
+#line 2145 "build/styx.tab.c"
     break;
 
   case 11: /* parameters: %empty  */
-#line 441 "parser.y"
+#line 441 "src/styx.y"
            { (yyval.ast) = new_astnode("Parameters"); }
-#line 2151 "parser.tab.c"
+#line 2151 "build/styx.tab.c"
     break;
 
   case 12: /* parameter: TYPE ID  */
-#line 443 "parser.y"
+#line 443 "src/styx.y"
                    { (yyval.ast) = new_astnode("Parameter"); (yyval.ast)->val.str = (yyvsp[0].str); (yyval.ast)->type = AST_ID_T; }
-#line 2157 "parser.tab.c"
+#line 2157 "build/styx.tab.c"
     break;
 
   case 13: /* main: TYPE MAIN ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 447 "parser.y"
+#line 447 "src/styx.y"
     {	
 	if(strcmp((yyvsp[-6].str), "ı’Ŧ") != 0){
 		printf("Error: Main function must return ı’Ŧ and must have identifier ºÆı’\n");
@@ -2171,329 +2171,329 @@ yyreduce:
 	(yyval.ast)->type = AST_ID_T;
 	(yyval.ast)->child[0] = (yyvsp[-1].ast);
     }
-#line 2175 "parser.tab.c"
+#line 2175 "build/styx.tab.c"
     break;
 
   case 14: /* body: statements  */
-#line 461 "parser.y"
+#line 461 "src/styx.y"
                  { (yyval.ast) = new_astnode("Body"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2181 "parser.tab.c"
+#line 2181 "build/styx.tab.c"
     break;
 
   case 15: /* body: declarations statements  */
-#line 462 "parser.y"
+#line 462 "src/styx.y"
                               { (yyval.ast) = new_astnode("Body"); (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2187 "parser.tab.c"
+#line 2187 "build/styx.tab.c"
     break;
 
   case 16: /* body: declarations  */
-#line 463 "parser.y"
+#line 463 "src/styx.y"
                    { (yyval.ast) = new_astnode("Body"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2193 "parser.tab.c"
+#line 2193 "build/styx.tab.c"
     break;
 
   case 17: /* body: %empty  */
-#line 464 "parser.y"
+#line 464 "src/styx.y"
       { (yyval.ast) = new_astnode("Body"); }
-#line 2199 "parser.tab.c"
+#line 2199 "build/styx.tab.c"
     break;
 
   case 18: /* global_declarations: global_declaration  */
-#line 466 "parser.y"
+#line 466 "src/styx.y"
                                         { (yyval.ast) = new_astnode("GlobalDeclarations"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2205 "parser.tab.c"
+#line 2205 "build/styx.tab.c"
     break;
 
   case 19: /* global_declarations: global_declarations global_declaration  */
-#line 467 "parser.y"
+#line 467 "src/styx.y"
                                                   { (yyval.ast) = new_astnode("GlobalDeclarations"); (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2211 "parser.tab.c"
+#line 2211 "build/styx.tab.c"
     break;
 
   case 20: /* global_declaration: GLOBAL TYPE ID SEMICOLON  */
-#line 469 "parser.y"
+#line 469 "src/styx.y"
                                              { (yyval.ast) = new_astnode("GlobalDeclaration"); (yyval.ast)->val.str = (yyvsp[-1].str); (yyval.ast)->type = AST_ID_T; }
-#line 2217 "parser.tab.c"
+#line 2217 "build/styx.tab.c"
     break;
 
   case 21: /* declarations: declaration  */
-#line 471 "parser.y"
+#line 471 "src/styx.y"
                           { (yyval.ast) = new_astnode("Declarations"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2223 "parser.tab.c"
+#line 2223 "build/styx.tab.c"
     break;
 
   case 22: /* declarations: declarations declaration  */
-#line 472 "parser.y"
+#line 472 "src/styx.y"
                                        { (yyval.ast) = new_astnode("Declarations"); (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2229 "parser.tab.c"
+#line 2229 "build/styx.tab.c"
     break;
 
   case 23: /* declaration: TYPE ID SEMICOLON  */
-#line 474 "parser.y"
+#line 474 "src/styx.y"
                                { (yyval.ast) = new_astnode("Declaration"); (yyval.ast)->val.str = (yyvsp[-1].str); (yyval.ast)->type = AST_ID_T; }
-#line 2235 "parser.tab.c"
+#line 2235 "build/styx.tab.c"
     break;
 
   case 24: /* statements: statement  */
-#line 476 "parser.y"
+#line 476 "src/styx.y"
                       { (yyval.ast) = new_astnode("Statements"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2241 "parser.tab.c"
+#line 2241 "build/styx.tab.c"
     break;
 
   case 25: /* statements: statements statement  */
-#line 477 "parser.y"
+#line 477 "src/styx.y"
                                  { (yyval.ast) = new_astnode("Statements"); (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2247 "parser.tab.c"
+#line 2247 "build/styx.tab.c"
     break;
 
   case 26: /* statement: assignment  */
-#line 479 "parser.y"
+#line 479 "src/styx.y"
                       { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2253 "parser.tab.c"
+#line 2253 "build/styx.tab.c"
     break;
 
   case 27: /* statement: if_statement  */
-#line 480 "parser.y"
+#line 480 "src/styx.y"
                         { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2259 "parser.tab.c"
+#line 2259 "build/styx.tab.c"
     break;
 
   case 28: /* statement: for_statement  */
-#line 481 "parser.y"
+#line 481 "src/styx.y"
                          { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2265 "parser.tab.c"
+#line 2265 "build/styx.tab.c"
     break;
 
   case 29: /* statement: return_statement  */
-#line 482 "parser.y"
+#line 482 "src/styx.y"
                             { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2271 "parser.tab.c"
+#line 2271 "build/styx.tab.c"
     break;
 
   case 30: /* statement: print_statement  */
-#line 483 "parser.y"
+#line 483 "src/styx.y"
                            { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2277 "parser.tab.c"
+#line 2277 "build/styx.tab.c"
     break;
 
   case 31: /* statement: scan_statement  */
-#line 484 "parser.y"
+#line 484 "src/styx.y"
                           { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2283 "parser.tab.c"
+#line 2283 "build/styx.tab.c"
     break;
 
   case 32: /* statement: rand_int_statement  */
-#line 485 "parser.y"
+#line 485 "src/styx.y"
                               { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2289 "parser.tab.c"
+#line 2289 "build/styx.tab.c"
     break;
 
   case 33: /* statement: function_call  */
-#line 486 "parser.y"
+#line 486 "src/styx.y"
                          { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2295 "parser.tab.c"
+#line 2295 "build/styx.tab.c"
     break;
 
   case 34: /* statement: CURLY_OPEN body CURLY_CLOSE  */
-#line 487 "parser.y"
+#line 487 "src/styx.y"
                                        { (yyval.ast) = new_astnode("Statement"); (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 2301 "parser.tab.c"
+#line 2301 "build/styx.tab.c"
     break;
 
   case 35: /* assignment: ID EQ expression SEMICOLON  */
-#line 490 "parser.y"
+#line 490 "src/styx.y"
                                        { (yyval.ast) = new_astnode("Assignment"); (yyval.ast)->val.str = (yyvsp[-3].str); (yyval.ast)->type = AST_ID_T; (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 2307 "parser.tab.c"
+#line 2307 "build/styx.tab.c"
     break;
 
   case 36: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 492 "parser.y"
+#line 492 "src/styx.y"
                                                                                { (yyval.ast) = new_astnode("If"); (yyval.ast)->child[0] = (yyvsp[-4].ast); (yyval.ast)->child[1] = (yyvsp[-1].ast); }
-#line 2313 "parser.tab.c"
+#line 2313 "build/styx.tab.c"
     break;
 
   case 37: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE  */
-#line 493 "parser.y"
+#line 493 "src/styx.y"
                                                                                                                 { (yyval.ast) = new_astnode("IfElse"); (yyval.ast)->child[0] = (yyvsp[-8].ast); (yyval.ast)->child[1] = (yyvsp[-5].ast); (yyval.ast)->child[2] = (yyvsp[-1].ast); }
-#line 2319 "parser.tab.c"
+#line 2319 "build/styx.tab.c"
     break;
 
   case 38: /* for_statement: FOR ROUND_OPEN expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 496 "parser.y"
+#line 496 "src/styx.y"
                                                                                                       { (yyval.ast) = new_astnode("For"); (yyval.ast)->child[0] = (yyvsp[-6].ast); (yyval.ast)->child[1] = (yyvsp[-4].ast); (yyval.ast)->child[2] = (yyvsp[-1].ast); }
-#line 2325 "parser.tab.c"
+#line 2325 "build/styx.tab.c"
     break;
 
   case 39: /* return_statement: RETURN expression SEMICOLON  */
-#line 498 "parser.y"
+#line 498 "src/styx.y"
                                               { (yyval.ast) = new_astnode("Return"); (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 2331 "parser.tab.c"
+#line 2331 "build/styx.tab.c"
     break;
 
   case 40: /* print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON  */
-#line 500 "parser.y"
+#line 500 "src/styx.y"
                                                                    { (yyval.ast) = new_astnode("Print"); (yyval.ast)->child[0] = (yyvsp[-2].ast); }
-#line 2337 "parser.tab.c"
+#line 2337 "build/styx.tab.c"
     break;
 
   case 41: /* print_statement: PRINT ROUND_OPEN STR ROUND_CLOSE SEMICOLON  */
-#line 501 "parser.y"
+#line 501 "src/styx.y"
                                                              { (yyval.ast) = new_astnode("PrintStr"); (yyval.ast)->val.str = (yyvsp[-2].str); (yyval.ast)->type = AST_STR_T; }
-#line 2343 "parser.tab.c"
+#line 2343 "build/styx.tab.c"
     break;
 
   case 42: /* scan_statement: SCAN ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
-#line 503 "parser.y"
+#line 503 "src/styx.y"
                                                          { (yyval.ast) = new_astnode("Scan"); (yyval.ast)->val.str = (yyvsp[-2].str); (yyval.ast)->type = AST_ID_T; }
-#line 2349 "parser.tab.c"
+#line 2349 "build/styx.tab.c"
     break;
 
   case 43: /* rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
-#line 505 "parser.y"
+#line 505 "src/styx.y"
                                                                  { (yyval.ast) = new_astnode("RandInt"); (yyval.ast)->val.str = (yyvsp[-2].str); (yyval.ast)->type = AST_ID_T; }
-#line 2355 "parser.tab.c"
+#line 2355 "build/styx.tab.c"
     break;
 
   case 44: /* function_call: ID ROUND_OPEN ROUND_CLOSE SEMICOLON  */
-#line 507 "parser.y"
+#line 507 "src/styx.y"
                                                    { (yyval.ast) = new_astnode("FunctionCall"); (yyval.ast)->val.str = (yyvsp[-3].str); (yyval.ast)->type = AST_ID_T; }
-#line 2361 "parser.tab.c"
+#line 2361 "build/styx.tab.c"
     break;
 
   case 45: /* function_call: ID ROUND_OPEN arguments ROUND_CLOSE SEMICOLON  */
-#line 508 "parser.y"
+#line 508 "src/styx.y"
                                                              { (yyval.ast) = new_astnode("FunctionCall"); (yyval.ast)->val.str = (yyvsp[-4].str); (yyval.ast)->type = AST_ID_T; (yyval.ast)->child[0] = (yyvsp[-2].ast); }
-#line 2367 "parser.tab.c"
+#line 2367 "build/styx.tab.c"
     break;
 
   case 46: /* arguments: expression  */
-#line 510 "parser.y"
+#line 510 "src/styx.y"
                       { (yyval.ast) = new_astnode("Arguments"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2373 "parser.tab.c"
+#line 2373 "build/styx.tab.c"
     break;
 
   case 47: /* arguments: arguments COMMA expression  */
-#line 511 "parser.y"
+#line 511 "src/styx.y"
                                       { (yyval.ast) = new_astnode("Arguments"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2379 "parser.tab.c"
+#line 2379 "build/styx.tab.c"
     break;
 
   case 48: /* expression: term  */
-#line 513 "parser.y"
+#line 513 "src/styx.y"
                  { (yyval.ast) = new_astnode("ExpressionTerm"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2385 "parser.tab.c"
+#line 2385 "build/styx.tab.c"
     break;
 
   case 49: /* expression: expression PLUS term  */
-#line 514 "parser.y"
+#line 514 "src/styx.y"
                                { (yyval.ast) = new_astnode("ExpressionPlus"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2391 "parser.tab.c"
+#line 2391 "build/styx.tab.c"
     break;
 
   case 50: /* expression: expression MINUS term  */
-#line 515 "parser.y"
+#line 515 "src/styx.y"
                                 { (yyval.ast) = new_astnode("ExpressionMinus"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2397 "parser.tab.c"
+#line 2397 "build/styx.tab.c"
     break;
 
   case 51: /* expression: expression LE term  */
-#line 516 "parser.y"
+#line 516 "src/styx.y"
                              { (yyval.ast) = new_astnode("ExpressionLE"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2403 "parser.tab.c"
+#line 2403 "build/styx.tab.c"
     break;
 
   case 52: /* expression: expression GE term  */
-#line 517 "parser.y"
+#line 517 "src/styx.y"
                              { (yyval.ast) = new_astnode("ExpressionGE"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2409 "parser.tab.c"
+#line 2409 "build/styx.tab.c"
     break;
 
   case 53: /* expression: expression EQ term  */
-#line 518 "parser.y"
+#line 518 "src/styx.y"
                              { (yyval.ast) = new_astnode("ExpressionEQ"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2415 "parser.tab.c"
+#line 2415 "build/styx.tab.c"
     break;
 
   case 54: /* expression: expression NE term  */
-#line 519 "parser.y"
+#line 519 "src/styx.y"
                              { (yyval.ast) = new_astnode("ExpressionNE"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2421 "parser.tab.c"
+#line 2421 "build/styx.tab.c"
     break;
 
   case 55: /* expression: expression GT term  */
-#line 520 "parser.y"
+#line 520 "src/styx.y"
                              { (yyval.ast) = new_astnode("ExpressionGT"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2427 "parser.tab.c"
+#line 2427 "build/styx.tab.c"
     break;
 
   case 56: /* expression: expression LT term  */
-#line 521 "parser.y"
+#line 521 "src/styx.y"
                              { (yyval.ast) = new_astnode("ExpressionLT"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2433 "parser.tab.c"
+#line 2433 "build/styx.tab.c"
     break;
 
   case 57: /* expression: expression AND term  */
-#line 522 "parser.y"
+#line 522 "src/styx.y"
                               { (yyval.ast) = new_astnode("ExpressionAND"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2439 "parser.tab.c"
+#line 2439 "build/styx.tab.c"
     break;
 
   case 58: /* expression: expression OR term  */
-#line 523 "parser.y"
+#line 523 "src/styx.y"
                              { (yyval.ast) = new_astnode("ExpressionOR"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2445 "parser.tab.c"
+#line 2445 "build/styx.tab.c"
     break;
 
   case 59: /* term: factor  */
-#line 526 "parser.y"
+#line 526 "src/styx.y"
              { (yyval.ast) = new_astnode("TermFactor"); (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2451 "parser.tab.c"
+#line 2451 "build/styx.tab.c"
     break;
 
   case 60: /* term: term MULT factor  */
-#line 527 "parser.y"
+#line 527 "src/styx.y"
                            { (yyval.ast) = new_astnode("TermMult"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); (yyval.ast)->val.str = "*"; (yyval.ast)->type = AST_STR_T; }
-#line 2457 "parser.tab.c"
+#line 2457 "build/styx.tab.c"
     break;
 
   case 61: /* term: term DIV factor  */
-#line 528 "parser.y"
+#line 528 "src/styx.y"
                           { (yyval.ast) = new_astnode("TermDiv"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); (yyval.ast)->val.str = "/"; (yyval.ast)->type = AST_STR_T; }
-#line 2463 "parser.tab.c"
+#line 2463 "build/styx.tab.c"
     break;
 
   case 62: /* term: term MOD factor  */
-#line 529 "parser.y"
+#line 529 "src/styx.y"
                           { (yyval.ast) = new_astnode("TermMod"); (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); (yyval.ast)->val.str = "%"; (yyval.ast)->type = AST_STR_T; }
-#line 2469 "parser.tab.c"
+#line 2469 "build/styx.tab.c"
     break;
 
   case 63: /* factor: ID  */
-#line 531 "parser.y"
+#line 531 "src/styx.y"
            { (yyval.ast) = new_astnode("FactorID"); (yyval.ast)->val.str = (yyvsp[0].str); (yyval.ast)->type = AST_ID_T; }
-#line 2475 "parser.tab.c"
+#line 2475 "build/styx.tab.c"
     break;
 
   case 64: /* factor: NUM  */
-#line 532 "parser.y"
+#line 532 "src/styx.y"
               { (yyval.ast) = new_astnode("FactorNUM"); (yyval.ast)->val.num = (yyvsp[0].num); (yyval.ast)->type = AST_NUM_T; }
-#line 2481 "parser.tab.c"
+#line 2481 "build/styx.tab.c"
     break;
 
   case 65: /* factor: ROUND_OPEN expression ROUND_CLOSE  */
-#line 533 "parser.y"
+#line 533 "src/styx.y"
                                             { (yyval.ast) = new_astnode("(Factor)"); (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->val.str = "(expr)"; (yyval.ast)->type = AST_STR_T; }
-#line 2487 "parser.tab.c"
+#line 2487 "build/styx.tab.c"
     break;
 
   case 66: /* factor: RAND_INT ROUND_OPEN NUM ROUND_CLOSE  */
-#line 534 "parser.y"
+#line 534 "src/styx.y"
                                               { (yyval.ast) = new_astnode("FactorRAND"); (yyval.ast)->val.num = (yyvsp[-1].num); (yyval.ast)->type = AST_NUM_T; }
-#line 2493 "parser.tab.c"
+#line 2493 "build/styx.tab.c"
     break;
 
 
-#line 2497 "parser.tab.c"
+#line 2497 "build/styx.tab.c"
 
         default: break;
       }
@@ -2728,7 +2728,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 538 "parser.y"
+#line 538 "src/styx.y"
 
 
 // C Code

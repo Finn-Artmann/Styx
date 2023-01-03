@@ -1,5 +1,6 @@
+#line 2 "build/lex.yy.c"
 
-#line 3 "lex.yy.c"
+#line 4 "build/lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -1009,14 +1010,14 @@ static const flex_int16_t yy_rule_linenum[54] =
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "lexer.l"
-#line 2 "lexer.l"
+#line 1 "src/styx.l"
+#line 2 "src/styx.l"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
-#include "parser.tab.h"
+#include "styx.tab.h"
 
 #define UTF8_ESCCHAR_LEN 1 
 
@@ -1032,14 +1033,14 @@ void init_str_buf();
 #define YY_USER_INIT init_str_buf();
 
 
-#line 1036 "lex.yy.c"
+#line 1037 "build/lex.yy.c"
 #define YY_NO_INPUT 1
 /* Datatypes */
 /* Operators */
 /* Keywords */
 /* Special */
 
-#line 1043 "lex.yy.c"
+#line 1044 "build/lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -1322,11 +1323,11 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 112 "lexer.l"
+#line 112 "src/styx.l"
 
 
 
-#line 1330 "lex.yy.c"
+#line 1331 "build/lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1418,278 +1419,278 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 115 "lexer.l"
+#line 115 "src/styx.l"
 { BEGIN(STRING); *str_buf = '\0'; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 116 "lexer.l"
+#line 116 "src/styx.l"
 {for (int i = UTF8_ESCCHAR_LEN; i < yyleng; i++){ addstr(yytext[i]);} } 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 117 "lexer.l"
+#line 117 "src/styx.l"
 { BEGIN(INITIAL); yylval.str = strdup(str_buf); return STR; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 118 "lexer.l"
+#line 118 "src/styx.l"
 { addstr(*yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 119 "lexer.l"
+#line 119 "src/styx.l"
 { addstr('\n'); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 120 "lexer.l"
+#line 120 "src/styx.l"
 { addstr(atoi(yytext + UTF8_ESCCHAR_LEN)); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 123 "lexer.l"
+#line 123 "src/styx.l"
 { yylval.num = atoi(yytext); return NUM; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 125 "lexer.l"
+#line 125 "src/styx.l"
 { BEGIN(HEX); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 126 "lexer.l"
+#line 126 "src/styx.l"
 { BEGIN(INITIAL); yylval.num = strtol(yytext, NULL, 16); return NUM; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 128 "lexer.l"
+#line 128 "src/styx.l"
 { BEGIN(BABYLONIAN); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 129 "lexer.l"
+#line 129 "src/styx.l"
 {BEGIN(INITIAL); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 130 "lexer.l"
+#line 130 "src/styx.l"
 { yylval.num = babylonian_to_decimal(yytext); return NUM; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 133 "lexer.l"
+#line 133 "src/styx.l"
 { BEGIN(LINECOMMENT);  *str_buf = '\0';}
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 134 "lexer.l"
+#line 134 "src/styx.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 135 "lexer.l"
+#line 135 "src/styx.l"
 { addstr(*yytext); /* addstr could be removed here to completely ignore comments */ }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 137 "lexer.l"
+#line 137 "src/styx.l"
 { BEGIN(BLOCKCOMMENT); *str_buf = '\0'; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 138 "lexer.l"
+#line 138 "src/styx.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 139 "lexer.l"
+#line 139 "src/styx.l"
 { addstr(*yytext); /* addstr could be removed here to completly ignore comments */ }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 141 "lexer.l"
+#line 141 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 142 "lexer.l"
+#line 142 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 143 "lexer.l"
+#line 143 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 144 "lexer.l"
+#line 144 "src/styx.l"
 { yylval.str = strdup(yytext); return TYPE; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 148 "lexer.l"
+#line 148 "src/styx.l"
 { return PLUS; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 149 "lexer.l"
+#line 149 "src/styx.l"
 { return MINUS; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 150 "lexer.l"
+#line 150 "src/styx.l"
 { return MULT; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 151 "lexer.l"
+#line 151 "src/styx.l"
 { return DIV; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 152 "lexer.l"
+#line 152 "src/styx.l"
 { return MOD; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 153 "lexer.l"
+#line 153 "src/styx.l"
 { return LE; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 154 "lexer.l"
+#line 154 "src/styx.l"
 { return GE; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 155 "lexer.l"
+#line 155 "src/styx.l"
 { return EQ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 156 "lexer.l"
+#line 156 "src/styx.l"
 { return NE; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 157 "lexer.l"
+#line 157 "src/styx.l"
 { return GT; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 158 "lexer.l"
+#line 158 "src/styx.l"
 { return LT; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 159 "lexer.l"
+#line 159 "src/styx.l"
 { return AND; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 160 "lexer.l"
+#line 160 "src/styx.l"
 { return OR; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 162 "lexer.l"
+#line 162 "src/styx.l"
 { return IF; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 163 "lexer.l"
+#line 163 "src/styx.l"
 { return ELSE; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 164 "lexer.l"
+#line 164 "src/styx.l"
 { return FOR; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 165 "lexer.l"
+#line 165 "src/styx.l"
 { return RETURN; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 166 "lexer.l"
+#line 166 "src/styx.l"
 { return PRINT; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 167 "lexer.l"
+#line 167 "src/styx.l"
 { return SCAN; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 168 "lexer.l"
+#line 168 "src/styx.l"
 { yylval.num = rand(); return RAND_INT; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 169 "lexer.l"
+#line 169 "src/styx.l"
 { return GLOBAL; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 170 "lexer.l"
+#line 170 "src/styx.l"
 { yylval.str = strdup(yytext); return MAIN; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 172 "lexer.l"
+#line 172 "src/styx.l"
 { yylval.str = strdup(yytext); return ID; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 175 "lexer.l"
+#line 175 "src/styx.l"
 { return SEMICOLON; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 176 "lexer.l"
+#line 176 "src/styx.l"
 { return COMMA; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 177 "lexer.l"
+#line 177 "src/styx.l"
 { return ROUND_OPEN; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 178 "lexer.l"
+#line 178 "src/styx.l"
 { return ROUND_CLOSE; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 179 "lexer.l"
+#line 179 "src/styx.l"
 { return CURLY_OPEN; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 180 "lexer.l"
+#line 180 "src/styx.l"
 { return CURLY_CLOSE; }
 	YY_BREAK
 case 52:
 /* rule 52 can match eol */
 YY_RULE_SETUP
-#line 182 "lexer.l"
+#line 182 "src/styx.l"
 { } // Ignore delimiter
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 184 "lexer.l"
+#line 184 "src/styx.l"
 { return *yytext; } // Return any other character
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 187 "lexer.l"
+#line 187 "src/styx.l"
 ECHO;
 	YY_BREAK
-#line 1693 "lex.yy.c"
+#line 1694 "build/lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(HEX):
@@ -2807,7 +2808,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 187 "lexer.l"
+#line 187 "src/styx.l"
 
 
 //function to convert babylonian string to decimal number; 1 = Y, 10 = <; base is 60 seperated by space

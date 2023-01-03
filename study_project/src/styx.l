@@ -4,7 +4,7 @@
 #include <math.h>
 #include <string.h>
 
-#include "parser.tab.h"
+#include "styx.tab.h"
 
 #define UTF8_ESCCHAR_LEN 1 
 
