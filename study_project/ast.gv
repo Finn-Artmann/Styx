@@ -1,24 +1,27 @@
 digraph ast {
-n25 [label="id: 25
+n107 [label="id: 107
  Program"];
-n25 -> n7;
-n7 [label="id: 7
+n107 -> n85;
+n85 [label="id: 85
  Functions"];
-n7 -> n6;
-n6 [label="id: 6
+n85 -> n84;
+n84 [label="id: 84
  Function
  ID: ªı‘"];
-n6 -> n1;
+n84 -> n1;
 n1 [label="id: 1
  Parameters"];
 n1 -> n0;
 n0 [label="id: 0
  Parameter
  ID: ’"];
-n6 -> n5;
-n5 [label="id: 5
+n84 -> n83;
+n83 [label="id: 83
  Body"];
-n5 -> n4;
+n83 -> n82;
+n82 [label="id: 82
+ Statements"];
+n82 -> n4;
 n4 [label="id: 4
  Statements"];
 n4 -> n3;
@@ -29,61 +32,326 @@ n2 [label="id: 2
  PrintStr
  STR: FIB
 "];
-n25 -> n24;
-n24 [label="id: 24
- Main
- ID: ºÆı’"];
-n24 -> n23;
-n23 [label="id: 23
- Body"];
-n23 -> n9;
+n82 -> n81;
+n81 [label="id: 81
+ Statement"];
+n81 -> n80;
+n80 [label="id: 80
+ IfElse"];
+n80 -> n10;
+n10 [label="id: 10
+ ExpressionLT"];
+n10 -> n7;
+n7 [label="id: 7
+ ExpressionTerm"];
+n7 -> n6;
+n6 [label="id: 6
+ TermFactor"];
+n6 -> n5;
+n5 [label="id: 5
+ FactorID
+ ID: ’"];
+n10 -> n9;
 n9 [label="id: 9
- Declarations"];
+ TermFactor"];
 n9 -> n8;
 n8 [label="id: 8
- Declaration
- ID: Ŋ"];
-n23 -> n22;
-n22 [label="id: 22
- Statements"];
-n22 -> n12;
-n12 [label="id: 12
- Statements"];
-n12 -> n11;
-n11 [label="id: 11
- Statement"];
-n11 -> n10;
-n10 [label="id: 10
- PrintStr
- STR: hello
-"];
-n22 -> n21;
-n21 [label="id: 21
- Statement"];
-n21 -> n20;
-n20 [label="id: 20
- ExpressionTerm"];
-n20 -> n19;
-n19 [label="id: 19
- TermFactor"];
-n19 -> n18;
-n18 [label="id: 18
- FactorFunctionCall"];
-n18 -> n17;
+ FactorNUM
+ NUM: 2"];
+n80 -> n17;
 n17 [label="id: 17
- FunctionCall
- ID: ªı‘"];
+ Body"];
 n17 -> n16;
 n16 [label="id: 16
- ArgExpr"];
+ Statements"];
 n16 -> n15;
 n15 [label="id: 15
- ExpressionTerm"];
+ Statement"];
 n15 -> n14;
 n14 [label="id: 14
- TermFactor"];
+ Return"];
 n14 -> n13;
 n13 [label="id: 13
+ ExpressionTerm"];
+n13 -> n12;
+n12 [label="id: 12
+ TermFactor"];
+n12 -> n11;
+n11 [label="id: 11
+ FactorID
+ ID: ’"];
+n80 -> n79;
+n79 [label="id: 79
+ Body"];
+n79 -> n23;
+n23 [label="id: 23
+ Declarations"];
+n23 -> n21;
+n21 [label="id: 21
+ Declarations"];
+n21 -> n19;
+n19 [label="id: 19
+ Declarations"];
+n19 -> n18;
+n18 [label="id: 18
+ Declaration
+ ID: Æ"];
+n21 -> n20;
+n20 [label="id: 20
+ Declaration
+ ID: ‘"];
+n23 -> n22;
+n22 [label="id: 22
+ Declaration
+ ID: ©"];
+n79 -> n78;
+n78 [label="id: 78
+ Statements"];
+n78 -> n72;
+n72 [label="id: 72
+ Statements"];
+n72 -> n63;
+n63 [label="id: 63
+ Statements"];
+n63 -> n49;
+n49 [label="id: 49
+ Statements"];
+n49 -> n35;
+n35 [label="id: 35
+ Statements"];
+n35 -> n32;
+n32 [label="id: 32
+ Statements"];
+n32 -> n26;
+n26 [label="id: 26
+ Statements"];
+n26 -> n25;
+n25 [label="id: 25
+ Statement"];
+n25 -> n24;
+n24 [label="id: 24
+ PrintStr
+ STR: n: "];
+n32 -> n31;
+n31 [label="id: 31
+ Statement"];
+n31 -> n30;
+n30 [label="id: 30
+ Print"];
+n30 -> n29;
+n29 [label="id: 29
+ ExpressionTerm"];
+n29 -> n28;
+n28 [label="id: 28
+ TermFactor"];
+n28 -> n27;
+n27 [label="id: 27
+ FactorID
+ ID: ’"];
+n35 -> n34;
+n34 [label="id: 34
+ Statement"];
+n34 -> n33;
+n33 [label="id: 33
+ PrintStr
+ STR: 
+"];
+n49 -> n48;
+n48 [label="id: 48
+ Statement"];
+n48 -> n47;
+n47 [label="id: 47
+ Assignment
+ ID: Æ"];
+n47 -> n46;
+n46 [label="id: 46
+ ExpressionTerm"];
+n46 -> n45;
+n45 [label="id: 45
+ TermFactor"];
+n45 -> n44;
+n44 [label="id: 44
+ FactorFunctionCall"];
+n44 -> n43;
+n43 [label="id: 43
+ FunctionCall
+ ID: ªı‘"];
+n43 -> n42;
+n42 [label="id: 42
+ ArgExpr"];
+n42 -> n41;
+n41 [label="id: 41
+ ExpressionMinus"];
+n41 -> n38;
+n38 [label="id: 38
+ ExpressionTerm"];
+n38 -> n37;
+n37 [label="id: 37
+ TermFactor"];
+n37 -> n36;
+n36 [label="id: 36
+ FactorID
+ ID: ’"];
+n41 -> n40;
+n40 [label="id: 40
+ TermFactor"];
+n40 -> n39;
+n39 [label="id: 39
  FactorNUM
- NUM: 0"];
+ NUM: 1"];
+n63 -> n62;
+n62 [label="id: 62
+ Statement"];
+n62 -> n61;
+n61 [label="id: 61
+ Assignment
+ ID: ‘"];
+n61 -> n60;
+n60 [label="id: 60
+ ExpressionTerm"];
+n60 -> n59;
+n59 [label="id: 59
+ TermFactor"];
+n59 -> n58;
+n58 [label="id: 58
+ FactorFunctionCall"];
+n58 -> n57;
+n57 [label="id: 57
+ FunctionCall
+ ID: ªı‘"];
+n57 -> n56;
+n56 [label="id: 56
+ ArgExpr"];
+n56 -> n55;
+n55 [label="id: 55
+ ExpressionMinus"];
+n55 -> n52;
+n52 [label="id: 52
+ ExpressionTerm"];
+n52 -> n51;
+n51 [label="id: 51
+ TermFactor"];
+n51 -> n50;
+n50 [label="id: 50
+ FactorID
+ ID: ’"];
+n55 -> n54;
+n54 [label="id: 54
+ TermFactor"];
+n54 -> n53;
+n53 [label="id: 53
+ FactorNUM
+ NUM: 2"];
+n72 -> n71;
+n71 [label="id: 71
+ Statement"];
+n71 -> n70;
+n70 [label="id: 70
+ Assignment
+ ID: ©"];
+n70 -> n69;
+n69 [label="id: 69
+ ExpressionPlus"];
+n69 -> n66;
+n66 [label="id: 66
+ ExpressionTerm"];
+n66 -> n65;
+n65 [label="id: 65
+ TermFactor"];
+n65 -> n64;
+n64 [label="id: 64
+ FactorID
+ ID: Æ"];
+n69 -> n68;
+n68 [label="id: 68
+ TermFactor"];
+n68 -> n67;
+n67 [label="id: 67
+ FactorID
+ ID: ‘"];
+n78 -> n77;
+n77 [label="id: 77
+ Statement"];
+n77 -> n76;
+n76 [label="id: 76
+ Return"];
+n76 -> n75;
+n75 [label="id: 75
+ ExpressionTerm"];
+n75 -> n74;
+n74 [label="id: 74
+ TermFactor"];
+n74 -> n73;
+n73 [label="id: 73
+ FactorID
+ ID: ©"];
+n107 -> n106;
+n106 [label="id: 106
+ Main
+ ID: ºÆı’"];
+n106 -> n105;
+n105 [label="id: 105
+ Body"];
+n105 -> n87;
+n87 [label="id: 87
+ Declarations"];
+n87 -> n86;
+n86 [label="id: 86
+ Declaration
+ ID: Ŋ"];
+n105 -> n104;
+n104 [label="id: 104
+ Statements"];
+n104 -> n98;
+n98 [label="id: 98
+ Statements"];
+n98 -> n97;
+n97 [label="id: 97
+ Statement"];
+n97 -> n96;
+n96 [label="id: 96
+ Assignment
+ ID: Ŋ"];
+n96 -> n95;
+n95 [label="id: 95
+ ExpressionTerm"];
+n95 -> n94;
+n94 [label="id: 94
+ TermFactor"];
+n94 -> n93;
+n93 [label="id: 93
+ FactorFunctionCall"];
+n93 -> n92;
+n92 [label="id: 92
+ FunctionCall
+ ID: ªı‘"];
+n92 -> n91;
+n91 [label="id: 91
+ ArgExpr"];
+n91 -> n90;
+n90 [label="id: 90
+ ExpressionTerm"];
+n90 -> n89;
+n89 [label="id: 89
+ TermFactor"];
+n89 -> n88;
+n88 [label="id: 88
+ FactorNUM
+ NUM: 19"];
+n104 -> n103;
+n103 [label="id: 103
+ Statement"];
+n103 -> n102;
+n102 [label="id: 102
+ Print"];
+n102 -> n101;
+n101 [label="id: 101
+ ExpressionTerm"];
+n101 -> n100;
+n100 [label="id: 100
+ TermFactor"];
+n100 -> n99;
+n99 [label="id: 99
+ FactorID
+ ID: Ŋ"];
 }

@@ -343,7 +343,7 @@
 		else if(strcmp(root->name, "Return") == 0){
 			// return from current function
 			// TODO: THIS IS NOT WORKING
-			return exec_ast(root->child[0]);
+			return_val = exec_ast(root->child[0]);
 
 
 		}
@@ -354,16 +354,18 @@
 				exit(1);
 			}
 			else{
-				var_enter_func();
+				
 				if(root->child[0] != NULL){
 					exec_ast(root->child[0]); // Add function arguments to paramlist
 				}
+
+				var_enter_func();
 				if(func->child[0] != NULL){
 					exec_ast(func->child[0]); // Create local variable from paramlist
 				}
-				exec_ast(func->child[1]); // Execute function body
-				return return_val;
+				exec_ast(func->child[1]); // Execute function body		
 				var_leave_func();
+				return return_val;
 			}
 		}
 		else if(strcmp(root->name, "Parameter") == 0){
