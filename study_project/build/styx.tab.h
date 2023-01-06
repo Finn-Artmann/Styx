@@ -88,7 +88,47 @@ extern int yydebug;
     ID = 289,                      /* ID  */
     OP = 290,                      /* OP  */
     NUM = 291,                     /* NUM  */
-    REAL = 292                     /* REAL  */
+    REAL = 292,                    /* REAL  */
+    PROGRAM = 293,                 /* PROGRAM  */
+    STATEMENTS = 294,              /* STATEMENTS  */
+    STATEMENT = 295,               /* STATEMENT  */
+    DECLARATIONS = 296,            /* DECLARATIONS  */
+    GLOBAL_DECLARATIONS = 297,     /* GLOBAL_DECLARATIONS  */
+    FUNCTIONS = 298,               /* FUNCTIONS  */
+    PARAMETERS = 299,              /* PARAMETERS  */
+    BODY = 300,                    /* BODY  */
+    ASSIGNMENT = 301,              /* ASSIGNMENT  */
+    EXPR_TERM = 302,               /* EXPR_TERM  */
+    EXPR_FUNCTION_CALL = 303,      /* EXPR_FUNCTION_CALL  */
+    EXPR_PLUS = 304,               /* EXPR_PLUS  */
+    EXPR_MINUS = 305,              /* EXPR_MINUS  */
+    EXPR_LE = 306,                 /* EXPR_LE  */
+    EXPR_GE = 307,                 /* EXPR_GE  */
+    EXPR_LT = 308,                 /* EXPR_LT  */
+    EXPR_GT = 309,                 /* EXPR_GT  */
+    EXPR_EQ = 310,                 /* EXPR_EQ  */
+    EXPR_NE = 311,                 /* EXPR_NE  */
+    EXPR_AND = 312,                /* EXPR_AND  */
+    EXPR_OR = 313,                 /* EXPR_OR  */
+    TERM_FACTOR = 314,             /* TERM_FACTOR  */
+    TERM_MUL = 315,                /* TERM_MUL  */
+    TERM_DIV = 316,                /* TERM_DIV  */
+    TERM_MOD = 317,                /* TERM_MOD  */
+    FACTOR_ID = 318,               /* FACTOR_ID  */
+    FACTOR_NUM = 319,              /* FACTOR_NUM  */
+    FACTOR_REAL = 320,             /* FACTOR_REAL  */
+    FACTOR_PARENTHESIS = 321,      /* FACTOR_PARENTHESIS  */
+    FACTOR_FUNCTION_CALL = 322,    /* FACTOR_FUNCTION_CALL  */
+    FACTOR_RAND = 323,             /* FACTOR_RAND  */
+    IFELSE = 324,                  /* IFELSE  */
+    PRINT_STR = 325,               /* PRINT_STR  */
+    DECLARATION = 326,             /* DECLARATION  */
+    GLOBAL_DECLARATION = 327,      /* GLOBAL_DECLARATION  */
+    FUNCTION_CALL = 328,           /* FUNCTION_CALL  */
+    PARAMETER = 329,               /* PARAMETER  */
+    FUNCTION = 330,                /* FUNCTION  */
+    ARG_EXPR = 331,                /* ARG_EXPR  */
+    ARGS_EXPR = 332                /* ARGS_EXPR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -97,14 +137,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 637 "src/styx.y"
+#line 31 "src/styx.y"
 
 	char* str;
 	int num;
 	double real;
 	struct astnode* ast;
 
-#line 108 "build/styx.tab.h"
+#line 148 "build/styx.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

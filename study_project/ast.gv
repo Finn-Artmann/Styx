@@ -1,121 +1,545 @@
 digraph ast {
-n33 [label="id: 33
- Program"];
-n33 -> n32;
-n32 [label="id: 32
- Main
- ID: ºÆı’"];
-n32 -> n31;
-n31 [label="id: 31
- Body"];
-n31 -> n1;
+n153 [label="id: 153
+ 293"];
+n153 -> n104;
+n104 [label="id: 104
+ 298"];
+n104 -> n103;
+n103 [label="id: 103
+ 330
+ ID: ÞŁÆ›"];
+n103 -> n102;
+n102 [label="id: 102
+ 300"];
+n102 -> n5;
+n5 [label="id: 5
+ 296"];
+n5 -> n3;
+n3 [label="id: 3
+ 296"];
+n3 -> n1;
 n1 [label="id: 1
- Declarations"];
+ 296"];
 n1 -> n0;
 n0 [label="id: 0
- Declaration
- ID: Æ"];
-n31 -> n30;
-n30 [label="id: 30
- Statements"];
-n30 -> n7;
-n7 [label="id: 7
- Statements"];
-n7 -> n6;
-n6 [label="id: 6
- Statement"];
-n6 -> n5;
-n5 [label="id: 5
- Assignment
- ID: Æ"];
-n5 -> n4;
-n4 [label="id: 4
- ExpressionTerm
- NUM: 0"];
-n4 -> n3;
-n3 [label="id: 3
- TermFactor
- NUM: 0"];
+ 326
+ ID: ’↑º"];
 n3 -> n2;
 n2 [label="id: 2
- FactorNUM
- NUM: 0"];
-n30 -> n29;
-n29 [label="id: 29
- Statement"];
-n29 -> n28;
-n28 [label="id: 28
- For"];
-n28 -> n13;
-n13 [label="id: 13
- ExpressionLT"];
-n13 -> n10;
+ 326
+ ID: ı’Þ↑Ŧ"];
+n5 -> n4;
+n4 [label="id: 4
+ 326
+ ID: ı"];
+n102 -> n101;
+n101 [label="id: 101
+ 294"];
+n101 -> n20;
+n20 [label="id: 20
+ 294"];
+n20 -> n17;
+n17 [label="id: 17
+ 294"];
+n17 -> n11;
+n11 [label="id: 11
+ 294"];
+n11 -> n10;
 n10 [label="id: 10
- ExpressionTerm
- NUM: 0"];
+ 295"];
 n10 -> n9;
 n9 [label="id: 9
- TermFactor
- NUM: 0"];
+ 301
+ ID: ı"];
 n9 -> n8;
 n8 [label="id: 8
- FactorID
- NUM: 170215760"];
-n13 -> n12;
-n12 [label="id: 12
- TermFactor"];
-n12 -> n11;
-n11 [label="id: 11
- FactorREAL"];
-n28 -> n20;
-n20 [label="id: 20
- Assignment
- ID: Æ"];
-n20 -> n19;
-n19 [label="id: 19
- ExpressionPlus"];
-n19 -> n16;
-n16 [label="id: 16
- ExpressionTerm
+ 302
  NUM: 0"];
+n8 -> n7;
+n7 [label="id: 7
+ 314
+ NUM: 0"];
+n7 -> n6;
+n6 [label="id: 6
+ 319
+ NUM: 1"];
+n17 -> n16;
+n16 [label="id: 16
+ 295"];
 n16 -> n15;
 n15 [label="id: 15
- TermFactor
- NUM: 0"];
+ 301
+ ID: ’↑º"];
 n15 -> n14;
 n14 [label="id: 14
- FactorID
- NUM: 170216496"];
+ 302
+ NUM: 0"];
+n14 -> n13;
+n13 [label="id: 13
+ 314
+ NUM: 0"];
+n13 -> n12;
+n12 [label="id: 12
+ 323
+ NUM: 1000"];
+n20 -> n19;
+n19 [label="id: 19
+ 295"];
 n19 -> n18;
 n18 [label="id: 18
- TermFactor
- NUM: 0"];
-n18 -> n17;
-n17 [label="id: 17
- FactorNUM
- NUM: 1"];
-n28 -> n27;
-n27 [label="id: 27
- Body"];
-n27 -> n26;
+ 325
+ STR: Guess the number between 0 and 1000
+"];
+n101 -> n100;
+n100 [label="id: 100
+ 295"];
+n100 -> n99;
+n99 [label="id: 99
+ 260"];
+n99 -> n26;
 n26 [label="id: 26
- Statements"];
-n26 -> n25;
-n25 [label="id: 25
- Statement"];
-n25 -> n24;
-n24 [label="id: 24
- Print"];
-n24 -> n23;
+ 309"];
+n26 -> n23;
 n23 [label="id: 23
- ExpressionTerm
+ 302
  NUM: 0"];
 n23 -> n22;
 n22 [label="id: 22
- TermFactor
+ 314
  NUM: 0"];
 n22 -> n21;
 n21 [label="id: 21
- FactorID
- NUM: 170217312"];
+ 318
+ NUM: -1641106304"];
+n26 -> n25;
+n25 [label="id: 25
+ 314
+ NUM: 0"];
+n25 -> n24;
+n24 [label="id: 24
+ 319
+ NUM: 0"];
+n99 -> n33;
+n33 [label="id: 33
+ 301
+ ID: ı"];
+n33 -> n32;
+n32 [label="id: 32
+ 304"];
+n32 -> n29;
+n29 [label="id: 29
+ 302
+ NUM: 0"];
+n29 -> n28;
+n28 [label="id: 28
+ 314
+ NUM: 0"];
+n28 -> n27;
+n27 [label="id: 27
+ 318
+ NUM: -1641083040"];
+n32 -> n31;
+n31 [label="id: 31
+ 314
+ NUM: 0"];
+n31 -> n30;
+n30 [label="id: 30
+ 319
+ NUM: 1"];
+n99 -> n98;
+n98 [label="id: 98
+ 300"];
+n98 -> n97;
+n97 [label="id: 97
+ 294"];
+n97 -> n36;
+n36 [label="id: 36
+ 294"];
+n36 -> n35;
+n35 [label="id: 35
+ 295"];
+n35 -> n34;
+n34 [label="id: 34
+ 263
+ ID: ı’Þ↑Ŧ"];
+n97 -> n96;
+n96 [label="id: 96
+ 295"];
+n96 -> n95;
+n95 [label="id: 95
+ 324"];
+n95 -> n42;
+n42 [label="id: 42
+ 310"];
+n42 -> n39;
+n39 [label="id: 39
+ 302
+ NUM: 0"];
+n39 -> n38;
+n38 [label="id: 38
+ 314
+ NUM: 0"];
+n38 -> n37;
+n37 [label="id: 37
+ 318
+ NUM: -1641082176"];
+n42 -> n41;
+n41 [label="id: 41
+ 314
+ NUM: 0"];
+n41 -> n40;
+n40 [label="id: 40
+ 318
+ NUM: -1641081904"];
+n95 -> n67;
+n67 [label="id: 67
+ 300"];
+n67 -> n66;
+n66 [label="id: 66
+ 294"];
+n66 -> n57;
+n57 [label="id: 57
+ 294"];
+n57 -> n54;
+n54 [label="id: 54
+ 294"];
+n54 -> n48;
+n48 [label="id: 48
+ 294"];
+n48 -> n45;
+n45 [label="id: 45
+ 294"];
+n45 -> n44;
+n44 [label="id: 44
+ 295"];
+n44 -> n43;
+n43 [label="id: 43
+ 325
+ STR: CORRECT!
+"];
+n48 -> n47;
+n47 [label="id: 47
+ 295"];
+n47 -> n46;
+n46 [label="id: 46
+ 325
+ STR: Number of guesses needed: "];
+n54 -> n53;
+n53 [label="id: 53
+ 295"];
+n53 -> n52;
+n52 [label="id: 52
+ 262"];
+n52 -> n51;
+n51 [label="id: 51
+ 302
+ NUM: 0"];
+n51 -> n50;
+n50 [label="id: 50
+ 314
+ NUM: 0"];
+n50 -> n49;
+n49 [label="id: 49
+ 318
+ NUM: -1641081072"];
+n57 -> n56;
+n56 [label="id: 56
+ 295"];
+n56 -> n55;
+n55 [label="id: 55
+ 325
+ STR: 
+"];
+n66 -> n65;
+n65 [label="id: 65
+ 295"];
+n65 -> n64;
+n64 [label="id: 64
+ 301
+ ID: ı"];
+n64 -> n63;
+n63 [label="id: 63
+ 305"];
+n63 -> n60;
+n60 [label="id: 60
+ 302
+ NUM: 0"];
+n60 -> n59;
+n59 [label="id: 59
+ 314
+ NUM: 0"];
+n59 -> n58;
+n58 [label="id: 58
+ 319
+ NUM: 0"];
+n63 -> n62;
+n62 [label="id: 62
+ 314
+ NUM: 0"];
+n62 -> n61;
+n61 [label="id: 61
+ 319
+ NUM: 1"];
+n95 -> n94;
+n94 [label="id: 94
+ 300"];
+n94 -> n93;
+n93 [label="id: 93
+ 294"];
+n93 -> n80;
+n80 [label="id: 80
+ 294"];
+n80 -> n79;
+n79 [label="id: 79
+ 295"];
+n79 -> n78;
+n78 [label="id: 78
+ 258"];
+n78 -> n73;
+n73 [label="id: 73
+ 308"];
+n73 -> n70;
+n70 [label="id: 70
+ 302
+ NUM: 0"];
+n70 -> n69;
+n69 [label="id: 69
+ 314
+ NUM: 0"];
+n69 -> n68;
+n68 [label="id: 68
+ 318
+ NUM: -1641079456"];
+n73 -> n72;
+n72 [label="id: 72
+ 314
+ NUM: 0"];
+n72 -> n71;
+n71 [label="id: 71
+ 318
+ NUM: -1641079184"];
+n78 -> n77;
+n77 [label="id: 77
+ 300"];
+n77 -> n76;
+n76 [label="id: 76
+ 294"];
+n76 -> n75;
+n75 [label="id: 75
+ 295"];
+n75 -> n74;
+n74 [label="id: 74
+ 325
+ STR: Your guess is lower than the actual number
+"];
+n93 -> n92;
+n92 [label="id: 92
+ 295"];
+n92 -> n91;
+n91 [label="id: 91
+ 258"];
+n91 -> n86;
+n86 [label="id: 86
+ 309"];
+n86 -> n83;
+n83 [label="id: 83
+ 302
+ NUM: 0"];
+n83 -> n82;
+n82 [label="id: 82
+ 314
+ NUM: 0"];
+n82 -> n81;
+n81 [label="id: 81
+ 318
+ NUM: -1641078224"];
+n86 -> n85;
+n85 [label="id: 85
+ 314
+ NUM: 0"];
+n85 -> n84;
+n84 [label="id: 84
+ 318
+ NUM: -1641077952"];
+n91 -> n90;
+n90 [label="id: 90
+ 300"];
+n90 -> n89;
+n89 [label="id: 89
+ 294"];
+n89 -> n88;
+n88 [label="id: 88
+ 295"];
+n88 -> n87;
+n87 [label="id: 87
+ 325
+ STR: Your guess is higher than the actual number
+"];
+n153 -> n152;
+n152 [label="id: 152
+ 266
+ ID: ºÆı’"];
+n152 -> n151;
+n151 [label="id: 151
+ 300"];
+n151 -> n106;
+n106 [label="id: 106
+ 296"];
+n106 -> n105;
+n105 [label="id: 105
+ 326
+ ID: ÞŁÆ›ÆŊÆı’"];
+n151 -> n150;
+n150 [label="id: 150
+ 294"];
+n150 -> n124;
+n124 [label="id: 124
+ 294"];
+n124 -> n121;
+n121 [label="id: 121
+ 294"];
+n121 -> n118;
+n118 [label="id: 118
+ 294"];
+n118 -> n112;
+n112 [label="id: 112
+ 294"];
+n112 -> n111;
+n111 [label="id: 111
+ 295"];
+n111 -> n110;
+n110 [label="id: 110
+ 301
+ ID: ÞŁÆ›ÆŊÆı’"];
+n110 -> n109;
+n109 [label="id: 109
+ 302
+ NUM: 0"];
+n109 -> n108;
+n108 [label="id: 108
+ 314
+ NUM: 0"];
+n108 -> n107;
+n107 [label="id: 107
+ 319
+ NUM: 1"];
+n118 -> n117;
+n117 [label="id: 117
+ 295"];
+n117 -> n116;
+n116 [label="id: 116
+ 302"];
+n116 -> n115;
+n115 [label="id: 115
+ 314"];
+n115 -> n114;
+n114 [label="id: 114
+ 322"];
+n114 -> n113;
+n113 [label="id: 113
+ 328
+ ID: ÞŁÆ›"];
+n121 -> n120;
+n120 [label="id: 120
+ 295"];
+n120 -> n119;
+n119 [label="id: 119
+ 325
+ STR: Do you want to play again? 0 -> no, 1 -> yes
+"];
+n124 -> n123;
+n123 [label="id: 123
+ 295"];
+n123 -> n122;
+n122 [label="id: 122
+ 263
+ ID: ÞŁÆ›ÆŊÆı’"];
+n150 -> n149;
+n149 [label="id: 149
+ 295"];
+n149 -> n148;
+n148 [label="id: 148
+ 260"];
+n148 -> n130;
+n130 [label="id: 130
+ 311"];
+n130 -> n127;
+n127 [label="id: 127
+ 302
+ NUM: 0"];
+n127 -> n126;
+n126 [label="id: 126
+ 314
+ NUM: 0"];
+n126 -> n125;
+n125 [label="id: 125
+ 318
+ NUM: -1641077648"];
+n130 -> n129;
+n129 [label="id: 129
+ 314
+ NUM: 0"];
+n129 -> n128;
+n128 [label="id: 128
+ 319
+ NUM: 0"];
+n148 -> n134;
+n134 [label="id: 134
+ 301
+ ID: ÞŁÆ›ÆŊÆı’"];
+n134 -> n133;
+n133 [label="id: 133
+ 302
+ NUM: 0"];
+n133 -> n132;
+n132 [label="id: 132
+ 314
+ NUM: 0"];
+n132 -> n131;
+n131 [label="id: 131
+ 318
+ NUM: -1641073744"];
+n148 -> n147;
+n147 [label="id: 147
+ 300"];
+n147 -> n146;
+n146 [label="id: 146
+ 294"];
+n146 -> n143;
+n143 [label="id: 143
+ 294"];
+n143 -> n140;
+n140 [label="id: 140
+ 294"];
+n140 -> n139;
+n139 [label="id: 139
+ 295"];
+n139 -> n138;
+n138 [label="id: 138
+ 302"];
+n138 -> n137;
+n137 [label="id: 137
+ 314"];
+n137 -> n136;
+n136 [label="id: 136
+ 322"];
+n136 -> n135;
+n135 [label="id: 135
+ 328
+ ID: ÞŁÆ›"];
+n143 -> n142;
+n142 [label="id: 142
+ 295"];
+n142 -> n141;
+n141 [label="id: 141
+ 325
+ STR: Do you want to play again? 0 -> no, 1 -> yes
+"];
+n146 -> n145;
+n145 [label="id: 145
+ 295"];
+n145 -> n144;
+n144 [label="id: 144
+ 263
+ ID: ÞŁÆ›ÆŊÆı’"];
 }
