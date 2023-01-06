@@ -36,7 +36,8 @@ int get_param(struct paramlist **list)
     if (*list == NULL)
     {
         printf("Error: No parameters left in queue\n");
-        exit(1);
+        exit(1 Error
+             : Type mismatch in operation 267);
     }
     struct paramlist *current = *list;
     *list = current->next;
@@ -163,6 +164,229 @@ void print_ast(astnode_t *root, int depth)
 
 int return_val = 0;
 
+astnode_t *operation(astnode_t *root, const int op)
+{
+    astnode_t *node1 = exec_ast(root->child[0]);
+    astnode_t *node2 = exec_ast(root->child[1]);
+
+    if (node1->data_type != node2->data_type)
+    {
+        printf("Error: Type mismatch in operation %d\n", op);
+        printf("Type 1: %d, Type 2: %d\n", node1->data_type, node2->data_type);
+        exit(1);
+    }
+
+    root->data_type = node1->data_type;
+    switch (node1->data_type)
+    {
+    case AST_NUM_T:
+        switch (op)
+        {
+        case LE:
+            root->val.num = node1->val.num <= node2->val.num;
+            break;
+
+        case GE:
+            root->val.num = node1->val.num >= node2->val.num;
+            break;
+
+        case EQ:
+            root->val.num = node1->val.num == node2->val.num;
+            break;
+
+        case NE:
+            root->val.num = node1->val.num != node2->val.num;
+            break;
+
+        case GT:
+            root->val.num = node1->val.num > node2->val.num;
+            break;
+
+        case LT:
+            root->val.num = node1->val.num < node2->val.num;
+            break;
+
+        case AND:
+            root->val.num = node1->val.num && node2->val.num;
+            break;
+
+        case OR:
+            root->val.num = node1->val.num || node2->val.num;
+            break;
+
+        case PLUS:
+            root->val.num = node1->val.num + node2->val.num;
+            break;
+
+        case MINUS:
+            root->val.num = node1->val.num - node2->val.num;
+            break;
+
+        case MULT:
+            root->val.num = node1->val.num * node2->val.num;
+            break;
+
+        case DIV:
+            root->val.num = node1->val.num / node2->val.num;
+            break;
+
+        case MOD:
+            root->val.num = node1->val.num % node2->val.num;
+            break;
+
+        default:
+            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            exit(1);
+        }
+        break;
+
+    case AST_REAL_T:
+        switch (op)
+        {
+        case LE:
+            root->val.real = node1->val.real <= node2->val.real;
+            break;
+
+        case GE:
+            root->val.real = node1->val.real >= node2->val.real;
+            break;
+
+        case EQ:
+            root->val.real = node1->val.real == node2->val.real;
+            break;
+
+        case NE:
+            root->val.real = node1->val.real != node2->val.real;
+            break;
+
+        case GT:
+            root->val.real = node1->val.real > node2->val.real;
+            break;
+
+        case LT:
+            root->val.real = node1->val.real < node2->val.real;
+            break;
+
+        case AND:
+            root->val.real = node1->val.real && node2->val.real;
+            break;
+
+        case OR:
+            root->val.real = node1->val.real || node2->val.real;
+            break;
+
+        case PLUS:
+            root->val.real = node1->val.real + node2->val.real;
+            break;
+
+        case MINUS:
+            root->val.real = node1->val.real - node2->val.real;
+            break;
+
+        case MULT:
+            root->val.real = node1->val.real * node2->val.real;
+            break;
+
+        case DIV:
+            root->val.real = node1->val.real / node2->val.real;
+            break;
+
+        case MOD:
+            printf("Error: Cannot use MOD on REAL.\n");
+            exit(1);
+            break;
+
+        default:
+            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            exit(1);
+        }
+        break;
+
+    case AST_STR_T:
+
+        switch (op)
+        {
+        case LE:
+            root->val.num = strcmp(node1->val.str, node2->val.str) <= 0;
+            root->data_type = AST_NUM_T;
+            break;
+
+        case GE:
+            root->val.num = strcmp(node1->val.str, node2->val.str) >= 0;
+            root->data_type = AST_NUM_T;
+            break;
+
+        case EQ:
+            root->val.num = strcmp(node1->val.str, node2->val.str) == 0;
+            root->data_type = AST_NUM_T;
+            break;
+
+        case NE:
+            root->val.num = strcmp(node1->val.str, node2->val.str) != 0;
+            root->data_type = AST_NUM_T;
+            break;
+
+        case GT:
+            root->val.num = strcmp(node1->val.str, node2->val.str) > 0;
+            root->data_type = AST_NUM_T;
+            break;
+
+        case LT:
+            root->val.num = strcmp(node1->val.str, node2->val.str) < 0;
+            root->data_type = AST_NUM_T;
+            break;
+
+        case AND:
+            printf("Error: Cannot use AND on STR.\n");
+            exit(1);
+            break;
+
+        case OR:
+            printf("Error: Cannot use OR on STR.\n");
+            exit(1);
+            break;
+
+        case PLUS:
+            root->val.str = malloc(strlen(node1->val.str) + strlen(node2->val.str) + 1);
+            strcpy(root->val.str, node1->val.str);
+            strcat(root->val.str, node2->val.str);
+            break;
+
+        case MINUS:
+            printf("Error: Cannot use MINUS on STR.\n");
+            exit(1);
+            break;
+
+        case MULT:
+            printf("Error: Cannot use MULT on STR.\n");
+            exit(1);
+            break;
+
+        case DIV:
+            printf("Error: Cannot use DIV on STR.\n");
+            exit(1);
+            break;
+
+        case MOD:
+            printf("Error: Cannot use MOD on STR.\n");
+            exit(1);
+            break;
+
+        default:
+            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            exit(1);
+        }
+        break;
+
+    default:
+
+        printf("Unkonwn data type %d\n", root->data_type);
+        break;
+    }
+
+    return root;
+}
+
 // Execute AST
 astnode_t *exec_ast(astnode_t *root)
 {
@@ -217,227 +441,32 @@ astnode_t *exec_ast(astnode_t *root)
 
     case EXPR_TERM:
         return exec_ast(root->child[0]);
-        break;
-
     case EXPR_FUNCTION_CALL:
         return exec_ast(root->child[0]);
-        break;
-
     case EXPR_PLUS:
-    {
-        astnode_t *node1 = exec_ast(root->child[0]);
-        astnode_t *node2 = exec_ast(root->child[1]);
-
-        if (node1->data_type != node2->data_type)
-        {
-            printf("Error: Type mismatch in addition\n");
-            printf("Type 1: %d, Type 2: %d\n", node1->data_type, node2->data_type);
-            exit(1);
-        }
-        else if (node1->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num + exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot add anything else than INT yet.\n");
-            printf("Type 1: %d, Type 2: %d\n", node1->data_type, node2->data_type);
-            exit(1);
-        }
-    }
-    break;
-
+        return operation(root, PLUS);
     case EXPR_MINUS:
-    {
-        astnode_t *node1 = exec_ast(root->child[0]);
-        astnode_t *node2 = exec_ast(root->child[1]);
-
-        if (node1->data_type != node2->data_type)
-        {
-            printf("Error: Type mismatch in subtraction\n");
-            exit(1);
-        }
-        else if (node1->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = node1->val.num - node2->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot subtract anything else than INT yet.\n");
-            exit(1);
-        }
-    }
-    break;
-
+        return operation(root, MINUS);
     case EXPR_LE:
-        if (root->child[0]->data_type != root->child[1]->data_type)
-        {
-            printf("Error: Type mismatch in less than or equal to\n");
-            exit(1);
-        }
-        else if (root->child[0]->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num <= exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-        break;
-
+        return operation(root, LE);
     case EXPR_GE:
-        if (root->child[0]->data_type != root->child[1]->data_type)
-        {
-            printf("Error: Type mismatch in greater than or equal to\n");
-            exit(1);
-        }
-        else if (root->child[0]->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num >= exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-        break;
-
+        return operation(root, GE);
     case EXPR_LT:
-    {
-        astnode_t *node1 = exec_ast(root->child[0]);
-        astnode_t *node2 = exec_ast(root->child[1]);
-
-        if (node1->data_type != node2->data_type)
-        {
-            printf("Error: Type mismatch in less than\n");
-            printf("Type 1: %d, Type 2: %d\n", node1->data_type, node2->data_type);
-            exit(1);
-        }
-        else if (node1->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = node1->val.num < node2->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-    }
-    break;
-
+        return operation(root, LT);
     case EXPR_GT:
-        if (root->child[0]->data_type != root->child[1]->data_type)
-        {
-            printf("Error: Type mismatch in greater than\n");
-            exit(1);
-        }
-        else if (root->child[0]->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num > exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-        break;
-
+        return operation(root, GT);
     case EXPR_EQ:
-
-        if (root->child[0]->data_type != root->child[1]->data_type)
-        {
-            printf("Error: Type mismatch in equal to\n");
-            exit(1);
-        }
-        else if (root->child[0]->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num == exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-        break;
-
+        return operation(root, EQ);
     case EXPR_NE:
-        if (root->child[0]->data_type != root->child[1]->data_type)
-        {
-            printf("Error: Type mismatch in not equal to\n");
-            exit(1);
-        }
-        else if (root->child[0]->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num != exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-        break;
-
+        return operation(root, NE);
     case EXPR_AND:
-        if (root->child[0]->data_type != root->child[1]->data_type)
-        {
-            printf("Error: Type mismatch in and\n");
-            exit(1);
-        }
-        else if (root->child[0]->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num && exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-        break;
-
+        return operation(root, AND);
     case EXPR_OR:
-        if (root->child[0]->data_type != root->child[1]->data_type)
-        {
-            printf("Error: Type mismatch in or\n");
-            exit(1);
-        }
-        else if (root->child[0]->data_type == AST_NUM_T)
-        {
-            root->data_type = AST_NUM_T;
-            root->val.num = exec_ast(root->child[0])->val.num || exec_ast(root->child[1])->val.num;
-            return root;
-        }
-        else
-        {
-            printf("Error: Cannot compare anything else than INT yet.\n");
-            exit(1);
-        }
-        break;
-
+        return operation(root, OR);
     case TERM_FACTOR:
         return exec_ast(root->child[0]);
-        break;
-
-    case TERM_MUL:
-    case TERM_DIV:
+    case TERM_MUL: // Fall through
+    case TERM_DIV: // Fall through
     case TERM_MOD:
     {
         astnode_t *val1 = exec_ast(root->child[0]);

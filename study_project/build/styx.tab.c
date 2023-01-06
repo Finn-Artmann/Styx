@@ -88,7 +88,7 @@
 		fprintf(stderr, "%s\n", msg);
 		fprintf(stderr, "Error at line %d\n", yylineno);
 	}
-	astnode_t *exec_ast(astnode_t *root);
+	
 
 #line 94 "build/styx.tab.c"
 

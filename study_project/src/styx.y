@@ -18,7 +18,7 @@
 		fprintf(stderr, "%s\n", msg);
 		fprintf(stderr, "Error at line %d\n", yylineno);
 	}
-	astnode_t *exec_ast(astnode_t *root);
+	
 %}
 
 %define parse.lac full

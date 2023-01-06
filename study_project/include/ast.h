@@ -55,6 +55,7 @@ extern struct paramlist *paramlist;
 // --- Function Prototypes ---
 
 astnode_t *new_astnode(int type);
+astnode_t *exec_ast(astnode_t *root);
 void print_ast_console(astnode_t *root);
 char *node2str(astnode_t *node);
 void print_ast(astnode_t *root, int depth);
