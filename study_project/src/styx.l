@@ -125,7 +125,7 @@ COMMA "?"
 
 
 {DEC_NUMBER} { yylval.num = atoi(yytext); return NUM; }
-{REAL} { yylval.num = atof(yytext); return REAL; }
+{REAL} { yylval.real = atof(yytext); return REAL; }
 
 {HEXSTART} { BEGIN(HEX); }
 <HEX>{HEX_NUMBER} { BEGIN(INITIAL); yylval.num = strtol(yytext, NULL, 16); return NUM; }

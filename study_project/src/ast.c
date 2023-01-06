@@ -95,8 +95,10 @@ void print_ast_console(astnode_t *root)
 char *node2str(astnode_t *node)
 {
     char *str = malloc(100);
-    if (node->data_type == AST_NUM_T)
+
+    switch (node->data_type)
     {
+    case AST_NUM_T:
         sprintf(
             str,
             "id: %d\n %s\n %d\n NUM: %d",
@@ -104,9 +106,9 @@ char *node2str(astnode_t *node)
             node->name,
             node->type,
             node->val.num);
-    }
-    else if (node->data_type == AST_ID_T)
-    {
+        break;
+
+    case AST_ID_T:
         sprintf(
             str,
             "id: %d\n %s\n %d\n ID: %s",
@@ -114,9 +116,9 @@ char *node2str(astnode_t *node)
             node->name,
             node->type,
             node->val.str);
-    }
-    else if (node->data_type == AST_STR_T)
-    {
+        break;
+
+    case AST_STR_T:
         sprintf(
             str,
             "id: %d\n %s\n %d\n STR: %s",
@@ -124,16 +126,31 @@ char *node2str(astnode_t *node)
             node->name,
             node->type,
             node->val.str);
-    }
-    else
-    {
+        break;
+
+    case AST_REAL_T:
+        sprintf(
+            str,
+            "id: %d\n %s\n %d\n REAL: %f",
+            node->id,
+            node->name,
+            node->type,
+            node->val.real);
+        break;
+
+    case AST_NONE_T:
         sprintf(
             str,
             "id: %d\n %s\n %d",
             node->id,
             node->name,
             node->type);
+        break;
+
+    default:
+        break;
     }
+
     return str;
 }
 
@@ -527,6 +544,7 @@ astnode_t *exec_ast(astnode_t *root)
 
     case FACTOR_REAL:
     {
+
         astnode_t *newnode = malloc(sizeof(astnode_t));
         newnode->data_type = AST_REAL_T;
         newnode->val.real = root->val.real;

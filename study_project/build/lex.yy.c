@@ -1489,7 +1489,7 @@ YY_RULE_SETUP
 case 8:
 YY_RULE_SETUP
 #line 128 "src/styx.l"
-{ yylval.num = atof(yytext); return REAL; }
+{ yylval.real = atof(yytext); return REAL; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
