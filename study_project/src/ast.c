@@ -36,8 +36,7 @@ int get_param(struct paramlist **list)
     if (*list == NULL)
     {
         printf("Error: No parameters left in queue\n");
-        exit(1 Error
-             : Type mismatch in operation 267);
+        exit(1);
     }
     struct paramlist *current = *list;
     *list = current->next;
@@ -100,8 +99,9 @@ char *node2str(astnode_t *node)
     {
         sprintf(
             str,
-            "id: %d\n %d\n NUM: %d",
+            "id: %d\n %s\n %d\n NUM: %d",
             node->id,
+            node->name,
             node->type,
             node->val.num);
     }
@@ -109,8 +109,9 @@ char *node2str(astnode_t *node)
     {
         sprintf(
             str,
-            "id: %d\n %d\n ID: %s",
+            "id: %d\n %s\n %d\n ID: %s",
             node->id,
+            node->name,
             node->type,
             node->val.str);
     }
@@ -118,8 +119,9 @@ char *node2str(astnode_t *node)
     {
         sprintf(
             str,
-            "id: %d\n %d\n STR: %s",
+            "id: %d\n %s\n %d\n STR: %s",
             node->id,
+            node->name,
             node->type,
             node->val.str);
     }
@@ -127,8 +129,9 @@ char *node2str(astnode_t *node)
     {
         sprintf(
             str,
-            "id: %d\n %d",
+            "id: %d\n %s\n %d",
             node->id,
+            node->name,
             node->type);
     }
     return str;

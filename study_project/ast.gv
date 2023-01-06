@@ -1,104 +1,135 @@
 digraph ast {
 n30 [label="id: 30
+ PROGRAM
  293"];
 n30 -> n16;
 n16 [label="id: 16
+ FUNCTIONS
  298"];
 n16 -> n15;
 n15 [label="id: 15
+ FUNCTION
  330
  ID: ª↑’©"];
 n15 -> n1;
 n1 [label="id: 1
+ PARAMETERS
  299"];
 n1 -> n0;
 n0 [label="id: 0
+ PARAMETER
  329
  ID: Ø"];
 n15 -> n14;
 n14 [label="id: 14
+ BODY
  300"];
 n14 -> n13;
 n13 [label="id: 13
+ STATEMENTS
  294"];
 n13 -> n10;
 n10 [label="id: 10
+ STATEMENTS
  294"];
 n10 -> n4;
 n4 [label="id: 4
+ STATEMENTS
  294"];
 n4 -> n3;
 n3 [label="id: 3
+ STATEMENT
  295"];
 n3 -> n2;
 n2 [label="id: 2
+ PRINT_STR
  325
  STR: func"];
 n10 -> n9;
 n9 [label="id: 9
+ STATEMENT
  295"];
 n9 -> n8;
 n8 [label="id: 8
+ PRINT
  262"];
 n8 -> n7;
 n7 [label="id: 7
+ EXPR_TERM
  302
  NUM: 0"];
 n7 -> n6;
 n6 [label="id: 6
+ TERM_FACTOR
  314
  NUM: 0"];
 n6 -> n5;
 n5 [label="id: 5
+ FACTOR_ID
  318
- NUM: 275830624"];
+ NUM: -781359264"];
 n13 -> n12;
 n12 [label="id: 12
+ STATEMENT
  295"];
 n12 -> n11;
 n11 [label="id: 11
+ PRINT_STR
  325
  STR: funcend
 "];
 n30 -> n29;
 n29 [label="id: 29
+ MAIN
  266
  ID: ºÆı’"];
 n29 -> n28;
 n28 [label="id: 28
+ BODY
  300"];
 n28 -> n18;
 n18 [label="id: 18
+ DECLARATIONS
  296"];
 n18 -> n17;
 n17 [label="id: 17
+ DECLARATION
  326
  ID: Æ"];
 n28 -> n27;
 n27 [label="id: 27
+ STATEMENTS
  294"];
 n27 -> n26;
 n26 [label="id: 26
+ STATEMENT
  295"];
 n26 -> n25;
 n25 [label="id: 25
+ PRINT
  262"];
 n25 -> n24;
 n24 [label="id: 24
+ EXPR_PLUS
  304"];
 n24 -> n21;
 n21 [label="id: 21
+ EXPR_TERM
  302"];
 n21 -> n20;
 n20 [label="id: 20
+ TERM_FACTOR
  314"];
 n20 -> n19;
 n19 [label="id: 19
+ FACTOR_REAL
  320"];
 n24 -> n23;
 n23 [label="id: 23
+ TERM_FACTOR
  314"];
 n23 -> n22;
 n22 [label="id: 22
+ FACTOR_REAL
  320"];
 }
