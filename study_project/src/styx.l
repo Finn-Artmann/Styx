@@ -39,6 +39,8 @@ BABYLONIAN_NUMBER (({BABYLONIAN_DIGIT1TO59}[ ])*{BABYLONIAN_DIGIT1TO59})
 DEC_NUMBER {DEC_DIGIT0}|({DEC_DIGIT}{DEC_DIGIT0}*)
 HEX_NUMBER {HEX_DIGIT0}|({HEX_DIGIT}{HEX_DIGIT0}*)
 
+REAL {DEC_DIGIT0}(\.{DEC_DIGIT0}*)|({DEC_DIGIT}{DEC_DIGIT0}*\.{DEC_DIGIT0}*)|({DEC_DIGIT}{DEC_DIGIT0}*\.{DEC_DIGIT0}+)
+
 WHITESPACE [ \t\r\n]+
 
 STRINGSTART "⅜"
@@ -69,6 +71,7 @@ BLOCKCOMMENT_END ‘{ESCCHAR}
 
 /* Datatypes */
 INT "ı’Ŧ"
+DOUBLE "ÐØ↑‘Ł€"
 STRING "ẞŦ®ı’Ŋ"
 CHAR "©ĦÆ®"
 VOID "‚ØıÐ"
@@ -122,6 +125,7 @@ COMMA "?"
 
 
 {DEC_NUMBER} { yylval.num = atoi(yytext); return NUM; }
+{REAL} { yylval.num = atof(yytext); return REAL; }
 
 {HEXSTART} { BEGIN(HEX); }
 <HEX>{HEX_NUMBER} { BEGIN(INITIAL); yylval.num = strtol(yytext, NULL, 16); return NUM; }
@@ -140,6 +144,7 @@ COMMA "?"
 <BLOCKCOMMENT>{BLOCKCOMMENT_CHAR} { addstr(*yytext); /* addstr could be removed here to completly ignore comments */ }
 
 {INT} { yylval.str = strdup(yytext); return TYPE; }
+{DOUBLE} { yylval.str = strdup(yytext); return TYPE; }
 {STRING} { yylval.str = strdup(yytext); return TYPE; }
 {CHAR} { yylval.str = strdup(yytext); return TYPE; }
 {VOID} { yylval.str = strdup(yytext); return TYPE; }
@@ -188,7 +193,6 @@ COMMA "?"
 
 %%
 
-//function to convert babylonian string to decimal number; 1 = Y, 10 = <; base is 60 seperated by space
 int babylonian_to_decimal(char* str){
     int num = 0;
     int base = 60;
@@ -220,6 +224,46 @@ int babylonian_to_decimal(char* str){
         i++;
     }
     return num;
+}
+
+char* decimal_to_babylonian(int num){
+    int base = 60;
+    int digit = 0;
+    int i = 0;
+    int temp = num;
+    char* str = malloc(1);
+    *str = '\0';
+
+    // count number of digits
+    while(temp != 0){
+            temp /= base;
+            digit++;
+    }
+
+    // convert to babylonian
+    while(num != 0){
+        if(num % base == 1){
+                str = realloc(str, strlen(str) + 2);
+                str[i] = 'Y';
+                str[i+1] = '\0';
+                i++;
+        }
+        else if(num % base == 10){
+                str = realloc(str, strlen(str) + 2);
+                str[i] = '<';
+                str[i+1] = '\0';
+                i++;
+        }
+        else{
+                str = realloc(str, strlen(str) + 2);
+                str[i] = ' ';
+                str[i+1] = '\0';
+                i++;
+        }
+        num /= base;
+        digit--;
+    }
+    return str;
 }
 
 void addstr(char ch){

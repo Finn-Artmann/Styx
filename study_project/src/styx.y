@@ -26,6 +26,7 @@
 	enum {
 		AST_NONE_T = 10000,
 		AST_NUM_T,
+		AST_REAL_T,
 		AST_ID_T,
 		AST_STR_T
 	};
@@ -36,6 +37,7 @@
 		int type;
 		union{
 			int num;
+			double real;
 			char *str;
 
 		} val;
@@ -197,7 +199,7 @@
 	int return_val = 0;
 
 	// Execute AST 
-	int exec_ast(astnode_t* root){
+	astnode_t* exec_ast(astnode_t* root){
 		//printf("Executing AST Node %d: %s\n", root->id, root->name); // For debugging
 		if(	strcmp(root->name, "Program") == 0 ||
 			strcmp(root->name, "Main") == 0 ||
@@ -225,8 +227,14 @@
 			var_leave_block();
 		}
 		else if(strcmp(root->name, "Assignment") == 0){
-			int val = exec_ast(root->child[0]);
-			var_set(root->val.str, val);
+			astnode_t* node = exec_ast(root->child[0]);
+			if(node->type == AST_NUM_T){
+				var_set(root->val.str, node->val.num);
+			}
+			else{
+				printf("Error: Cannot assign anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionTerm") == 0){
 			return exec_ast(root->child[0]);
@@ -235,34 +243,177 @@
 			return exec_ast(root->child[0]);
 		}
 		else if(strcmp(root->name, "ExpressionPlus") == 0){
-			return exec_ast(root->child[0]) + exec_ast(root->child[1]);
+
+			astnode_t* node1 = exec_ast(root->child[0]);
+			astnode_t* node2 = exec_ast(root->child[1]);
+
+			if(node1->type != node2->type){
+				printf("Error: Type mismatch in addition\n");
+				printf("Type 1: %d, Type 2: %d\n", node1->type, node2->type);
+				exit(1);
+			}
+			else if(node1->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num + exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot add anything else than INT yet.\n");
+				printf("Type 1: %d, Type 2: %d\n", node1->type, node2->type);
+				exit(1);
+			}
+			
 		}
 		else if(strcmp(root->name, "ExpressionMinus") == 0){
-			return exec_ast(root->child[0]) - exec_ast(root->child[1]);
+
+			astnode_t* node1 = exec_ast(root->child[0]);
+			astnode_t* node2 = exec_ast(root->child[1]);
+
+			if(node1->type != node2->type){
+				printf("Error: Type mismatch in subtraction\n");
+				exit(1);
+			}
+			else if(node1->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = node1->val.num - node2->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot subtract anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionLE") == 0){
-			return exec_ast(root->child[0]) <= exec_ast(root->child[1]);
+
+			if(root->child[0]->type != root->child[1]->type){
+				printf("Error: Type mismatch in less than or equal to\n");
+				exit(1);
+			}
+			else if(root->child[0]->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num <= exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionGE") == 0){
-			return exec_ast(root->child[0]) >= exec_ast(root->child[1]);
+
+			if(root->child[0]->type != root->child[1]->type){
+				printf("Error: Type mismatch in greater than or equal to\n");
+				exit(1);
+			}
+			else if(root->child[0]->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num >= exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionLT") == 0){
-			return exec_ast(root->child[0]) < exec_ast(root->child[1]);
+
+			astnode_t* node1 = exec_ast(root->child[0]);
+			astnode_t* node2 = exec_ast(root->child[1]);
+
+			if(node1->type != node2->type){
+				printf("Error: Type mismatch in less than\n");
+				printf("Type 1: %d, Type 2: %d\n", node1->type, node2->type);
+				exit(1);
+			}
+			else if(node1->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = node1->val.num < node2->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionGT") == 0){
-			return exec_ast(root->child[0]) > exec_ast(root->child[1]);
+
+			if(root->child[0]->type != root->child[1]->type){
+				printf("Error: Type mismatch in greater than\n");
+				exit(1);
+			}
+			else if(root->child[0]->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num > exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionEQ") == 0){
-			return exec_ast(root->child[0]) == exec_ast(root->child[1]);
+
+			if(root->child[0]->type != root->child[1]->type){
+				printf("Error: Type mismatch in equal to\n");
+				exit(1);
+			}
+			else if(root->child[0]->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num == exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionNE") == 0){
-			return exec_ast(root->child[0]) != exec_ast(root->child[1]);
+
+			if(root->child[0]->type != root->child[1]->type){
+				printf("Error: Type mismatch in not equal to\n");
+				exit(1);
+			}
+			else if(root->child[0]->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num != exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionAnd") == 0){
-			return exec_ast(root->child[0]) && exec_ast(root->child[1]);
+
+			if(root->child[0]->type != root->child[1]->type){
+				printf("Error: Type mismatch in and\n");
+				exit(1);
+			}
+			else if(root->child[0]->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num && exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ExpressionOr") == 0){
-			return exec_ast(root->child[0]) || exec_ast(root->child[1]);
+
+			if(root->child[0]->type != root->child[1]->type){
+				printf("Error: Type mismatch in or\n");
+				exit(1);
+			}
+			else if(root->child[0]->type == AST_NUM_T){
+				root->type = AST_NUM_T;
+				root->val.num = exec_ast(root->child[0])->val.num || exec_ast(root->child[1])->val.num;
+				return root;
+			}
+			else{
+				printf("Error: Cannot compare anything else than INT yet.\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "TermFactor") == 0){	
 			
@@ -273,23 +424,55 @@
 			strcmp(root->name, "TermMod") == 0	
 		){
 			        
-				int val1 = exec_ast(root->child[0]);
-				int val2 = exec_ast(root->child[1]);
+				astnode_t* val1 = exec_ast(root->child[0]);
+				astnode_t* val2 = exec_ast(root->child[1]);
+				
+				astnode_t* ret = malloc(sizeof(astnode_t));
+				ret->type = AST_NUM_T;
+				ret->val.num = 0;
+
+
+				if(val1->type != AST_NUM_T || val2->type != AST_NUM_T){
+					printf("Error: Cannot multiply non-numbers yet\n");
+					exit(1);
+				}
+
 				if(strcmp(root->val.str, "*") == 0){
-					return val1 * val2;
+					
+					ret->val.num = val1->val.num * val2->val.num;
+					return ret;
 				}
 				else if(strcmp(root->val.str, "/") == 0){
-					return val1 / val2;
+					
+					ret->val.num = val1->val.num / val2->val.num;
+					return ret;
 				}
 				else if(strcmp(root->val.str, "%") == 0){
-					return val1 % val2;
+					ret->val.num = val1->val.num % val2->val.num;
+					return ret;
 				}
 		}
 		else if(strcmp(root->name, "FactorID") == 0){
-			return var_get(root->val.str);
+
+			astnode_t* ret = malloc(sizeof(astnode_t));
+			ret->type = AST_NUM_T;
+			ret->val.num = var_get(root->val.str);;
+			return ret;
 		}
 		else if(strcmp(root->name, "FactorNUM") == 0){
-			return root->val.num;
+
+			// Create new astnode for this number	
+			astnode_t* newnode = malloc(sizeof(astnode_t));
+			newnode->type = AST_NUM_T;
+			newnode->val.num = root->val.num;
+
+			return newnode;
+		}
+		else if(strcmp(root->name, "FactorREAL") == 0){
+			astnode_t* newnode = malloc(sizeof(astnode_t));
+			newnode->type = AST_REAL_T;
+			newnode->val.real = root->val.real;
+			return newnode;
 		}
 		else if(strcmp(root->name, "(Factor)") == 0){
 			return exec_ast(root->child[0]);
@@ -299,18 +482,42 @@
 		}
 		else if(strcmp(root->name, "FactorRAND") == 0){
 			srand(time(NULL));
-			return rand() % (root->val.num);
+			astnode_t* newnode = malloc(sizeof(astnode_t));
+			newnode->type = AST_NUM_T;
+			newnode->val.num = rand() % (root->val.num);
+			return newnode;
 		}
 		else if(strcmp(root->name, "If") == 0){
-			if(exec_ast(root->child[0])){ exec_ast(root->child[1]); }
+
+			astnode_t* condition = exec_ast(root->child[0]);
+
+			if(condition->val.num){ exec_ast(root->child[1]); }
 		}
 		else if(strcmp(root->name, "IfElse") == 0){
-			if(exec_ast(root->child[0])){ exec_ast(root->child[1]); }
+
+			astnode_t* condition = exec_ast(root->child[0]);
+
+			if(condition->val.num){ exec_ast(root->child[1]); }
 			else{ exec_ast(root->child[2]); }
 		}
 		else if(strcmp(root->name, "Print") == 0){
-			int val = exec_ast(root->child[0]);
-			printf("%d", val);
+
+
+			astnode_t* val = exec_ast(root->child[0]);
+
+			if(val->type == AST_NUM_T){
+				printf("%d", val->val.num);
+			}
+			else if(val->type == AST_REAL_T){
+				printf("%f", val->val.real);
+			}
+			else if(val->type == AST_STR_T){
+				printf("%s", val->val.str);
+			}
+			else{
+				printf("Error: Cannot print this type yet\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "PrintStr") == 0){
 			printf("%s", root->val.str);
@@ -328,9 +535,9 @@
 			var_set(root->val.str, atoi(buf));
 		}
 		else if(strcmp(root->name, "For") == 0){
-			// TODO: Add assignment/declaration in for loop
-
-			for(; exec_ast(root->child[0]); exec_ast(root->child[1])){
+			// TODO: Add assignment/declaration in for loop; add different types
+		
+			for(; exec_ast(root->child[0])->val.num; exec_ast(root->child[1])){
 				exec_ast(root->child[2]);
 			}
 		}
@@ -342,10 +549,16 @@
 		}
 		else if(strcmp(root->name, "Return") == 0){
 			// return from current function
-			// TODO: THIS IS NOT WORKING
-			return_val = exec_ast(root->child[0]);
-
-
+			astnode_t* val = exec_ast(root->child[0]);
+			
+			if(val->type == AST_NUM_T){
+				return_val = val->val.num;
+			}
+			else{
+				printf("Error: Cannot return this type yet\n");
+				exit(1);
+			}
+			
 		}
 		else if(strcmp(root->name, "FunctionCall") == 0){
 			astnode_t* func = find_function(root->val.str);
@@ -365,7 +578,11 @@
 				}
 				exec_ast(func->child[1]); // Execute function body		
 				var_leave_func();
-				return return_val;
+
+				astnode_t* return_node = malloc(sizeof(astnode_t));
+				return_node->type = AST_NUM_T;
+				return_node->val.num = return_val;
+				return return_node;
 			}
 		}
 		else if(strcmp(root->name, "Parameter") == 0){
@@ -377,20 +594,36 @@
 			add_function(root->val.str, root);
 		}
 		else if(strcmp(root->name, "ArgExpr") == 0){
-			int arg = exec_ast(root->child[0]); //TODO: Add other types
-			add_param(&paramlist, arg);
+			astnode_t* arg = exec_ast(root->child[0]); //TODO: Add other types
+			if(arg->type == AST_NUM_T){
+				add_param(&paramlist, arg->val.num);
+			}
+			else{
+				printf("Error: Cannot pass this type yet\n");
+				exit(1);
+			}
 		}
 		else if(strcmp(root->name, "ArgsExpr") == 0){
 			exec_ast(root->child[0]);
-			int arg = exec_ast(root->child[1]);
-			add_param(&paramlist, arg);
+			astnode_t* arg = exec_ast(root->child[1]);
+			if(arg->type == AST_NUM_T){
+				add_param(&paramlist, arg->val.num);
+			}
+			else{
+				printf("Error: Cannot pass this type yet\n");
+				exit(1);
+			}
 		}
 		else{
 			printf("Error: Unknown node %s\n", root->name);
 		}
 		
 		// Default return value
-		return 0;
+		astnode_t* newnode = malloc(sizeof(astnode_t));
+		newnode->type = AST_NUM_T;
+		newnode->val.num = 0;
+
+		return newnode;
 	}	
 %}
 
@@ -404,6 +637,7 @@
 %union{
 	char* str;
 	int num;
+	double real;
 	struct astnode* ast;
 }
 
@@ -447,6 +681,7 @@
 
 %token <str> STR TYPE ID OP 
 %token <num> NUM
+%token <real> REAL
 %start start
 
 %type <ast> start program functions function function_call arguments parameters parameter main body statements statement declarations declaration global_declarations global_declaration assignment expression if_statement for_statement return_statement print_statement scan_statement rand_int_statement term factor
@@ -495,12 +730,6 @@ function: TYPE ID ROUND_OPEN parameters ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
 		$$->val.str = $2;
 		$$->type = AST_ID_T;
 
-		// $$ = new_astnode("Function");
-		// $$->child[0] = $4; 
-		// $$->child[1] = $7; 
-		// $$->val.str = $2; 
-		// $$->type= AST_ID_T;
-		// add_function($2, $$);
 	}
 
 parameters: parameter { $$ = new_astnode("Parameters"); $$->child[0] = $1; }
@@ -577,7 +806,7 @@ arguments: expression { $$ = new_astnode("ArgExpr"); $$->child[0] = $1; }
 	 | arguments COMMA expression { $$ = new_astnode("ArgsExpr"); $$->child[0] = $1; $$->child[1] = $3; }
 	 | %empty { $$ = NULL; }
 
-expression: term { $$ = new_astnode("ExpressionTerm"); $$->child[0] = $1; }
+expression: term { $$ = new_astnode("ExpressionTerm"); $$->child[0] = $1; $$->type = $$->child[0]->type; }
 	| expression PLUS term { $$ = new_astnode("ExpressionPlus"); $$->child[0] = $1; $$->child[1] = $3; }
 	| expression MINUS term { $$ = new_astnode("ExpressionMinus"); $$->child[0] = $1; $$->child[1] = $3; }
 	| expression LE term { $$ = new_astnode("ExpressionLE"); $$->child[0] = $1; $$->child[1] = $3; }
@@ -590,13 +819,14 @@ expression: term { $$ = new_astnode("ExpressionTerm"); $$->child[0] = $1; }
 	| expression OR term { $$ = new_astnode("ExpressionOR"); $$->child[0] = $1; $$->child[1] = $3; }
 	  
 
-term: factor { $$ = new_astnode("TermFactor"); $$->child[0] = $1; }
+term: factor { $$ = new_astnode("TermFactor"); $$->child[0] = $1; $$->type = $$->child[0]->type; }
 	| term MULT factor { $$ = new_astnode("TermMult"); $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "*"; $$->type = AST_STR_T; }
 	| term DIV factor { $$ = new_astnode("TermDiv"); $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "/"; $$->type = AST_STR_T; }
 	| term MOD factor { $$ = new_astnode("TermMod"); $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "%"; $$->type = AST_STR_T; }
 
-factor: ID { $$ = new_astnode("FactorID"); $$->val.str = $1; $$->type = AST_ID_T; }
+factor: ID { $$ = new_astnode("FactorID"); $$->val.str = $1; $$->type = AST_NUM_T; }
     | NUM { $$ = new_astnode("FactorNUM"); $$->val.num = $1; $$->type = AST_NUM_T; }
+	| REAL { $$ = new_astnode("FactorREAL"); $$->val.real = $1; $$->type = AST_REAL_T; }
 	| function_call { $$ = new_astnode("FactorFunctionCall"); $$->child[0] = $1; }
 	| ROUND_OPEN expression ROUND_CLOSE { $$ = new_astnode("(Factor)"); $$->child[0] = $2; $$->val.str = "(expr)"; $$->type = AST_STR_T; }
 	| RAND_INT ROUND_OPEN NUM ROUND_CLOSE { $$ = new_astnode("FactorRAND"); $$->val.num = $3; $$->type = AST_NUM_T; }

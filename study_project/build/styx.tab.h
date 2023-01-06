@@ -87,7 +87,8 @@ extern int yydebug;
     TYPE = 288,                    /* TYPE  */
     ID = 289,                      /* ID  */
     OP = 290,                      /* OP  */
-    NUM = 291                      /* NUM  */
+    NUM = 291,                     /* NUM  */
+    REAL = 292                     /* REAL  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -96,13 +97,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 404 "src/styx.y"
+#line 637 "src/styx.y"
 
 	char* str;
 	int num;
+	double real;
 	struct astnode* ast;
 
-#line 106 "build/styx.tab.h"
+#line 108 "build/styx.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
