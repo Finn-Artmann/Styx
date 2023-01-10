@@ -8,11 +8,20 @@
 enum
 {
     AST_NONE_T = 10000,
-    AST_NUM_T,
-    AST_REAL_T,
+    AST_INT_T,
+    AST_DOUBLE_T,
     AST_ID_T,
-    AST_STR_T
+    AST_STR_T,
+    AST_CHAR_T
 };
+
+typedef union
+{
+    int num;
+    double real;
+    char *str;
+    char chr;
+} val_t;
 
 struct astnode
 {
@@ -20,13 +29,7 @@ struct astnode
     char *name;
     int type;
     int data_type;
-    union
-    {
-        int num;
-        double real;
-        char *str;
-
-    } val;
+    val_t val;
     struct astnode *child[MAXCHILDREN];
 };
 typedef struct astnode astnode_t;
@@ -44,12 +47,13 @@ struct funclist
 // Parameter queue for function calls
 struct paramlist
 {
-    int val;
+    val_t val;
+    int type;
     struct paramlist *next;
 };
 
 // --- Variables ---
-extern int return_val;
+extern val_t return_val;
 extern struct funclist *funclist;
 extern struct paramlist *paramlist;
 
@@ -62,8 +66,8 @@ char *node2str(astnode_t *node);
 void print_ast(astnode_t *root, int depth);
 
 void add_function(char *name, astnode_t *node);
-void add_param(struct paramlist **list, int val);
-int get_param(struct paramlist **list);
+void add_param(struct paramlist **list, void *val, int type);
+void *get_param(struct paramlist **list, int *type);
 astnode_t *find_function(char *name);
 
 #endif // __AST_H__

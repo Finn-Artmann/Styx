@@ -10,6 +10,8 @@
 struct funclist *funclist = NULL;
 struct paramlist *paramlist = NULL;
 
+extern const char **token_table;
+
 // Add function to list
 void add_function(char *name, astnode_t *node)
 {
@@ -21,16 +23,44 @@ void add_function(char *name, astnode_t *node)
 }
 
 // Add parameter to queue
-void add_param(struct paramlist **list, int val)
+void add_param(struct paramlist **list, void *val, int type)
 {
     struct paramlist *new = malloc(sizeof *new);
-    new->val = val;
+
+    switch (type)
+    {
+
+    case AST_INT_T:
+        new->val.num = *(int *)val;
+        break;
+
+    case AST_DOUBLE_T:
+        new->val.real = *(double *)val;
+        break;
+
+    case AST_CHAR_T:
+        new->val.chr = *(char *)val;
+        break;
+
+    case AST_STR_T:
+        new->val.str = strdup((char *)val);
+        break;
+
+    case AST_NONE_T:
+        break;
+
+    default:
+        printf("Error: Unknown type in add_param\n");
+        exit(1);
+    }
+
+    new->type = type;
     new->next = *list;
     *list = new;
 }
 
 // Get parameter from queue
-int get_param(struct paramlist **list)
+void *get_param(struct paramlist **list, int *type)
 {
 
     if (*list == NULL)
@@ -40,7 +70,38 @@ int get_param(struct paramlist **list)
     }
     struct paramlist *current = *list;
     *list = current->next;
-    int val = current->val;
+    *type = current->type;
+
+    void *val = NULL;
+    switch (current->type)
+    {
+    case AST_INT_T:
+        val = malloc(sizeof(int));
+        *(int *)val = current->val.num;
+        break;
+
+    case AST_DOUBLE_T:
+        val = malloc(sizeof(double));
+        *(double *)val = current->val.real;
+        break;
+
+    case AST_CHAR_T:
+        val = malloc(sizeof(char));
+        *(char *)val = current->val.chr;
+        break;
+
+    case AST_STR_T:
+        val = strdup(current->val.str);
+        break;
+
+    case AST_NONE_T:
+        val = NULL;
+        break;
+
+    default:
+        printf("Error: Unknown type in get_param\n");
+        exit(1);
+    }
     free(current);
     return val;
 }
@@ -91,6 +152,40 @@ void print_ast_console(astnode_t *root)
     printf(") ");
 }
 
+const char *ast_token2str(int type)
+{
+    return token_table[type - 258 + 3];
+}
+
+char *ast_type2str(int type)
+{
+
+    switch (type)
+    {
+    case AST_INT_T:
+        return "int";
+
+    case AST_DOUBLE_T:
+        return "double";
+
+    case AST_CHAR_T:
+        return "char";
+
+    case AST_STR_T:
+        return "string";
+
+    case AST_ID_T:
+        return "id";
+
+    case AST_NONE_T:
+        return "none_t";
+
+    default:
+        printf("Error: Unknown type %d in ast_type2str\n", type);
+        return "unknown";
+    }
+}
+
 // node2str funciton required for printing AST
 char *node2str(astnode_t *node)
 {
@@ -98,53 +193,63 @@ char *node2str(astnode_t *node)
 
     switch (node->data_type)
     {
-    case AST_NUM_T:
+    case AST_INT_T:
         sprintf(
             str,
-            "id: %d\n %s\n %d\n NUM: %d",
+            "id: %d\n %s\n %s\n NUM: %d",
             node->id,
             node->name,
-            node->type,
+            ast_type2str(AST_INT_T),
             node->val.num);
         break;
 
     case AST_ID_T:
         sprintf(
             str,
-            "id: %d\n %s\n %d\n ID: %s",
+            "id: %d\n %s\n %s\n ID: %s",
             node->id,
             node->name,
-            node->type,
+            ast_type2str(AST_ID_T),
             node->val.str);
         break;
 
     case AST_STR_T:
         sprintf(
             str,
-            "id: %d\n %s\n %d\n STR: %s",
+            "id: %d\n %s\n %s\n STR: %s",
             node->id,
             node->name,
-            node->type,
+            ast_type2str(AST_STR_T),
             node->val.str);
         break;
 
-    case AST_REAL_T:
+    case AST_CHAR_T:
         sprintf(
             str,
-            "id: %d\n %s\n %d\n REAL: %f",
+            "id: %d\n %s\n %s\n CHAR: %c",
             node->id,
             node->name,
-            node->type,
+            ast_type2str(AST_CHAR_T),
+            node->val.chr);
+        break;
+
+    case AST_DOUBLE_T:
+        sprintf(
+            str,
+            "id: %d\n %s\n %s\n REAL: %f",
+            node->id,
+            node->name,
+            ast_type2str(AST_DOUBLE_T),
             node->val.real);
         break;
 
     case AST_NONE_T:
         sprintf(
             str,
-            "id: %d\n %s\n %d",
+            "id: %d\n %s\n %s",
             node->id,
             node->name,
-            node->type);
+            ast_type2str(AST_NONE_T));
         break;
 
     default:
@@ -182,7 +287,8 @@ void print_ast(astnode_t *root, int depth)
     }
 }
 
-int return_val = 0;
+val_t return_val;
+int return_val_type = AST_NONE_T;
 
 astnode_t *operation(astnode_t *root, const int op)
 {
@@ -199,7 +305,7 @@ astnode_t *operation(astnode_t *root, const int op)
     root->data_type = node1->data_type;
     switch (node1->data_type)
     {
-    case AST_NUM_T:
+    case AST_INT_T:
         switch (op)
         {
         case LE:
@@ -260,7 +366,7 @@ astnode_t *operation(astnode_t *root, const int op)
         }
         break;
 
-    case AST_REAL_T:
+    case AST_DOUBLE_T:
         switch (op)
         {
         case LE:
@@ -328,32 +434,32 @@ astnode_t *operation(astnode_t *root, const int op)
         {
         case LE:
             root->val.num = strcmp(node1->val.str, node2->val.str) <= 0;
-            root->data_type = AST_NUM_T;
+            root->data_type = AST_INT_T;
             break;
 
         case GE:
             root->val.num = strcmp(node1->val.str, node2->val.str) >= 0;
-            root->data_type = AST_NUM_T;
+            root->data_type = AST_INT_T;
             break;
 
         case EQ:
             root->val.num = strcmp(node1->val.str, node2->val.str) == 0;
-            root->data_type = AST_NUM_T;
+            root->data_type = AST_INT_T;
             break;
 
         case NE:
             root->val.num = strcmp(node1->val.str, node2->val.str) != 0;
-            root->data_type = AST_NUM_T;
+            root->data_type = AST_INT_T;
             break;
 
         case GT:
             root->val.num = strcmp(node1->val.str, node2->val.str) > 0;
-            root->data_type = AST_NUM_T;
+            root->data_type = AST_INT_T;
             break;
 
         case LT:
             root->val.num = strcmp(node1->val.str, node2->val.str) < 0;
-            root->data_type = AST_NUM_T;
+            root->data_type = AST_INT_T;
             break;
 
         case AND:
@@ -398,6 +504,85 @@ astnode_t *operation(astnode_t *root, const int op)
         }
         break;
 
+    case AST_CHAR_T:
+        switch (op)
+        {
+        case LE:
+            root->val.num = node1->val.chr <= node2->val.chr;
+            root->data_type = AST_INT_T;
+            break;
+
+        case GE:
+            root->val.num = node1->val.chr >= node2->val.chr;
+            root->data_type = AST_INT_T;
+            break;
+
+        case EQ:
+            root->val.num = node1->val.chr == node2->val.chr;
+            root->data_type = AST_INT_T;
+            break;
+
+        case NE:
+            root->val.num = node1->val.chr != node2->val.chr;
+            root->data_type = AST_INT_T;
+            break;
+
+        case GT:
+            root->val.num = node1->val.chr > node2->val.chr;
+            root->data_type = AST_INT_T;
+            break;
+
+        case LT:
+            root->val.num = node1->val.chr < node2->val.chr;
+            root->data_type = AST_INT_T;
+            break;
+
+        case AND:
+            printf("Error: Cannot use AND on CHAR.\n");
+            exit(1);
+            break;
+
+        case OR:
+            printf("Error: Cannot use OR on CHAR.\n");
+            exit(1);
+            break;
+
+        case PLUS:
+            printf("Error: Cannot use PLUS on CHAR.\n");
+            exit(1);
+            break;
+
+        case MINUS:
+            printf("Error: Cannot use MINUS on CHAR.\n");
+            exit(1);
+            break;
+
+        case MULT:
+            printf("Error: Cannot use MULT on CHAR.\n");
+            exit(1);
+            break;
+
+        case DIV:
+            printf("Error: Cannot use DIV on CHAR.\n");
+            exit(1);
+            break;
+
+        case MOD:
+            printf("Error: Cannot use MOD on CHAR.\n");
+            exit(1);
+            break;
+
+        default:
+            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            exit(1);
+        }
+        break;
+
+    case AST_NONE_T:
+        printf("Error: Cannot use NONE type for operations.\n");
+        exit(1);
+        break;
+
     default:
 
         printf("Unkonwn data type %d\n", root->data_type);
@@ -410,7 +595,7 @@ astnode_t *operation(astnode_t *root, const int op)
 // Execute AST
 astnode_t *exec_ast(astnode_t *root)
 {
-    // printf("Executing AST Node %d: %d\n", root->id, root->type); // For debugging
+    printf("Executing AST Node %d: %s\n", root->id, ast_token2str(root->type)); // For debugging
 
     switch (root->type)
     {
@@ -447,13 +632,27 @@ astnode_t *exec_ast(astnode_t *root)
     case ASSIGNMENT:
     {
         astnode_t *node = exec_ast(root->child[0]);
-        if (node->data_type == AST_NUM_T)
+
+        switch (node->data_type)
         {
-            var_set(root->val.str, node->val.num);
-        }
-        else
-        {
-            printf("Error: Cannot assign anything else than INT yet.\n");
+        case AST_INT_T:
+            var_set(root->val.str, &node->val.num, AST_INT_T);
+            break;
+
+        case AST_DOUBLE_T:
+            var_set(root->val.str, &node->val.real, AST_DOUBLE_T);
+            break;
+
+        case AST_STR_T:
+            var_set(root->val.str, node->val.str, AST_STR_T);
+            break;
+
+        case AST_CHAR_T:
+            var_set(root->val.str, &node->val.chr, AST_CHAR_T);
+            break;
+
+        default:
+            printf("ERROR: Unsupported data type for assignment.\n");
             exit(1);
         }
     }
@@ -485,49 +684,53 @@ astnode_t *exec_ast(astnode_t *root)
         return operation(root, OR);
     case TERM_FACTOR:
         return exec_ast(root->child[0]);
-    case TERM_MUL: // Fall through
-    case TERM_DIV: // Fall through
+    case TERM_MUL:
+        return operation(root, MULT);
+    case TERM_DIV:
+        return operation(root, DIV);
     case TERM_MOD:
-    {
-        astnode_t *val1 = exec_ast(root->child[0]);
-        astnode_t *val2 = exec_ast(root->child[1]);
-
-        astnode_t *ret = malloc(sizeof(astnode_t));
-        ret->data_type = AST_NUM_T;
-        ret->val.num = 0;
-
-        if (val1->data_type != AST_NUM_T || val2->data_type != AST_NUM_T)
-        {
-            printf("Error: Cannot multiply non-numbers yet\n");
-            exit(1);
-        }
-
-        if (strcmp(root->val.str, "*") == 0)
-        {
-
-            ret->val.num = val1->val.num * val2->val.num;
-            return ret;
-        }
-        else if (strcmp(root->val.str, "/") == 0)
-        {
-
-            ret->val.num = val1->val.num / val2->val.num;
-            return ret;
-        }
-        else if (strcmp(root->val.str, "%") == 0)
-        {
-            ret->val.num = val1->val.num % val2->val.num;
-            return ret;
-        }
-    }
-    break;
-
+        return operation(root, MOD);
     case FACTOR_ID:
     {
         astnode_t *ret = malloc(sizeof(astnode_t));
-        ret->data_type = AST_NUM_T;
-        ret->val.num = var_get(root->val.str);
-        return ret;
+        int type = 0;
+        void *val = var_get(root->val.str, &type);
+
+        if (val)
+        {
+            ret->data_type = type;
+            switch (type)
+            {
+
+            case AST_INT_T:
+                ret->val.num = *(int *)val;
+                break;
+
+            case AST_DOUBLE_T:
+                ret->val.real = *(double *)val;
+                break;
+
+            case AST_STR_T:
+                ret->val.str = val;
+                break;
+
+            case AST_CHAR_T:
+                ret->val.chr = *(char *)val;
+                break;
+
+            default:
+                printf("ERROR: Unsupported data type for FACTOR_ID.\n");
+                exit(1);
+            }
+
+            return ret;
+        }
+        else
+        {
+            free(ret);
+            printf("ERROR: Variable %s not found.\n", root->val.str);
+            exit(1);
+        }
     }
     break;
 
@@ -535,8 +738,30 @@ astnode_t *exec_ast(astnode_t *root)
     {
         // Create new astnode for this number
         astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_NUM_T;
+        newnode->data_type = AST_INT_T;
         newnode->val.num = root->val.num;
+
+        return newnode;
+    }
+    break;
+
+    case FACTOR_STRING:
+    {
+        // Create new astnode for this string
+        astnode_t *newnode = malloc(sizeof(astnode_t));
+        newnode->data_type = AST_STR_T;
+        newnode->val.str = root->val.str;
+
+        return newnode;
+    }
+    break;
+
+    case FACTOR_CHAR:
+    {
+        // Create new astnode for this char
+        astnode_t *newnode = malloc(sizeof(astnode_t));
+        newnode->data_type = AST_CHAR_T;
+        newnode->val.chr = root->val.chr;
 
         return newnode;
     }
@@ -546,7 +771,7 @@ astnode_t *exec_ast(astnode_t *root)
     {
 
         astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_REAL_T;
+        newnode->data_type = AST_DOUBLE_T;
         newnode->val.real = root->val.real;
         return newnode;
     }
@@ -564,7 +789,7 @@ astnode_t *exec_ast(astnode_t *root)
     {
         srand(time(NULL));
         astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_NUM_T;
+        newnode->data_type = AST_INT_T;
         newnode->val.num = rand() % (root->val.num);
         return newnode;
     }
@@ -600,21 +825,32 @@ astnode_t *exec_ast(astnode_t *root)
     {
         astnode_t *val = exec_ast(root->child[0]);
 
-        if (val->data_type == AST_NUM_T)
+        switch (val->data_type)
         {
+
+        case AST_INT_T:
             printf("%d", val->val.num);
-        }
-        else if (val->data_type == AST_REAL_T)
-        {
+            break;
+
+        case AST_DOUBLE_T:
             printf("%f", val->val.real);
-        }
-        else if (val->data_type == AST_STR_T)
-        {
+            break;
+
+        case AST_ID_T: // Fallthrough
+        case AST_STR_T:
             printf("%s", val->val.str);
-        }
-        else
-        {
-            printf("Error: Cannot print this type yet\n");
+            break;
+
+        case AST_CHAR_T:
+            printf("%c", val->val.chr);
+            break;
+
+        case AST_NONE_T:
+            printf("NULL");
+            break;
+
+        default:
+            printf("ERROR: Unsupported data type for PRINT.\n");
             exit(1);
         }
     }
@@ -626,7 +862,7 @@ astnode_t *exec_ast(astnode_t *root)
 
     case SCAN:
     {
-        // Read int from stdin using fgets
+        // Read value from stdin using fgets
         char buf[100];
         printf("<< ");
         char *s = fgets(buf, 100, stdin);
@@ -635,7 +871,39 @@ astnode_t *exec_ast(astnode_t *root)
             printf("EOF\n");
             exit(1);
         }
-        var_set(root->val.str, atoi(buf));
+
+        switch (root->data_type)
+        {
+
+        case AST_INT_T:
+        {
+            int scanned = atoi(buf);
+            var_set(root->val.str, &scanned, AST_INT_T);
+        }
+        break;
+
+        case AST_DOUBLE_T:
+        {
+            double scanned = atof(buf);
+            var_set(root->val.str, &scanned, AST_DOUBLE_T);
+        }
+        break;
+
+        case AST_STR_T:
+            var_set(root->val.str, buf, AST_STR_T);
+            break;
+
+        case AST_CHAR_T:
+        {
+            char scanned = buf[0];
+            var_set(root->val.str, &scanned, AST_CHAR_T);
+        }
+        break;
+
+        default:
+            printf("ERROR: Unsupported data type for SCAN.\n");
+            exit(1);
+        }
     }
     break;
 
@@ -649,25 +917,135 @@ astnode_t *exec_ast(astnode_t *root)
         break;
 
     case DECLARATION:
-        var_declare(root->val.str, 0);
+    {
+        // printf("DEBUG: Declaring variable %s\n", root->val.str);
+        val_t inital_val;
+        switch (root->data_type)
+        {
+        case AST_DOUBLE_T:
+            inital_val.real = 0.0;
+            var_declare(root->val.str, &inital_val.real, AST_DOUBLE_T);
+            break;
+        case AST_INT_T:
+            inital_val.num = 0;
+            var_declare(root->val.str, &inital_val.num, AST_INT_T);
+            break;
+
+        case AST_STR_T:
+        {
+            inital_val.str = malloc(sizeof(char) * 100);
+            inital_val.str[0] = '\0';
+            var_declare(root->val.str, inital_val.str, AST_STR_T);
+        }
         break;
 
-    case GLOBAL_DECLARATION:
-        var_declare_global(root->val.str, 0);
+        case AST_CHAR_T:
+            inital_val.chr = '\0';
+            var_declare(root->val.str, &inital_val.chr, AST_CHAR_T);
+            break;
+
+        default:
+            printf("ERROR: Unsupported data type for declaration.\n");
+            exit(1);
+        }
+    }
+    break;
+
+    case DECLARATION_ASSIGN:
+    {
+        astnode_t *val = exec_ast(root->child[0]);
+        val_t variable;
+
+        // printf("DEBUG: DeclAssign %s (%d)\n", root->val.str, root->data_type);
+
+        switch (root->data_type)
+        {
+        case AST_DOUBLE_T:
+            variable.real = val->val.real;
+            var_declare(root->val.str, &variable.real, AST_DOUBLE_T);
+            break;
+        case AST_INT_T:
+            variable.num = val->val.num;
+            var_declare(root->val.str, &variable.num, AST_INT_T);
+            break;
+
+        case AST_STR_T:
+            variable.str = val->val.str;
+            var_declare(root->val.str, variable.str, AST_STR_T);
+            break;
+
+        case AST_CHAR_T:
+            variable.chr = val->val.chr;
+            var_declare(root->val.str, &variable.chr, AST_CHAR_T);
+            break;
+
+        default:
+            printf("ERROR: Unsupported data type for declaration.\n");
+            exit(1);
+        }
+    }
+    break;
+
+    case GLOBAL_DECLARATION: // TODO: Add global declaration assign
+    {
+        val_t inital_val;
+        switch (root->data_type)
+        {
+        case AST_DOUBLE_T:
+            inital_val.real = 0.0;
+            var_declare_global(root->val.str, &inital_val.real, AST_DOUBLE_T);
+            break;
+        case AST_INT_T:
+            inital_val.num = 0;
+            var_declare_global(root->val.str, &inital_val.num, AST_INT_T);
+            break;
+
+        case AST_STR_T:
+        {
+            // printf("DEBUG: Declaring global variable %s\n", root->val.str);
+            inital_val.str = malloc(sizeof(char) * 100);
+            inital_val.str[0] = '\0';
+            var_declare_global(root->val.str, inital_val.str, AST_STR_T);
+        }
         break;
+
+        case AST_CHAR_T:
+            inital_val.chr = '\0';
+            var_declare_global(root->val.str, &inital_val.chr, AST_CHAR_T);
+            break;
+
+        default:
+            printf("ERROR: Unsupported data type for declaration.\n");
+            exit(1);
+        }
+    }
+    break;
 
     case RETURN:
     {
         // return from current function
         astnode_t *val = exec_ast(root->child[0]);
 
-        if (val->data_type == AST_NUM_T)
+        switch (val->data_type)
         {
-            return_val = val->val.num;
-        }
-        else
-        {
-            printf("Error: Cannot return this type yet\n");
+        case AST_INT_T:
+            return_val_type = AST_INT_T;
+            return_val.num = val->val.num;
+            break;
+        case AST_DOUBLE_T:
+            return_val_type = AST_DOUBLE_T;
+            return_val.real = val->val.real;
+            break;
+        case AST_STR_T:
+            return_val_type = AST_STR_T;
+            return_val.str = val->val.str;
+            break;
+        case AST_CHAR_T:
+            return_val_type = AST_CHAR_T;
+            return_val.chr = val->val.chr;
+            break;
+        default:
+            printf("Error: Unsupported data type for return.\n");
             exit(1);
         }
     }
@@ -699,8 +1077,35 @@ astnode_t *exec_ast(astnode_t *root)
             var_leave_func();
 
             astnode_t *return_node = malloc(sizeof(astnode_t));
-            return_node->data_type = AST_NUM_T;
-            return_node->val.num = return_val;
+            return_node->data_type = func->data_type;
+
+            switch (return_node->data_type)
+            {
+
+            case AST_INT_T:
+                return_node->val.num = return_val.num;
+                break;
+
+            case AST_DOUBLE_T:
+                return_node->val.real = return_val.real;
+                break;
+
+            case AST_STR_T:
+                return_node->val.str = return_val.str;
+                break;
+
+            case AST_CHAR_T:
+                return_node->val.chr = return_val.chr;
+                break;
+
+            case AST_NONE_T:
+                break;
+
+            default:
+                printf("Error: Unsupported data type %s for return.\n", ast_type2str(return_node->data_type));
+                exit(1);
+            }
+
             return return_node;
         }
     }
@@ -708,8 +1113,9 @@ astnode_t *exec_ast(astnode_t *root)
 
     case PARAMETER:
     {
-        int param = get_param(&paramlist);
-        var_declare(root->val.str, param); // TODO: Add other types
+        int type = 0;
+        void *param = get_param(&paramlist, &type);
+        var_declare(root->val.str, param, type);
     }
     break;
 
@@ -721,13 +1127,32 @@ astnode_t *exec_ast(astnode_t *root)
     case ARG_EXPR:
     {
         astnode_t *arg = exec_ast(root->child[0]); // TODO: Add other types
-        if (arg->data_type == AST_NUM_T)
+
+        switch (arg->data_type)
         {
-            add_param(&paramlist, arg->val.num);
-        }
-        else
-        {
-            printf("Error: Cannot pass this type yet\n");
+
+        case AST_INT_T:
+            add_param(&paramlist, &arg->val.num, AST_INT_T);
+            break;
+
+        case AST_DOUBLE_T:
+            add_param(&paramlist, &arg->val.real, AST_DOUBLE_T);
+            break;
+
+        case AST_CHAR_T:
+            add_param(&paramlist, &arg->val.chr, AST_CHAR_T);
+            break;
+
+        case AST_STR_T:
+            add_param(&paramlist, arg->val.str, AST_STR_T);
+            break;
+
+        case AST_NONE_T:
+            add_param(&paramlist, NULL, AST_NONE_T);
+            break;
+
+        default:
+            printf("Error: Unsupported data type for ARG_EXPR.\n");
             exit(1);
         }
     }
@@ -738,26 +1163,44 @@ astnode_t *exec_ast(astnode_t *root)
     {
         exec_ast(root->child[0]);
         astnode_t *arg = exec_ast(root->child[1]);
-        if (arg->data_type == AST_NUM_T)
+        switch (arg->data_type)
         {
-            add_param(&paramlist, arg->val.num);
-        }
-        else
-        {
-            printf("Error: Cannot pass this type yet\n");
+
+        case AST_INT_T:
+            add_param(&paramlist, &arg->val.num, AST_INT_T);
+            break;
+
+        case AST_DOUBLE_T:
+            add_param(&paramlist, &arg->val.real, AST_DOUBLE_T);
+            break;
+
+        case AST_CHAR_T:
+            add_param(&paramlist, &arg->val.chr, AST_CHAR_T);
+            break;
+
+        case AST_STR_T:
+            add_param(&paramlist, arg->val.str, AST_STR_T);
+            break;
+
+        case AST_NONE_T:
+            add_param(&paramlist, NULL, AST_NONE_T);
+            break;
+
+        default:
+            printf("Error: Unsupported data type for ARG_EXPR.\n");
             exit(1);
         }
     }
     break;
 
     default:
-        printf("Error: Unknown node %d\n", root->type);
+        printf("Error: Unknown node %s with type id %d\n", ast_type2str(root->type), root->type);
         break;
     }
 
     // Default return value
     astnode_t *newnode = malloc(sizeof(astnode_t));
-    newnode->data_type = AST_NUM_T;
+    newnode->data_type = AST_INT_T;
     newnode->val.num = 0;
 
     return newnode;

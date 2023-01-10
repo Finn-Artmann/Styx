@@ -14,13 +14,13 @@ build/styx.tab.o: build/styx.tab.c build/styx.tab.h
 build/lex.yy.c: src/styx.l
 	flex -d -o build/lex.yy.c src/styx.l 
 
-build/lex.yy.o: build/lex.yy.c build/styx.tab.h
+build/lex.yy.o: build/lex.yy.c build/styx.tab.h include/ast.h
 	$(CC) $(CFLAGS) -c -o build/lex.yy.o build/lex.yy.c
 
 build/ast.o: src/ast.c include/ast.h include/vars_interp.h build/styx.tab.h
 	$(CC) $(CFLAGS) -c -o build/ast.o src/ast.c
 
-build/vars_interp.o: src/vars_interp.c include/vars_interp.h
+build/vars_interp.o: src/vars_interp.c include/vars_interp.h include/ast.h
 	$(CC) $(CFLAGS) -c -o build/vars_interp.o src/vars_interp.c
 
 

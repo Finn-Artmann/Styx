@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "styx.tab.h"
+#include "ast.h"
 
 #define UTF8_ESCCHAR_LEN 1 
 
@@ -143,11 +144,11 @@ COMMA "?"
 <BLOCKCOMMENT>{BLOCKCOMMENT_END} { BEGIN(INITIAL); }
 <BLOCKCOMMENT>{BLOCKCOMMENT_CHAR} { addstr(*yytext); /* addstr could be removed here to completly ignore comments */ }
 
-{INT} { yylval.str = strdup(yytext); return TYPE; }
-{DOUBLE} { yylval.str = strdup(yytext); return TYPE; }
-{STRING} { yylval.str = strdup(yytext); return TYPE; }
-{CHAR} { yylval.str = strdup(yytext); return TYPE; }
-{VOID} { yylval.str = strdup(yytext); return TYPE; }
+{INT} { yylval.num = AST_INT_T; return TYPE; }
+{DOUBLE} { yylval.num = AST_DOUBLE_T; return TYPE; }
+{STRING} { yylval.num = AST_STR_T; return TYPE; }
+{CHAR} { yylval.num = AST_STR_T; return TYPE; }
+{VOID} { yylval.num = AST_NONE_T; return TYPE; }
 
 
 
@@ -276,6 +277,8 @@ void addstr(char ch){
 void init_str_buf(){
     str_buf = malloc(1);
 }
+
+//TODO: Add char begin end ''
 
 /*
  

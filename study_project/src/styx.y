@@ -8,6 +8,8 @@
 
 	#include "vars_interp.h"
 	#include "ast.h"
+	
+
 
 	int yylex(void);
 
@@ -18,11 +20,14 @@
 		fprintf(stderr, "%s\n", msg);
 		fprintf(stderr, "Error at line %d\n", yylineno);
 	}
+	const char ** token_table;
+	
 	
 %}
 
 %define parse.lac full
 %define parse.error verbose
+%token-table
 
 // Definitions
 
@@ -30,6 +35,7 @@
 
 %union{
 	char* str;
+	char chr;
 	int num;
 	double real;
 	struct astnode* ast;
@@ -73,8 +79,9 @@
 
 
 
-%token <str> STR TYPE ID OP 
-%token <num> NUM
+%token <str> STR ID OP 
+%token <chr> CHR
+%token <num> NUM TYPE
 %token <real> REAL
 %start start
 
@@ -89,7 +96,7 @@
 %token EXPR_LT EXPR_GT EXPR_EQ EXPR_NE EXPR_AND EXPR_OR TERM_FACTOR TERM_MUL TERM_DIV
 %token TERM_MOD FACTOR_ID FACTOR_NUM FACTOR_REAL FACTOR_PARENTHESIS FACTOR_FUNCTION_CALL
 %token FACTOR_RAND IFELSE PRINT_STR DECLARATION GLOBAL_DECLARATION FUNCTION_CALL PARAMETER
-%token FUNCTION ARG_EXPR ARGS_EXPR
+%token FUNCTION ARG_EXPR ARGS_EXPR DECLARATION_ASSIGN FACTOR_STRING FACTOR_CHAR
 
 
 %%
@@ -137,7 +144,7 @@ function: TYPE ID ROUND_OPEN parameters ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
 		$$->child[0] = $4;
 		$$->child[1] = $7;
 		$$->val.str = $2;
-		$$->data_type = AST_ID_T;
+		$$->data_type = $1;
 
 	}
 
@@ -150,9 +157,9 @@ parameter: TYPE ID { $$ = new_astnode(PARAMETER); $$->name = "PARAMETER"; $$->va
 
 main: TYPE MAIN ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
     {	
-	if(strcmp($1, "ı’Ŧ") != 0){
+	if($1 != AST_INT_T){
 		printf("Error: Main function must return ı’Ŧ and must have identifier ºÆı’\n");
-		printf("Found: TYPE: %s \n", $1);
+		printf("Found: TYPE: %d \n", $1);
 		exit(1);
 	}
 	
@@ -172,17 +179,18 @@ body: statements { $$ = new_astnode(BODY); $$->name = "BODY"; $$->child[0] = $1;
 global_declarations: global_declaration { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->child[0] = $1; }
 	 | global_declarations global_declaration { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->child[0] = $1; $$->child[1] = $2; }
 
-global_declaration: GLOBAL TYPE ID SEMICOLON { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->val.str = $3; $$->data_type = AST_ID_T; }
+global_declaration: GLOBAL TYPE ID SEMICOLON { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->val.str = $3; $$->data_type = $2; }
 
 declarations: declaration { $$ = new_astnode(DECLARATIONS); $$->name = "DECLARATIONS"; $$->child[0] = $1; }
 	    | declarations declaration { $$ = new_astnode(DECLARATIONS); $$->name = "DECLARATIONS"; $$->child[0] = $1; $$->child[1] = $2; }
 
-declaration: TYPE ID SEMICOLON { $$ = new_astnode(DECLARATION); $$->name = "DECLARATION"; $$->val.str = $2; $$->data_type = AST_ID_T; }
+declaration: TYPE ID SEMICOLON { $$ = new_astnode(DECLARATION); $$->name = "DECLARATION"; $$->val.str = $2; $$->data_type = $1; }
+		| TYPE ID ASSIGN expression SEMICOLON { $$ = new_astnode(DECLARATION_ASSIGN); $$->name = "DECLARATION_ASSIGN"; $$->val.str = $2; $$->data_type = $1; $$->child[0] = $4; }
 
 statements: statement { $$ = new_astnode(STATEMENTS); $$->name = "STATEMENTS"; $$->child[0] = $1; }
 	  | statements statement { $$ = new_astnode(STATEMENTS); $$->name = "STATEMENTS"; $$->child[0] = $1; $$->child[1] = $2; }
 
-statement: assignment { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
+statement: assignment SEMICOLON { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | if_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | for_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | return_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
@@ -193,7 +201,7 @@ statement: assignment { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$-
 	 | expression SEMICOLON { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 
 
-assignment: ID ASSIGN expression SEMICOLON { $$ = new_astnode(ASSIGNMENT); $$->name = "ASSIGNMENT"; $$->val.str = $1; $$->data_type = AST_ID_T; $$->child[0] = $3; }
+assignment: ID ASSIGN expression { $$ = new_astnode(ASSIGNMENT); $$->name = "ASSIGNMENT"; $$->val.str = $1; $$->data_type = AST_ID_T; $$->child[0] = $3; }
 
 if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(IF); $$->name = "IF"; $$->child[0] = $3; $$->child[1] = $6; }
 	    | IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(IFELSE); $$->name = "IFELSE"; $$->child[0] = $3; $$->child[1] = $6; $$->child[2] = $10; }
@@ -204,9 +212,8 @@ for_statement: FOR ROUND_OPEN expression SEMICOLON assignment ROUND_CLOSE CURLY_
 return_statement: RETURN expression SEMICOLON { $$ = new_astnode(RETURN); $$->name = "RETURN"; $$->child[0] = $2; }
 
 print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON { $$ = new_astnode(PRINT); $$->name = "PRINT"; $$->child[0] = $3; }
-		| PRINT ROUND_OPEN STR ROUND_CLOSE SEMICOLON { $$ = new_astnode(PRINT_STR); $$->name = "PRINT_STR"; $$->val.str = $3; $$->data_type = AST_STR_T; }
 
-scan_statement: SCAN ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode(SCAN); $$->name = "SCAN"; $$->val.str = $3; $$->data_type = AST_ID_T; }
+scan_statement: SCAN ROUND_OPEN TYPE ROUND_CLOSE ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode(SCAN); $$->name = "SCAN"; $$->val.str = $6; $$->data_type = $3; }
 
 rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode(RAND_INT); $$->name = "RAND_INT";  $$->val.str = $3; $$->data_type = AST_ID_T; }
 
@@ -234,22 +241,30 @@ term: factor { $$ = new_astnode(TERM_FACTOR); $$->name = "TERM_FACTOR"; $$->chil
 	| term DIV factor { $$ = new_astnode(TERM_DIV); $$->name = "TERM_DIV"; $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "/"; $$->data_type = AST_STR_T; }
 	| term MOD factor { $$ = new_astnode(TERM_MOD); $$->name = "TERM_MOD"; $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "%"; $$->data_type = AST_STR_T; }
 
-factor: ID { $$ = new_astnode(FACTOR_ID); $$->name = "FACTOR_ID"; $$->val.str = $1; $$->data_type = AST_NUM_T; }
-    | NUM { $$ = new_astnode(FACTOR_NUM); $$->name = "FACTOR_NUM"; $$->val.num = $1; $$->data_type = AST_NUM_T; }
-	| REAL { $$ = new_astnode(FACTOR_REAL); $$->name = "FACTOR_REAL"; $$->val.real = $1; $$->data_type = AST_REAL_T; }
+factor: ID { $$ = new_astnode(FACTOR_ID); $$->name = "FACTOR_ID"; $$->val.str = $1; $$->data_type = AST_INT_T; }
+    | NUM { $$ = new_astnode(FACTOR_NUM); $$->name = "FACTOR_NUM"; $$->val.num = $1; $$->data_type = AST_INT_T; }
+	| REAL { $$ = new_astnode(FACTOR_REAL); $$->name = "FACTOR_REAL"; $$->val.real = $1; $$->data_type = AST_DOUBLE_T; }
+	| STR { $$ = new_astnode(FACTOR_STRING); $$->name = "FACTOR_STRING"; $$->val.str = $1; $$->data_type = AST_STR_T; }
+	| CHR { $$ = new_astnode(FACTOR_CHAR); $$->name = "FACTOR_CHAR"; $$->val.chr = $1; $$->data_type = AST_CHAR_T; }
 	| function_call { $$ = new_astnode(FACTOR_FUNCTION_CALL); $$->name = "FACTOR_FUNCTION_CALL"; $$->child[0] = $1; }
 	| ROUND_OPEN expression ROUND_CLOSE { $$ = new_astnode(FACTOR_PARENTHESIS); $$->name = "FACTOR_PARENTHESIS"; $$->child[0] = $2; $$->val.str = "(expr)"; $$->data_type = AST_STR_T; }
-	| RAND_INT ROUND_OPEN NUM ROUND_CLOSE { $$ = new_astnode(FACTOR_RAND); $$->name = "FACTOR_RAND"; $$->val.num = $3; $$->data_type = AST_NUM_T; }
+	| RAND_INT ROUND_OPEN NUM ROUND_CLOSE { $$ = new_astnode(FACTOR_RAND); $$->name = "FACTOR_RAND"; $$->val.num = $3; $$->data_type = AST_INT_T; }
 
 
 
 %%
 
 // C Code
+const char* token_name(int t) {
+    return yysymbol_name(YYTRANSLATE(t));
+}
+
+
 int main(int arc, char **argv)
 {
     yy_flex_debug = 0;
     yydebug = 0;
+	token_table = yytname;
     yyin = fopen(argv[1], "r");
     return yyparse();
 }
