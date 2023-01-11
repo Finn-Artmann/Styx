@@ -97,7 +97,7 @@
 %token TERM_MOD FACTOR_ID FACTOR_NUM FACTOR_REAL FACTOR_PARENTHESIS FACTOR_FUNCTION_CALL
 %token FACTOR_RAND IFELSE PRINT_STR DECLARATION GLOBAL_DECLARATION FUNCTION_CALL PARAMETER
 %token FUNCTION ARG_EXPR ARGS_EXPR DECLARATION_ASSIGN FACTOR_STRING FACTOR_CHAR PRINT_WIDTH
-%token SYSTEM_CALL STATEMENT_BLOCK
+%token SYSTEM_CALL STATEMENT_BLOCK GLOBAL_DECLARATION_ASSIGN
 
 
 %%
@@ -167,7 +167,8 @@ body: statements { $$ = new_astnode(BODY); $$->name = "BODY"; $$->child[0] = $1;
 
 
 
-global_declaration: GLOBAL TYPE ID SEMICOLON { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->val.str = $3; $$->data_type = $2; }
+global_declaration: GLOBAL TYPE ID SEMICOLON { $$ = new_astnode(GLOBAL_DECLARATION); $$->name = "GLOBAL_DECLARATION"; $$->val.str = $3; $$->data_type = $2; }
+		| GLOBAL TYPE ID ASSIGN expression SEMICOLON { $$ = new_astnode(GLOBAL_DECLARATION_ASSIGN); $$->name = "GLOBAL_DECLARATION_ASSIGN"; $$->val.str = $3; $$->data_type = $2; $$->child[0] = $5; }
 
 
 declaration: TYPE ID SEMICOLON { $$ = new_astnode(DECLARATION); $$->name = "DECLARATION"; $$->val.str = $2; $$->data_type = $1; }

@@ -136,7 +136,8 @@ extern int yydebug;
     FACTOR_CHAR = 337,             /* FACTOR_CHAR  */
     PRINT_WIDTH = 338,             /* PRINT_WIDTH  */
     SYSTEM_CALL = 339,             /* SYSTEM_CALL  */
-    STATEMENT_BLOCK = 340          /* STATEMENT_BLOCK  */
+    STATEMENT_BLOCK = 340,         /* STATEMENT_BLOCK  */
+    GLOBAL_DECLARATION_ASSIGN = 341 /* GLOBAL_DECLARATION_ASSIGN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -153,7 +154,7 @@ union YYSTYPE
 	double real;
 	struct astnode* ast;
 
-#line 157 "build/styx.tab.h"
+#line 158 "build/styx.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

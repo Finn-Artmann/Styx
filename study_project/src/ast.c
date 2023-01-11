@@ -1044,7 +1044,40 @@ astnode_t *exec_ast(astnode_t *root)
     }
     break;
 
-    case GLOBAL_DECLARATION: // TODO: Add global declaration assign
+    case GLOBAL_DECLARATION_ASSIGN:
+    {
+        astnode_t *val = exec_ast(root->child[0]);
+        val_t variable;
+
+        switch (root->data_type)
+        {
+        case AST_DOUBLE_T:
+            variable.real = val->val.real;
+            var_declare_global(root->val.str, &variable.real, AST_DOUBLE_T);
+            break;
+        case AST_INT_T:
+            variable.num = val->val.num;
+            var_declare_global(root->val.str, &variable.num, AST_INT_T);
+            break;
+
+        case AST_STR_T:
+            variable.str = val->val.str;
+            var_declare_global(root->val.str, variable.str, AST_STR_T);
+            break;
+
+        case AST_CHAR_T:
+            variable.chr = val->val.chr;
+            var_declare_global(root->val.str, &variable.chr, AST_CHAR_T);
+            break;
+
+        default:
+            printf("ERROR: Unsupported data type for global declaration.\n");
+            exit(1);
+        }
+    }
+    break;
+
+    case GLOBAL_DECLARATION:
     {
         val_t inital_val;
         switch (root->data_type)
