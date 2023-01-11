@@ -965,11 +965,12 @@ astnode_t *exec_ast(astnode_t *root)
     break;
 
     case FOR:
+
         // TODO: Add assignment/declaration in for loop; add different types
         var_enter_block();
-        for (; exec_ast(root->child[0])->val.num; exec_ast(root->child[1]))
+        for (exec_ast(root->child[0]); exec_ast(root->child[1])->val.num; exec_ast(root->child[2]))
         {
-            exec_ast(root->child[2]);
+            exec_ast(root->child[3]);
         }
         var_leave_block();
         break;
@@ -1217,7 +1218,7 @@ astnode_t *exec_ast(astnode_t *root)
 
     case ARG_EXPR:
     {
-        astnode_t *arg = exec_ast(root->child[0]); // TODO: Add other types
+        astnode_t *arg = exec_ast(root->child[0]);
 
         switch (arg->data_type)
         {

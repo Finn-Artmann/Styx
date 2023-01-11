@@ -196,7 +196,7 @@ if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE {
 	    | IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(IFELSE); $$->name = "IFELSE"; $$->child[0] = $3; $$->child[1] = $6; $$->child[2] = $10; }
 	    
 
-for_statement: FOR ROUND_OPEN expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(FOR); $$->name = "FOR"; $$->child[0] = $3; $$->child[1] = $5; $$->child[2] = $8; }
+for_statement: FOR ROUND_OPEN declaration expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(FOR); $$->name = "FOR"; $$->child[0] = $3; $$->child[1] = $4; $$->child[2] = $6; $$->child[3] = $9; }
 
 return_statement: RETURN expression SEMICOLON { $$ = new_astnode(RETURN); $$->name = "RETURN"; $$->child[0] = $2; }
 
