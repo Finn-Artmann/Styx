@@ -604,8 +604,6 @@ astnode_t *exec_ast(astnode_t *root)
     case MAIN:
     case STATEMENTS:
     case STATEMENT:
-    case DECLARATIONS:
-    case GLOBAL_DECLARATIONS:
     case FUNCTIONS:
     case PARAMETERS:
         for (int i = 0; i < MAXCHILDREN; i++)
@@ -813,6 +811,14 @@ astnode_t *exec_ast(astnode_t *root)
     }
     break;
 
+    case STATEMENT_BLOCK:
+    {
+        var_enter_block();
+        exec_ast(root->child[0]);
+        var_leave_block();
+    }
+    break;
+
     case IFELSE:
     {
         astnode_t *condition = exec_ast(root->child[0]);
@@ -960,11 +966,12 @@ astnode_t *exec_ast(astnode_t *root)
 
     case FOR:
         // TODO: Add assignment/declaration in for loop; add different types
-
+        var_enter_block();
         for (; exec_ast(root->child[0])->val.num; exec_ast(root->child[1]))
         {
             exec_ast(root->child[2]);
         }
+        var_leave_block();
         break;
 
     case DECLARATION:

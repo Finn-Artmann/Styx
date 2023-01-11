@@ -79,7 +79,6 @@
 %token CURLY_CLOSE
 
 
-
 %token <str> STR ID OP 
 %token <chr> CHR
 %token <num> NUM TYPE
@@ -87,7 +86,7 @@
 %start start
 
 %type <ast> start program functions function function_call arguments parameters parameter 
-%type <ast> main body statements statement declarations declaration global_declarations 
+%type <ast> main body statements statement declaration 
 %type <ast> global_declaration assignment expression if_statement for_statement return_statement 
 %type <ast> print_statement scan_statement rand_int_statement term factor
 
@@ -98,7 +97,7 @@
 %token TERM_MOD FACTOR_ID FACTOR_NUM FACTOR_REAL FACTOR_PARENTHESIS FACTOR_FUNCTION_CALL
 %token FACTOR_RAND IFELSE PRINT_STR DECLARATION GLOBAL_DECLARATION FUNCTION_CALL PARAMETER
 %token FUNCTION ARG_EXPR ARGS_EXPR DECLARATION_ASSIGN FACTOR_STRING FACTOR_CHAR PRINT_WIDTH
-%token SYSTEM_CALL
+%token SYSTEM_CALL STATEMENT_BLOCK
 
 
 %%
@@ -109,25 +108,15 @@
 start: program { print_ast($1, 0); printf("\n"); exec_ast($1);} //TODO: Execute AST
 
 
-
-program: global_declarations functions main {
+program: functions main {
        		printf(">>> [SŦYX parser]: Program syntax is valid\n");
                  
                 $$ = new_astnode(PROGRAM);
 				$$->name = "PROGRAM";
                 $$->child[0] = $1;
                 $$->child[1] = $2;
-				$$->child[2] = $3;
 
 	} 
-    |functions main {
-		printf(">>> [SŦYX parser]: Program syntax is valid\n");
-		
-		$$ = new_astnode(PROGRAM);
-		$$->name = "PROGRAM";
-		$$->child[0] = $1;
-		$$->child[1] = $2;
-	}
 	| main {
 		printf(">>> [SŦYX parser] Program syntax is valid\n");
 		
@@ -174,17 +163,12 @@ main: TYPE MAIN ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE
     }
 
 body: statements { $$ = new_astnode(BODY); $$->name = "BODY"; $$->child[0] = $1; }
-    | declarations statements { $$ = new_astnode(BODY); $$->name = "BODY"; $$->child[0] = $1; $$->child[1] = $2; }
-    | declarations { $$ = new_astnode(BODY); $$->name = "BODY"; $$->child[0] = $1; }
     | %empty { $$ = NULL; }
 
-global_declarations: global_declaration { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->child[0] = $1; }
-	 | global_declarations global_declaration { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->child[0] = $1; $$->child[1] = $2; }
+
 
 global_declaration: GLOBAL TYPE ID SEMICOLON { $$ = new_astnode(GLOBAL_DECLARATIONS); $$->name = "GLOBAL_DECLARATIONS"; $$->val.str = $3; $$->data_type = $2; }
 
-declarations: declaration { $$ = new_astnode(DECLARATIONS); $$->name = "DECLARATIONS"; $$->child[0] = $1; }
-	    | declarations declaration { $$ = new_astnode(DECLARATIONS); $$->name = "DECLARATIONS"; $$->child[0] = $1; $$->child[1] = $2; }
 
 declaration: TYPE ID SEMICOLON { $$ = new_astnode(DECLARATION); $$->name = "DECLARATION"; $$->val.str = $2; $$->data_type = $1; }
 		| TYPE ID ASSIGN expression SEMICOLON { $$ = new_astnode(DECLARATION_ASSIGN); $$->name = "DECLARATION_ASSIGN"; $$->val.str = $2; $$->data_type = $1; $$->child[0] = $4; }
@@ -199,9 +183,11 @@ statement: assignment SEMICOLON { $$ = new_astnode(STATEMENT); $$->name = "STATE
 	 | print_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | scan_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | rand_int_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
-	 | CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $2; }
+	 | CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(STATEMENT_BLOCK); $$->name = "STATEMENT_BLOCK"; $$->child[0] = $2; }
 	 | expression SEMICOLON { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
-
+	 | declaration { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
+	 | global_declaration { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
+	 
 
 assignment: ID ASSIGN expression { $$ = new_astnode(ASSIGNMENT); $$->name = "ASSIGNMENT"; $$->val.str = $1; $$->data_type = AST_ID_T; $$->child[0] = $3; }
 
