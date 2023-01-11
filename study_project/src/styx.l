@@ -103,6 +103,7 @@ SCAN "ẞ©Æ’"
 MAIN "ºÆı’"
 RAND_INT "®Æ’Ðı’Ŧ"
 GLOBAL "ŊŁØ‘ÆŁ"
+SYSTEM "ẞ›ẞŦ€º"
 
 /* Special */
 ROUND_OPEN "("
@@ -176,6 +177,7 @@ COMMA "?"
 {RAND_INT} { yylval.num = rand(); return RAND_INT; }
 {GLOBAL} { return GLOBAL; }
 {MAIN} { yylval.str = strdup(yytext); return MAIN; }
+{SYSTEM} { return SYSTEM; }
 
 {IDENTIFIER} { yylval.str = strdup(yytext); return ID; }
 

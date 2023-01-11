@@ -785,6 +785,13 @@ astnode_t *exec_ast(astnode_t *root)
         return exec_ast(root->child[0]);
         break;
 
+    case SYSTEM_CALL:
+    {
+        root->val.num = system(root->val.str);
+        return root;
+    }
+    break;
+
     case FACTOR_RAND:
     {
         srand(time(NULL));

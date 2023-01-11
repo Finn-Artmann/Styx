@@ -50,6 +50,7 @@
 %token SCAN
 %token RAND_INT
 %token GLOBAL
+%token SYSTEM
 %token <str>MAIN
 
 
@@ -97,6 +98,7 @@
 %token TERM_MOD FACTOR_ID FACTOR_NUM FACTOR_REAL FACTOR_PARENTHESIS FACTOR_FUNCTION_CALL
 %token FACTOR_RAND IFELSE PRINT_STR DECLARATION GLOBAL_DECLARATION FUNCTION_CALL PARAMETER
 %token FUNCTION ARG_EXPR ARGS_EXPR DECLARATION_ASSIGN FACTOR_STRING FACTOR_CHAR PRINT_WIDTH
+%token SYSTEM_CALL
 
 
 %%
@@ -219,6 +221,7 @@ scan_statement: SCAN ROUND_OPEN TYPE ROUND_CLOSE ROUND_OPEN ID ROUND_CLOSE SEMIC
 rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode(RAND_INT); $$->name = "RAND_INT";  $$->val.str = $3; $$->data_type = AST_ID_T; }
 
 function_call: ID ROUND_OPEN arguments ROUND_CLOSE { $$ = new_astnode(FUNCTION_CALL); $$->name = "FUNCTION_CALL";  $$->val.str = $1; $$->data_type = AST_ID_T; $$->child[0] = $3; }
+			| SYSTEM ROUND_OPEN STR ROUND_CLOSE { $$ = new_astnode(SYSTEM_CALL); $$->name = "SYSTEM_CALL";  $$->data_type = AST_INT_T; $$->val.str = $3; }
 
 arguments: expression { $$ = new_astnode(ARG_EXPR); $$->name = "ARG_EXPR";  $$->child[0] = $1; }
 	 | arguments COMMA expression { $$ = new_astnode(ARGS_EXPR); $$->name = "ARGS_EXPR"; $$->child[0] = $1; $$->child[1] = $3; }
