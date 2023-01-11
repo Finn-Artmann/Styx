@@ -595,7 +595,7 @@ astnode_t *operation(astnode_t *root, const int op)
 // Execute AST
 astnode_t *exec_ast(astnode_t *root)
 {
-    printf("Executing AST Node %d: %s\n", root->id, ast_token2str(root->type)); // For debugging
+    // printf("Executing AST Node %d: %s\n", root->id, ast_token2str(root->type)); // For debugging
 
     switch (root->type)
     {
@@ -851,6 +851,50 @@ astnode_t *exec_ast(astnode_t *root)
 
         default:
             printf("ERROR: Unsupported data type for PRINT.\n");
+            exit(1);
+        }
+    }
+    break;
+
+    case PRINT_WIDTH:
+    {
+        astnode_t *width_node = exec_ast(root->child[0]);
+
+        if (width_node->data_type != AST_INT_T)
+        {
+            printf("ERROR: PRINT_WIDTH requires an integer.\n");
+            exit(1);
+        }
+
+        int width = width_node->val.num;
+        astnode_t *val = exec_ast(root->child[1]);
+
+        switch (val->data_type)
+        {
+
+        case AST_INT_T:
+            printf("%*d", width, val->val.num);
+            break;
+
+        case AST_DOUBLE_T:
+            printf("%*f", width, val->val.real);
+            break;
+
+        case AST_ID_T: // Fallthrough
+        case AST_STR_T:
+            printf("%*s", width, val->val.str);
+            break;
+
+        case AST_CHAR_T:
+            printf("%*c", width, val->val.chr);
+            break;
+
+        case AST_NONE_T:
+            printf("%*s", width, "NULL");
+            break;
+
+        default:
+            printf("ERROR: Unsupported data type for PRINT_WIDTH.\n");
             exit(1);
         }
     }

@@ -132,7 +132,8 @@ extern int yydebug;
     ARGS_EXPR = 333,               /* ARGS_EXPR  */
     DECLARATION_ASSIGN = 334,      /* DECLARATION_ASSIGN  */
     FACTOR_STRING = 335,           /* FACTOR_STRING  */
-    FACTOR_CHAR = 336              /* FACTOR_CHAR  */
+    FACTOR_CHAR = 336,             /* FACTOR_CHAR  */
+    PRINT_WIDTH = 337              /* PRINT_WIDTH  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -149,7 +150,7 @@ union YYSTYPE
 	double real;
 	struct astnode* ast;
 
-#line 153 "build/styx.tab.h"
+#line 154 "build/styx.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
