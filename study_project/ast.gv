@@ -1,811 +1,288 @@
 digraph ast {
-n177 [label="id: 177
+n49 [label="id: 49
  PROGRAM
- none_t"];
-n177 -> n120;
-n120 [label="id: 120
- FUNCTIONS
- none_t"];
-n120 -> n119;
-n119 [label="id: 119
- FUNCTION
- int
- NUM: 883184944"];
-n119 -> n118;
-n118 [label="id: 118
+ none_t
+ is_const: 0"];
+n49 -> n48;
+n48 [label="id: 48
+ MAIN
+ id
+ ID: ºÆı’
+ is_const: 0"];
+n48 -> n47;
+n47 [label="id: 47
  BODY
- none_t"];
-n118 -> n117;
-n117 [label="id: 117
+ none_t
+ is_const: 0"];
+n47 -> n46;
+n46 [label="id: 46
  STATEMENTS
- none_t"];
-n117 -> n17;
-n17 [label="id: 17
+ none_t
+ is_const: 0"];
+n46 -> n40;
+n40 [label="id: 40
  STATEMENTS
- none_t"];
-n17 -> n11;
-n11 [label="id: 11
- STATEMENTS
- none_t"];
-n11 -> n5;
+ none_t
+ is_const: 0"];
+n40 -> n5;
 n5 [label="id: 5
  STATEMENTS
- none_t"];
-n5 -> n2;
-n2 [label="id: 2
- STATEMENTS
- none_t"];
-n2 -> n1;
-n1 [label="id: 1
- STATEMENT
- none_t"];
-n1 -> n0;
-n0 [label="id: 0
- DECLARATION
- int
- NUM: 883184976"];
+ none_t
+ is_const: 0"];
 n5 -> n4;
 n4 [label="id: 4
  STATEMENT
- none_t"];
+ none_t
+ is_const: 0"];
 n4 -> n3;
 n3 [label="id: 3
- DECLARATION
+ DECLARATION_ASSIGN
  int
- NUM: 883185248"];
-n11 -> n10;
-n10 [label="id: 10
+ NUM: 73631056
+ is_const: 0"];
+n3 -> n2;
+n2 [label="id: 2
+ EXPR_TERM
+ int
+ NUM: 0
+ is_const: 1"];
+n2 -> n1;
+n1 [label="id: 1
+ TERM_FACTOR
+ int
+ NUM: 0
+ is_const: 1"];
+n1 -> n0;
+n0 [label="id: 0
+ FACTOR_NUM
+ int
+ NUM: 1
+ is_const: 1"];
+n40 -> n39;
+n39 [label="id: 39
  STATEMENT
- none_t"];
-n10 -> n9;
+ none_t
+ is_const: 0"];
+n39 -> n38;
+n38 [label="id: 38
+ FOR
+ none_t
+ is_const: 0"];
+n38 -> n9;
 n9 [label="id: 9
- ASSIGNMENT
- id
- ID: ’↑º"];
+ DECLARATION_ASSIGN
+ int
+ NUM: 73631664
+ is_const: 0"];
 n9 -> n8;
 n8 [label="id: 8
  EXPR_TERM
  int
- NUM: 0"];
+ NUM: 0
+ is_const: 1"];
 n8 -> n7;
 n7 [label="id: 7
  TERM_FACTOR
  int
- NUM: 0"];
+ NUM: 0
+ is_const: 1"];
 n7 -> n6;
 n6 [label="id: 6
- FACTOR_RAND
- int
- NUM: 1000"];
-n17 -> n16;
-n16 [label="id: 16
- STATEMENT
- none_t"];
-n16 -> n15;
-n15 [label="id: 15
- PRINT
- none_t"];
-n15 -> n14;
-n14 [label="id: 14
- EXPR_TERM
- string
- STR: (null)"];
-n14 -> n13;
-n13 [label="id: 13
- TERM_FACTOR
- string
- STR: (null)"];
-n13 -> n12;
-n12 [label="id: 12
- FACTOR_STRING
- string
- STR: Guess the number between 0 and 1000
-"];
-n117 -> n116;
-n116 [label="id: 116
- STATEMENT
- none_t"];
-n116 -> n115;
-n115 [label="id: 115
- FOR
- none_t"];
-n115 -> n21;
-n21 [label="id: 21
- DECLARATION_ASSIGN
- int
- NUM: 883164288"];
-n21 -> n20;
-n20 [label="id: 20
- EXPR_TERM
- int
- NUM: 0"];
-n20 -> n19;
-n19 [label="id: 19
- TERM_FACTOR
- int
- NUM: 0"];
-n19 -> n18;
-n18 [label="id: 18
  FACTOR_NUM
  int
- NUM: 1"];
-n115 -> n27;
-n27 [label="id: 27
- EXPR_GT
- none_t"];
-n27 -> n24;
-n24 [label="id: 24
- EXPR_TERM
+ NUM: 0
+ is_const: 1"];
+n38 -> n15;
+n15 [label="id: 15
+ EXPR_LT
  int
- NUM: 0"];
-n24 -> n23;
-n23 [label="id: 23
+ NUM: 0
+ is_const: 0"];
+n15 -> n12;
+n12 [label="id: 12
+ EXPR_TERM
+ id
+ ID: (null)
+ is_const: 0"];
+n12 -> n11;
+n11 [label="id: 11
+ TERM_FACTOR
+ id
+ ID: (null)
+ is_const: 0"];
+n11 -> n10;
+n10 [label="id: 10
+ FACTOR_ID
+ id
+ ID: Æ
+ is_const: 0"];
+n15 -> n14;
+n14 [label="id: 14
  TERM_FACTOR
  int
- NUM: 0"];
-n23 -> n22;
-n22 [label="id: 22
- FACTOR_ID
+ NUM: 0
+ is_const: 1"];
+n14 -> n13;
+n13 [label="id: 13
+ FACTOR_NUM
  int
- NUM: 883186928"];
+ NUM: 5
+ is_const: 1"];
+n38 -> n22;
+n22 [label="id: 22
+ ASSIGNMENT
+ id
+ ID: Æ
+ is_const: 0"];
+n22 -> n21;
+n21 [label="id: 21
+ EXPR_PLUS
+ int
+ NUM: 5
+ is_const: 0"];
+n21 -> n18;
+n18 [label="id: 18
+ EXPR_TERM
+ id
+ ID: (null)
+ is_const: 0"];
+n18 -> n17;
+n17 [label="id: 17
+ TERM_FACTOR
+ id
+ ID: (null)
+ is_const: 0"];
+n17 -> n16;
+n16 [label="id: 16
+ FACTOR_ID
+ id
+ ID: Æ
+ is_const: 0"];
+n21 -> n20;
+n20 [label="id: 20
+ TERM_FACTOR
+ int
+ NUM: 0
+ is_const: 1"];
+n20 -> n19;
+n19 [label="id: 19
+ FACTOR_NUM
+ int
+ NUM: 1
+ is_const: 1"];
+n38 -> n37;
+n37 [label="id: 37
+ BODY
+ none_t
+ is_const: 0"];
+n37 -> n36;
+n36 [label="id: 36
+ STATEMENTS
+ none_t
+ is_const: 0"];
+n36 -> n35;
+n35 [label="id: 35
+ STATEMENT
+ none_t
+ is_const: 0"];
+n35 -> n34;
+n34 [label="id: 34
+ ASSIGNMENT
+ id
+ ID: Ł
+ is_const: 0"];
+n34 -> n33;
+n33 [label="id: 33
+ EXPR_TERM
+ string
+ STR: (null)
+ is_const: 0"];
+n33 -> n32;
+n32 [label="id: 32
+ TERM_MUL
+ int
+ NUM: 32
+ is_const: 0"];
+n32 -> n24;
+n24 [label="id: 24
+ TERM_FACTOR
+ id
+ ID: (null)
+ is_const: 0"];
+n24 -> n23;
+n23 [label="id: 23
+ FACTOR_ID
+ id
+ ID: Ł
+ is_const: 0"];
+n32 -> n31;
+n31 [label="id: 31
+ FACTOR_PARENTHESIS
+ string
+ STR: (expr)
+ is_const: 0"];
+n31 -> n30;
+n30 [label="id: 30
+ EXPR_PLUS
+ int
+ NUM: 2
+ is_const: 1"];
+n30 -> n27;
+n27 [label="id: 27
+ EXPR_TERM
+ int
+ NUM: 0
+ is_const: 1"];
 n27 -> n26;
 n26 [label="id: 26
  TERM_FACTOR
  int
- NUM: 0"];
+ NUM: 0
+ is_const: 1"];
 n26 -> n25;
 n25 [label="id: 25
  FACTOR_NUM
  int
- NUM: 0"];
-n115 -> n34;
-n34 [label="id: 34
- ASSIGNMENT
- id
- ID: ı"];
-n34 -> n33;
-n33 [label="id: 33
- EXPR_PLUS
- none_t"];
-n33 -> n30;
-n30 [label="id: 30
- EXPR_TERM
- int
- NUM: 0"];
+ NUM: 1
+ is_const: 1"];
 n30 -> n29;
 n29 [label="id: 29
  TERM_FACTOR
  int
- NUM: 0"];
+ NUM: 0
+ is_const: 1"];
 n29 -> n28;
 n28 [label="id: 28
- FACTOR_ID
- int
- NUM: 883187472"];
-n33 -> n32;
-n32 [label="id: 32
- TERM_FACTOR
- int
- NUM: 0"];
-n32 -> n31;
-n31 [label="id: 31
  FACTOR_NUM
  int
- NUM: 1"];
-n115 -> n114;
-n114 [label="id: 114
- BODY
- none_t"];
-n114 -> n113;
-n113 [label="id: 113
- STATEMENTS
- none_t"];
-n113 -> n37;
-n37 [label="id: 37
- STATEMENTS
- none_t"];
-n37 -> n36;
-n36 [label="id: 36
+ NUM: 1
+ is_const: 1"];
+n46 -> n45;
+n45 [label="id: 45
  STATEMENT
- none_t"];
-n36 -> n35;
-n35 [label="id: 35
- SCAN
- int
- NUM: 883188064"];
-n113 -> n112;
-n112 [label="id: 112
- STATEMENT
- none_t"];
-n112 -> n111;
-n111 [label="id: 111
- IFELSE
- none_t"];
-n111 -> n43;
+ none_t
+ is_const: 0"];
+n45 -> n44;
+n44 [label="id: 44
+ PRINT
+ none_t
+ is_const: 0"];
+n44 -> n43;
 n43 [label="id: 43
- EXPR_EQ
- none_t"];
-n43 -> n40;
-n40 [label="id: 40
  EXPR_TERM
- int
- NUM: 0"];
-n40 -> n39;
-n39 [label="id: 39
- TERM_FACTOR
- int
- NUM: 0"];
-n39 -> n38;
-n38 [label="id: 38
- FACTOR_ID
- int
- NUM: 883188336"];
+ id
+ ID: (null)
+ is_const: 0"];
 n43 -> n42;
 n42 [label="id: 42
  TERM_FACTOR
- int
- NUM: 0"];
+ id
+ ID: (null)
+ is_const: 0"];
 n42 -> n41;
 n41 [label="id: 41
  FACTOR_ID
- int
- NUM: 883188608"];
-n111 -> n77;
-n77 [label="id: 77
- BODY
- none_t"];
-n77 -> n76;
-n76 [label="id: 76
- STATEMENTS
- none_t"];
-n76 -> n67;
-n67 [label="id: 67
- STATEMENTS
- none_t"];
-n67 -> n61;
-n61 [label="id: 61
- STATEMENTS
- none_t"];
-n61 -> n55;
-n55 [label="id: 55
- STATEMENTS
- none_t"];
-n55 -> n49;
-n49 [label="id: 49
- STATEMENTS
- none_t"];
-n49 -> n48;
-n48 [label="id: 48
- STATEMENT
- none_t"];
-n48 -> n47;
-n47 [label="id: 47
- PRINT
- none_t"];
-n47 -> n46;
-n46 [label="id: 46
- EXPR_TERM
- string
- STR: (null)"];
-n46 -> n45;
-n45 [label="id: 45
- TERM_FACTOR
- string
- STR: (null)"];
-n45 -> n44;
-n44 [label="id: 44
- FACTOR_STRING
- string
- STR: CORRECT!
-"];
-n55 -> n54;
-n54 [label="id: 54
- STATEMENT
- none_t"];
-n54 -> n53;
-n53 [label="id: 53
- PRINT
- none_t"];
-n53 -> n52;
-n52 [label="id: 52
- EXPR_TERM
- string
- STR: (null)"];
-n52 -> n51;
-n51 [label="id: 51
- TERM_FACTOR
- string
- STR: (null)"];
-n51 -> n50;
-n50 [label="id: 50
- FACTOR_STRING
- string
- STR: Number of guesses needed: "];
-n61 -> n60;
-n60 [label="id: 60
- STATEMENT
- none_t"];
-n60 -> n59;
-n59 [label="id: 59
- PRINT
- none_t"];
-n59 -> n58;
-n58 [label="id: 58
- EXPR_TERM
- int
- NUM: 0"];
-n58 -> n57;
-n57 [label="id: 57
- TERM_FACTOR
- int
- NUM: 0"];
-n57 -> n56;
-n56 [label="id: 56
- FACTOR_ID
- int
- NUM: 883189920"];
-n67 -> n66;
-n66 [label="id: 66
- STATEMENT
- none_t"];
-n66 -> n65;
-n65 [label="id: 65
- PRINT
- none_t"];
-n65 -> n64;
-n64 [label="id: 64
- EXPR_TERM
- string
- STR: (null)"];
-n64 -> n63;
-n63 [label="id: 63
- TERM_FACTOR
- string
- STR: (null)"];
-n63 -> n62;
-n62 [label="id: 62
- FACTOR_STRING
- string
- STR: 
-"];
-n76 -> n75;
-n75 [label="id: 75
- STATEMENT
- none_t"];
-n75 -> n74;
-n74 [label="id: 74
- ASSIGNMENT
  id
- ID: ı"];
-n74 -> n73;
-n73 [label="id: 73
- EXPR_MINUS
- none_t"];
-n73 -> n70;
-n70 [label="id: 70
- EXPR_TERM
- int
- NUM: 0"];
-n70 -> n69;
-n69 [label="id: 69
- TERM_FACTOR
- int
- NUM: 0"];
-n69 -> n68;
-n68 [label="id: 68
- FACTOR_NUM
- int
- NUM: 0"];
-n73 -> n72;
-n72 [label="id: 72
- TERM_FACTOR
- int
- NUM: 0"];
-n72 -> n71;
-n71 [label="id: 71
- FACTOR_NUM
- int
- NUM: 1"];
-n111 -> n110;
-n110 [label="id: 110
- BODY
- none_t"];
-n110 -> n109;
-n109 [label="id: 109
- STATEMENTS
- none_t"];
-n109 -> n93;
-n93 [label="id: 93
- STATEMENTS
- none_t"];
-n93 -> n92;
-n92 [label="id: 92
- STATEMENT
- none_t"];
-n92 -> n91;
-n91 [label="id: 91
- IF
- none_t"];
-n91 -> n83;
-n83 [label="id: 83
- EXPR_LT
- none_t"];
-n83 -> n80;
-n80 [label="id: 80
- EXPR_TERM
- int
- NUM: 0"];
-n80 -> n79;
-n79 [label="id: 79
- TERM_FACTOR
- int
- NUM: 0"];
-n79 -> n78;
-n78 [label="id: 78
- FACTOR_ID
- int
- NUM: 883191776"];
-n83 -> n82;
-n82 [label="id: 82
- TERM_FACTOR
- int
- NUM: 0"];
-n82 -> n81;
-n81 [label="id: 81
- FACTOR_ID
- int
- NUM: 883192048"];
-n91 -> n90;
-n90 [label="id: 90
- BODY
- none_t"];
-n90 -> n89;
-n89 [label="id: 89
- STATEMENTS
- none_t"];
-n89 -> n88;
-n88 [label="id: 88
- STATEMENT
- none_t"];
-n88 -> n87;
-n87 [label="id: 87
- PRINT
- none_t"];
-n87 -> n86;
-n86 [label="id: 86
- EXPR_TERM
- string
- STR: (null)"];
-n86 -> n85;
-n85 [label="id: 85
- TERM_FACTOR
- string
- STR: (null)"];
-n85 -> n84;
-n84 [label="id: 84
- FACTOR_STRING
- string
- STR: Your guess is lower than the actual number
-"];
-n109 -> n108;
-n108 [label="id: 108
- STATEMENT
- none_t"];
-n108 -> n107;
-n107 [label="id: 107
- IF
- none_t"];
-n107 -> n99;
-n99 [label="id: 99
- EXPR_GT
- none_t"];
-n99 -> n96;
-n96 [label="id: 96
- EXPR_TERM
- int
- NUM: 0"];
-n96 -> n95;
-n95 [label="id: 95
- TERM_FACTOR
- int
- NUM: 0"];
-n95 -> n94;
-n94 [label="id: 94
- FACTOR_ID
- int
- NUM: 883193248"];
-n99 -> n98;
-n98 [label="id: 98
- TERM_FACTOR
- int
- NUM: 0"];
-n98 -> n97;
-n97 [label="id: 97
- FACTOR_ID
- int
- NUM: 883193520"];
-n107 -> n106;
-n106 [label="id: 106
- BODY
- none_t"];
-n106 -> n105;
-n105 [label="id: 105
- STATEMENTS
- none_t"];
-n105 -> n104;
-n104 [label="id: 104
- STATEMENT
- none_t"];
-n104 -> n103;
-n103 [label="id: 103
- PRINT
- none_t"];
-n103 -> n102;
-n102 [label="id: 102
- EXPR_TERM
- string
- STR: (null)"];
-n102 -> n101;
-n101 [label="id: 101
- TERM_FACTOR
- string
- STR: (null)"];
-n101 -> n100;
-n100 [label="id: 100
- FACTOR_STRING
- string
- STR: Your guess is higher than the actual number
-"];
-n177 -> n176;
-n176 [label="id: 176
- MAIN
- id
- ID: ºÆı’"];
-n176 -> n175;
-n175 [label="id: 175
- BODY
- none_t"];
-n175 -> n174;
-n174 [label="id: 174
- STATEMENTS
- none_t"];
-n174 -> n144;
-n144 [label="id: 144
- STATEMENTS
- none_t"];
-n144 -> n141;
-n141 [label="id: 141
- STATEMENTS
- none_t"];
-n141 -> n135;
-n135 [label="id: 135
- STATEMENTS
- none_t"];
-n135 -> n129;
-n129 [label="id: 129
- STATEMENTS
- none_t"];
-n129 -> n123;
-n123 [label="id: 123
- STATEMENTS
- none_t"];
-n123 -> n122;
-n122 [label="id: 122
- STATEMENT
- none_t"];
-n122 -> n121;
-n121 [label="id: 121
- DECLARATION
- int
- NUM: 883192352"];
-n129 -> n128;
-n128 [label="id: 128
- STATEMENT
- none_t"];
-n128 -> n127;
-n127 [label="id: 127
- ASSIGNMENT
- id
- ID: ÞŁÆ›ÆŊÆı’"];
-n127 -> n126;
-n126 [label="id: 126
- EXPR_TERM
- int
- NUM: 0"];
-n126 -> n125;
-n125 [label="id: 125
- TERM_FACTOR
- int
- NUM: 0"];
-n125 -> n124;
-n124 [label="id: 124
- FACTOR_NUM
- int
- NUM: 1"];
-n135 -> n134;
-n134 [label="id: 134
- STATEMENT
- none_t"];
-n134 -> n133;
-n133 [label="id: 133
- EXPR_TERM
- none_t"];
-n133 -> n132;
-n132 [label="id: 132
- TERM_FACTOR
- none_t"];
-n132 -> n131;
-n131 [label="id: 131
- FACTOR_FUNCTION_CALL
- none_t"];
-n131 -> n130;
-n130 [label="id: 130
- FUNCTION_CALL
- id
- ID: ÞŁÆ›"];
-n141 -> n140;
-n140 [label="id: 140
- STATEMENT
- none_t"];
-n140 -> n139;
-n139 [label="id: 139
- PRINT
- none_t"];
-n139 -> n138;
-n138 [label="id: 138
- EXPR_TERM
- string
- STR: (null)"];
-n138 -> n137;
-n137 [label="id: 137
- TERM_FACTOR
- string
- STR: (null)"];
-n137 -> n136;
-n136 [label="id: 136
- FACTOR_STRING
- string
- STR: Do you want to play again? 0 -> no, 1 -> yes
-"];
-n144 -> n143;
-n143 [label="id: 143
- STATEMENT
- none_t"];
-n143 -> n142;
-n142 [label="id: 142
- SCAN
- int
- NUM: 883193792"];
-n174 -> n173;
-n173 [label="id: 173
- STATEMENT
- none_t"];
-n173 -> n172;
-n172 [label="id: 172
- FOR
- none_t"];
-n172 -> n145;
-n145 [label="id: 145
- DECLARATION
- int
- NUM: 883193824"];
-n172 -> n151;
-n151 [label="id: 151
- EXPR_NE
- none_t"];
-n151 -> n148;
-n148 [label="id: 148
- EXPR_TERM
- int
- NUM: 0"];
-n148 -> n147;
-n147 [label="id: 147
- TERM_FACTOR
- int
- NUM: 0"];
-n147 -> n146;
-n146 [label="id: 146
- FACTOR_ID
- int
- NUM: 883197792"];
-n151 -> n150;
-n150 [label="id: 150
- TERM_FACTOR
- int
- NUM: 0"];
-n150 -> n149;
-n149 [label="id: 149
- FACTOR_NUM
- int
- NUM: 0"];
-n172 -> n155;
-n155 [label="id: 155
- ASSIGNMENT
- id
- ID: ÞŁÆ›ÆŊÆı’"];
-n155 -> n154;
-n154 [label="id: 154
- EXPR_TERM
- int
- NUM: 0"];
-n154 -> n153;
-n153 [label="id: 153
- TERM_FACTOR
- int
- NUM: 0"];
-n153 -> n152;
-n152 [label="id: 152
- FACTOR_ID
- int
- NUM: 883198336"];
-n172 -> n171;
-n171 [label="id: 171
- BODY
- none_t"];
-n171 -> n170;
-n170 [label="id: 170
- STATEMENTS
- none_t"];
-n170 -> n167;
-n167 [label="id: 167
- STATEMENTS
- none_t"];
-n167 -> n161;
-n161 [label="id: 161
- STATEMENTS
- none_t"];
-n161 -> n160;
-n160 [label="id: 160
- STATEMENT
- none_t"];
-n160 -> n159;
-n159 [label="id: 159
- EXPR_TERM
- none_t"];
-n159 -> n158;
-n158 [label="id: 158
- TERM_FACTOR
- none_t"];
-n158 -> n157;
-n157 [label="id: 157
- FACTOR_FUNCTION_CALL
- none_t"];
-n157 -> n156;
-n156 [label="id: 156
- FUNCTION_CALL
- id
- ID: ÞŁÆ›"];
-n167 -> n166;
-n166 [label="id: 166
- STATEMENT
- none_t"];
-n166 -> n165;
-n165 [label="id: 165
- PRINT
- none_t"];
-n165 -> n164;
-n164 [label="id: 164
- EXPR_TERM
- string
- STR: (null)"];
-n164 -> n163;
-n163 [label="id: 163
- TERM_FACTOR
- string
- STR: (null)"];
-n163 -> n162;
-n162 [label="id: 162
- FACTOR_STRING
- string
- STR: Do you want to play again? 0 -> no, 1 -> yes
-"];
-n170 -> n169;
-n169 [label="id: 169
- STATEMENT
- none_t"];
-n169 -> n168;
-n168 [label="id: 168
- SCAN
- int
- NUM: 883196864"];
+ ID: Ł
+ is_const: 0"];
 }

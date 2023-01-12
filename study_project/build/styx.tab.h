@@ -146,7 +146,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 36 "src/styx.y"
+#line 35 "src/styx.y"
 
 	char* str;
 	char chr;

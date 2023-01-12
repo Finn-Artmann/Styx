@@ -1,6 +1,9 @@
 #ifndef __AST_H__
 #define __AST_H__
 
+// --- Configuration options ---
+// #define DEBUG_AST
+
 // --- Abstract Syntax Tree Node ---
 
 #define MAXCHILDREN 5
@@ -30,6 +33,7 @@ struct astnode
     int type;
     int data_type;
     val_t val;
+    int is_const;
     struct astnode *child[MAXCHILDREN];
 };
 typedef struct astnode astnode_t;

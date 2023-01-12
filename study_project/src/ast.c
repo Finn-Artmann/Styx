@@ -130,6 +130,7 @@ astnode_t *new_astnode(int type)
     node->id = astNodeCount++;
     node->type = type;
     node->data_type = AST_NONE_T;
+    node->is_const = 0;
 
     for (int i = 0; i < MAXCHILDREN; i++)
     {
@@ -196,60 +197,66 @@ char *node2str(astnode_t *node)
     case AST_INT_T:
         sprintf(
             str,
-            "id: %d\n %s\n %s\n NUM: %d",
+            "id: %d\n %s\n %s\n NUM: %d\n is_const: %d",
             node->id,
             node->name,
             ast_type2str(AST_INT_T),
-            node->val.num);
+            node->val.num,
+            node->is_const);
         break;
 
     case AST_ID_T:
         sprintf(
             str,
-            "id: %d\n %s\n %s\n ID: %s",
+            "id: %d\n %s\n %s\n ID: %s\n is_const: %d",
             node->id,
             node->name,
             ast_type2str(AST_ID_T),
-            node->val.str);
+            node->val.str,
+            node->is_const);
         break;
 
     case AST_STR_T:
         sprintf(
             str,
-            "id: %d\n %s\n %s\n STR: %s",
+            "id: %d\n %s\n %s\n STR: %s\n is_const: %d",
             node->id,
             node->name,
             ast_type2str(AST_STR_T),
-            node->val.str);
+            node->val.str,
+            node->is_const);
         break;
 
     case AST_CHAR_T:
         sprintf(
             str,
-            "id: %d\n %s\n %s\n CHAR: %c",
+            "id: %d\n %s\n %s\n CHAR: %c\n is_const: %d",
             node->id,
             node->name,
             ast_type2str(AST_CHAR_T),
-            node->val.chr);
+            node->val.chr,
+            node->is_const);
         break;
 
     case AST_DOUBLE_T:
         sprintf(
             str,
-            "id: %d\n %s\n %s\n REAL: %f",
+            "id: %d\n %s\n %s\n REAL: %f\n is_const: %d",
             node->id,
             node->name,
             ast_type2str(AST_DOUBLE_T),
-            node->val.real);
+            node->val.real,
+            node->is_const);
         break;
 
     case AST_NONE_T:
         sprintf(
             str,
-            "id: %d\n %s\n %s",
+            "id: %d\n %s\n %s\n is_const: %d",
             node->id,
             node->name,
-            ast_type2str(AST_NONE_T));
+            ast_type2str(AST_NONE_T),
+            node->is_const);
         break;
 
     default:
@@ -292,8 +299,28 @@ int return_val_type = AST_NONE_T;
 
 astnode_t *operation(astnode_t *root, const int op)
 {
+
     astnode_t *node1 = exec_ast(root->child[0]);
     astnode_t *node2 = exec_ast(root->child[1]);
+
+    int childs_const = node1->is_const && node2->is_const;
+
+    if (childs_const && root->is_const)
+    {
+
+#ifdef DEBUG_AST
+
+        printf("[DEBUG]: Folded constant expression: %s %s %s; AST Node %d: %s\n",
+               ast_token2str(node1->type),
+               ast_token2str(op),
+               ast_token2str(node2->type),
+               root->id,
+               ast_token2str(root->type));
+
+#endif
+
+        return root;
+    }
 
     if (node1->data_type != node2->data_type)
     {
@@ -303,6 +330,12 @@ astnode_t *operation(astnode_t *root, const int op)
     }
 
     root->data_type = node1->data_type;
+
+    if (childs_const)
+    {
+        root->is_const = 1;
+    }
+
     switch (node1->data_type)
     {
     case AST_INT_T:
@@ -586,6 +619,7 @@ astnode_t *operation(astnode_t *root, const int op)
     default:
 
         printf("Unkonwn data type %d\n", root->data_type);
+        exit(1);
         break;
     }
 
@@ -595,7 +629,12 @@ astnode_t *operation(astnode_t *root, const int op)
 // Execute AST
 astnode_t *exec_ast(astnode_t *root)
 {
-    // printf("Executing AST Node %d: %s\n", root->id, ast_token2str(root->type)); // For debugging
+
+#ifdef DEBUG_AST
+
+    printf("[DEBUG]: Executing AST Node %d: %s\n", root->id, ast_token2str(root->type)); // For debugging
+
+#endif
 
     switch (root->type)
     {
@@ -657,7 +696,11 @@ astnode_t *exec_ast(astnode_t *root)
     break;
 
     case EXPR_TERM:
-        return exec_ast(root->child[0]);
+    {
+        astnode_t *node = exec_ast(root->child[0]);
+        root->is_const = node->is_const;
+        return node;
+    }
     case EXPR_FUNCTION_CALL:
         return exec_ast(root->child[0]);
     case EXPR_PLUS:
@@ -681,7 +724,11 @@ astnode_t *exec_ast(astnode_t *root)
     case EXPR_OR:
         return operation(root, OR);
     case TERM_FACTOR:
-        return exec_ast(root->child[0]);
+    {
+        astnode_t *node = exec_ast(root->child[0]);
+        root->is_const = node->is_const;
+        return node;
+    }
     case TERM_MUL:
         return operation(root, MULT);
     case TERM_DIV:
@@ -693,6 +740,7 @@ astnode_t *exec_ast(astnode_t *root)
         astnode_t *ret = malloc(sizeof(astnode_t));
         int type = 0;
         void *val = var_get(root->val.str, &type);
+        ret->is_const = 0;
 
         if (val)
         {
@@ -734,44 +782,25 @@ astnode_t *exec_ast(astnode_t *root)
 
     case FACTOR_NUM:
     {
-        // Create new astnode for this number
-        astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_INT_T;
-        newnode->val.num = root->val.num;
-
-        return newnode;
+        return root;
     }
     break;
 
     case FACTOR_STRING:
     {
-        // Create new astnode for this string
-        astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_STR_T;
-        newnode->val.str = root->val.str;
-
-        return newnode;
+        return root;
     }
     break;
 
     case FACTOR_CHAR:
     {
-        // Create new astnode for this char
-        astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_CHAR_T;
-        newnode->val.chr = root->val.chr;
-
-        return newnode;
+        return root;
     }
     break;
 
     case FACTOR_REAL:
     {
-
-        astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_DOUBLE_T;
-        newnode->val.real = root->val.real;
-        return newnode;
+        return root;
     }
     break;
 
@@ -793,10 +822,9 @@ astnode_t *exec_ast(astnode_t *root)
     case FACTOR_RAND:
     {
         srand(time(NULL));
-        astnode_t *newnode = malloc(sizeof(astnode_t));
-        newnode->data_type = AST_INT_T;
-        newnode->val.num = rand() % (root->val.num);
-        return newnode;
+        root->data_type = AST_INT_T;
+        root->val.num = rand() % (root->val.num);
+        return root;
     }
     break;
 
@@ -966,7 +994,7 @@ astnode_t *exec_ast(astnode_t *root)
 
     case FOR:
 
-        // TODO: Add assignment/declaration in for loop; add different types
+        // TODO: Make declaration, condition, and increment optional
         var_enter_block();
         for (exec_ast(root->child[0]); exec_ast(root->child[1])->val.num; exec_ast(root->child[2]))
         {
@@ -977,7 +1005,6 @@ astnode_t *exec_ast(astnode_t *root)
 
     case DECLARATION:
     {
-        // printf("DEBUG: Declaring variable %s\n", root->val.str);
         val_t inital_val;
         switch (root->data_type)
         {
@@ -1014,8 +1041,6 @@ astnode_t *exec_ast(astnode_t *root)
     {
         astnode_t *val = exec_ast(root->child[0]);
         val_t variable;
-
-        // printf("DEBUG: DeclAssign %s (%d)\n", root->val.str, root->data_type);
 
         switch (root->data_type)
         {
@@ -1094,7 +1119,6 @@ astnode_t *exec_ast(astnode_t *root)
 
         case AST_STR_T:
         {
-            // printf("DEBUG: Declaring global variable %s\n", root->val.str);
             inital_val.str = malloc(sizeof(char) * 100);
             inital_val.str[0] = '\0';
             var_declare_global(root->val.str, inital_val.str, AST_STR_T);

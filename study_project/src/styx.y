@@ -10,7 +10,6 @@
 	#include "ast.h"
 	
 
-
 	int yylex(void);
 
 	extern FILE *yyin;
@@ -105,7 +104,7 @@
 
 // Rules and Actions
 
-start: program { print_ast($1, 0); printf("\n"); exec_ast($1);} //TODO: Execute AST
+start: program {exec_ast($1); printf("\n"); print_ast($1, 0); }
 
 
 program: functions main {
@@ -232,11 +231,11 @@ term: factor { $$ = new_astnode(TERM_FACTOR); $$->name = "TERM_FACTOR"; $$->chil
 	| term DIV factor { $$ = new_astnode(TERM_DIV); $$->name = "TERM_DIV"; $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "/"; $$->data_type = AST_STR_T; }
 	| term MOD factor { $$ = new_astnode(TERM_MOD); $$->name = "TERM_MOD"; $$->child[0] = $1; $$->child[1] = $3; $$->val.str = "%"; $$->data_type = AST_STR_T; }
 
-factor: ID { $$ = new_astnode(FACTOR_ID); $$->name = "FACTOR_ID"; $$->val.str = $1; $$->data_type = AST_INT_T; }
-    | NUM { $$ = new_astnode(FACTOR_NUM); $$->name = "FACTOR_NUM"; $$->val.num = $1; $$->data_type = AST_INT_T; }
-	| REAL { $$ = new_astnode(FACTOR_REAL); $$->name = "FACTOR_REAL"; $$->val.real = $1; $$->data_type = AST_DOUBLE_T; }
-	| STR { $$ = new_astnode(FACTOR_STRING); $$->name = "FACTOR_STRING"; $$->val.str = $1; $$->data_type = AST_STR_T; }
-	| CHR { $$ = new_astnode(FACTOR_CHAR); $$->name = "FACTOR_CHAR"; $$->val.chr = $1; $$->data_type = AST_CHAR_T; }
+factor: ID { $$ = new_astnode(FACTOR_ID); $$->name = "FACTOR_ID"; $$->val.str = $1; $$->data_type = AST_ID_T; }
+    | NUM { $$ = new_astnode(FACTOR_NUM); $$->name = "FACTOR_NUM"; $$->val.num = $1; $$->data_type = AST_INT_T; $$->is_const = 1;}
+	| REAL { $$ = new_astnode(FACTOR_REAL); $$->name = "FACTOR_REAL"; $$->val.real = $1; $$->data_type = AST_DOUBLE_T; $$->is_const = 1; }
+	| STR { $$ = new_astnode(FACTOR_STRING); $$->name = "FACTOR_STRING"; $$->val.str = $1; $$->data_type = AST_STR_T; $$->is_const = 1; }
+	| CHR { $$ = new_astnode(FACTOR_CHAR); $$->name = "FACTOR_CHAR"; $$->val.chr = $1; $$->data_type = AST_CHAR_T; $$->is_const = 1; }
 	| function_call { $$ = new_astnode(FACTOR_FUNCTION_CALL); $$->name = "FACTOR_FUNCTION_CALL"; $$->child[0] = $1; }
 	| ROUND_OPEN expression ROUND_CLOSE { $$ = new_astnode(FACTOR_PARENTHESIS); $$->name = "FACTOR_PARENTHESIS"; $$->child[0] = $2; $$->val.str = "(expr)"; $$->data_type = AST_STR_T; }
 	| RAND_INT ROUND_OPEN NUM ROUND_CLOSE { $$ = new_astnode(FACTOR_RAND); $$->name = "FACTOR_RAND"; $$->val.num = $3; $$->data_type = AST_INT_T; }
