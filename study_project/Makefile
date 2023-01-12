@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -O2 -Wall -ggdb -Iinclude
+CFLAGS= -O2 -Wall -ggdb -Iinclude -fopenmp
 LDFLAGS= -ll -lm
 
 bin/styx: build/styx.tab.o build/lex.yy.o build/vars_interp.o build/ast.o
