@@ -1,0 +1,7 @@
+After the AST is executed and fully traversed the parser will generate a
+Graphviz file, which can be used to visualize the AST. To display node names 
+in a human-readable form, token IDs are converted to their corresponding
+token names using the internal token table provided by bison.
+There also is a function to print the AST to console.\newline
+By setting the pre-compiler directive \textit{\#define DEBUG\_AST} in the header file
+each node of the AST will be printed to the console while traversing it.

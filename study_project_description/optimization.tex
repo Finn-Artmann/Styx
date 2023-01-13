@@ -1,0 +1,11 @@
+Constant folding is implemented for arithmetic operations.
+The optimization takes place while the AST is being traversed and is 
+implemented in the \textit{operation} function in the \textit{src/ast.c} source file.
+When the AST is traversed, and an operation is encountered for the
+first time, the operation is evaluated, and the result is stored in the
+\textit{value} field of the node. This optimization is only possible if 
+all child nodes have a constant value. For this reason each ast node has a
+\textit{is\_const} field. A node is marked as constant if all child nodes are
+constant. When the original operation node is encountered again, the node is 
+marked as constant and \textit{value} field can be used instead of traversing the
+child nodes again.

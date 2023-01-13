@@ -1,0 +1,82 @@
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[english]{babel}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\usepackage{csquotes}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\definecolor{darkgreen}{HTML}{006400}
+
+
+\addbibresource{bibliography.bib}
+
+
+\setmainfont{DejaVu Sans}
+\begin{document}
+
+    \begin{titlepage}
+        \titlehead{OTH Regensburg\\
+        Computer Science and Mathematics\\}
+        \subject{Study Project}
+        \subtitle{Course: Compiler Construction}
+        \title{Interpreter for the programming language STYX}
+        \date{Winter Semester 2022/2023}
+        \author{Finn Artmann}
+        \maketitle
+    \end{titlepage}
+
+
+    \tableofcontents
+
+    \newpage
+
+    \section{Introduction}
+        \input{Introduction.tex}
+
+    \section{Lexer implementation}
+        \input{lexer.tex}
+
+    \section{Syntax}
+        To keep this document in the requested length, only a few selected tokens are listed here explicitly.
+        To review all tokens recognized by the lexer, please refer to the lexer implementation (\textit{src/styx.l}).
+        \subsection{Number formats}
+            \input{numberformats.tex}
+        \subsection{Data types}    
+            \input{datatypes.tex}
+        \subsection{Program structure}
+            \input{programstructure.tex}
+        \subsection{Functions}
+            \input{functions.tex}
+        \subsection{Variables}
+            \input{variables.tex}
+        \subsection{Control flow}
+            \input{controlflow.tex}
+        \subsection{User I/O and other built-in functions}
+            \input{userio.tex}
+        
+    \section{Abstract Syntax Tree}
+        The parser builds an abstract syntax tree (AST) while parsing the source code and
+        executes the AST afterwards. Available functions can be found in the
+        \textit{include/ast.h} header file or in the \textit{src/ast.c} source file.
+        \subsection{AST nodes}
+            \input{astnodes.tex}
+        \subsection{Debugging}
+            \input{debugging.tex}
+        \subsection{Optimization}
+            \input{optimization.tex}
+
+
+
+    \newpage
+    \printbibliography
+
+
+\end{document}

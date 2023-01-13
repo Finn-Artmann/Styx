@@ -140,19 +140,6 @@ astnode_t *new_astnode(int type)
     return node;
 }
 
-void print_ast_console(astnode_t *root)
-{
-    printf("AST Node %d: %d\n", root->id, root->type);
-    for (int i = 0; i < MAXCHILDREN; i++)
-    {
-        if (root->child[i] != NULL)
-        {
-            print_ast_console(root->child[i]);
-        }
-    }
-    printf(") ");
-}
-
 const char *ast_token2str(int type)
 {
     return token_table[type - 258 + 3];
@@ -187,6 +174,19 @@ char *ast_type2str(int type)
     }
 }
 
+void print_ast_console(astnode_t *root)
+{
+    printf("AST Node %d: %s\n", root->id, ast_type2str(root->type));
+    for (int i = 0; i < MAXCHILDREN; i++)
+    {
+        if (root->child[i] != NULL)
+        {
+            print_ast_console(root->child[i]);
+        }
+    }
+    printf(") ");
+}
+
 // node2str funciton required for printing AST
 char *node2str(astnode_t *node)
 {
@@ -199,7 +199,7 @@ char *node2str(astnode_t *node)
             str,
             "id: %d\n %s\n %s\n NUM: %d\n is_const: %d",
             node->id,
-            node->name,
+            ast_token2str(node->type), // TODO: use this function an remove ast->name
             ast_type2str(AST_INT_T),
             node->val.num,
             node->is_const);

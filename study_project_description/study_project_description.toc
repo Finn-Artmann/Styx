@@ -1,0 +1,17 @@
+\selectlanguage *{latex}
+\selectlanguage *{latex}
+\contentsline {section}{\numberline {1}Introduction}{3}{}%
+\contentsline {section}{\numberline {2}Lexer implementation}{3}{}%
+\contentsline {section}{\numberline {3}Syntax}{3}{}%
+\contentsline {subsection}{\numberline {3.1}Number formats}{4}{}%
+\contentsline {subsection}{\numberline {3.2}Data types}{4}{}%
+\contentsline {subsection}{\numberline {3.3}Program structure}{5}{}%
+\contentsline {subsection}{\numberline {3.4}Functions}{5}{}%
+\contentsline {subsection}{\numberline {3.5}Variables}{6}{}%
+\contentsline {subsection}{\numberline {3.6}Control flow}{6}{}%
+\contentsline {subsection}{\numberline {3.7}User I/O and other built-in functions}{6}{}%
+\contentsline {section}{\numberline {4}Abstract Syntax Tree}{7}{}%
+\contentsline {subsection}{\numberline {4.1}AST nodes}{7}{}%
+\contentsline {subsection}{\numberline {4.2}Debugging}{7}{}%
+\contentsline {subsection}{\numberline {4.3}Optimization}{7}{}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

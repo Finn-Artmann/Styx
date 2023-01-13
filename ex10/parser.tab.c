@@ -2625,7 +2625,7 @@ yyreturnlab:
 
 // C Code
 int main(int arc, char** argv){
-	yy_flex_debug = 1;
+	yy_flex_debug = 0;
 	init_vars();
 	yyin = fopen(argv[1], "r");
 	return yyparse();

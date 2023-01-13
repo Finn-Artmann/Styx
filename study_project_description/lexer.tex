@@ -1,0 +1,23 @@
+The lexer is implemented in the file \textit{src/styx.l}. Regarding the
+lexer implementation it is important to know how UTF-8 characters are
+encoded. Otherwise, there might be hard to debug issues when using
+regular expressions to match these characters. Flex scans the input byte-wise,
+but UTF-8 characters can be encoded with up to 4 bytes. So when we want to match
+a UTF-8 character, we need to make sure we match the whole sequence of bytes.
+\newline
+Additionally to recognizing keywords, identifiers, operators and other special 
+character the lexer is also able to recognize numbers in different formats and
+supports linecomments and blockcomments. For those, the lexer tries to take as
+much work away from the parser as possible for example by completely
+ignoring the content of comments and converting numbers to decimal numbers when
+possible. Special number formats will be discussed in more detail in the specific chapter.
+\newline
+Also supported are String literals, which can still make use of special characters
+used elsewhere in the language by escaping them using the defined escape character.
+They are also able to span multiple lines with the use of newline symbols.
+Strings can also include arbitrary ascii characters by using the escape character.
+\newline
+Another unconventional feature compared to other programming languages
+is that lexemes are not separated by whitespace,
+but by the special character \textcolor{teal}{\#} or a newline
+to better fit in with the cryptic theme of the language. 

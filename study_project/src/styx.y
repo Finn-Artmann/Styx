@@ -87,7 +87,7 @@
 %type <ast> start program functions function function_call arguments parameters parameter 
 %type <ast> main body statements statement declaration 
 %type <ast> global_declaration assignment expression if_statement for_statement return_statement 
-%type <ast> print_statement scan_statement rand_int_statement term factor
+%type <ast> print_statement scan_statement term factor
 
 // Other Grammar tokens
 %token PROGRAM STATEMENTS STATEMENT DECLARATIONS GLOBAL_DECLARATIONS FUNCTIONS PARAMETERS
@@ -182,7 +182,6 @@ statement: assignment SEMICOLON { $$ = new_astnode(STATEMENT); $$->name = "STATE
 	 | return_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | print_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | scan_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
-	 | rand_int_statement { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(STATEMENT_BLOCK); $$->name = "STATEMENT_BLOCK"; $$->child[0] = $2; }
 	 | expression SEMICOLON { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
 	 | declaration { $$ = new_astnode(STATEMENT); $$->name = "STATEMENT"; $$->child[0] = $1; }
@@ -204,7 +203,6 @@ print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON { $$ = new_as
 
 scan_statement: SCAN ROUND_OPEN TYPE ROUND_CLOSE ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode(SCAN); $$->name = "SCAN"; $$->val.str = $6; $$->data_type = $3; }
 
-rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode(RAND_INT); $$->name = "RAND_INT";  $$->val.str = $3; $$->data_type = AST_ID_T; }
 
 function_call: ID ROUND_OPEN arguments ROUND_CLOSE { $$ = new_astnode(FUNCTION_CALL); $$->name = "FUNCTION_CALL";  $$->val.str = $1; $$->data_type = AST_ID_T; $$->child[0] = $3; }
 			| SYSTEM ROUND_OPEN STR ROUND_CLOSE { $$ = new_astnode(SYSTEM_CALL); $$->name = "SYSTEM_CALL";  $$->data_type = AST_INT_T; $$->val.str = $3; }

@@ -1,0 +1,9 @@
+Each node contains the following fields:
+\begin{itemize}[noitemsep]
+    \item \textbf{id} (int): A unique identifier for the node that is assigned on creation.
+    \item \textbf{type} (int): The type of the node specifies the token type of the node.
+    \item \textbf{data\_type}: Used to determine the data type of the value stored in the val field.
+    \item \textbf{val} (val\_t): Stores the value of the node.
+    \item \textbf{is\_const} (int): Used to determine if the node is constant.
+    \item \textbf{child} (struct\ astnode\_t*): Stores pointers to the child nodes.
+\end{itemize}

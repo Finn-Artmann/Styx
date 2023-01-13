@@ -227,12 +227,11 @@ enum yysymbol_kind_t
   YYSYMBOL_return_statement = 103,         /* return_statement  */
   YYSYMBOL_print_statement = 104,          /* print_statement  */
   YYSYMBOL_scan_statement = 105,           /* scan_statement  */
-  YYSYMBOL_rand_int_statement = 106,       /* rand_int_statement  */
-  YYSYMBOL_function_call = 107,            /* function_call  */
-  YYSYMBOL_arguments = 108,                /* arguments  */
-  YYSYMBOL_expression = 109,               /* expression  */
-  YYSYMBOL_term = 110,                     /* term  */
-  YYSYMBOL_factor = 111                    /* factor  */
+  YYSYMBOL_function_call = 106,            /* function_call  */
+  YYSYMBOL_arguments = 107,                /* arguments  */
+  YYSYMBOL_expression = 108,               /* expression  */
+  YYSYMBOL_term = 109,                     /* term  */
+  YYSYMBOL_factor = 110                    /* factor  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -537,16 +536,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  9
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   236
+#define YYLAST   230
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  87
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  25
+#define YYNNTS  24
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  68
+#define YYNRULES  66
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  160
+#define YYNSTATES  154
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   341
@@ -607,10 +606,10 @@ static const yytype_uint8 yyrline[] =
        0,   107,   107,   110,   119,   127,   128,   130,   141,   142,
      143,   145,   148,   164,   165,   169,   170,   173,   174,   176,
      177,   179,   180,   181,   182,   183,   184,   185,   186,   187,
-     188,   189,   192,   194,   195,   198,   200,   202,   203,   205,
-     207,   209,   210,   212,   213,   214,   216,   217,   218,   219,
-     220,   221,   222,   223,   224,   225,   226,   229,   230,   231,
-     232,   234,   235,   236,   237,   238,   239,   240,   241
+     188,   191,   193,   194,   197,   199,   201,   202,   204,   207,
+     208,   210,   211,   212,   214,   215,   216,   217,   218,   219,
+     220,   221,   222,   223,   224,   227,   228,   229,   230,   232,
+     233,   234,   235,   236,   237,   238,   239
 };
 #endif
 
@@ -645,8 +644,8 @@ static const char *const yytname[] =
   "program", "functions", "function", "parameters", "parameter", "main",
   "body", "global_declaration", "declaration", "statements", "statement",
   "assignment", "if_statement", "for_statement", "return_statement",
-  "print_statement", "scan_statement", "rand_int_statement",
-  "function_call", "arguments", "expression", "term", "factor", YY_NULLPTR
+  "print_statement", "scan_statement", "function_call", "arguments",
+  "expression", "term", "factor", YY_NULLPTR
 };
 
 static const char *
@@ -656,7 +655,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-59)
+#define YYPACT_NINF (-39)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -670,22 +669,22 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     -35,    -8,    22,   -59,   -35,   -59,   -59,     1,     2,   -59,
-     -59,   -59,     5,     6,    18,    23,    28,   -59,     3,   -59,
-       6,    21,    45,    47,    14,    50,    51,    61,    37,    62,
-      14,     3,   -59,   -24,   -59,   -59,    58,   -59,    63,   -59,
-     -59,     3,   -59,    66,   -59,   -59,   -59,   -59,   -59,   -59,
-     -59,   126,     4,   -59,   -59,     3,    14,    59,    67,    69,
-     141,    14,    65,   -19,    71,    68,    64,    74,    14,    14,
-     -10,   -59,   -59,   -59,    14,    14,    14,    14,    14,    14,
-      14,    14,    14,    14,   -59,    14,    14,    14,    78,    95,
-      14,    75,   -59,    41,    70,    81,    91,    46,    93,   -59,
-     -59,   201,    40,   201,    14,   -59,     4,     4,     4,     4,
-       4,     4,     4,     4,     4,     4,   -59,   -59,   -59,   -59,
-      97,   156,    14,   102,   101,   114,   -59,    14,   -59,   -59,
-      14,   -59,   171,     3,   108,   113,   -59,   118,   -59,   186,
-     201,   -59,   124,   131,   128,   140,   142,   -59,   167,   151,
-     -59,   146,   155,     3,   -59,     3,   165,   169,   -59,   -59
+     -30,    -3,    21,   -39,   -30,   -39,   -39,     9,    11,   -39,
+     -39,   -39,    12,    13,    18,    20,   -10,   -39,    19,   -39,
+      13,    31,    39,    43,    30,    46,    47,    57,    49,    62,
+      30,    19,   -39,     8,   -39,   -39,    55,   -39,    61,   -39,
+     -39,    19,   -39,    65,   -39,   -39,   -39,   -39,   -39,   -39,
+      -8,   -13,   -39,   -39,    19,    30,    56,    67,   127,    30,
+      66,    76,    64,    70,    87,    97,    30,    30,    34,   -39,
+     -39,   -39,    30,    30,    30,    30,    30,    30,    30,    30,
+      30,    30,   -39,    30,    30,    30,    98,   101,    30,   -39,
+      60,   112,   113,    44,   123,   -39,   -39,   187,     5,   187,
+      30,   -39,   -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,
+     -13,   -13,   -39,   -39,   -39,   -39,   126,   142,    30,   131,
+     130,   -39,    30,   -39,   -39,    30,   -39,   157,    19,   134,
+     114,   -39,   138,   172,   187,   -39,   151,   147,   144,   160,
+     158,   -39,   185,   167,   -39,   175,   173,    19,   -39,    19,
+     171,   191,   -39,   -39
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -696,27 +695,27 @@ static const yytype_int8 yydefact[] =
        0,     0,     0,     2,     0,     5,     4,     0,     0,     1,
        6,     3,     0,    10,     0,     0,     0,     8,    14,    11,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    14,    64,    61,    65,    62,     0,    63,     0,    31,
-      30,    13,    19,     0,    22,    23,    24,    25,    26,    27,
-      66,     0,    46,    57,     9,    14,     0,     0,     0,    61,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,    45,
-       0,    12,    20,    21,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    29,     0,     0,     0,     0,     0,
-       0,     0,    36,     0,     0,     0,     0,     0,     0,    67,
-      28,    32,     0,    43,     0,    17,    47,    48,    49,    50,
-      51,    52,    53,    54,    55,    56,    58,    59,    60,     7,
-       0,     0,     0,     0,     0,     0,    68,     0,    15,    42,
-       0,    41,     0,    14,     0,     0,    37,     0,    40,     0,
-      44,    18,     0,     0,     0,     0,     0,    16,    33,     0,
-      38,     0,     0,    14,    39,    14,     0,     0,    35,    34
+       0,    14,    62,    59,    63,    60,     0,    61,     0,    30,
+      29,    13,    19,     0,    22,    23,    24,    25,    26,    64,
+       0,    44,    55,     9,    14,     0,     0,    59,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    43,     0,    12,
+      20,    21,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,    28,     0,     0,     0,     0,     0,     0,    35,
+       0,     0,     0,     0,     0,    65,    27,    31,     0,    41,
+       0,    17,    45,    46,    47,    48,    49,    50,    51,    52,
+      53,    54,    56,    57,    58,     7,     0,     0,     0,     0,
+       0,    66,     0,    15,    40,     0,    39,     0,    14,     0,
+       0,    36,     0,     0,    42,    18,     0,     0,     0,     0,
+       0,    16,    32,     0,    37,     0,     0,    14,    38,    14,
+       0,     0,    34,    33
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -59,   -59,   -59,   -59,   183,   -59,   168,   198,   -31,   -59,
-     159,   -59,   162,    83,   -59,   -59,   -59,   -59,   -59,   -59,
-     -59,   -59,   -23,   153,   -58
+     -39,   -39,   -39,   -39,   220,   -39,   205,   222,   -31,   -39,
+     174,   -39,   186,    99,   -39,   -39,   -39,   -39,   -39,   -39,
+     -39,   -23,   141,   -38
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -724,7 +723,7 @@ static const yytype_int8 yydefgoto[] =
 {
        0,     2,     3,     4,     5,    16,    17,     6,    38,    39,
       40,    41,    42,    43,    44,    45,    46,    47,    48,    49,
-      50,   102,    51,    52,    53
+      98,    50,    51,    52
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -732,58 +731,58 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      67,    60,    68,     1,     7,    69,    22,    66,    23,    24,
-      25,    26,    27,    28,    29,    95,   104,   105,    96,    85,
-      86,    87,     9,    58,    88,    29,     8,   116,   117,   118,
-      12,    13,    30,    89,    31,    14,    32,    33,    93,    34,
-      35,    36,    37,    30,    15,   101,   103,    32,    59,    18,
-      34,    35,    55,    37,    74,    75,    20,    19,    21,    76,
-      77,    78,    79,    80,    81,    82,    83,   121,   130,   122,
-     131,   123,   127,   128,    56,    64,    57,    74,    75,    61,
-      62,   132,    76,    77,    78,    79,    80,    81,    82,    83,
-      63,    65,    70,    73,    99,    71,    91,    36,    69,   135,
-     124,    98,   142,    94,   139,    97,   100,   140,    74,    75,
-     119,   125,    96,    76,    77,    78,    79,    80,    81,    82,
-      83,   126,   156,   129,   157,   120,    74,    75,   133,   136,
-     137,    76,    77,    78,    79,    80,    81,    82,    83,    74,
-      75,   138,   143,   145,    76,    77,    78,    79,    80,    81,
-      82,    83,   146,    84,    74,    75,   148,    68,   149,    76,
-      77,    78,    79,    80,    81,    82,    83,   150,    92,    74,
-      75,   152,   151,   154,    76,    77,    78,    79,    80,    81,
-      82,    83,   153,   134,    74,    75,   155,    10,    54,    76,
-      77,    78,    79,    80,    81,    82,    83,   158,   141,    74,
-      75,   159,    11,    72,    76,    77,    78,    79,    80,    81,
-      82,    83,     0,   147,    74,    75,    90,   144,     0,    76,
-      77,    78,    79,    80,    81,    82,    83,   106,   107,   108,
-     109,   110,   111,   112,   113,   114,   115
+      65,    58,    83,    84,    85,    72,    73,    64,     1,     7,
+      74,    75,    76,    77,    78,    79,    80,    81,    20,    82,
+      21,     9,    22,    86,    23,    24,    25,    26,    27,    28,
+      29,     8,    87,   125,    66,   126,    90,    67,    12,    27,
+      13,    29,    14,    97,    99,   112,   113,   114,    30,    18,
+      31,    15,    32,    33,    19,    34,    35,    36,    37,    30,
+     100,   101,    54,    32,    57,   117,    34,    35,    55,    37,
+     122,   123,    56,    72,    73,    59,    60,   127,    74,    75,
+      76,    77,    78,    79,    80,    81,    61,    62,   118,    68,
+     119,    63,    71,    69,    36,   130,    67,   136,    93,   133,
+      72,    73,   134,    94,    91,    74,    75,    76,    77,    78,
+      79,    80,    81,    92,    72,    73,   150,    95,   151,    74,
+      75,    76,    77,    78,    79,    80,    81,    72,    73,    96,
+     115,   116,    74,    75,    76,    77,    78,    79,    80,    81,
+      72,    73,   120,   121,   139,    74,    75,    76,    77,    78,
+      79,    80,    81,   124,    89,    72,    73,   128,   131,   132,
+      74,    75,    76,    77,    78,    79,    80,    81,   137,   129,
+      72,    73,   140,    66,   143,    74,    75,    76,    77,    78,
+      79,    80,    81,   142,   135,    72,    73,   144,   145,   146,
+      74,    75,    76,    77,    78,    79,    80,    81,   147,   141,
+      72,    73,   148,   152,   149,    74,    75,    76,    77,    78,
+      79,    80,    81,   102,   103,   104,   105,   106,   107,   108,
+     109,   110,   111,   153,    10,    53,    11,    70,   138,     0,
+      88
 };
 
 static const yytype_int16 yycheck[] =
 {
-      31,    24,    26,    38,    12,    29,     3,    30,     5,     6,
-       7,     8,     9,    10,    11,    34,    26,    27,    37,    15,
-      16,    17,     0,     9,    55,    11,    34,    85,    86,    87,
-      29,    29,    29,    56,    31,    30,    33,    34,    61,    36,
-      37,    38,    39,    29,    38,    68,    69,    33,    34,    31,
-      36,    37,    31,    39,    13,    14,    28,    34,    30,    18,
-      19,    20,    21,    22,    23,    24,    25,    90,    28,    28,
-      30,    30,    26,    27,    29,    38,    29,    13,    14,    29,
-      29,   104,    18,    19,    20,    21,    22,    23,    24,    25,
-      29,    29,    34,    27,    30,    32,    29,    38,    29,   122,
-      30,    33,   133,    38,   127,    34,    32,   130,    13,    14,
-      32,    30,    37,    18,    19,    20,    21,    22,    23,    24,
-      25,    30,   153,    30,   155,    30,    13,    14,    31,    27,
-      29,    18,    19,    20,    21,    22,    23,    24,    25,    13,
-      14,    27,    34,    30,    18,    19,    20,    21,    22,    23,
-      24,    25,    34,    27,    13,    14,    32,    26,    30,    18,
-      19,    20,    21,    22,    23,    24,    25,    27,    27,    13,
-      14,     4,    30,    27,    18,    19,    20,    21,    22,    23,
-      24,    25,    31,    27,    13,    14,    31,     4,    20,    18,
-      19,    20,    21,    22,    23,    24,    25,    32,    27,    13,
-      14,    32,     4,    41,    18,    19,    20,    21,    22,    23,
-      24,    25,    -1,    27,    13,    14,    57,   134,    -1,    18,
-      19,    20,    21,    22,    23,    24,    25,    74,    75,    76,
-      77,    78,    79,    80,    81,    82,    83
+      31,    24,    15,    16,    17,    13,    14,    30,    38,    12,
+      18,    19,    20,    21,    22,    23,    24,    25,    28,    27,
+      30,     0,     3,    54,     5,     6,     7,     8,     9,    10,
+      11,    34,    55,    28,    26,    30,    59,    29,    29,     9,
+      29,    11,    30,    66,    67,    83,    84,    85,    29,    31,
+      31,    38,    33,    34,    34,    36,    37,    38,    39,    29,
+      26,    27,    31,    33,    34,    88,    36,    37,    29,    39,
+      26,    27,    29,    13,    14,    29,    29,   100,    18,    19,
+      20,    21,    22,    23,    24,    25,    29,    38,    28,    34,
+      30,    29,    27,    32,    38,   118,    29,   128,    34,   122,
+      13,    14,   125,    33,    38,    18,    19,    20,    21,    22,
+      23,    24,    25,    37,    13,    14,   147,    30,   149,    18,
+      19,    20,    21,    22,    23,    24,    25,    13,    14,    32,
+      32,    30,    18,    19,    20,    21,    22,    23,    24,    25,
+      13,    14,    30,    30,    30,    18,    19,    20,    21,    22,
+      23,    24,    25,    30,    27,    13,    14,    31,    27,    29,
+      18,    19,    20,    21,    22,    23,    24,    25,    34,    27,
+      13,    14,    34,    26,    30,    18,    19,    20,    21,    22,
+      23,    24,    25,    32,    27,    13,    14,    27,    30,     4,
+      18,    19,    20,    21,    22,    23,    24,    25,    31,    27,
+      13,    14,    27,    32,    31,    18,    19,    20,    21,    22,
+      23,    24,    25,    72,    73,    74,    75,    76,    77,    78,
+      79,    80,    81,    32,     4,    20,     4,    41,   129,    -1,
+      56
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -795,17 +794,17 @@ static const yytype_int8 yystos[] =
       28,    30,     3,     5,     6,     7,     8,     9,    10,    11,
       29,    31,    33,    34,    36,    37,    38,    39,    95,    96,
       97,    98,    99,   100,   101,   102,   103,   104,   105,   106,
-     107,   109,   110,   111,    93,    31,    29,    29,     9,    34,
-     109,    29,    29,    29,    38,    29,   109,    95,    26,    29,
-      34,    32,    99,    27,    13,    14,    18,    19,    20,    21,
-      22,    23,    24,    25,    27,    15,    16,    17,    95,   109,
-      97,    29,    27,   109,    38,    34,    37,    34,    33,    30,
-      32,   109,   108,   109,    26,    27,   110,   110,   110,   110,
-     110,   110,   110,   110,   110,   110,   111,   111,   111,    32,
-      30,   109,    28,    30,    30,    30,    30,    26,    27,    30,
-      28,    30,   109,    31,    27,   109,    27,    29,    27,   109,
-     109,    27,    95,    34,   100,    30,    34,    27,    32,    30,
-      27,    30,     4,    31,    27,    31,    95,    95,    32,    32
+     108,   109,   110,    93,    31,    29,    29,    34,   108,    29,
+      29,    29,    38,    29,   108,    95,    26,    29,    34,    32,
+      99,    27,    13,    14,    18,    19,    20,    21,    22,    23,
+      24,    25,    27,    15,    16,    17,    95,   108,    97,    27,
+     108,    38,    37,    34,    33,    30,    32,   108,   107,   108,
+      26,    27,   109,   109,   109,   109,   109,   109,   109,   109,
+     109,   109,   110,   110,   110,    32,    30,   108,    28,    30,
+      30,    30,    26,    27,    30,    28,    30,   108,    31,    27,
+     108,    27,    29,   108,   108,    27,    95,    34,   100,    30,
+      34,    27,    32,    30,    27,    30,     4,    31,    27,    31,
+      95,    95,    32,    32
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -814,10 +813,10 @@ static const yytype_int8 yyr1[] =
        0,    87,    88,    89,    89,    90,    90,    91,    92,    92,
       92,    93,    94,    95,    95,    96,    96,    97,    97,    98,
       98,    99,    99,    99,    99,    99,    99,    99,    99,    99,
-      99,    99,   100,   101,   101,   102,   103,   104,   104,   105,
-     106,   107,   107,   108,   108,   108,   109,   109,   109,   109,
-     109,   109,   109,   109,   109,   109,   109,   110,   110,   110,
-     110,   111,   111,   111,   111,   111,   111,   111,   111
+      99,   100,   101,   101,   102,   103,   104,   104,   105,   106,
+     106,   107,   107,   107,   108,   108,   108,   108,   108,   108,
+     108,   108,   108,   108,   108,   109,   109,   109,   109,   110,
+     110,   110,   110,   110,   110,   110,   110
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -825,11 +824,11 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     1,     1,     2,     8,     1,     3,
        0,     2,     7,     1,     0,     4,     6,     3,     5,     1,
-       2,     2,     1,     1,     1,     1,     1,     1,     3,     2,
-       1,     1,     3,     7,    11,    10,     3,     5,     7,     8,
-       5,     4,     4,     1,     3,     0,     1,     3,     3,     3,
-       3,     3,     3,     3,     3,     3,     3,     1,     3,     3,
-       3,     1,     1,     1,     1,     1,     1,     3,     4
+       2,     2,     1,     1,     1,     1,     1,     3,     2,     1,
+       1,     3,     7,    11,    10,     3,     5,     7,     8,     4,
+       4,     1,     3,     0,     1,     3,     3,     3,     3,     3,
+       3,     3,     3,     3,     3,     1,     3,     3,     3,     1,
+       1,     1,     1,     1,     1,     3,     4
 };
 
 
@@ -1825,7 +1824,7 @@ yyreduce:
   case 2: /* start: program  */
 #line 107 "src/styx.y"
                {exec_ast((yyvsp[0].ast)); printf("\n"); print_ast((yyvsp[0].ast), 0); }
-#line 1829 "build/styx.tab.c"
+#line 1828 "build/styx.tab.c"
     break;
 
   case 3: /* program: functions main  */
@@ -1839,7 +1838,7 @@ yyreduce:
                 (yyval.ast)->child[1] = (yyvsp[0].ast);
 
 	}
-#line 1843 "build/styx.tab.c"
+#line 1842 "build/styx.tab.c"
     break;
 
   case 4: /* program: main  */
@@ -1851,19 +1850,19 @@ yyreduce:
 		(yyval.ast)->name = "PROGRAM";
 		(yyval.ast)->child[0] = (yyvsp[0].ast);
 	}
-#line 1855 "build/styx.tab.c"
+#line 1854 "build/styx.tab.c"
     break;
 
   case 5: /* functions: function  */
 #line 127 "src/styx.y"
                     { (yyval.ast) = new_astnode(FUNCTIONS); (yyval.ast)->name = "FUNCTIONS"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 1861 "build/styx.tab.c"
+#line 1860 "build/styx.tab.c"
     break;
 
   case 6: /* functions: functions function  */
 #line 128 "src/styx.y"
                               { (yyval.ast) = new_astnode(FUNCTIONS); (yyval.ast)->name = "FUNCTIONS"; (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 1867 "build/styx.tab.c"
+#line 1866 "build/styx.tab.c"
     break;
 
   case 7: /* function: TYPE ID ROUND_OPEN parameters ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
@@ -1877,31 +1876,31 @@ yyreduce:
 		(yyval.ast)->data_type = (yyvsp[-7].num);
 
 	}
-#line 1881 "build/styx.tab.c"
+#line 1880 "build/styx.tab.c"
     break;
 
   case 8: /* parameters: parameter  */
 #line 141 "src/styx.y"
                       { (yyval.ast) = new_astnode(PARAMETERS); (yyval.ast)->name = "PARAMETERS"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 1887 "build/styx.tab.c"
+#line 1886 "build/styx.tab.c"
     break;
 
   case 9: /* parameters: parameters COMMA parameter  */
 #line 142 "src/styx.y"
                                       { (yyval.ast) = new_astnode(PARAMETERS); (yyval.ast)->name = "PARAMETERS"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 1893 "build/styx.tab.c"
+#line 1892 "build/styx.tab.c"
     break;
 
   case 10: /* parameters: %empty  */
 #line 143 "src/styx.y"
                   { (yyval.ast) = NULL; }
-#line 1899 "build/styx.tab.c"
+#line 1898 "build/styx.tab.c"
     break;
 
   case 11: /* parameter: TYPE ID  */
 #line 145 "src/styx.y"
                    { (yyval.ast) = new_astnode(PARAMETER); (yyval.ast)->name = "PARAMETER"; (yyval.ast)->val.str = (yyvsp[0].str); (yyval.ast)->data_type = AST_ID_T; }
-#line 1905 "build/styx.tab.c"
+#line 1904 "build/styx.tab.c"
     break;
 
   case 12: /* main: TYPE MAIN ROUND_OPEN ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
@@ -1920,347 +1919,335 @@ yyreduce:
 	(yyval.ast)->data_type = AST_ID_T;
 	(yyval.ast)->child[0] = (yyvsp[-1].ast);
     }
-#line 1924 "build/styx.tab.c"
+#line 1923 "build/styx.tab.c"
     break;
 
   case 13: /* body: statements  */
 #line 164 "src/styx.y"
                  { (yyval.ast) = new_astnode(BODY); (yyval.ast)->name = "BODY"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 1930 "build/styx.tab.c"
+#line 1929 "build/styx.tab.c"
     break;
 
   case 14: /* body: %empty  */
 #line 165 "src/styx.y"
              { (yyval.ast) = NULL; }
-#line 1936 "build/styx.tab.c"
+#line 1935 "build/styx.tab.c"
     break;
 
   case 15: /* global_declaration: GLOBAL TYPE ID SEMICOLON  */
 #line 169 "src/styx.y"
                                              { (yyval.ast) = new_astnode(GLOBAL_DECLARATION); (yyval.ast)->name = "GLOBAL_DECLARATION"; (yyval.ast)->val.str = (yyvsp[-1].str); (yyval.ast)->data_type = (yyvsp[-2].num); }
-#line 1942 "build/styx.tab.c"
+#line 1941 "build/styx.tab.c"
     break;
 
   case 16: /* global_declaration: GLOBAL TYPE ID ASSIGN expression SEMICOLON  */
 #line 170 "src/styx.y"
                                                              { (yyval.ast) = new_astnode(GLOBAL_DECLARATION_ASSIGN); (yyval.ast)->name = "GLOBAL_DECLARATION_ASSIGN"; (yyval.ast)->val.str = (yyvsp[-3].str); (yyval.ast)->data_type = (yyvsp[-4].num); (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 1948 "build/styx.tab.c"
+#line 1947 "build/styx.tab.c"
     break;
 
   case 17: /* declaration: TYPE ID SEMICOLON  */
 #line 173 "src/styx.y"
                                { (yyval.ast) = new_astnode(DECLARATION); (yyval.ast)->name = "DECLARATION"; (yyval.ast)->val.str = (yyvsp[-1].str); (yyval.ast)->data_type = (yyvsp[-2].num); }
-#line 1954 "build/styx.tab.c"
+#line 1953 "build/styx.tab.c"
     break;
 
   case 18: /* declaration: TYPE ID ASSIGN expression SEMICOLON  */
 #line 174 "src/styx.y"
                                                       { (yyval.ast) = new_astnode(DECLARATION_ASSIGN); (yyval.ast)->name = "DECLARATION_ASSIGN"; (yyval.ast)->val.str = (yyvsp[-3].str); (yyval.ast)->data_type = (yyvsp[-4].num); (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 1960 "build/styx.tab.c"
+#line 1959 "build/styx.tab.c"
     break;
 
   case 19: /* statements: statement  */
 #line 176 "src/styx.y"
                       { (yyval.ast) = new_astnode(STATEMENTS); (yyval.ast)->name = "STATEMENTS"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 1966 "build/styx.tab.c"
+#line 1965 "build/styx.tab.c"
     break;
 
   case 20: /* statements: statements statement  */
 #line 177 "src/styx.y"
                                  { (yyval.ast) = new_astnode(STATEMENTS); (yyval.ast)->name = "STATEMENTS"; (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 1972 "build/styx.tab.c"
+#line 1971 "build/styx.tab.c"
     break;
 
   case 21: /* statement: assignment SEMICOLON  */
 #line 179 "src/styx.y"
                                 { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 1978 "build/styx.tab.c"
+#line 1977 "build/styx.tab.c"
     break;
 
   case 22: /* statement: if_statement  */
 #line 180 "src/styx.y"
                         { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 1984 "build/styx.tab.c"
+#line 1983 "build/styx.tab.c"
     break;
 
   case 23: /* statement: for_statement  */
 #line 181 "src/styx.y"
                          { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 1990 "build/styx.tab.c"
+#line 1989 "build/styx.tab.c"
     break;
 
   case 24: /* statement: return_statement  */
 #line 182 "src/styx.y"
                             { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 1996 "build/styx.tab.c"
+#line 1995 "build/styx.tab.c"
     break;
 
   case 25: /* statement: print_statement  */
 #line 183 "src/styx.y"
                            { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2002 "build/styx.tab.c"
+#line 2001 "build/styx.tab.c"
     break;
 
   case 26: /* statement: scan_statement  */
 #line 184 "src/styx.y"
                           { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2008 "build/styx.tab.c"
+#line 2007 "build/styx.tab.c"
     break;
 
-  case 27: /* statement: rand_int_statement  */
+  case 27: /* statement: CURLY_OPEN body CURLY_CLOSE  */
 #line 185 "src/styx.y"
-                              { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2014 "build/styx.tab.c"
-    break;
-
-  case 28: /* statement: CURLY_OPEN body CURLY_CLOSE  */
-#line 186 "src/styx.y"
                                        { (yyval.ast) = new_astnode(STATEMENT_BLOCK); (yyval.ast)->name = "STATEMENT_BLOCK"; (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 2020 "build/styx.tab.c"
+#line 2013 "build/styx.tab.c"
     break;
 
-  case 29: /* statement: expression SEMICOLON  */
-#line 187 "src/styx.y"
+  case 28: /* statement: expression SEMICOLON  */
+#line 186 "src/styx.y"
                                 { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 2026 "build/styx.tab.c"
+#line 2019 "build/styx.tab.c"
     break;
 
-  case 30: /* statement: declaration  */
-#line 188 "src/styx.y"
+  case 29: /* statement: declaration  */
+#line 187 "src/styx.y"
                        { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2032 "build/styx.tab.c"
+#line 2025 "build/styx.tab.c"
     break;
 
-  case 31: /* statement: global_declaration  */
-#line 189 "src/styx.y"
+  case 30: /* statement: global_declaration  */
+#line 188 "src/styx.y"
                               { (yyval.ast) = new_astnode(STATEMENT); (yyval.ast)->name = "STATEMENT"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2038 "build/styx.tab.c"
+#line 2031 "build/styx.tab.c"
     break;
 
-  case 32: /* assignment: ID ASSIGN expression  */
-#line 192 "src/styx.y"
+  case 31: /* assignment: ID ASSIGN expression  */
+#line 191 "src/styx.y"
                                  { (yyval.ast) = new_astnode(ASSIGNMENT); (yyval.ast)->name = "ASSIGNMENT"; (yyval.ast)->val.str = (yyvsp[-2].str); (yyval.ast)->data_type = AST_ID_T; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2044 "build/styx.tab.c"
+#line 2037 "build/styx.tab.c"
     break;
 
-  case 33: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 194 "src/styx.y"
+  case 32: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
+#line 193 "src/styx.y"
                                                                                { (yyval.ast) = new_astnode(IF); (yyval.ast)->name = "IF"; (yyval.ast)->child[0] = (yyvsp[-4].ast); (yyval.ast)->child[1] = (yyvsp[-1].ast); }
-#line 2050 "build/styx.tab.c"
+#line 2043 "build/styx.tab.c"
     break;
 
-  case 34: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE  */
-#line 195 "src/styx.y"
+  case 33: /* if_statement: IF ROUND_OPEN expression ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE ELSE CURLY_OPEN body CURLY_CLOSE  */
+#line 194 "src/styx.y"
                                                                                                                 { (yyval.ast) = new_astnode(IFELSE); (yyval.ast)->name = "IFELSE"; (yyval.ast)->child[0] = (yyvsp[-8].ast); (yyval.ast)->child[1] = (yyvsp[-5].ast); (yyval.ast)->child[2] = (yyvsp[-1].ast); }
-#line 2056 "build/styx.tab.c"
+#line 2049 "build/styx.tab.c"
     break;
 
-  case 35: /* for_statement: FOR ROUND_OPEN declaration expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
-#line 198 "src/styx.y"
+  case 34: /* for_statement: FOR ROUND_OPEN declaration expression SEMICOLON assignment ROUND_CLOSE CURLY_OPEN body CURLY_CLOSE  */
+#line 197 "src/styx.y"
                                                                                                                   { (yyval.ast) = new_astnode(FOR); (yyval.ast)->name = "FOR"; (yyval.ast)->child[0] = (yyvsp[-7].ast); (yyval.ast)->child[1] = (yyvsp[-6].ast); (yyval.ast)->child[2] = (yyvsp[-4].ast); (yyval.ast)->child[3] = (yyvsp[-1].ast); }
-#line 2062 "build/styx.tab.c"
+#line 2055 "build/styx.tab.c"
     break;
 
-  case 36: /* return_statement: RETURN expression SEMICOLON  */
-#line 200 "src/styx.y"
+  case 35: /* return_statement: RETURN expression SEMICOLON  */
+#line 199 "src/styx.y"
                                               { (yyval.ast) = new_astnode(RETURN); (yyval.ast)->name = "RETURN"; (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 2068 "build/styx.tab.c"
+#line 2061 "build/styx.tab.c"
     break;
 
-  case 37: /* print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON  */
-#line 202 "src/styx.y"
+  case 36: /* print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON  */
+#line 201 "src/styx.y"
                                                                    { (yyval.ast) = new_astnode(PRINT); (yyval.ast)->name = "PRINT"; (yyval.ast)->child[0] = (yyvsp[-2].ast); }
-#line 2074 "build/styx.tab.c"
+#line 2067 "build/styx.tab.c"
     break;
 
-  case 38: /* print_statement: PRINT ROUND_OPEN expression COMMA expression ROUND_CLOSE SEMICOLON  */
-#line 203 "src/styx.y"
+  case 37: /* print_statement: PRINT ROUND_OPEN expression COMMA expression ROUND_CLOSE SEMICOLON  */
+#line 202 "src/styx.y"
                                                                                                      { (yyval.ast) = new_astnode(PRINT_WIDTH); (yyval.ast)->name = "PRINT_WIDTH"; (yyval.ast)->child[0] = (yyvsp[-4].ast); (yyval.ast)->child[1] = (yyvsp[-2].ast); }
-#line 2080 "build/styx.tab.c"
+#line 2073 "build/styx.tab.c"
     break;
 
-  case 39: /* scan_statement: SCAN ROUND_OPEN TYPE ROUND_CLOSE ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
-#line 205 "src/styx.y"
+  case 38: /* scan_statement: SCAN ROUND_OPEN TYPE ROUND_CLOSE ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
+#line 204 "src/styx.y"
                                                                                      { (yyval.ast) = new_astnode(SCAN); (yyval.ast)->name = "SCAN"; (yyval.ast)->val.str = (yyvsp[-2].str); (yyval.ast)->data_type = (yyvsp[-5].num); }
-#line 2086 "build/styx.tab.c"
+#line 2079 "build/styx.tab.c"
     break;
 
-  case 40: /* rand_int_statement: RAND_INT ROUND_OPEN ID ROUND_CLOSE SEMICOLON  */
+  case 39: /* function_call: ID ROUND_OPEN arguments ROUND_CLOSE  */
 #line 207 "src/styx.y"
-                                                                 { (yyval.ast) = new_astnode(RAND_INT); (yyval.ast)->name = "RAND_INT";  (yyval.ast)->val.str = (yyvsp[-2].str); (yyval.ast)->data_type = AST_ID_T; }
-#line 2092 "build/styx.tab.c"
-    break;
-
-  case 41: /* function_call: ID ROUND_OPEN arguments ROUND_CLOSE  */
-#line 209 "src/styx.y"
                                                    { (yyval.ast) = new_astnode(FUNCTION_CALL); (yyval.ast)->name = "FUNCTION_CALL";  (yyval.ast)->val.str = (yyvsp[-3].str); (yyval.ast)->data_type = AST_ID_T; (yyval.ast)->child[0] = (yyvsp[-1].ast); }
-#line 2098 "build/styx.tab.c"
+#line 2085 "build/styx.tab.c"
     break;
 
-  case 42: /* function_call: SYSTEM ROUND_OPEN STR ROUND_CLOSE  */
-#line 210 "src/styx.y"
+  case 40: /* function_call: SYSTEM ROUND_OPEN STR ROUND_CLOSE  */
+#line 208 "src/styx.y"
                                                             { (yyval.ast) = new_astnode(SYSTEM_CALL); (yyval.ast)->name = "SYSTEM_CALL";  (yyval.ast)->data_type = AST_INT_T; (yyval.ast)->val.str = (yyvsp[-1].str); }
-#line 2104 "build/styx.tab.c"
+#line 2091 "build/styx.tab.c"
     break;
 
-  case 43: /* arguments: expression  */
-#line 212 "src/styx.y"
+  case 41: /* arguments: expression  */
+#line 210 "src/styx.y"
                       { (yyval.ast) = new_astnode(ARG_EXPR); (yyval.ast)->name = "ARG_EXPR";  (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2110 "build/styx.tab.c"
+#line 2097 "build/styx.tab.c"
     break;
 
-  case 44: /* arguments: arguments COMMA expression  */
-#line 213 "src/styx.y"
+  case 42: /* arguments: arguments COMMA expression  */
+#line 211 "src/styx.y"
                                       { (yyval.ast) = new_astnode(ARGS_EXPR); (yyval.ast)->name = "ARGS_EXPR"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2116 "build/styx.tab.c"
+#line 2103 "build/styx.tab.c"
     break;
 
-  case 45: /* arguments: %empty  */
-#line 214 "src/styx.y"
+  case 43: /* arguments: %empty  */
+#line 212 "src/styx.y"
                   { (yyval.ast) = NULL; }
-#line 2122 "build/styx.tab.c"
+#line 2109 "build/styx.tab.c"
     break;
 
-  case 46: /* expression: term  */
-#line 216 "src/styx.y"
+  case 44: /* expression: term  */
+#line 214 "src/styx.y"
                  { (yyval.ast) = new_astnode(EXPR_TERM); (yyval.ast)->name = "EXPR_TERM"; (yyval.ast)->child[0] = (yyvsp[0].ast); (yyval.ast)->data_type = (yyval.ast)->child[0]->data_type; }
-#line 2128 "build/styx.tab.c"
+#line 2115 "build/styx.tab.c"
     break;
 
-  case 47: /* expression: expression PLUS term  */
-#line 217 "src/styx.y"
+  case 45: /* expression: expression PLUS term  */
+#line 215 "src/styx.y"
                                { (yyval.ast) = new_astnode(EXPR_PLUS); (yyval.ast)->name = "EXPR_PLUS"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2134 "build/styx.tab.c"
+#line 2121 "build/styx.tab.c"
     break;
 
-  case 48: /* expression: expression MINUS term  */
-#line 218 "src/styx.y"
+  case 46: /* expression: expression MINUS term  */
+#line 216 "src/styx.y"
                                 { (yyval.ast) = new_astnode(EXPR_MINUS); (yyval.ast)->name = "EXPR_MINUS";  (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2140 "build/styx.tab.c"
+#line 2127 "build/styx.tab.c"
     break;
 
-  case 49: /* expression: expression LE term  */
-#line 219 "src/styx.y"
+  case 47: /* expression: expression LE term  */
+#line 217 "src/styx.y"
                              { (yyval.ast) = new_astnode(EXPR_LE); (yyval.ast)->name = "EXPR_LE"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2146 "build/styx.tab.c"
+#line 2133 "build/styx.tab.c"
     break;
 
-  case 50: /* expression: expression GE term  */
-#line 220 "src/styx.y"
+  case 48: /* expression: expression GE term  */
+#line 218 "src/styx.y"
                              { (yyval.ast) = new_astnode(EXPR_GE); (yyval.ast)->name = "EXPR_GE"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2152 "build/styx.tab.c"
+#line 2139 "build/styx.tab.c"
     break;
 
-  case 51: /* expression: expression EQ term  */
-#line 221 "src/styx.y"
+  case 49: /* expression: expression EQ term  */
+#line 219 "src/styx.y"
                              { (yyval.ast) = new_astnode(EXPR_EQ); (yyval.ast)->name = "EXPR_EQ"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2158 "build/styx.tab.c"
+#line 2145 "build/styx.tab.c"
     break;
 
-  case 52: /* expression: expression NE term  */
-#line 222 "src/styx.y"
+  case 50: /* expression: expression NE term  */
+#line 220 "src/styx.y"
                              { (yyval.ast) = new_astnode(EXPR_NE); (yyval.ast)->name = "EXPR_NE"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2164 "build/styx.tab.c"
+#line 2151 "build/styx.tab.c"
     break;
 
-  case 53: /* expression: expression GT term  */
-#line 223 "src/styx.y"
+  case 51: /* expression: expression GT term  */
+#line 221 "src/styx.y"
                              { (yyval.ast) = new_astnode(EXPR_GT); (yyval.ast)->name = "EXPR_GT"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2170 "build/styx.tab.c"
+#line 2157 "build/styx.tab.c"
     break;
 
-  case 54: /* expression: expression LT term  */
-#line 224 "src/styx.y"
+  case 52: /* expression: expression LT term  */
+#line 222 "src/styx.y"
                              { (yyval.ast) = new_astnode(EXPR_LT); (yyval.ast)->name = "EXPR_LT"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2176 "build/styx.tab.c"
+#line 2163 "build/styx.tab.c"
     break;
 
-  case 55: /* expression: expression AND term  */
-#line 225 "src/styx.y"
+  case 53: /* expression: expression AND term  */
+#line 223 "src/styx.y"
                               { (yyval.ast) = new_astnode(EXPR_AND); (yyval.ast)->name = "EXPR_AND"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2182 "build/styx.tab.c"
+#line 2169 "build/styx.tab.c"
     break;
 
-  case 56: /* expression: expression OR term  */
-#line 226 "src/styx.y"
+  case 54: /* expression: expression OR term  */
+#line 224 "src/styx.y"
                              { (yyval.ast) = new_astnode(EXPR_OR); (yyval.ast)->name = "EXPR_OR"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); }
-#line 2188 "build/styx.tab.c"
+#line 2175 "build/styx.tab.c"
     break;
 
-  case 57: /* term: factor  */
-#line 229 "src/styx.y"
+  case 55: /* term: factor  */
+#line 227 "src/styx.y"
              { (yyval.ast) = new_astnode(TERM_FACTOR); (yyval.ast)->name = "TERM_FACTOR"; (yyval.ast)->child[0] = (yyvsp[0].ast); (yyval.ast)->data_type = (yyval.ast)->child[0]->data_type; }
-#line 2194 "build/styx.tab.c"
+#line 2181 "build/styx.tab.c"
     break;
 
-  case 58: /* term: term MULT factor  */
-#line 230 "src/styx.y"
+  case 56: /* term: term MULT factor  */
+#line 228 "src/styx.y"
                            { (yyval.ast) = new_astnode(TERM_MUL); (yyval.ast)->name = "TERM_MUL"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); (yyval.ast)->val.str = "*"; (yyval.ast)->data_type = AST_STR_T; }
-#line 2200 "build/styx.tab.c"
+#line 2187 "build/styx.tab.c"
     break;
 
-  case 59: /* term: term DIV factor  */
-#line 231 "src/styx.y"
+  case 57: /* term: term DIV factor  */
+#line 229 "src/styx.y"
                           { (yyval.ast) = new_astnode(TERM_DIV); (yyval.ast)->name = "TERM_DIV"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); (yyval.ast)->val.str = "/"; (yyval.ast)->data_type = AST_STR_T; }
-#line 2206 "build/styx.tab.c"
+#line 2193 "build/styx.tab.c"
     break;
 
-  case 60: /* term: term MOD factor  */
-#line 232 "src/styx.y"
+  case 58: /* term: term MOD factor  */
+#line 230 "src/styx.y"
                           { (yyval.ast) = new_astnode(TERM_MOD); (yyval.ast)->name = "TERM_MOD"; (yyval.ast)->child[0] = (yyvsp[-2].ast); (yyval.ast)->child[1] = (yyvsp[0].ast); (yyval.ast)->val.str = "%"; (yyval.ast)->data_type = AST_STR_T; }
-#line 2212 "build/styx.tab.c"
+#line 2199 "build/styx.tab.c"
     break;
 
-  case 61: /* factor: ID  */
-#line 234 "src/styx.y"
+  case 59: /* factor: ID  */
+#line 232 "src/styx.y"
            { (yyval.ast) = new_astnode(FACTOR_ID); (yyval.ast)->name = "FACTOR_ID"; (yyval.ast)->val.str = (yyvsp[0].str); (yyval.ast)->data_type = AST_ID_T; }
-#line 2218 "build/styx.tab.c"
+#line 2205 "build/styx.tab.c"
     break;
 
-  case 62: /* factor: NUM  */
-#line 235 "src/styx.y"
+  case 60: /* factor: NUM  */
+#line 233 "src/styx.y"
           { (yyval.ast) = new_astnode(FACTOR_NUM); (yyval.ast)->name = "FACTOR_NUM"; (yyval.ast)->val.num = (yyvsp[0].num); (yyval.ast)->data_type = AST_INT_T; (yyval.ast)->is_const = 1;}
-#line 2224 "build/styx.tab.c"
+#line 2211 "build/styx.tab.c"
     break;
 
-  case 63: /* factor: REAL  */
-#line 236 "src/styx.y"
+  case 61: /* factor: REAL  */
+#line 234 "src/styx.y"
                { (yyval.ast) = new_astnode(FACTOR_REAL); (yyval.ast)->name = "FACTOR_REAL"; (yyval.ast)->val.real = (yyvsp[0].real); (yyval.ast)->data_type = AST_DOUBLE_T; (yyval.ast)->is_const = 1; }
-#line 2230 "build/styx.tab.c"
+#line 2217 "build/styx.tab.c"
     break;
 
-  case 64: /* factor: STR  */
-#line 237 "src/styx.y"
+  case 62: /* factor: STR  */
+#line 235 "src/styx.y"
               { (yyval.ast) = new_astnode(FACTOR_STRING); (yyval.ast)->name = "FACTOR_STRING"; (yyval.ast)->val.str = (yyvsp[0].str); (yyval.ast)->data_type = AST_STR_T; (yyval.ast)->is_const = 1; }
-#line 2236 "build/styx.tab.c"
+#line 2223 "build/styx.tab.c"
     break;
 
-  case 65: /* factor: CHR  */
-#line 238 "src/styx.y"
+  case 63: /* factor: CHR  */
+#line 236 "src/styx.y"
               { (yyval.ast) = new_astnode(FACTOR_CHAR); (yyval.ast)->name = "FACTOR_CHAR"; (yyval.ast)->val.chr = (yyvsp[0].chr); (yyval.ast)->data_type = AST_CHAR_T; (yyval.ast)->is_const = 1; }
-#line 2242 "build/styx.tab.c"
+#line 2229 "build/styx.tab.c"
     break;
 
-  case 66: /* factor: function_call  */
-#line 239 "src/styx.y"
+  case 64: /* factor: function_call  */
+#line 237 "src/styx.y"
                         { (yyval.ast) = new_astnode(FACTOR_FUNCTION_CALL); (yyval.ast)->name = "FACTOR_FUNCTION_CALL"; (yyval.ast)->child[0] = (yyvsp[0].ast); }
-#line 2248 "build/styx.tab.c"
+#line 2235 "build/styx.tab.c"
     break;
 
-  case 67: /* factor: ROUND_OPEN expression ROUND_CLOSE  */
-#line 240 "src/styx.y"
+  case 65: /* factor: ROUND_OPEN expression ROUND_CLOSE  */
+#line 238 "src/styx.y"
                                             { (yyval.ast) = new_astnode(FACTOR_PARENTHESIS); (yyval.ast)->name = "FACTOR_PARENTHESIS"; (yyval.ast)->child[0] = (yyvsp[-1].ast); (yyval.ast)->val.str = "(expr)"; (yyval.ast)->data_type = AST_STR_T; }
-#line 2254 "build/styx.tab.c"
+#line 2241 "build/styx.tab.c"
     break;
 
-  case 68: /* factor: RAND_INT ROUND_OPEN NUM ROUND_CLOSE  */
-#line 241 "src/styx.y"
+  case 66: /* factor: RAND_INT ROUND_OPEN NUM ROUND_CLOSE  */
+#line 239 "src/styx.y"
                                               { (yyval.ast) = new_astnode(FACTOR_RAND); (yyval.ast)->name = "FACTOR_RAND"; (yyval.ast)->val.num = (yyvsp[-1].num); (yyval.ast)->data_type = AST_INT_T; }
-#line 2260 "build/styx.tab.c"
+#line 2247 "build/styx.tab.c"
     break;
 
 
-#line 2264 "build/styx.tab.c"
+#line 2251 "build/styx.tab.c"
 
         default: break;
       }
@@ -2495,7 +2482,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 245 "src/styx.y"
+#line 243 "src/styx.y"
 
 
 // C Code

@@ -1,337 +1,100 @@
 digraph ast {
-n60 [label="id: 60
+n17 [label="id: 17
  PROGRAM
  none_t
  is_const: 0"];
-n60 -> n42;
-n42 [label="id: 42
- FUNCTIONS
+n17 -> n16;
+n16 [label="id: 16
+ MAIN
+ id
+ ID: ºÆı’
+ is_const: 0"];
+n16 -> n15;
+n15 [label="id: 15
+ BODY
  none_t
  is_const: 0"];
-n42 -> n41;
-n41 [label="id: 41
- FUNCTION
- int
- NUM: -1736301264
- is_const: 0"];
-n41 -> n3;
-n3 [label="id: 3
- PARAMETERS
+n15 -> n14;
+n14 [label="id: 14
+ STATEMENTS
  none_t
  is_const: 0"];
-n3 -> n1;
+n14 -> n8;
+n8 [label="id: 8
+ STATEMENTS
+ none_t
+ is_const: 0"];
+n8 -> n2;
+n2 [label="id: 2
+ STATEMENTS
+ none_t
+ is_const: 0"];
+n2 -> n1;
 n1 [label="id: 1
- PARAMETERS
+ STATEMENT
  none_t
  is_const: 0"];
 n1 -> n0;
 n0 [label="id: 0
- PARAMETER
- id
- ID: Æ
- is_const: 0"];
-n3 -> n2;
-n2 [label="id: 2
- PARAMETER
- id
- ID: Ŋ
- is_const: 0"];
-n41 -> n40;
-n40 [label="id: 40
- BODY
- none_t
- is_const: 0"];
-n40 -> n39;
-n39 [label="id: 39
- STATEMENTS
- none_t
- is_const: 0"];
-n39 -> n33;
-n33 [label="id: 33
- STATEMENTS
- none_t
- is_const: 0"];
-n33 -> n27;
-n27 [label="id: 27
- STATEMENTS
- none_t
- is_const: 0"];
-n27 -> n21;
-n21 [label="id: 21
- STATEMENTS
- none_t
- is_const: 0"];
-n21 -> n15;
-n15 [label="id: 15
- STATEMENTS
- none_t
- is_const: 0"];
-n15 -> n9;
-n9 [label="id: 9
- STATEMENTS
- none_t
- is_const: 0"];
-n9 -> n8;
-n8 [label="id: 8
- STATEMENT
- none_t
+ DECLARATION
+ int
+ NUM: 1087845712
  is_const: 0"];
 n8 -> n7;
 n7 [label="id: 7
- PRINT
+ STATEMENT
  none_t
  is_const: 0"];
 n7 -> n6;
 n6 [label="id: 6
- EXPR_TERM
- string
- STR: (null)
- is_const: 1"];
+ ASSIGNMENT
+ id
+ ID: Æ
+ is_const: 0"];
 n6 -> n5;
 n5 [label="id: 5
- TERM_FACTOR
- string
- STR: (null)
- is_const: 1"];
+ EXPR_TERM
+ int
+ NUM: 0
+ is_const: 0"];
 n5 -> n4;
 n4 [label="id: 4
- FACTOR_STRING
- string
- STR: Æ = 
- is_const: 1"];
-n15 -> n14;
-n14 [label="id: 14
- STATEMENT
- none_t
+ TERM_FACTOR
+ int
+ NUM: 0
+ is_const: 0"];
+n4 -> n3;
+n3 [label="id: 3
+ FACTOR_RAND
+ int
+ NUM: 6979
  is_const: 0"];
 n14 -> n13;
 n13 [label="id: 13
- PRINT
+ STATEMENT
  none_t
  is_const: 0"];
 n13 -> n12;
 n12 [label="id: 12
- EXPR_TERM
- id
- ID: (null)
+ PRINT
+ none_t
  is_const: 0"];
 n12 -> n11;
 n11 [label="id: 11
- TERM_FACTOR
+ EXPR_TERM
  id
  ID: (null)
  is_const: 0"];
 n11 -> n10;
 n10 [label="id: 10
+ TERM_FACTOR
+ id
+ ID: (null)
+ is_const: 0"];
+n10 -> n9;
+n9 [label="id: 9
  FACTOR_ID
  id
  ID: Æ
  is_const: 0"];
-n21 -> n20;
-n20 [label="id: 20
- STATEMENT
- none_t
- is_const: 0"];
-n20 -> n19;
-n19 [label="id: 19
- PRINT
- none_t
- is_const: 0"];
-n19 -> n18;
-n18 [label="id: 18
- EXPR_TERM
- string
- STR: (null)
- is_const: 1"];
-n18 -> n17;
-n17 [label="id: 17
- TERM_FACTOR
- string
- STR: (null)
- is_const: 1"];
-n17 -> n16;
-n16 [label="id: 16
- FACTOR_STRING
- string
- STR: 
-Ŋ = 
- is_const: 1"];
-n27 -> n26;
-n26 [label="id: 26
- STATEMENT
- none_t
- is_const: 0"];
-n26 -> n25;
-n25 [label="id: 25
- RETURN
- none_t
- is_const: 0"];
-n25 -> n24;
-n24 [label="id: 24
- EXPR_TERM
- int
- NUM: 0
- is_const: 1"];
-n24 -> n23;
-n23 [label="id: 23
- TERM_FACTOR
- int
- NUM: 0
- is_const: 1"];
-n23 -> n22;
-n22 [label="id: 22
- FACTOR_NUM
- int
- NUM: 1
- is_const: 1"];
-n33 -> n32;
-n32 [label="id: 32
- STATEMENT
- none_t
- is_const: 0"];
-n32 -> n31;
-n31 [label="id: 31
- PRINT
- none_t
- is_const: 0"];
-n31 -> n30;
-n30 [label="id: 30
- EXPR_TERM
- id
- ID: (null)
- is_const: 0"];
-n30 -> n29;
-n29 [label="id: 29
- TERM_FACTOR
- id
- ID: (null)
- is_const: 0"];
-n29 -> n28;
-n28 [label="id: 28
- FACTOR_ID
- id
- ID: Ŋ
- is_const: 0"];
-n39 -> n38;
-n38 [label="id: 38
- STATEMENT
- none_t
- is_const: 0"];
-n38 -> n37;
-n37 [label="id: 37
- PRINT
- none_t
- is_const: 0"];
-n37 -> n36;
-n36 [label="id: 36
- EXPR_TERM
- string
- STR: (null)
- is_const: 1"];
-n36 -> n35;
-n35 [label="id: 35
- TERM_FACTOR
- string
- STR: (null)
- is_const: 1"];
-n35 -> n34;
-n34 [label="id: 34
- FACTOR_STRING
- string
- STR: 
-
- is_const: 1"];
-n60 -> n59;
-n59 [label="id: 59
- MAIN
- id
- ID: ºÆı’
- is_const: 0"];
-n59 -> n58;
-n58 [label="id: 58
- BODY
- none_t
- is_const: 0"];
-n58 -> n57;
-n57 [label="id: 57
- STATEMENTS
- none_t
- is_const: 0"];
-n57 -> n56;
-n56 [label="id: 56
- STATEMENT
- none_t
- is_const: 0"];
-n56 -> n55;
-n55 [label="id: 55
- PRINT
- none_t
- is_const: 0"];
-n55 -> n54;
-n54 [label="id: 54
- EXPR_TERM
- none_t
- is_const: 0"];
-n54 -> n53;
-n53 [label="id: 53
- TERM_FACTOR
- none_t
- is_const: 0"];
-n53 -> n52;
-n52 [label="id: 52
- FACTOR_FUNCTION_CALL
- none_t
- is_const: 0"];
-n52 -> n51;
-n51 [label="id: 51
- FUNCTION_CALL
- id
- ID: ª↑’©
- is_const: 0"];
-n51 -> n50;
-n50 [label="id: 50
- ARGS_EXPR
- none_t
- is_const: 0"];
-n50 -> n46;
-n46 [label="id: 46
- ARG_EXPR
- none_t
- is_const: 0"];
-n46 -> n45;
-n45 [label="id: 45
- EXPR_TERM
- int
- NUM: 0
- is_const: 1"];
-n45 -> n44;
-n44 [label="id: 44
- TERM_FACTOR
- int
- NUM: 0
- is_const: 1"];
-n44 -> n43;
-n43 [label="id: 43
- FACTOR_NUM
- int
- NUM: 3
- is_const: 1"];
-n50 -> n49;
-n49 [label="id: 49
- EXPR_TERM
- int
- NUM: 0
- is_const: 1"];
-n49 -> n48;
-n48 [label="id: 48
- TERM_FACTOR
- int
- NUM: 0
- is_const: 1"];
-n48 -> n47;
-n47 [label="id: 47
- FACTOR_NUM
- int
- NUM: 7
- is_const: 1"];
 }
