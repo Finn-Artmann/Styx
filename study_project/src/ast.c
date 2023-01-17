@@ -319,6 +319,19 @@ void print_ast(astnode_t *root, int depth)
     }
 }
 
+int check_and_cast_condition(astnode_t *node)
+{
+    // get_node_val returns void* , check if it is NULL and then cast to int
+    void *cond_ptr = get_node_val(exec_ast(node));
+    if (cond_ptr == NULL)
+    {
+        printf("ERROR: FOR requires a condition.\n");
+        exit(1);
+    }
+    // We always want to interpret the condition as an int no matter what the original type was
+    return *(int *)cond_ptr;
+}
+
 val_t return_val;
 int return_val_type = AST_NONE_T;
 
@@ -1041,26 +1054,19 @@ astnode_t *exec_ast(astnode_t *root)
     break;
 
     case FOR:
-
+    {
         var_enter_block();
         exec_ast(root->child[0]); // init
-        astnode_t *condition = exec_ast(root->child[1]);
+        int cond_val = check_and_cast_condition(exec_ast(root->child[1]));
 
-        // get_node_val returns void* , check if it is NULL and then cast to int
-        void *cond_ptr = get_node_val(condition);
-        if (cond_ptr == NULL)
-        {
-            printf("ERROR: FOR requires a condition.\n");
-            exit(1);
-        }
-
-        int cond_val = *(int *)cond_ptr; // We always want to interpret the condition as an int no matter what the original type was
         for (; cond_val; exec_ast(root->child[2]))
         {
+            cond_val = check_and_cast_condition(exec_ast(root->child[1]));
             exec_ast(root->child[3]);
         }
         var_leave_block();
-        break;
+    }
+    break;
 
     case FOR_NUM:
     {
@@ -1076,6 +1082,22 @@ astnode_t *exec_ast(astnode_t *root)
         {
             exec_ast(root->child[1]);
         }
+        var_leave_block();
+    }
+    break;
+
+    case REPEAT:
+    {
+        var_enter_block();
+
+        int cond_val = check_and_cast_condition(exec_ast(root->child[1]));
+        do
+        {
+            exec_ast(root->child[0]);
+            cond_val = check_and_cast_condition(exec_ast(root->child[1]));
+
+        } while (!cond_val); // Negate the condition for REPEAT UNTIL loop
+
         var_leave_block();
     }
     break;
