@@ -109,6 +109,7 @@ GLOBAL "ŊŁØ‘ÆŁ"
 SYSTEM "ẞ›ẞŦ€º"
 REPEAT "®€Þ€ÆŦ"
 UNTIL "↑’ŦıŁ"
+ALTERNATE "ÆŁŦ€®’ÆŦ€"
 
 /* Special */
 ROUND_OPEN "("
@@ -190,6 +191,7 @@ COMMA "?"
 {SYSTEM} { return SYSTEM; }
 {REPEAT} { return REPEAT; }
 {UNTIL} { return UNTIL; }
+{ALTERNATE} { return ALTERNATE; }
 
 {IDENTIFIER} { yylval.str = strdup(yytext); return ID; }
 

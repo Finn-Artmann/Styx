@@ -1102,6 +1102,32 @@ astnode_t *exec_ast(astnode_t *root)
     }
     break;
 
+    case ALTERNATE:
+    {
+
+        astnode_t *statements[100];
+        int num_statements = 0;
+        astnode_t *curr = root->child[0];
+        while (curr->type == ALTER_STATEMENTS)
+        {
+            if (curr->child[1] != NULL)
+            {
+                statements[num_statements++] = (astnode_t *)curr->child[1];
+                curr = curr->child[0];
+            }
+            else
+            {
+                statements[num_statements++] = (astnode_t *)curr->child[0];
+                break;
+            }
+        }
+
+        int i = root->val.num;
+        root->val.num = (i + 1) % num_statements;
+        return exec_ast(statements[num_statements - i - 1]);
+    }
+    break;
+
     case DECLARATION:
     {
         val_t inital_val;

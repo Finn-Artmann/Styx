@@ -52,6 +52,7 @@
 %token SYSTEM
 %token REPEAT
 %token UNTIL
+%token ALTERNATE
 %token <str>MAIN
 
 
@@ -88,9 +89,9 @@
 %start start
 
 %type <ast> start program functions function function_call arguments parameters parameter 
-%type <ast> main body statements statement declaration 
+%type <ast> main body statements statement declaration alternate_statement alter_statements
 %type <ast> global_declaration assignment expression if_statement for_statement return_statement 
-%type <ast> print_statement scan_statement term factor repeat_statement
+%type <ast> print_statement scan_statement term factor repeat_statement 
 
 // Other Grammar tokens
 %token PROGRAM STATEMENTS STATEMENT DECLARATIONS GLOBAL_DECLARATIONS FUNCTIONS PARAMETERS
@@ -99,7 +100,7 @@
 %token TERM_MOD FACTOR_ID FACTOR_NUM FACTOR_REAL FACTOR_PARENTHESIS FACTOR_FUNCTION_CALL
 %token FACTOR_RAND IFELSE PRINT_STR DECLARATION GLOBAL_DECLARATION FUNCTION_CALL PARAMETER
 %token FUNCTION ARG_EXPR ARGS_EXPR DECLARATION_ASSIGN FACTOR_STRING FACTOR_CHAR PRINT_WIDTH
-%token SYSTEM_CALL STATEMENT_BLOCK GLOBAL_DECLARATION_ASSIGN FOR_NUM 
+%token SYSTEM_CALL STATEMENT_BLOCK GLOBAL_DECLARATION_ASSIGN FOR_NUM ALTER_STATEMENTS
 
 
 %%
@@ -184,6 +185,14 @@ statement: assignment SEMICOLON { $$ = new_astnode(STATEMENT); $$->child[0] = $1
 	 | expression SEMICOLON { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
 	 | declaration { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
 	 | global_declaration { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
+	 | alternate_statement { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
+
+
+alternate_statement: ALTERNATE ROUND_OPEN alter_statements ROUND_CLOSE SEMICOLON { $$ = new_astnode(ALTERNATE); $$->child[0] = $3; $$->val.num = 0; }
+
+alter_statements: statement { $$ = new_astnode(ALTER_STATEMENTS); $$->child[0] = $1; }
+		| alter_statements COMMA statement { $$ = new_astnode(ALTER_STATEMENTS); $$->child[0] = $1; $$->child[1] = $3; }
+
 	 
 
 assignment: ID ASSIGN expression { $$ = new_astnode(ASSIGNMENT); $$->val.str = $1; $$->data_type = AST_ID_T; $$->child[0] = $3; }
