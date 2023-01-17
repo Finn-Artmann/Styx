@@ -29,7 +29,6 @@ typedef union
 struct astnode
 {
     int id;
-    char *name;
     int type;
     int data_type;
     val_t val;

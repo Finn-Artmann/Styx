@@ -47,6 +47,8 @@ WHITESPACE [ \t\r\n]+
 STRINGSTART "⅜"
 STRINGEND "⅜"
 STRINGCHAR .
+CHARSTART "⅝"
+CHAREND "⅝"
 ESCCHAR "E"
 NEWLINE "Ω"
 ESCAPE_STR {ESCCHAR}({STRINGSTART}|{STRINGEND}|{NEWLINE}|{ESCCHAR})
@@ -105,6 +107,8 @@ MAIN "ºÆı’"
 RAND_INT "®Æ’Ðı’Ŧ"
 GLOBAL "ŊŁØ‘ÆŁ"
 SYSTEM "ẞ›ẞŦ€º"
+REPEAT "®€Þ€ÆŦ"
+UNTIL "↑’ŦıŁ"
 
 /* Special */
 ROUND_OPEN "("
@@ -115,7 +119,7 @@ SEMICOLON ";"
 COMMA "?"
 
 
-%x STRING HEX BABYLONIAN LINECOMMENT BLOCKCOMMENT
+%x STRING HEX BABYLONIAN LINECOMMENT BLOCKCOMMENT CHAR
 %%
 
 
@@ -125,6 +129,10 @@ COMMA "?"
 <STRING>{STRINGCHAR} { addstr(*yytext); }
 <STRING>{NEWLINE} { addstr('\n'); }
 <STRING>{ASCII} { addstr(atoi(yytext + UTF8_ESCCHAR_LEN)); }
+
+{CHARSTART} { BEGIN(CHAR); }
+<CHAR>{STRINGCHAR} { yylval.chr = *yytext; }
+<CHAR>{CHAREND} { BEGIN(INITIAL); return CHR; }
 
 
 {DEC_NUMBER} { yylval.num = atoi(yytext); return NUM; }
@@ -149,7 +157,7 @@ COMMA "?"
 {INT} { yylval.num = AST_INT_T; return TYPE; }
 {DOUBLE} { yylval.num = AST_DOUBLE_T; return TYPE; }
 {STRING} { yylval.num = AST_STR_T; return TYPE; }
-{CHAR} { yylval.num = AST_STR_T; return TYPE; }
+{CHAR} { yylval.num = AST_CHAR_T; return TYPE; }
 {VOID} { yylval.num = AST_NONE_T; return TYPE; }
 
 
@@ -165,6 +173,7 @@ COMMA "?"
 {NE} { return NE; }
 {GT} { return GT; }
 {LT} { return LT; }
+{NOT} { return NOT; }
 {AND} { return AND; }
 {OR} { return OR; }
 {ASSIGN} { return ASSIGN; }
@@ -179,6 +188,8 @@ COMMA "?"
 {GLOBAL} { return GLOBAL; }
 {MAIN} { yylval.str = strdup(yytext); return MAIN; }
 {SYSTEM} { return SYSTEM; }
+{REPEAT} { return REPEAT; }
+{UNTIL} { return UNTIL; }
 
 {IDENTIFIER} { yylval.str = strdup(yytext); return ID; }
 

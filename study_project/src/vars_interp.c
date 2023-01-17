@@ -175,9 +175,14 @@ void var_set(char *id, void *val, int type)
       break;
 
     case AST_STR_T:
-      if (s->val.str != NULL)
+      /* In case we assign the strig to itself (e.g. a = a) we cannot free the old string and then strdup the new one
+      because the old string is already freed. So we have to check if the old string is the same as the new one
+      and only free it if it is not. Also we only strdup the new string if it is not the same as the old one. */
+      if (s->val.str != NULL && strcmp(s->val.str, (char *)val) != 0)
+      {
         free(s->val.str);
-      s->val.str = strdup((char *)val);
+        s->val.str = strdup((char *)val);
+      }
       break;
 
     case AST_CHAR_T:
@@ -220,6 +225,10 @@ void *var_get(char *id, int *type)
 
     case AST_STR_T:
       return s->val.str;
+      break;
+
+    case AST_CHAR_T:
+      return &s->val.chr;
       break;
 
     case AST_NONE_T:

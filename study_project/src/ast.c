@@ -140,6 +140,31 @@ astnode_t *new_astnode(int type)
     return node;
 }
 
+void *get_node_val(astnode_t *node)
+{
+    switch (node->data_type)
+    {
+    case AST_INT_T:
+        return &node->val.num;
+
+    case AST_DOUBLE_T:
+        return &node->val.real;
+
+    case AST_CHAR_T:
+        return &node->val.chr;
+
+    case AST_STR_T:
+        return node->val.str;
+
+    case AST_NONE_T:
+        return NULL;
+
+    default:
+        printf("Error: Unknown type in get_node_val\n");
+        exit(1);
+    }
+}
+
 const char *ast_token2str(int type)
 {
     return token_table[type - 258 + 3];
@@ -199,7 +224,7 @@ char *node2str(astnode_t *node)
             str,
             "id: %d\n %s\n %s\n NUM: %d\n is_const: %d",
             node->id,
-            ast_token2str(node->type), // TODO: use this function an remove ast->name
+            ast_token2str(node->type),
             ast_type2str(AST_INT_T),
             node->val.num,
             node->is_const);
@@ -210,7 +235,7 @@ char *node2str(astnode_t *node)
             str,
             "id: %d\n %s\n %s\n ID: %s\n is_const: %d",
             node->id,
-            node->name,
+            ast_token2str(node->type),
             ast_type2str(AST_ID_T),
             node->val.str,
             node->is_const);
@@ -221,7 +246,7 @@ char *node2str(astnode_t *node)
             str,
             "id: %d\n %s\n %s\n STR: %s\n is_const: %d",
             node->id,
-            node->name,
+            ast_token2str(node->type),
             ast_type2str(AST_STR_T),
             node->val.str,
             node->is_const);
@@ -232,7 +257,7 @@ char *node2str(astnode_t *node)
             str,
             "id: %d\n %s\n %s\n CHAR: %c\n is_const: %d",
             node->id,
-            node->name,
+            ast_token2str(node->type),
             ast_type2str(AST_CHAR_T),
             node->val.chr,
             node->is_const);
@@ -243,7 +268,7 @@ char *node2str(astnode_t *node)
             str,
             "id: %d\n %s\n %s\n REAL: %f\n is_const: %d",
             node->id,
-            node->name,
+            ast_token2str(node->type),
             ast_type2str(AST_DOUBLE_T),
             node->val.real,
             node->is_const);
@@ -254,7 +279,7 @@ char *node2str(astnode_t *node)
             str,
             "id: %d\n %s\n %s\n is_const: %d",
             node->id,
-            node->name,
+            ast_token2str(node->type),
             ast_type2str(AST_NONE_T),
             node->is_const);
         break;
@@ -324,8 +349,8 @@ astnode_t *operation(astnode_t *root, const int op)
 
     if (node1->data_type != node2->data_type)
     {
-        printf("Error: Type mismatch in operation %d\n", op);
-        printf("Type 1: %d, Type 2: %d\n", node1->data_type, node2->data_type);
+        printf("Error: Type mismatch in operation %s\n", ast_token2str(op));
+        printf("Type 1: %s, Type 2: %s\n", ast_type2str(node1->data_type), ast_type2str(node2->data_type));
         exit(1);
     }
 
@@ -394,7 +419,7 @@ astnode_t *operation(astnode_t *root, const int op)
             break;
 
         default:
-            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            printf("Error: Invalid operation %s for type %s and %s.\n", ast_token2str(op), ast_type2str(node1->data_type), ast_type2str(node2->data_type));
             exit(1);
         }
         break;
@@ -456,7 +481,7 @@ astnode_t *operation(astnode_t *root, const int op)
             break;
 
         default:
-            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            printf("Error: Invalid operation %s for type %s and %s.\n", ast_token2str(op), ast_type2str(node1->data_type), ast_type2str(node2->data_type));
             exit(1);
         }
         break;
@@ -532,7 +557,7 @@ astnode_t *operation(astnode_t *root, const int op)
             break;
 
         default:
-            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            printf("Error: Invalid operation %s for type %s and %s.\n", ast_token2str(op), ast_type2str(node1->data_type), ast_type2str(node2->data_type));
             exit(1);
         }
         break;
@@ -606,7 +631,7 @@ astnode_t *operation(astnode_t *root, const int op)
             break;
 
         default:
-            printf("Error: Invalid operation %d for type %d and %d.\n", op, node1->data_type, node2->data_type);
+            printf("Error: Invalid operation %s for type %s and %s.\n", ast_token2str(op), ast_type2str(node1->data_type), ast_type2str(node2->data_type));
             exit(1);
         }
         break;
@@ -723,11 +748,34 @@ astnode_t *exec_ast(astnode_t *root)
         return operation(root, AND);
     case EXPR_OR:
         return operation(root, OR);
-    case TERM_FACTOR:
+
+    case TERM_NOT_FACTOR:
     {
         astnode_t *node = exec_ast(root->child[0]);
         root->is_const = node->is_const;
-        return node;
+        root->data_type = node->data_type;
+
+        switch (node->data_type)
+        {
+        case AST_INT_T:
+            root->val.num = !node->val.num;
+            break;
+
+        case AST_DOUBLE_T:
+            root->val.real = !node->val.real;
+            break;
+
+        default:
+            printf("Error: Cannot use NOT on type %s.\n", ast_token2str(root->child[0]->data_type));
+            exit(1);
+        }
+        return root;
+    }
+    break;
+
+    case TERM_FACTOR:
+    {
+        return exec_ast(root->child[0]);
     }
     case TERM_MUL:
         return operation(root, MULT);
@@ -994,14 +1042,43 @@ astnode_t *exec_ast(astnode_t *root)
 
     case FOR:
 
-        // TODO: Make declaration, condition, and increment optional
         var_enter_block();
-        for (exec_ast(root->child[0]); exec_ast(root->child[1])->val.num; exec_ast(root->child[2]))
+        exec_ast(root->child[0]); // init
+        astnode_t *condition = exec_ast(root->child[1]);
+
+        // get_node_val returns void* , check if it is NULL and then cast to int
+        void *cond_ptr = get_node_val(condition);
+        if (cond_ptr == NULL)
+        {
+            printf("ERROR: FOR requires a condition.\n");
+            exit(1);
+        }
+
+        int cond_val = *(int *)cond_ptr; // We always want to interpret the condition as an int no matter what the original type was
+        for (; cond_val; exec_ast(root->child[2]))
         {
             exec_ast(root->child[3]);
         }
         var_leave_block();
         break;
+
+    case FOR_NUM:
+    {
+        var_enter_block();
+        astnode_t *repeat = exec_ast(root->child[0]);
+        if (repeat->data_type != AST_INT_T)
+        {
+            printf("ERROR: FOR_NUM requires an integer.\n");
+            exit(1);
+        }
+
+        for (int i = 0; i < repeat->val.num; i++)
+        {
+            exec_ast(root->child[1]);
+        }
+        var_leave_block();
+    }
+    break;
 
     case DECLARATION:
     {
@@ -1310,7 +1387,7 @@ astnode_t *exec_ast(astnode_t *root)
     break;
 
     default:
-        printf("Error: Unknown node %s with type id %d\n", ast_type2str(root->type), root->type);
+        printf("Error: Unknown node %s with type id %d\n", ast_token2str(root->type), root->type);
         break;
     }
 
