@@ -1108,8 +1108,20 @@ astnode_t *exec_ast(astnode_t *root)
         astnode_t *statements[100];
         int num_statements = 0;
         astnode_t *curr = root->child[0];
+
+        /* Currently this is not very efficient as it builds the list of statements
+         *  every the alternate-statement is executed. This could be improved by
+         *  storing the list of statements in the AST node itself.
+         */
         while (curr->type == ALTER_STATEMENTS)
         {
+
+            if (num_statements >= 100)
+            {
+                printf("ERROR: Too many statements in ALTERNATE.\n");
+                exit(1);
+            }
+
             if (curr->child[1] != NULL)
             {
                 statements[num_statements++] = (astnode_t *)curr->child[1];
