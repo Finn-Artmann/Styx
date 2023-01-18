@@ -11,6 +11,8 @@ struct paramlist
     struct paramlist *next;
 };
 
+extern struct paramlist *paramlist;
+
 void add_param(struct paramlist **list, void *val, int type);
 void *get_param(struct paramlist **list, int *type);
 

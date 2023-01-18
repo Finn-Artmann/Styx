@@ -4,6 +4,9 @@
         "vars_interp.h": "c",
         "stdio.h": "c",
         "ast.h": "c",
-        "parameters.h": "c"
+        "parameters.h": "c",
+        "value_type.h": "c",
+        "output_ast.h": "c",
+        "styx.tab.h": "c"
     }
 }

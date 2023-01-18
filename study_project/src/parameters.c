@@ -5,6 +5,8 @@
 #include "value_type.h"
 #include "parameters.h"
 
+struct paramlist *paramlist = NULL;
+
 // Add parameter to queue
 void add_param(struct paramlist **list, void *val, int type)
 {

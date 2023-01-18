@@ -7,6 +7,7 @@
 	#include <time.h>
 
 	#include "vars_interp.h"
+	#include "output_ast.h"
 	#include "ast.h"
 	
 
@@ -21,7 +22,6 @@
 	}
 	const char * const* token_table;
 	
-	
 %}
 
 %define parse.lac full
@@ -29,8 +29,6 @@
 %token-table
 
 // Definitions
-
-
 
 %union{
 	char* str;
@@ -254,11 +252,6 @@ factor: ID { $$ = new_astnode(FACTOR_ID); $$->val.str = $1; $$->data_type = AST_
 	| RAND_INT ROUND_OPEN NUM ROUND_CLOSE { $$ = new_astnode(FACTOR_RAND); $$->val.num = $3; $$->data_type = AST_INT_T; }
 
 %%
-
-// C Code
-const char* token_name(int t) {
-    return yysymbol_name(YYTRANSLATE(t));
-}
 
 
 int main(int arc, char **argv)
