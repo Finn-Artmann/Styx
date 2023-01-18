@@ -1166,13 +1166,13 @@ int yy_flex_debug = 1;
 
 static const flex_int16_t yy_rule_linenum[66] =
     {   0,
-      128,  129,  130,  131,  132,  133,  135,  136,  137,  140,
-      141,  143,  144,  146,  147,  148,  151,  152,  153,  155,
-      156,  157,  159,  160,  161,  162,  163,  167,  168,  169,
-      170,  171,  172,  173,  174,  175,  176,  177,  178,  179,
-      180,  181,  183,  184,  185,  186,  187,  188,  189,  190,
-      191,  192,  193,  194,  195,  196,  198,  201,  202,  203,
-      204,  205,  206,  208,  210
+      127,  128,  129,  130,  131,  132,  134,  135,  136,  139,
+      140,  142,  143,  145,  146,  147,  150,  151,  152,  154,
+      155,  156,  158,  159,  160,  161,  162,  166,  167,  168,
+      169,  170,  171,  172,  173,  174,  175,  176,  177,  178,
+      179,  180,  182,  183,  184,  185,  186,  187,  188,  189,
+      190,  191,  192,  193,  194,  195,  197,  200,  201,  202,
+      203,  204,  205,  207,  209
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -1187,17 +1187,16 @@ char *yytext;
 #line 2 "src/styx.l"
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
 #include "styx.tab.h"
 #include "ast.h"
+#include "babylonian_converter.h"
 
 #define UTF8_ESCCHAR_LEN 1 
 
 
 void addstr(char ch);
-int babylonian_to_decimal(char* str);
 
 char* str_buf;
 
@@ -1207,14 +1206,14 @@ void init_str_buf();
 #define YY_USER_INIT init_str_buf();
 
 
-#line 1211 "build/lex.yy.c"
+#line 1210 "build/lex.yy.c"
 #define YY_NO_INPUT 1
 /* Datatypes */
 /* Operators */
 /* Keywords */
 /* Special */
 
-#line 1218 "build/lex.yy.c"
+#line 1217 "build/lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -1498,11 +1497,11 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 125 "src/styx.l"
+#line 124 "src/styx.l"
 
 
 
-#line 1506 "build/lex.yy.c"
+#line 1505 "build/lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1594,338 +1593,338 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 128 "src/styx.l"
+#line 127 "src/styx.l"
 { BEGIN(STRING); *str_buf = '\0'; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 129 "src/styx.l"
+#line 128 "src/styx.l"
 {for (int i = UTF8_ESCCHAR_LEN; i < yyleng; i++){ addstr(yytext[i]);} } 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 130 "src/styx.l"
+#line 129 "src/styx.l"
 { BEGIN(INITIAL); yylval.str = strdup(str_buf); return STR; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 131 "src/styx.l"
+#line 130 "src/styx.l"
 { addstr(*yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 132 "src/styx.l"
+#line 131 "src/styx.l"
 { addstr('\n'); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 133 "src/styx.l"
+#line 132 "src/styx.l"
 { addstr(atoi(yytext + UTF8_ESCCHAR_LEN)); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 135 "src/styx.l"
+#line 134 "src/styx.l"
 { BEGIN(CHAR); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 136 "src/styx.l"
+#line 135 "src/styx.l"
 { yylval.chr = *yytext; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 137 "src/styx.l"
+#line 136 "src/styx.l"
 { BEGIN(INITIAL); return CHR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 140 "src/styx.l"
+#line 139 "src/styx.l"
 { yylval.num = atoi(yytext); return NUM; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 141 "src/styx.l"
+#line 140 "src/styx.l"
 { yylval.real = atof(yytext); return REAL; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 143 "src/styx.l"
+#line 142 "src/styx.l"
 { BEGIN(HEX); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 144 "src/styx.l"
+#line 143 "src/styx.l"
 { BEGIN(INITIAL); yylval.num = strtol(yytext, NULL, 16); return NUM; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 146 "src/styx.l"
+#line 145 "src/styx.l"
 { BEGIN(BABYLONIAN); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 147 "src/styx.l"
+#line 146 "src/styx.l"
 {BEGIN(INITIAL); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 148 "src/styx.l"
+#line 147 "src/styx.l"
 { yylval.num = babylonian_to_decimal(yytext); return NUM; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 151 "src/styx.l"
+#line 150 "src/styx.l"
 { BEGIN(LINECOMMENT);  *str_buf = '\0';}
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 152 "src/styx.l"
+#line 151 "src/styx.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 153 "src/styx.l"
+#line 152 "src/styx.l"
 { addstr(*yytext); /* addstr could be removed here to completely ignore comments */ }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 155 "src/styx.l"
+#line 154 "src/styx.l"
 { BEGIN(BLOCKCOMMENT); *str_buf = '\0'; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 156 "src/styx.l"
+#line 155 "src/styx.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 22:
 /* rule 22 can match eol */
 YY_RULE_SETUP
-#line 157 "src/styx.l"
+#line 156 "src/styx.l"
 { addstr(*yytext); /* addstr could be removed here to completly ignore comments */ }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 159 "src/styx.l"
+#line 158 "src/styx.l"
 { yylval.num = AST_INT_T; return TYPE; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 160 "src/styx.l"
+#line 159 "src/styx.l"
 { yylval.num = AST_DOUBLE_T; return TYPE; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 161 "src/styx.l"
+#line 160 "src/styx.l"
 { yylval.num = AST_STR_T; return TYPE; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 162 "src/styx.l"
+#line 161 "src/styx.l"
 { yylval.num = AST_CHAR_T; return TYPE; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 163 "src/styx.l"
+#line 162 "src/styx.l"
 { yylval.num = AST_NONE_T; return TYPE; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 167 "src/styx.l"
+#line 166 "src/styx.l"
 { return PLUS; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 168 "src/styx.l"
+#line 167 "src/styx.l"
 { return MINUS; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 169 "src/styx.l"
+#line 168 "src/styx.l"
 { return MULT; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 170 "src/styx.l"
+#line 169 "src/styx.l"
 { return DIV; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 171 "src/styx.l"
+#line 170 "src/styx.l"
 { return MOD; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 172 "src/styx.l"
+#line 171 "src/styx.l"
 { return LE; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 173 "src/styx.l"
+#line 172 "src/styx.l"
 { return GE; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 174 "src/styx.l"
+#line 173 "src/styx.l"
 { return EQ; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 175 "src/styx.l"
+#line 174 "src/styx.l"
 { return NE; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 176 "src/styx.l"
+#line 175 "src/styx.l"
 { return GT; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 177 "src/styx.l"
+#line 176 "src/styx.l"
 { return LT; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 178 "src/styx.l"
+#line 177 "src/styx.l"
 { return NOT; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 179 "src/styx.l"
+#line 178 "src/styx.l"
 { return AND; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 180 "src/styx.l"
+#line 179 "src/styx.l"
 { return OR; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 181 "src/styx.l"
+#line 180 "src/styx.l"
 { return ASSIGN; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 183 "src/styx.l"
+#line 182 "src/styx.l"
 { return IF; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 184 "src/styx.l"
+#line 183 "src/styx.l"
 { return ELSE; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 185 "src/styx.l"
+#line 184 "src/styx.l"
 { return FOR; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 186 "src/styx.l"
+#line 185 "src/styx.l"
 { return RETURN; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 187 "src/styx.l"
+#line 186 "src/styx.l"
 { return PRINT; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 188 "src/styx.l"
+#line 187 "src/styx.l"
 { return PRINTB; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 189 "src/styx.l"
+#line 188 "src/styx.l"
 { return SCAN; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 190 "src/styx.l"
+#line 189 "src/styx.l"
 { yylval.num = rand(); return RAND_INT; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 191 "src/styx.l"
+#line 190 "src/styx.l"
 { return GLOBAL; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 192 "src/styx.l"
+#line 191 "src/styx.l"
 { yylval.str = strdup(yytext); return MAIN; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 193 "src/styx.l"
+#line 192 "src/styx.l"
 { return SYSTEM; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 194 "src/styx.l"
+#line 193 "src/styx.l"
 { return REPEAT; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 195 "src/styx.l"
+#line 194 "src/styx.l"
 { return UNTIL; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 196 "src/styx.l"
+#line 195 "src/styx.l"
 { return ALTERNATE; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 198 "src/styx.l"
+#line 197 "src/styx.l"
 { yylval.str = strdup(yytext); return ID; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 201 "src/styx.l"
+#line 200 "src/styx.l"
 { return SEMICOLON; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 202 "src/styx.l"
+#line 201 "src/styx.l"
 { return COMMA; }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 203 "src/styx.l"
+#line 202 "src/styx.l"
 { return ROUND_OPEN; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 204 "src/styx.l"
+#line 203 "src/styx.l"
 { return ROUND_CLOSE; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 205 "src/styx.l"
+#line 204 "src/styx.l"
 { return CURLY_OPEN; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 206 "src/styx.l"
+#line 205 "src/styx.l"
 { return CURLY_CLOSE; }
 	YY_BREAK
 case 64:
 /* rule 64 can match eol */
 YY_RULE_SETUP
-#line 208 "src/styx.l"
+#line 207 "src/styx.l"
 { } // Ignore delimiter
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 210 "src/styx.l"
+#line 209 "src/styx.l"
 { return *yytext; } // Return any other character
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 213 "src/styx.l"
+#line 212 "src/styx.l"
 ECHO;
 	YY_BREAK
-#line 1929 "build/lex.yy.c"
+#line 1928 "build/lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(HEX):
@@ -3044,41 +3043,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 213 "src/styx.l"
-
-
-int babylonian_to_decimal(char* str){
-    int num = 0;
-    int base = 60;
-    int digit = 0;
-    int i = 0;
-
-    
-    // count number of digits
-    while(str[i] != '\0'){
-            if(str[i] == ' '){
-                    digit++;
-            }
-            i++;
-    }
-
-    // convert to decimal
-    i=0;
-    while(str[i] != '\0'){
-        
-        if(str[i] == 'Y'){
-                num += 1 * pow(base, digit);
-        }
-        else if(str[i] == '<'){
-                num += 10 * pow(base, digit);
-        }
-        else if(str[i] == ' '){
-                digit--;
-        }
-        i++;
-    }
-    return num;
-}
+#line 212 "src/styx.l"
 
 
 
@@ -3092,54 +3057,3 @@ void addstr(char ch){
 void init_str_buf(){
     str_buf = malloc(1);
 }
-
-//TODO: Add char begin end ''
-
-/*
- 
-int main (void){
-
-    int token;
-
-    yylval.type = malloc(1);
-    yylval.id = malloc(1);
-    yylval.str = malloc(1);
-    yylval.op = malloc(1);
-
-    do{
-        token = yylex();
-	switch(token){
-		case str:
-			printf("String: %s\n", yylval.str);
-			break;
-		case num:
-			printf("Number: %d\n", yylval.num);
-			break;
-
-		case id:
-			printf("Identifier: %s\n", yylval.id);
-			break;
-		
-		case lincom:
-			printf("Line Comment: %s\n", yylval.str);
-			break;
-
-		case blkcom:
-			printf("Block Comment: %s\n", yylval.str);
-			break;
-
-		case whitespc:
-			printf("Whitespace: %s\n", yylval.str);
-			break;
-
-		case type:
-			printf("Type: %s\n", yylval.type);
-			break;
-
-	}
-    } while (token != eoi);
-    exit(EXIT_SUCCESS);
-}
-
-*/
-

@@ -5,6 +5,9 @@
 
 #include "../build/styx.tab.h"
 #include "vars_interp.h"
+#include "babylonian_converter.h"
+#include "value_type.h"
+#include "parameters.h"
 #include "ast.h"
 
 struct funclist *funclist = NULL;
@@ -54,113 +57,6 @@ void add_function(char *name, astnode_t *node)
     new->node = node;
     new->next = funclist;
     funclist = new;
-}
-
-// Add parameter to queue
-void add_param(struct paramlist **list, void *val, int type)
-{
-    struct paramlist *new = malloc(sizeof *new);
-
-    // printf("Adding param of type %s\n", ast_type2str(type)); // DEBUG
-
-    switch (type)
-    {
-
-    case AST_INT_T:
-        new->val.num = *(int *)val;
-        break;
-
-    case AST_DOUBLE_T:
-        new->val.real = *(double *)val;
-        break;
-
-    case AST_CHAR_T:
-        new->val.chr = *(char *)val;
-        break;
-
-    case AST_STR_T:
-        new->val.str = strdup((char *)val);
-        break;
-
-    case AST_NONE_T:
-        break;
-
-    default:
-        printf("Error: Unknown type in add_param\n");
-        exit(1);
-    }
-
-    new->type = type;
-    new->next = *list;
-    *list = new;
-}
-
-// Get parameter from queue
-void *get_param(struct paramlist **list, int *type)
-{
-    if (*list == NULL)
-    {
-        printf("Error: No parameters left in queue\n");
-        exit(1);
-    }
-
-    // Get last element in list
-    struct paramlist *current = *list;
-    while (current->next)
-    {
-        current = current->next;
-    }
-    *type = current->type;
-    // printf("Getting param of type %s\n, ", ast_type2str(*type)); // DEBUG
-
-    void *val = NULL;
-    switch (current->type)
-    {
-    case AST_INT_T:
-        val = malloc(sizeof(int));
-        *(int *)val = current->val.num;
-        break;
-
-    case AST_DOUBLE_T:
-        val = malloc(sizeof(double));
-        *(double *)val = current->val.real;
-        break;
-
-    case AST_CHAR_T:
-        val = malloc(sizeof(char));
-        *(char *)val = current->val.chr;
-        break;
-
-    case AST_STR_T:
-        val = strdup(current->val.str);
-        break;
-
-    case AST_NONE_T:
-        val = NULL;
-        break;
-
-    default:
-        printf("Error: Unknown type in get_param\n");
-        exit(1);
-    }
-
-    // Remove last element from queue and free memory
-    if (current == *list)
-    {
-        *list = NULL;
-    }
-    else
-    {
-        struct paramlist *tmp = *list;
-        while (tmp->next != current)
-        {
-            tmp = tmp->next;
-        }
-        tmp->next = NULL;
-    }
-    free(current);
-
-    return val;
 }
 
 // Find function in list
@@ -220,67 +116,6 @@ void *get_node_val(astnode_t *node)
         printf("Error: Unknown type in get_node_val\n");
         exit(1);
     }
-}
-
-char *decimal_to_babylonian(int num)
-{
-    int base = 60;
-    int digit = 0;
-    int i = 0;
-    int temp = num;
-    char *digit_str = malloc(1);
-    *digit_str = '\0';
-    char *str = malloc(1);
-    *str = '\0';
-
-    // count number of babylonian digits
-    while (temp != 0)
-    {
-        temp /= base;
-        digit++;
-    }
-
-    // convert to babylonian
-    for (i = 0; i < digit; i++)
-    {
-        int rem = num % base;
-        num /= base;
-
-        // Add space between each digit
-        if (i < digit - 1)
-        {
-            digit_str = realloc(digit_str, strlen(digit_str) + 2);
-            strcat(digit_str, " ");
-        }
-
-        // Add 10s
-        for (int j = 0; j < rem / 10; j++)
-        {
-            digit_str = realloc(digit_str, strlen(digit_str) + 2);
-            strcat(digit_str, "<");
-        }
-
-        // Add 1s
-        for (int j = 0; j < rem % 10; j++)
-        {
-            digit_str = realloc(digit_str, strlen(digit_str) + 2);
-            strcat(digit_str, "Y");
-        }
-
-        // Since we are adding digits from least significant to most significant,
-        // we need to reorder the digits in the output string
-        int j = 0;
-        while (str[j] != ' ' && str[j] != '\0')
-        {
-            j++;
-        }
-        str = realloc(str, strlen(str) + strlen(digit_str) + 1);
-        memmove(str + j + strlen(digit_str), str + j, strlen(str) - j + 1); // Copy existing digits to the right
-        memcpy(str + j, digit_str, strlen(digit_str));                      // Insert new digit on the left
-        *digit_str = '\0';
-    }
-
-    return str;
 }
 
 void print_ast_console(astnode_t *root)

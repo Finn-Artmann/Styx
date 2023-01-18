@@ -3,6 +3,7 @@
         "stdlib.h": "c",
         "vars_interp.h": "c",
         "stdio.h": "c",
-        "ast.h": "c"
+        "ast.h": "c",
+        "parameters.h": "c"
     }
 }

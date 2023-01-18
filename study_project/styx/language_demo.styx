@@ -6,9 +6,9 @@ E‘
 EŁ THIS IS A LINECOMMENT
 #
 E‘
- This language demo is supposed to demonstrate some specifics os SŦYX.
+ This language demo is supposed to demonstrate some of specifics os SŦYX.
  The demo should show how they are used and that they are functional.
- For each feature there is a a seperate function that is called from the main.
+ For each feature there is a a separate function that is called from the main.
 ‘E
 #
 #
@@ -108,11 +108,160 @@ E‘
 #
 #
 E‘
+   ------------ Variables / Declarations / Assignments / Scopes------------
+‘E
+#
+‚ØıÐ#‚Æ®Ŧ€ẞŦ()°
+####Þ®ı’Ŧ(⅜---- Vars / Decls / Assign / Scopes ----ΩΩ⅜);
+E‘
+   Declaring a variable Æ without initializing it
+‘E
+####ı’Ŧ#Æ;
+E‘
+   Declaring a variable ẞ and initialize it with the value 2
+‘E
+####ı’Ŧ#ẞ#§#2;
+E‘
+   Open a new scope and declare a variable ẞ and initialize it with the value 1
+‘E
+####°
+########ı’Ŧ#ẞ#§#1;
+########Þ®ı’Ŧ(ẞ);
+########Þ®ı’Ŧ(⅜ ⅜);
+####°°
+########Þ®ı’Ŧ(ẞ);
+########Þ®ı’Ŧ(⅜ ⅜);
+E‘
+   Assigning the value 3 to the declared variable Æ
+‘E
+####Æ#§#3;
+####Þ®ı’Ŧ(Æ);
+E‘
+   Expexted output: 1 2 3
+   First prints the value of ẞ within the scope, then the value of ẞ outside the scope and finally the value of Æ
+‘E
+####Þ®ı’Ŧ(⅜Ω---- End Vars / Decls / Assign / Scopes ----ΩΩ⅜);
+°°
+#
+E‘
+   ------------ End Variables / Declarations / Assignments / Scopes ------------
+‘E
+#
+#
+#
+#
+E‘
+   ------------ Operators ------------
+‘E
+#
+‚ØıÐ#ØÞ€®ÆŦØ®ẞ()°
+####Þ®ı’Ŧ(⅜---- Operators ----ΩΩ⅜);
+E‘
+   This example is supposed to show the functionality of the correct precedence of the operators.
+   The result is the same one a standard C compiler would produce.
+   Print the result of 10+9-8*7/6%5  --> Expexted outout: 15
+‘E
+####Þ®ı’Ŧ(10¤9¤¤8¤¤¤7¤¤¤¤6¤¤¤¤¤5);
+####Þ®ı’Ŧ(⅜Ω⅜);
+#
+E‘
+   Not every operator is shown here but all the ones recognized in the lexer file
+   'styx.l' are also working in the parser file 'styx.y' and can be used in SŦYX source code.
+‘E
+#
+####Þ®ı’Ŧ(⅜Ω---- End Operators ----ΩΩ⅜);
+°°
+#
+E‘
+   ------------ End Operators ------------
+‘E
+#
+#
+#
+#
+E‘
+   ------------ Control flow ------------
+‘E
+#
+‚ØıÐ#©Ø’Ŧ®ØŁ()°
+####Þ®ı’Ŧ(⅜---- Control flow ----ΩΩ⅜);
+E‘
+    The following lines of code show the simple-for-loop and alternate-statement working together.
+    The variable Æ is first initialized with 1. The altenate-statement gets called 4 times by
+    the simple-for-loop. The first statement in the alternate-statement is the incrementation
+    of the variable Æ modulo 2. This results in Æ being 0, 1, 0, 1. The second statement
+    in the alternate-statement prints TRUE if Æ is 1 and FALSE if Æ is 0.
+    The expected output is: FALSETRUE
+‘E
+####ı’Ŧ#Æ#§#1;
+####ªØ®(4)°
+####ÆŁŦ€®’ÆŦ€(#Æ#§#(#Æ#¤1#)#¤¤¤¤¤2#;#?#ıª(Æ#§§#1)°#Þ®ı’Ŧ(⅜TRUEE⅜);°°€Łẞ€°Þ®ı’Ŧ(⅜FALSEE⅜);°°#);
+####°°
+Þ®ı’Ŧ(⅜Ω⅜);
+#
+E‘
+    Next shown is the repeat-until-loop. The variable Æ is first initialized with 1.
+    The loop gets called until the condition in the ↑’ŦıŁ() brackets is true.
+    The condition is true when Æ is greater than 10. Æ gets incremented in the loop.
+    The expected output is: 1 2 3 4 5 6 7 8 9 10
+‘E
+####Æ#§#1;
+####®€Þ€ÆŦ°
+####Þ®ı’Ŧ(Æ);
+####Þ®ı’Ŧ(⅜ ⅜);
+####Æ#§#(#Æ#¤#1);
+####°°
+####↑’ŦıŁ(Æ#>#10);
+####Þ®ı’Ŧ(⅜Ω---- End Control flow ----ΩΩ⅜);
+°°
+#
+E‘
+   ------------ End Control flow ------------
+‘E
+#
+#
+#
+#
+E‘
+   ------------ User I/O and built in functions ------------
+‘E
+‚ØıÐ#ıØ()°
+####Þ®ı’Ŧ(⅜---- User I/O and built in functions ----ΩΩ⅜);
+E‘
+    The print and scan functions are already shown in the other sample
+    programs, so they are not shown here again. The formatted print function
+    is demonstrated in the 'mult_table.styx' sample program.
+    The random function is demonstrated in the 'guessmynumber.styx' sample program.
+    The following lines of code show the built in function SYSTEM() which
+    executes a system command. The expected output is the current date and time.
+‘E
+####ẞ›ẞŦ€º(⅜date⅜);
+####Þ®ı’Ŧ(⅜Ω---- End User I/O and built in functions ----ΩΩ⅜);
+°°
+E‘
+   ------------ End User I/O and built in functions ------------
+‘E
+#
+#
+#
+#
+E‘
     Main function
 ‘E
 ı’Ŧ#ºÆı’()°
 ####Þ®ı’Ŧ(⅜BEGIN MAINΩ⅜);
+#
 ####’↑º‘€®ªØ®ºÆŦẞ();#EŁ Call function numberormats 
+#
 ####ẞŦ®ı’Ŋ©Ø’©ÆŦ€’ÆŦıØ’();#EŁ Call function string concatenation
+#
 ####ª↑’©Ŧ€ẞŦ();#EŁ Call function functest
+#
+####‚Æ®Ŧ€ẞŦ();#EŁ Call function vartest:  vars / decls / assign / scopes
+#
+ØÞ€®ÆŦØ®ẞ();#EŁ Call function operators 
+#
+©Ø’Ŧ®ØŁ();#EŁ Call function control flow
+#
+ıØ();#EŁ Call function user I/O and built in functions
 °°

@@ -1,17 +1,16 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
 #include "styx.tab.h"
 #include "ast.h"
+#include "babylonian_converter.h"
 
 #define UTF8_ESCCHAR_LEN 1 
 
 
 void addstr(char ch);
-int babylonian_to_decimal(char* str);
 
 char* str_buf;
 
@@ -212,40 +211,6 @@ COMMA "?"
 
 %%
 
-int babylonian_to_decimal(char* str){
-    int num = 0;
-    int base = 60;
-    int digit = 0;
-    int i = 0;
-
-    
-    // count number of digits
-    while(str[i] != '\0'){
-            if(str[i] == ' '){
-                    digit++;
-            }
-            i++;
-    }
-
-    // convert to decimal
-    i=0;
-    while(str[i] != '\0'){
-        
-        if(str[i] == 'Y'){
-                num += 1 * pow(base, digit);
-        }
-        else if(str[i] == '<'){
-                num += 10 * pow(base, digit);
-        }
-        else if(str[i] == ' '){
-                digit--;
-        }
-        i++;
-    }
-    return num;
-}
-
-
 
 void addstr(char ch){
     int l = strlen(str_buf);
@@ -257,53 +222,3 @@ void addstr(char ch){
 void init_str_buf(){
     str_buf = malloc(1);
 }
-
-//TODO: Add char begin end ''
-
-/*
- 
-int main (void){
-
-    int token;
-
-    yylval.type = malloc(1);
-    yylval.id = malloc(1);
-    yylval.str = malloc(1);
-    yylval.op = malloc(1);
-
-    do{
-        token = yylex();
-	switch(token){
-		case str:
-			printf("String: %s\n", yylval.str);
-			break;
-		case num:
-			printf("Number: %d\n", yylval.num);
-			break;
-
-		case id:
-			printf("Identifier: %s\n", yylval.id);
-			break;
-		
-		case lincom:
-			printf("Line Comment: %s\n", yylval.str);
-			break;
-
-		case blkcom:
-			printf("Block Comment: %s\n", yylval.str);
-			break;
-
-		case whitespc:
-			printf("Whitespace: %s\n", yylval.str);
-			break;
-
-		case type:
-			printf("Type: %s\n", yylval.type);
-			break;
-
-	}
-    } while (token != eoi);
-    exit(EXIT_SUCCESS);
-}
-
-*/
