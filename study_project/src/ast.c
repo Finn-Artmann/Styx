@@ -12,6 +12,40 @@ struct paramlist *paramlist = NULL;
 
 extern const char **token_table;
 
+const char *ast_token2str(int type)
+{
+    return token_table[type - 258 + 3];
+}
+
+char *ast_type2str(int type)
+{
+
+    switch (type)
+    {
+    case AST_INT_T:
+        return "int";
+
+    case AST_DOUBLE_T:
+        return "double";
+
+    case AST_CHAR_T:
+        return "char";
+
+    case AST_STR_T:
+        return "string";
+
+    case AST_ID_T:
+        return "id";
+
+    case AST_NONE_T:
+        return "none_t";
+
+    default:
+        printf("Error: Unknown type %d in ast_type2str\n", type);
+        return "unknown";
+    }
+}
+
 // Add function to list
 void add_function(char *name, astnode_t *node)
 {
@@ -26,6 +60,8 @@ void add_function(char *name, astnode_t *node)
 void add_param(struct paramlist **list, void *val, int type)
 {
     struct paramlist *new = malloc(sizeof *new);
+
+    // printf("Adding param of type %s\n", ast_type2str(type)); // DEBUG
 
     switch (type)
     {
@@ -62,15 +98,20 @@ void add_param(struct paramlist **list, void *val, int type)
 // Get parameter from queue
 void *get_param(struct paramlist **list, int *type)
 {
-
     if (*list == NULL)
     {
         printf("Error: No parameters left in queue\n");
         exit(1);
     }
+
+    // Get last element in list
     struct paramlist *current = *list;
-    *list = current->next;
+    while (current->next)
+    {
+        current = current->next;
+    }
     *type = current->type;
+    // printf("Getting param of type %s\n, ", ast_type2str(*type)); // DEBUG
 
     void *val = NULL;
     switch (current->type)
@@ -102,7 +143,23 @@ void *get_param(struct paramlist **list, int *type)
         printf("Error: Unknown type in get_param\n");
         exit(1);
     }
+
+    // Remove last element from queue and free memory
+    if (current == *list)
+    {
+        *list = NULL;
+    }
+    else
+    {
+        struct paramlist *tmp = *list;
+        while (tmp->next != current)
+        {
+            tmp = tmp->next;
+        }
+        tmp->next = NULL;
+    }
     free(current);
+
     return val;
 }
 
@@ -165,38 +222,65 @@ void *get_node_val(astnode_t *node)
     }
 }
 
-const char *ast_token2str(int type)
+char *decimal_to_babylonian(int num)
 {
-    return token_table[type - 258 + 3];
-}
+    int base = 60;
+    int digit = 0;
+    int i = 0;
+    int temp = num;
+    char *digit_str = malloc(1);
+    *digit_str = '\0';
+    char *str = malloc(1);
+    *str = '\0';
 
-char *ast_type2str(int type)
-{
-
-    switch (type)
+    // count number of babylonian digits
+    while (temp != 0)
     {
-    case AST_INT_T:
-        return "int";
-
-    case AST_DOUBLE_T:
-        return "double";
-
-    case AST_CHAR_T:
-        return "char";
-
-    case AST_STR_T:
-        return "string";
-
-    case AST_ID_T:
-        return "id";
-
-    case AST_NONE_T:
-        return "none_t";
-
-    default:
-        printf("Error: Unknown type %d in ast_type2str\n", type);
-        return "unknown";
+        temp /= base;
+        digit++;
     }
+
+    // convert to babylonian
+    for (i = 0; i < digit; i++)
+    {
+        int rem = num % base;
+        num /= base;
+
+        // Add space between each digit
+        if (i < digit - 1)
+        {
+            digit_str = realloc(digit_str, strlen(digit_str) + 2);
+            strcat(digit_str, " ");
+        }
+
+        // Add 10s
+        for (int j = 0; j < rem / 10; j++)
+        {
+            digit_str = realloc(digit_str, strlen(digit_str) + 2);
+            strcat(digit_str, "<");
+        }
+
+        // Add 1s
+        for (int j = 0; j < rem % 10; j++)
+        {
+            digit_str = realloc(digit_str, strlen(digit_str) + 2);
+            strcat(digit_str, "Y");
+        }
+
+        // Since we are adding digits from least significant to most significant,
+        // we need to reorder the digits in the output string
+        int j = 0;
+        while (str[j] != ' ' && str[j] != '\0')
+        {
+            j++;
+        }
+        str = realloc(str, strlen(str) + strlen(digit_str) + 1);
+        memmove(str + j + strlen(digit_str), str + j, strlen(str) - j + 1); // Copy existing digits to the right
+        memcpy(str + j, digit_str, strlen(digit_str));                      // Insert new digit on the left
+        *digit_str = '\0';
+    }
+
+    return str;
 }
 
 void print_ast_console(astnode_t *root)
@@ -958,6 +1042,21 @@ astnode_t *exec_ast(astnode_t *root)
     }
     break;
 
+    case PRINTB:
+    {
+        astnode_t *val = exec_ast(root->child[0]);
+
+        if (val->data_type != AST_INT_T)
+        {
+            printf("ERROR: PRINTB requires an integer.\n");
+            exit(1);
+        }
+
+        char *dec = decimal_to_babylonian(val->val.num);
+        printf("%s", dec);
+    }
+    break;
+
     case PRINT_WIDTH:
     {
         astnode_t *width_node = exec_ast(root->child[0]);
@@ -1057,11 +1156,9 @@ astnode_t *exec_ast(astnode_t *root)
     {
         var_enter_block();
         exec_ast(root->child[0]); // init
-        int cond_val = check_and_cast_condition(exec_ast(root->child[1]));
 
-        for (; cond_val; exec_ast(root->child[2]))
+        for (; check_and_cast_condition(exec_ast(root->child[1])); exec_ast(root->child[2]))
         {
-            cond_val = check_and_cast_condition(exec_ast(root->child[1]));
             exec_ast(root->child[3]);
         }
         var_leave_block();
@@ -1089,14 +1186,11 @@ astnode_t *exec_ast(astnode_t *root)
     case REPEAT:
     {
         var_enter_block();
-
-        int cond_val = check_and_cast_condition(exec_ast(root->child[1]));
         do
         {
             exec_ast(root->child[0]);
-            cond_val = check_and_cast_condition(exec_ast(root->child[1]));
 
-        } while (!cond_val); // Negate the condition for REPEAT UNTIL loop
+        } while (!check_and_cast_condition(exec_ast(root->child[1]))); // Negate the condition for REPEAT UNTIL loop
 
         var_leave_block();
     }

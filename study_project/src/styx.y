@@ -46,6 +46,7 @@
 %token FOR
 %token RETURN
 %token PRINT
+%token PRINTB
 %token SCAN
 %token RAND_INT
 %token GLOBAL
@@ -91,7 +92,7 @@
 %type <ast> start program functions function function_call arguments parameters parameter 
 %type <ast> main body statements statement declaration alternate_statement alter_statements
 %type <ast> global_declaration assignment expression if_statement for_statement return_statement 
-%type <ast> print_statement scan_statement term factor repeat_statement 
+%type <ast> print_statement scan_statement term factor repeat_statement printb_statement
 
 // Other Grammar tokens
 %token PROGRAM STATEMENTS STATEMENT DECLARATIONS GLOBAL_DECLARATIONS FUNCTIONS PARAMETERS
@@ -100,7 +101,7 @@
 %token TERM_MOD FACTOR_ID FACTOR_NUM FACTOR_REAL FACTOR_PARENTHESIS FACTOR_FUNCTION_CALL
 %token FACTOR_RAND IFELSE PRINT_STR DECLARATION GLOBAL_DECLARATION FUNCTION_CALL PARAMETER
 %token FUNCTION ARG_EXPR ARGS_EXPR DECLARATION_ASSIGN FACTOR_STRING FACTOR_CHAR PRINT_WIDTH
-%token SYSTEM_CALL STATEMENT_BLOCK GLOBAL_DECLARATION_ASSIGN FOR_NUM ALTER_STATEMENTS
+%token SYSTEM_CALL STATEMENT_BLOCK GLOBAL_DECLARATION_ASSIGN FOR_NUM ALTER_STATEMENTS PRINT_B
 
 
 %%
@@ -180,6 +181,7 @@ statement: assignment SEMICOLON { $$ = new_astnode(STATEMENT); $$->child[0] = $1
 	 | repeat_statement { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
 	 | return_statement { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
 	 | print_statement { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
+	 | printb_statement { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
 	 | scan_statement { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
 	 | CURLY_OPEN body CURLY_CLOSE { $$ = new_astnode(STATEMENT_BLOCK); $$->child[0] = $2; }
 	 | expression SEMICOLON { $$ = new_astnode(STATEMENT); $$->child[0] = $1; }
@@ -210,6 +212,8 @@ return_statement: RETURN expression SEMICOLON { $$ = new_astnode(RETURN); $$->ch
 
 print_statement: PRINT ROUND_OPEN expression ROUND_CLOSE SEMICOLON { $$ = new_astnode(PRINT); $$->child[0] = $3; }
 				| PRINT ROUND_OPEN expression COMMA expression ROUND_CLOSE SEMICOLON { $$ = new_astnode(PRINT_WIDTH); $$->child[0] = $3; $$->child[1] = $5; }
+
+printb_statement: PRINTB ROUND_OPEN expression ROUND_CLOSE SEMICOLON { $$ = new_astnode(PRINTB); $$->child[0] = $3; }
 
 scan_statement: SCAN ROUND_OPEN TYPE ROUND_CLOSE ROUND_OPEN ID ROUND_CLOSE SEMICOLON { $$ = new_astnode(SCAN); $$->val.str = $6; $$->data_type = $3; }
 

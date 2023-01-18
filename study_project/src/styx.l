@@ -102,6 +102,7 @@ ELSE "€Łẞ€"
 FOR "ªØ®"
 RETURN "®€Ŧ↑®’"
 PRINT "Þ®ı’Ŧ"
+PRINTB "Þ®ı’Ŧ‘"
 SCAN "ẞ©Æ’"
 MAIN "ºÆı’"
 RAND_INT "®Æ’Ðı’Ŧ"
@@ -184,6 +185,7 @@ COMMA "?"
 {FOR} { return FOR; }
 {RETURN} { return RETURN; }
 {PRINT} { return PRINT; }
+{PRINTB} { return PRINTB; }
 {SCAN} { return SCAN; }
 {RAND_INT} { yylval.num = rand(); return RAND_INT; }
 {GLOBAL} { return GLOBAL; }
@@ -243,45 +245,7 @@ int babylonian_to_decimal(char* str){
     return num;
 }
 
-char* decimal_to_babylonian(int num){
-    int base = 60;
-    int digit = 0;
-    int i = 0;
-    int temp = num;
-    char* str = malloc(1);
-    *str = '\0';
 
-    // count number of digits
-    while(temp != 0){
-            temp /= base;
-            digit++;
-    }
-
-    // convert to babylonian
-    while(num != 0){
-        if(num % base == 1){
-                str = realloc(str, strlen(str) + 2);
-                str[i] = 'Y';
-                str[i+1] = '\0';
-                i++;
-        }
-        else if(num % base == 10){
-                str = realloc(str, strlen(str) + 2);
-                str[i] = '<';
-                str[i+1] = '\0';
-                i++;
-        }
-        else{
-                str = realloc(str, strlen(str) + 2);
-                str[i] = ' ';
-                str[i+1] = '\0';
-                i++;
-        }
-        num /= base;
-        digit--;
-    }
-    return str;
-}
 
 void addstr(char ch){
     int l = strlen(str_buf);

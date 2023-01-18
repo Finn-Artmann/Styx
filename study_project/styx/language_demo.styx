@@ -1,0 +1,118 @@
+#
+E‘
+ THIS IS A BLOCKCOMMENT
+‘E
+#
+EŁ THIS IS A LINECOMMENT
+#
+E‘
+ This language demo is supposed to demonstrate some specifics os SŦYX.
+ The demo should show how they are used and that they are functional.
+ For each feature there is a a seperate function that is called from the main.
+‘E
+#
+#
+#
+E‘
+    ------------ Function defenition numberormats ------------
+‘E
+‚ØıÐ#’↑º‘€®ªØ®ºÆŦẞ()°
+####Þ®ı’Ŧ(⅜---- Nuberformats ----ΩΩ⅜);
+####EŁ Special for SŦYX is the fact that you can enter numbers in the form of babylonian numbers.
+#
+####EŁ The folllowing line prints the decimal value (123456) of a babylonian number.
+####Þ®ı’Ŧ(EB°<<<YYYY <YYYYYYY <<<YYYYYY°°BE);
+#
+####Þ®ı’Ŧ(⅜Ω⅜);#EŁ Print a new line
+#
+####EŁ The following line prints the decimal value the decimal number (42) in babylonian numbers by using the PRINTB statement.
+####Þ®ı’Ŧ‘(42);
+#
+####Þ®ı’Ŧ(⅜Ω⅜);#EŁ Print a new line
+#
+####Þ®ı’Ŧ(⅜---- End Nuberformats ----ΩΩ⅜);
+°°
+#
+#
+#
+E‘
+   ------------ Function defenition stringconcatenation ------------
+‘E
+‚ØıÐ#ẞŦ®ı’Ŋ©Ø’©ÆŦ€’ÆŦıØ’()°
+####Þ®ı’Ŧ(⅜---- String concatenation ----ΩΩ⅜);
+#
+E‘
+    Declare and initialize a string1
+‘E
+####ẞŦ®ı’Ŋ#Æ#§#⅜Hello ⅜;
+#
+E‘
+    Declare and initialize a string2
+‘E
+####ẞŦ®ı’Ŋ#‘#§#⅜World!⅜;
+#
+E‘
+    Concatenate string1 and string2
+‘E
+####ẞŦ®ı’Ŋ#©#§#Æ#¤#‘;
+#
+E‘
+    Print concatenated string
+‘E
+####Þ®ı’Ŧ(©);
+#
+####Þ®ı’Ŧ(⅜Ω⅜);#EŁ Print a new line
+#
+####Þ®ı’Ŧ(⅜---- END String concatenation ----ΩΩ⅜);
+°°
+#
+#
+#
+#
+#
+E‘
+   ------------ Functions with parameters ------------
+
+   Function can return values and can have multiple parameters.
+‘E
+E‘
+   Function: int bar(int Ŋ){} --> Returns incrementet parameter and prints "bar"
+‘E
+ı’Ŧ#‘Æ®(ı’Ŧ#Ŋ#?#ÐØ↑‘Ł€#Ð)°
+####Þ®ı’Ŧ(⅜bar ⅜);
+####Þ®ı’Ŧ(Ð);
+####Þ®ı’Ŧ(⅜ ⅜);
+####®€Ŧ↑®’#Ŋ#¤#1;
+°°
+E‘
+   Function: int foo(int Æ){} --> Prints "foo" and returns result of bar(Æ)
+‘E
+ı’Ŧ#ªØØ(ı’Ŧ#Æ)°
+####Þ®ı’Ŧ(⅜foo ⅜);
+####®€Ŧ↑®’#‘Æ®(Æ#?#2.2);
+°°
+
+E‘
+   Function: int functest() --> Calls foo(4) and prints result: foo bar 2.200000 5
+‘E
+‚ØıÐ#ª↑’©Ŧ€ẞŦ()°
+####Þ®ı’Ŧ(⅜---- Function test ----ΩΩ⅜);
+####Þ®ı’Ŧ(ªØØ(4));
+####Þ®ı’Ŧ(⅜Ω---- End Function test ----ΩΩ⅜);
+°°
+E‘
+   ------------ End Functions with parameters ------------
+‘E
+#
+#
+#
+#
+E‘
+    Main function
+‘E
+ı’Ŧ#ºÆı’()°
+####Þ®ı’Ŧ(⅜BEGIN MAINΩ⅜);
+####’↑º‘€®ªØ®ºÆŦẞ();#EŁ Call function numberormats 
+####ẞŦ®ı’Ŋ©Ø’©ÆŦ€’ÆŦıØ’();#EŁ Call function string concatenation
+####ª↑’©Ŧ€ẞŦ();#EŁ Call function functest
+°°

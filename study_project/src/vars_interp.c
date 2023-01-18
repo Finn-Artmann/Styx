@@ -302,23 +302,23 @@ void var_dump(void)
       {
 
       case AST_INT_T:
-        printf("%s : %d\n", vars.vals[i].id, vars.vals[i].val.num);
+        printf("%s (int): %d\n", vars.vals[i].id, vars.vals[i].val.num);
         break;
 
       case AST_DOUBLE_T:
-        printf("%s : %f\n", vars.vals[i].id, vars.vals[i].val.real);
+        printf("%s (double): %f\n", vars.vals[i].id, vars.vals[i].val.real);
         break;
 
       case AST_STR_T:
-        printf("%s : %s\n", vars.vals[i].id, vars.vals[i].val.str);
+        printf("%s (string): %s\n", vars.vals[i].id, vars.vals[i].val.str);
         break;
 
       case AST_CHAR_T:
-        printf("%s : %c\n", vars.vals[i].id, vars.vals[i].val.chr);
+        printf("%s (char): %c\n", vars.vals[i].id, vars.vals[i].val.chr);
         break;
 
       case AST_NONE_T:
-        printf("%s : NULL\n", vars.vals[i].id);
+        printf("%s (none): NULL\n", vars.vals[i].id);
         break;
 
       default:
