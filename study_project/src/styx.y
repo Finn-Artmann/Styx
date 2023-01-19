@@ -344,11 +344,11 @@ function_call: ID ROUND_OPEN arguments ROUND_CLOSE
 	$$->data_type = AST_ID_T;
 	$$->child[0] = $3; 
 }
-| SYSTEM ROUND_OPEN STR ROUND_CLOSE 
+| SYSTEM ROUND_OPEN expression ROUND_CLOSE 
 { 
 	$$ = new_astnode(SYSTEM_CALL);
 	$$->data_type = AST_INT_T;
-	$$->val.str = $3;
+	$$->child[0] = $3;
 }
 
 arguments: expression 				{ $$ = new_astnode(ARG_EXPR);  $$->child[0] = $1; }

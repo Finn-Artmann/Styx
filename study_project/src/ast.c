@@ -612,7 +612,15 @@ astnode_t *exec_ast(astnode_t *root)
 
     case SYSTEM_CALL:
     {
-        root->val.num = system(root->val.str);
+
+        astnode_t *arg = exec_ast(root->child[0]);
+        if (arg->data_type != AST_STR_T)
+        {
+            printf("ERROR: System call argument must be a string.\n");
+            exit(1);
+        }
+
+        root->val.num = system(arg->val.str);
         return root;
     }
     break;
@@ -754,19 +762,18 @@ astnode_t *exec_ast(astnode_t *root)
     }
     break;
 
-    case PRINT_STR:
-        printf("%s", root->val.str);
-        break;
-
     case SCAN:
     {
-        // Read value from stdin using fgets
-        char buf[100];
+        // Read value from stdin using getline
+        char *buf = NULL;
+        size_t len = 0;
         printf("<< ");
-        char *s = fgets(buf, 100, stdin);
-        if (s == NULL)
+        ssize_t read = getline(&buf, &len, stdin);
+
+        if (read < 0)
         {
-            printf("EOF\n");
+            printf("\n[Error]: Unable to read input.\n");
+            free(buf);
             exit(1);
         }
 
@@ -788,6 +795,12 @@ astnode_t *exec_ast(astnode_t *root)
         break;
 
         case AST_STR_T:
+
+            if (buf[strlen(buf) - 1] == '\n')
+            {
+                buf[strlen(buf) - 1] = '\0';
+            }
+
             var_set(root->val.str, buf, AST_STR_T);
             break;
 
@@ -802,6 +815,7 @@ astnode_t *exec_ast(astnode_t *root)
             printf("ERROR: Unsupported data type for SCAN.\n");
             exit(1);
         }
+        free(buf);
     }
     break;
 

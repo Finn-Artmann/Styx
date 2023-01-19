@@ -9,16 +9,12 @@
 
 #define UTF8_ESCCHAR_LEN 1 
 
-
 void addstr(char ch);
-
 char* str_buf;
-
 
 // Initialize the string buffer before any rules are executed
 void init_str_buf();
 #define YY_USER_INIT init_str_buf();
-
 
 %}
 %option nounput noinput noyywrap yylineno 
@@ -36,10 +32,10 @@ BABYLONIAN_DIGIT1TO59 ({BABYLONIAN_DIGIT10TO50}{BABYLONIAN_DIGIT1TO9}|{BABYLONIA
 
 
 BABYLONIAN_NUMBER (({BABYLONIAN_DIGIT1TO59}[ ])*{BABYLONIAN_DIGIT1TO59})
-DEC_NUMBER {DEC_DIGIT0}|({DEC_DIGIT}{DEC_DIGIT0}*)
+DEC_NUMBER ((-)?{DEC_DIGIT0}|(-)?({DEC_DIGIT}{DEC_DIGIT0}*))
 HEX_NUMBER {HEX_DIGIT0}|({HEX_DIGIT}{HEX_DIGIT0}*)
 
-REAL {DEC_DIGIT0}(\.{DEC_DIGIT0}*)|({DEC_DIGIT}{DEC_DIGIT0}*\.{DEC_DIGIT0}*)|({DEC_DIGIT}{DEC_DIGIT0}*\.{DEC_DIGIT0}+)
+REAL (-?{DEC_DIGIT0}(\.{DEC_DIGIT0}*)|(-?{DEC_DIGIT}{DEC_DIGIT0}*\.{DEC_DIGIT0}*)|(-?{DEC_DIGIT}{DEC_DIGIT0}*\.{DEC_DIGIT0}+))
 
 WHITESPACE [ \t\r\n]+
 
@@ -208,9 +204,7 @@ COMMA "?"
 
 . { return *yytext; } // Return any other character
 
-
 %%
-
 
 void addstr(char ch){
     int l = strlen(str_buf);
